@@ -1,0 +1,17 @@
+//
+//  SmartWatch_Prefix.pch
+//  SmartWatch
+//
+//  Created by zhuzhi on 14/11/16.
+//
+//
+
+#ifndef SmartWatch_Prefix_pch
+#define SmartWatch_Prefix_pch
+
+#import "SWMacros.h"
+#import "SWCategory.h"
+#import "GCDObjC.h"
+#import "PureLayout.h"
+
+#endif

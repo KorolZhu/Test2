@@ -7,6 +7,11 @@
 //
 
 #import "AppDelegate.h"
+#import "SWExerciseRecordsViewController.h"
+#import "SWHistoryRecordsViewController.h"
+#import "SWProfileViewController.h"
+#import "SWSettingViewController.h"
+#import "SWShareKit.h"
 
 @interface AppDelegate ()
 
@@ -16,8 +21,43 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    [[SWShareKit sharedInstance] registerApp];
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.backgroundColor = [UIColor whiteColor];
+    
+    _exerciseRecordsViewController = [[SWExerciseRecordsViewController alloc] init];
+    [_exerciseRecordsViewController.tabBarItem setTitle:NSLocalizedString(@"运动记录", nil)];
+    [_exerciseRecordsViewController.tabBarItem setImage:[UIImage imageNamed:@"first"]];
+    
+    _historyRecordsViewController = [[SWHistoryRecordsViewController alloc] init];
+    [_historyRecordsViewController.tabBarItem setTitle:NSLocalizedString(@"历史记录", nil)];
+    [_historyRecordsViewController.tabBarItem setImage:[UIImage imageNamed:@"first"]];
+    
+    _profileViewController = [[SWProfileViewController alloc] init];
+    [_profileViewController.tabBarItem setTitle:NSLocalizedString(@"个人资料", nil)];
+    [_profileViewController.tabBarItem setImage:[UIImage imageNamed:@"first"]];
+    
+    _settingViewController = [[SWSettingViewController alloc] init];
+    [_settingViewController.tabBarItem setTitle:NSLocalizedString(@"设置", nil)];
+    [_settingViewController.tabBarItem setImage:[UIImage imageNamed:@"first"]];
+    
+    UINavigationController *nav1 = [[UINavigationController alloc] initWithRootViewController:_exerciseRecordsViewController];
+    UINavigationController *nav2 = [[UINavigationController alloc] initWithRootViewController:_historyRecordsViewController];
+    UINavigationController *nav3 = [[UINavigationController alloc] initWithRootViewController:_profileViewController];
+    UINavigationController *nav4 = [[UINavigationController alloc] initWithRootViewController:_settingViewController];
+    
+    _tabBarController = [[UITabBarController alloc] init];
+    _tabBarController.viewControllers = @[nav1,nav2,nav3,nav4];
+
+    self.window.rootViewController = _tabBarController;
+    [self.window makeKeyAndVisible];
     return YES;
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    return [[SWShareKit sharedInstance] handleOpenURL:url];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

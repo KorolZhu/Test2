@@ -7,14 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE208F571A1A4C8A001D6482 /* SWLineGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE208F541A1A4C8A001D6482 /* SWLineGraphView.m */; };
+		CE208F581A1A4C8A001D6482 /* SWPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = CE208F561A1A4C8A001D6482 /* SWPlot.m */; };
 		CEE0D7F71A18793500CE643C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D7F61A18793500CE643C /* main.m */; };
 		CEE0D7FA1A18793500CE643C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D7F91A18793500CE643C /* AppDelegate.m */; };
-		CEE0D7FD1A18793500CE643C /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D7FC1A18793500CE643C /* FirstViewController.m */; };
-		CEE0D8001A18793500CE643C /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D7FF1A18793500CE643C /* SecondViewController.m */; };
-		CEE0D8031A18793500CE643C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEE0D8011A18793500CE643C /* Main.storyboard */; };
 		CEE0D8051A18793500CE643C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEE0D8041A18793500CE643C /* Images.xcassets */; };
-		CEE0D8081A18793500CE643C /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEE0D8061A18793500CE643C /* LaunchScreen.xib */; };
 		CEE0D8141A18793500CE643C /* SmartWatchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D8131A18793500CE643C /* SmartWatchTests.m */; };
+		CEE0D8231A187CEF00CE643C /* SWExerciseRecordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D8221A187CEF00CE643C /* SWExerciseRecordsViewController.m */; };
+		CEE0D8261A187D7600CE643C /* SWHistoryRecordsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D8251A187D7600CE643C /* SWHistoryRecordsViewController.m */; };
+		CEE0D8291A187D8900CE643C /* SWProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D8281A187D8900CE643C /* SWProfileViewController.m */; };
+		CEE0D82C1A187DC800CE643C /* SWSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D82B1A187DC800CE643C /* SWSettingViewController.m */; };
+		CEE0D8321A1884FC00CE643C /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CEE0D82F1A1884FC00CE643C /* libWeChatSDK.a */; };
+		CEE0D8371A18870200CE643C /* SWShareKit.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D8361A18870200CE643C /* SWShareKit.m */; };
+		CEE0D8401A18884700CE643C /* UIDevice+SW.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D83F1A18884700CE643C /* UIDevice+SW.m */; };
+		CEE0D8431A18885C00CE643C /* UIView+SW.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D8421A18885C00CE643C /* UIView+SW.m */; };
+		CEE0D8461A18887800CE643C /* UIColor+SW.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D8451A18887800CE643C /* UIColor+SW.m */; };
+		CEE0D85A1A1888CF00CE643C /* GCDGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D8491A1888CF00CE643C /* GCDGroup.m */; };
+		CEE0D85B1A1888CF00CE643C /* GCDQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D84D1A1888CF00CE643C /* GCDQueue.m */; };
+		CEE0D85C1A1888CF00CE643C /* GCDSemaphore.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D84F1A1888CF00CE643C /* GCDSemaphore.m */; };
+		CEE0D85D1A1888CF00CE643C /* ALView+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D8521A1888CF00CE643C /* ALView+PureLayout.m */; };
+		CEE0D85E1A1888CF00CE643C /* NSArray+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D8541A1888CF00CE643C /* NSArray+PureLayout.m */; };
+		CEE0D85F1A1888CF00CE643C /* NSLayoutConstraint+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D8561A1888CF00CE643C /* NSLayoutConstraint+PureLayout.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,21 +41,60 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CE208F531A1A4C8A001D6482 /* SWLineGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWLineGraphView.h; sourceTree = "<group>"; };
+		CE208F541A1A4C8A001D6482 /* SWLineGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWLineGraphView.m; sourceTree = "<group>"; };
+		CE208F551A1A4C8A001D6482 /* SWPlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWPlot.h; sourceTree = "<group>"; };
+		CE208F561A1A4C8A001D6482 /* SWPlot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWPlot.m; sourceTree = "<group>"; };
 		CEE0D7F11A18793500CE643C /* SmartWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEE0D7F51A18793500CE643C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEE0D7F61A18793500CE643C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CEE0D7F81A18793500CE643C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CEE0D7F91A18793500CE643C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		CEE0D7FB1A18793500CE643C /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		CEE0D7FC1A18793500CE643C /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
-		CEE0D7FE1A18793500CE643C /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
-		CEE0D7FF1A18793500CE643C /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
-		CEE0D8021A18793500CE643C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CEE0D8041A18793500CE643C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		CEE0D8071A18793500CE643C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		CEE0D80D1A18793500CE643C /* SmartWatchTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SmartWatchTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEE0D8121A18793500CE643C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEE0D8131A18793500CE643C /* SmartWatchTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SmartWatchTests.m; sourceTree = "<group>"; };
+		CEE0D8211A187CEF00CE643C /* SWExerciseRecordsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWExerciseRecordsViewController.h; sourceTree = "<group>"; };
+		CEE0D8221A187CEF00CE643C /* SWExerciseRecordsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWExerciseRecordsViewController.m; sourceTree = "<group>"; };
+		CEE0D8241A187D7600CE643C /* SWHistoryRecordsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWHistoryRecordsViewController.h; sourceTree = "<group>"; };
+		CEE0D8251A187D7600CE643C /* SWHistoryRecordsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWHistoryRecordsViewController.m; sourceTree = "<group>"; };
+		CEE0D8271A187D8900CE643C /* SWProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWProfileViewController.h; sourceTree = "<group>"; };
+		CEE0D8281A187D8900CE643C /* SWProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWProfileViewController.m; sourceTree = "<group>"; };
+		CEE0D82A1A187DC800CE643C /* SWSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWSettingViewController.h; sourceTree = "<group>"; };
+		CEE0D82B1A187DC800CE643C /* SWSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWSettingViewController.m; sourceTree = "<group>"; };
+		CEE0D82F1A1884FC00CE643C /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		CEE0D8301A1884FC00CE643C /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		CEE0D8311A1884FC00CE643C /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		CEE0D8351A18870200CE643C /* SWShareKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWShareKit.h; sourceTree = "<group>"; };
+		CEE0D8361A18870200CE643C /* SWShareKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWShareKit.m; sourceTree = "<group>"; };
+		CEE0D83B1A1887C200CE643C /* SWMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWMacros.h; sourceTree = "<group>"; };
+		CEE0D83D1A18882200CE643C /* SWCategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWCategory.h; sourceTree = "<group>"; };
+		CEE0D83E1A18884700CE643C /* UIDevice+SW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIDevice+SW.h"; sourceTree = "<group>"; };
+		CEE0D83F1A18884700CE643C /* UIDevice+SW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIDevice+SW.m"; sourceTree = "<group>"; };
+		CEE0D8411A18885C00CE643C /* UIView+SW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+SW.h"; sourceTree = "<group>"; };
+		CEE0D8421A18885C00CE643C /* UIView+SW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+SW.m"; sourceTree = "<group>"; };
+		CEE0D8441A18887800CE643C /* UIColor+SW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+SW.h"; sourceTree = "<group>"; };
+		CEE0D8451A18887800CE643C /* UIColor+SW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+SW.m"; sourceTree = "<group>"; };
+		CEE0D8481A1888CF00CE643C /* GCDGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDGroup.h; sourceTree = "<group>"; };
+		CEE0D8491A1888CF00CE643C /* GCDGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDGroup.m; sourceTree = "<group>"; };
+		CEE0D84A1A1888CF00CE643C /* GCDMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDMacros.h; sourceTree = "<group>"; };
+		CEE0D84B1A1888CF00CE643C /* GCDObjC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDObjC.h; sourceTree = "<group>"; };
+		CEE0D84C1A1888CF00CE643C /* GCDQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDQueue.h; sourceTree = "<group>"; };
+		CEE0D84D1A1888CF00CE643C /* GCDQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDQueue.m; sourceTree = "<group>"; };
+		CEE0D84E1A1888CF00CE643C /* GCDSemaphore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDSemaphore.h; sourceTree = "<group>"; };
+		CEE0D84F1A1888CF00CE643C /* GCDSemaphore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDSemaphore.m; sourceTree = "<group>"; };
+		CEE0D8511A1888CF00CE643C /* ALView+PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ALView+PureLayout.h"; sourceTree = "<group>"; };
+		CEE0D8521A1888CF00CE643C /* ALView+PureLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ALView+PureLayout.m"; sourceTree = "<group>"; };
+		CEE0D8531A1888CF00CE643C /* NSArray+PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+PureLayout.h"; sourceTree = "<group>"; };
+		CEE0D8541A1888CF00CE643C /* NSArray+PureLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+PureLayout.m"; sourceTree = "<group>"; };
+		CEE0D8551A1888CF00CE643C /* NSLayoutConstraint+PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+PureLayout.h"; sourceTree = "<group>"; };
+		CEE0D8561A1888CF00CE643C /* NSLayoutConstraint+PureLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+PureLayout.m"; sourceTree = "<group>"; };
+		CEE0D8571A1888CF00CE643C /* PureLayout+Internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PureLayout+Internal.h"; sourceTree = "<group>"; };
+		CEE0D8581A1888CF00CE643C /* PureLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PureLayout.h; sourceTree = "<group>"; };
+		CEE0D8591A1888CF00CE643C /* PureLayoutDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PureLayoutDefines.h; sourceTree = "<group>"; };
+		CEE0D8651A188D1500CE643C /* SmartWatch_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartWatch_Prefix.pch; sourceTree = "<group>"; };
+		CEE0D8661A188E1500CE643C /* SWSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWSingleton.h; sourceTree = "<group>"; };
+		CEE0D8671A1891BB00CE643C /* SWShareConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWShareConstant.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEE0D8321A1884FC00CE643C /* libWeChatSDK.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -63,9 +116,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE208F521A1A4C5F001D6482 /* SWUIKit */ = {
+			isa = PBXGroup;
+			children = (
+				CE208F531A1A4C8A001D6482 /* SWLineGraphView.h */,
+				CE208F541A1A4C8A001D6482 /* SWLineGraphView.m */,
+				CE208F551A1A4C8A001D6482 /* SWPlot.h */,
+				CE208F561A1A4C8A001D6482 /* SWPlot.m */,
+			);
+			name = SWUIKit;
+			path = SmartWatch/SWUIKit;
+			sourceTree = "<group>";
+		};
 		CEE0D7E81A18793400CE643C = {
 			isa = PBXGroup;
 			children = (
+				CEE0D8381A18877600CE643C /* Common */,
+				CEE0D83C1A1887F600CE643C /* Category */,
+				CEE0D82D1A1884D000CE643C /* ThirdParty */,
+				CE208F521A1A4C5F001D6482 /* SWUIKit */,
+				CEE0D8331A18866200CE643C /* SWFoundation */,
 				CEE0D7F31A18793500CE643C /* SmartWatch */,
 				CEE0D8101A18793500CE643C /* SmartWatchTests */,
 				CEE0D7F21A18793500CE643C /* Products */,
@@ -84,15 +154,13 @@
 		CEE0D7F31A18793500CE643C /* SmartWatch */ = {
 			isa = PBXGroup;
 			children = (
+				CEE0D81D1A187C9D00CE643C /* Exercise */,
+				CEE0D81E1A187C9D00CE643C /* History */,
+				CEE0D81F1A187C9D00CE643C /* Profile */,
+				CEE0D8201A187C9D00CE643C /* Setting */,
 				CEE0D7F81A18793500CE643C /* AppDelegate.h */,
 				CEE0D7F91A18793500CE643C /* AppDelegate.m */,
-				CEE0D7FB1A18793500CE643C /* FirstViewController.h */,
-				CEE0D7FC1A18793500CE643C /* FirstViewController.m */,
-				CEE0D7FE1A18793500CE643C /* SecondViewController.h */,
-				CEE0D7FF1A18793500CE643C /* SecondViewController.m */,
-				CEE0D8011A18793500CE643C /* Main.storyboard */,
 				CEE0D8041A18793500CE643C /* Images.xcassets */,
-				CEE0D8061A18793500CE643C /* LaunchScreen.xib */,
 				CEE0D7F41A18793500CE643C /* Supporting Files */,
 			);
 			path = SmartWatch;
@@ -103,6 +171,7 @@
 			children = (
 				CEE0D7F51A18793500CE643C /* Info.plist */,
 				CEE0D7F61A18793500CE643C /* main.m */,
+				CEE0D8651A188D1500CE643C /* SmartWatch_Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -122,6 +191,138 @@
 				CEE0D8121A18793500CE643C /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CEE0D81D1A187C9D00CE643C /* Exercise */ = {
+			isa = PBXGroup;
+			children = (
+				CEE0D8211A187CEF00CE643C /* SWExerciseRecordsViewController.h */,
+				CEE0D8221A187CEF00CE643C /* SWExerciseRecordsViewController.m */,
+			);
+			path = Exercise;
+			sourceTree = "<group>";
+		};
+		CEE0D81E1A187C9D00CE643C /* History */ = {
+			isa = PBXGroup;
+			children = (
+				CEE0D8241A187D7600CE643C /* SWHistoryRecordsViewController.h */,
+				CEE0D8251A187D7600CE643C /* SWHistoryRecordsViewController.m */,
+			);
+			path = History;
+			sourceTree = "<group>";
+		};
+		CEE0D81F1A187C9D00CE643C /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				CEE0D8271A187D8900CE643C /* SWProfileViewController.h */,
+				CEE0D8281A187D8900CE643C /* SWProfileViewController.m */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		CEE0D8201A187C9D00CE643C /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				CEE0D82A1A187DC800CE643C /* SWSettingViewController.h */,
+				CEE0D82B1A187DC800CE643C /* SWSettingViewController.m */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		CEE0D82D1A1884D000CE643C /* ThirdParty */ = {
+			isa = PBXGroup;
+			children = (
+				CEE0D8501A1888CF00CE643C /* PureLayout */,
+				CEE0D8471A1888CF00CE643C /* GCDObjC */,
+				CEE0D82E1A1884EF00CE643C /* WeChat */,
+			);
+			name = ThirdParty;
+			path = SmartWatch/ThirdParty;
+			sourceTree = "<group>";
+		};
+		CEE0D82E1A1884EF00CE643C /* WeChat */ = {
+			isa = PBXGroup;
+			children = (
+				CEE0D82F1A1884FC00CE643C /* libWeChatSDK.a */,
+				CEE0D8301A1884FC00CE643C /* WXApi.h */,
+				CEE0D8311A1884FC00CE643C /* WXApiObject.h */,
+			);
+			path = WeChat;
+			sourceTree = "<group>";
+		};
+		CEE0D8331A18866200CE643C /* SWFoundation */ = {
+			isa = PBXGroup;
+			children = (
+				CEE0D8341A18869400CE643C /* ShareKit */,
+			);
+			name = SWFoundation;
+			path = SmartWatch/SWFoundation;
+			sourceTree = "<group>";
+		};
+		CEE0D8341A18869400CE643C /* ShareKit */ = {
+			isa = PBXGroup;
+			children = (
+				CEE0D8671A1891BB00CE643C /* SWShareConstant.h */,
+				CEE0D8351A18870200CE643C /* SWShareKit.h */,
+				CEE0D8361A18870200CE643C /* SWShareKit.m */,
+			);
+			path = ShareKit;
+			sourceTree = "<group>";
+		};
+		CEE0D8381A18877600CE643C /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				CEE0D83B1A1887C200CE643C /* SWMacros.h */,
+				CEE0D8661A188E1500CE643C /* SWSingleton.h */,
+			);
+			name = Common;
+			path = SmartWatch/Common;
+			sourceTree = "<group>";
+		};
+		CEE0D83C1A1887F600CE643C /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				CEE0D83D1A18882200CE643C /* SWCategory.h */,
+				CEE0D83E1A18884700CE643C /* UIDevice+SW.h */,
+				CEE0D83F1A18884700CE643C /* UIDevice+SW.m */,
+				CEE0D8411A18885C00CE643C /* UIView+SW.h */,
+				CEE0D8421A18885C00CE643C /* UIView+SW.m */,
+				CEE0D8441A18887800CE643C /* UIColor+SW.h */,
+				CEE0D8451A18887800CE643C /* UIColor+SW.m */,
+			);
+			name = Category;
+			path = SmartWatch/Category;
+			sourceTree = "<group>";
+		};
+		CEE0D8471A1888CF00CE643C /* GCDObjC */ = {
+			isa = PBXGroup;
+			children = (
+				CEE0D8481A1888CF00CE643C /* GCDGroup.h */,
+				CEE0D8491A1888CF00CE643C /* GCDGroup.m */,
+				CEE0D84A1A1888CF00CE643C /* GCDMacros.h */,
+				CEE0D84B1A1888CF00CE643C /* GCDObjC.h */,
+				CEE0D84C1A1888CF00CE643C /* GCDQueue.h */,
+				CEE0D84D1A1888CF00CE643C /* GCDQueue.m */,
+				CEE0D84E1A1888CF00CE643C /* GCDSemaphore.h */,
+				CEE0D84F1A1888CF00CE643C /* GCDSemaphore.m */,
+			);
+			path = GCDObjC;
+			sourceTree = "<group>";
+		};
+		CEE0D8501A1888CF00CE643C /* PureLayout */ = {
+			isa = PBXGroup;
+			children = (
+				CEE0D8511A1888CF00CE643C /* ALView+PureLayout.h */,
+				CEE0D8521A1888CF00CE643C /* ALView+PureLayout.m */,
+				CEE0D8531A1888CF00CE643C /* NSArray+PureLayout.h */,
+				CEE0D8541A1888CF00CE643C /* NSArray+PureLayout.m */,
+				CEE0D8551A1888CF00CE643C /* NSLayoutConstraint+PureLayout.h */,
+				CEE0D8561A1888CF00CE643C /* NSLayoutConstraint+PureLayout.m */,
+				CEE0D8571A1888CF00CE643C /* PureLayout+Internal.h */,
+				CEE0D8581A1888CF00CE643C /* PureLayout.h */,
+				CEE0D8591A1888CF00CE643C /* PureLayoutDefines.h */,
+			);
+			path = PureLayout;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -168,8 +369,9 @@
 		CEE0D7E91A18793400CE643C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = SW;
 				LastUpgradeCheck = 0610;
-				ORGANIZATIONNAME = SW;
+				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					CEE0D7F01A18793400CE643C = {
 						CreatedOnToolsVersion = 6.1;
@@ -204,8 +406,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEE0D8031A18793500CE643C /* Main.storyboard in Resources */,
-				CEE0D8081A18793500CE643C /* LaunchScreen.xib in Resources */,
 				CEE0D8051A18793500CE643C /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -224,10 +424,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEE0D8001A18793500CE643C /* SecondViewController.m in Sources */,
+				CE208F581A1A4C8A001D6482 /* SWPlot.m in Sources */,
+				CEE0D8261A187D7600CE643C /* SWHistoryRecordsViewController.m in Sources */,
+				CEE0D85C1A1888CF00CE643C /* GCDSemaphore.m in Sources */,
+				CEE0D8461A18887800CE643C /* UIColor+SW.m in Sources */,
+				CEE0D85F1A1888CF00CE643C /* NSLayoutConstraint+PureLayout.m in Sources */,
+				CEE0D85D1A1888CF00CE643C /* ALView+PureLayout.m in Sources */,
+				CEE0D85E1A1888CF00CE643C /* NSArray+PureLayout.m in Sources */,
 				CEE0D7FA1A18793500CE643C /* AppDelegate.m in Sources */,
-				CEE0D7FD1A18793500CE643C /* FirstViewController.m in Sources */,
 				CEE0D7F71A18793500CE643C /* main.m in Sources */,
+				CE208F571A1A4C8A001D6482 /* SWLineGraphView.m in Sources */,
+				CEE0D85B1A1888CF00CE643C /* GCDQueue.m in Sources */,
+				CEE0D8401A18884700CE643C /* UIDevice+SW.m in Sources */,
+				CEE0D8431A18885C00CE643C /* UIView+SW.m in Sources */,
+				CEE0D8371A18870200CE643C /* SWShareKit.m in Sources */,
+				CEE0D85A1A1888CF00CE643C /* GCDGroup.m in Sources */,
+				CEE0D8291A187D8900CE643C /* SWProfileViewController.m in Sources */,
+				CEE0D8231A187CEF00CE643C /* SWExerciseRecordsViewController.m in Sources */,
+				CEE0D82C1A187DC800CE643C /* SWSettingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -248,25 +462,6 @@
 			targetProxy = CEE0D80E1A18793500CE643C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		CEE0D8011A18793500CE643C /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CEE0D8021A18793500CE643C /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		CEE0D8061A18793500CE643C /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CEE0D8071A18793500CE643C /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		CEE0D8151A18793500CE643C /* Debug */ = {
@@ -349,8 +544,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = SmartWatch/SmartWatch_Prefix.pch;
 				INFOPLIST_FILE = SmartWatch/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SmartWatch/ThirdParty/WeChat",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -359,8 +560,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = SmartWatch/SmartWatch_Prefix.pch;
 				INFOPLIST_FILE = SmartWatch/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SmartWatch/ThirdParty/WeChat",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -418,6 +625,7 @@
 				CEE0D8191A18793500CE643C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CEE0D81A1A18793500CE643C /* Build configuration list for PBXNativeTarget "SmartWatchTests" */ = {
 			isa = XCConfigurationList;
@@ -426,6 +634,7 @@
 				CEE0D81C1A18793500CE643C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
