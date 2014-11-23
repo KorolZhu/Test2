@@ -7,17 +7,65 @@
 //
 
 #import "SWExerciseRecordsViewController.h"
+#import "SWExerciseRecordsTitleView.h"
+#import "SWEnvironmentView.h"
+#import "SWCircleProgressView.h"
 #import "SWShareKit.h"
 #import "SWLineGraphView.h"
 #import "SWPlot.h"
 
+@interface SWExerciseRecordsViewController ()
+{
+    SWExerciseRecordsTitleView *titleView;
+    SWEnvironmentView *environmentView;
+    SWCircleProgressView *progressView;
+}
+
+@end
 @implementation SWExerciseRecordsViewController
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+        self.extendedLayoutIncludesOpaqueBars = NO;
+    }
+    
+    return self;
+}
+
 - (void)viewDidLoad {
-    UIBarButtonItem *rightBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"分享", nil) style:UIBarButtonItemStylePlain target:self action:@selector(shareClick)];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"1背景-ios_01"] forBarMetrics:UIBarMetricsDefault];
+    
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"1背景-ios_02"]];
+    
+    UIBarButtonItem *leftBtn = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"蓝牙"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(bleClick)];
+    self.navigationItem.leftBarButtonItem = leftBtn;
+    
+    UIBarButtonItem *rightBtn = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"分享"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(shareClick)];
     self.navigationItem.rightBarButtonItem = rightBtn;
     
-    SWLineGraphView *graphView = [[SWLineGraphView alloc] initWithFrame:CGRectMake(0.0f, 100.0f, 320.0f, 200.0f)];
+    titleView = [[SWExerciseRecordsTitleView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 220.0f, 44.0f)];
+    titleView.date = [NSDate date];
+    self.navigationItem.titleView = titleView;
+    
+    
+    environmentView = [[SWEnvironmentView alloc] initWithFrame:CGRectMake(14.0f, 12.0f, IPHONE_WIDTH - 28.0f, 25.0f)];
+    environmentView.uvLevel = 5;
+    environmentView.temperature = 25;
+    environmentView.humidity = 66;
+    environmentView.leftPower = 77;
+    [self.view addSubview:environmentView];
+    
+    progressView = [[SWCircleProgressView alloc] initWithFrame:CGRectMake(14.0f, environmentView.bottom + 15.0f, 0.0f, 0.0f)];
+    progressView.backImage = [UIImage imageNamed:@"1运动记录_70"];
+    progressView.topDesc = NSLocalizedString(@"今日", nil);
+    progressView.bottomDesc = NSLocalizedString(@"目标", nil);
+    progressView.progress = 0.83;
+    progressView.valueString = @"83%";
+    [self.view addSubview:progressView];
+    
+    SWLineGraphView *graphView = [[SWLineGraphView alloc] initWithFrame:CGRectMake(0.0f, progressView.bottom + 10.0f, 320.0f, 200.0f)];
     graphView.backgroundColor = [UIColor clearColor];
     graphView.xAxisValues = @[@{@6 : @"6"},@{@12 : @"12"},@{@18 : @"18"},@{@24 : @"24"}];
     graphView.xIntervalCount = 24;
@@ -53,6 +101,14 @@
     
     [graphView setupTheView];
     [self.view addSubview:graphView];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+}
+
+- (void)bleClick {
+    
 }
 
 - (void)shareClick {

@@ -10,4 +10,10 @@
 
 @implementation SWSettingViewController
 
+- (void)viewDidLoad {
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"4背景-ios_01"] forBarMetrics:UIBarMetricsDefault];
+    
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"4背景-ios_02"]];
+}
+
 @end

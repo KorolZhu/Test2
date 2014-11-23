@@ -195,8 +195,7 @@ NSString *const kDotSizeKey                 = @"kDotSizeKey";
         }
     }
     
-    UIImageView *yAxis = [[UIImageView alloc] init];
-    yAxis.backgroundColor = [UIColor whiteColor];
+    UIImageView *yAxis = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"曲线图_竖线"]];
     [self addSubview:yAxis];
     CGRect frame = CGRectZero;
     frame.origin.x = origin.x;
@@ -235,8 +234,7 @@ NSString *const kDotSizeKey                 = @"kDotSizeKey";
 
 - (void)drawLines {
     for (int i = 0; i <= _xIntervalCount; i++) {
-        UIImageView *line = [[UIImageView alloc] init];
-        line.backgroundColor = [UIColor whiteColor];
+        UIImageView *line = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"曲线图_竖线"]];
         [self addSubview:line];
         CGRect frame = CGRectZero;
         frame.origin.x = origin.x + i * xIntervalInPx;

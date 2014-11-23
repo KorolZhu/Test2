@@ -23,25 +23,32 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [[SWShareKit sharedInstance] registerApp];
     
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     
     _exerciseRecordsViewController = [[SWExerciseRecordsViewController alloc] init];
     [_exerciseRecordsViewController.tabBarItem setTitle:NSLocalizedString(@"运动记录", nil)];
-    [_exerciseRecordsViewController.tabBarItem setImage:[UIImage imageNamed:@"first"]];
+    [_exerciseRecordsViewController.tabBarItem setImage:[UIImage imageNamed:@"运动记录1"]];
+    [_exerciseRecordsViewController.tabBarItem setSelectedImage:[[UIImage imageNamed:@"运动记录2"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
     _historyRecordsViewController = [[SWHistoryRecordsViewController alloc] init];
     [_historyRecordsViewController.tabBarItem setTitle:NSLocalizedString(@"历史记录", nil)];
-    [_historyRecordsViewController.tabBarItem setImage:[UIImage imageNamed:@"first"]];
+    [_historyRecordsViewController.tabBarItem setImage:[UIImage imageNamed:@"历史记录1"]];
+    [_historyRecordsViewController.tabBarItem setSelectedImage:[[UIImage imageNamed:@"历史记录2"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+
     
     _profileViewController = [[SWProfileViewController alloc] init];
     [_profileViewController.tabBarItem setTitle:NSLocalizedString(@"个人资料", nil)];
-    [_profileViewController.tabBarItem setImage:[UIImage imageNamed:@"first"]];
-    
+    [_profileViewController.tabBarItem setImage:[UIImage imageNamed:@"个人中心1"]];
+    [_profileViewController.tabBarItem setSelectedImage:[[UIImage imageNamed:@"个人中心2"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+
     _settingViewController = [[SWSettingViewController alloc] init];
     [_settingViewController.tabBarItem setTitle:NSLocalizedString(@"设置", nil)];
-    [_settingViewController.tabBarItem setImage:[UIImage imageNamed:@"first"]];
-    
+    [_settingViewController.tabBarItem setImage:[UIImage imageNamed:@"设置1"]];
+    [_settingViewController.tabBarItem setSelectedImage:[[UIImage imageNamed:@"设置2"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+
     UINavigationController *nav1 = [[UINavigationController alloc] initWithRootViewController:_exerciseRecordsViewController];
     UINavigationController *nav2 = [[UINavigationController alloc] initWithRootViewController:_historyRecordsViewController];
     UINavigationController *nav3 = [[UINavigationController alloc] initWithRootViewController:_profileViewController];

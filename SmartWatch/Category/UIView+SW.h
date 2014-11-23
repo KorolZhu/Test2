@@ -20,6 +20,7 @@
 - (CGFloat)centerY;
 
 - (void)setTop:(CGFloat)top;
+- (void)setBottom:(CGFloat)bottom;
 - (void)setLeft:(CGFloat)left;
 - (void)setRight:(CGFloat)right;
 - (void)setWidth:(CGFloat)width;

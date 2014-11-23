@@ -65,6 +65,12 @@
     return self.frame.origin.y + self.frame.size.height;
 }
 
+- (void)setBottom:(CGFloat)bottom {
+    CGRect frame = self.frame;
+    frame.origin.y = bottom - self.height;
+    self.frame = frame;
+}
+
 - (CGFloat)centerX {
     return CGRectGetMidX(self.frame);
 }

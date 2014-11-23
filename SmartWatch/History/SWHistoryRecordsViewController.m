@@ -15,6 +15,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"2背景-ios_01"] forBarMetrics:UIBarMetricsDefault];
+    
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"2背景-ios_02"]];
+    
     SWLineGraphView *graphView = [[SWLineGraphView alloc] initWithFrame:CGRectMake(0.0f, 100.0f, 320.0f, 200.0f)];
     graphView.backgroundColor = [UIColor clearColor];
     graphView.xAxisValues = @[@{@1 : @"10-29"},@{@2 : @"10-30"},@{@3 : @"10-31"},@{@4 : @"11-01"},@{@5 : @"11-02"},@{@6 : @"11-03"},@{@7 : @"11-04"}];
