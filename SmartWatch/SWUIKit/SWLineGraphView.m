@@ -62,16 +62,16 @@ NSString *const kDotSizeKey                 = @"kDotSizeKey";
 - (void)loadDefaultTheme {
     _themeAttributes = @{
                          kXAxisLabelColorKey : [UIColor whiteColor],
-                         kXAxisLabelFontKey : [UIFont systemFontOfSize:11.0f],
-                         kXAxisDescLabelColorKey : [UIColor whiteColor],
+                         kXAxisLabelFontKey : [UIFont systemFontOfSize:9.0f],
+                         kXAxisDescLabelColorKey : [[UIColor whiteColor] colorWithAlphaComponent:0.5f],
                          kXAxisDescLabelFontKey : [UIFont systemFontOfSize:11.0f],
-                         kYAxisLabelColorKey : [UIColor whiteColor],
-                         kYAxisLabelFontKey : [UIFont systemFontOfSize:11.0f],
+                         kYAxisLabelColorKey : [[UIColor whiteColor] colorWithAlphaComponent:0.5f],
+                         kYAxisLabelFontKey : [UIFont systemFontOfSize:9.0f],
                          kYAxisDescLabelColorKey : [UIColor blackColor],
                          kYAxisDescLabelFontKey : [UIFont systemFontOfSize:11.0f],
                          kYAxisLabelSideMarginsKey : @10,
                          kPlotBackgroundLineColorKey : [UIColor colorWithRed:0.48 green:0.48 blue:0.49 alpha:0.4],
-                         kDotSizeKey : @5.0
+                         kDotSizeKey : @4.0
                          };
 }
 

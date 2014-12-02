@@ -10,6 +10,7 @@
 #import "SWExerciseRecordsTitleView.h"
 #import "SWEnvironmentView.h"
 #import "SWCircleProgressView.h"
+#import "SWDashboardView.h"
 #import "SWShareKit.h"
 #import "SWLineGraphView.h"
 #import "SWPlot.h"
@@ -19,9 +20,15 @@
     SWExerciseRecordsTitleView *titleView;
     SWEnvironmentView *environmentView;
     SWCircleProgressView *progressView;
+    SWDashboardView *dashboardView;
+    UIButton *curveButton, *trackButton;
+    UIButton *calorieButton, *stepButton, *sleepButton;
 }
 
+@property (nonatomic,strong) UIScrollView *scrollView;
+
 @end
+
 @implementation SWExerciseRecordsViewController
 
 - (instancetype)init {
@@ -35,6 +42,11 @@
 }
 
 - (void)viewDidLoad {
+    _scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
+    _scrollView.backgroundColor = [UIColor clearColor];
+    _scrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    [self.view addSubview:_scrollView];
+    
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"1背景-ios_01"] forBarMetrics:UIBarMetricsDefault];
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"1背景-ios_02"]];
@@ -55,7 +67,7 @@
     environmentView.temperature = 25;
     environmentView.humidity = 66;
     environmentView.leftPower = 77;
-    [self.view addSubview:environmentView];
+    [_scrollView addSubview:environmentView];
     
     progressView = [[SWCircleProgressView alloc] initWithFrame:CGRectMake(14.0f, environmentView.bottom + 15.0f, 0.0f, 0.0f)];
     progressView.backImage = [UIImage imageNamed:@"1运动记录_70"];
@@ -63,9 +75,21 @@
     progressView.bottomDesc = NSLocalizedString(@"目标", nil);
     progressView.progress = 0.83;
     progressView.valueString = @"83%";
-    [self.view addSubview:progressView];
+    [_scrollView addSubview:progressView];
     
-    SWLineGraphView *graphView = [[SWLineGraphView alloc] initWithFrame:CGRectMake(0.0f, progressView.bottom + 10.0f, 320.0f, 200.0f)];
+    dashboardView = [[SWDashboardView alloc] initWithFrame:CGRectMake(progressView.right + 16.0f, progressView.top + 10.0f, 112.0f, 171.0f)];
+    [_scrollView addSubview:dashboardView];
+    dashboardView.value1 = 3089;
+    dashboardView.unit1 = @"千卡";
+    dashboardView.descri1 = @"燃烧";
+    dashboardView.value2 = 554;
+    dashboardView.unit2 = @"公里";
+    dashboardView.descri2 = @"距离";
+    dashboardView.value3 = 2565;
+    dashboardView.unit3 = @"步";
+    dashboardView.descri3 = @"步数";
+    
+    SWLineGraphView *graphView = [[SWLineGraphView alloc] initWithFrame:CGRectMake(0.0f, progressView.bottom + 10.0f, IPHONE_WIDTH, 166.0f)];
     graphView.backgroundColor = [UIColor clearColor];
     graphView.xAxisValues = @[@{@6 : @"6"},@{@12 : @"12"},@{@18 : @"18"},@{@24 : @"24"}];
     graphView.xIntervalCount = 24;
@@ -95,12 +119,91 @@
     plot.plotThemeAttributes = @{
                                   kPlotFillColorKey : [UIColor clearColor],
                                   kPlotStrokeWidthKey : @1,
-                                  kPlotStrokeColorKey : [UIColor blueColor],
-                                  kPlotPointFillColorKey : [UIColor blueColor]};
+                                  kPlotStrokeColorKey : RGBFromHex(0x00F0FF),
+                                  kPlotPointFillColorKey : RGBFromHex(0x00F0FF)};
     [graphView addPlot:plot];
     
     [graphView setupTheView];
-    [self.view addSubview:graphView];
+    [_scrollView addSubview:graphView];
+    
+    curveButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [curveButton addTarget:self action:@selector(curveButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    [curveButton setBackgroundImage:[UIImage imageNamed:@"button1"] forState:UIControlStateNormal];
+    [curveButton setBackgroundImage:[UIImage imageNamed:@"button2"] forState:UIControlStateSelected];
+    [curveButton setTitle:@"曲线图" forState:UIControlStateNormal];
+    [curveButton.titleLabel setFont:[UIFont systemFontOfSize:9.0f]];
+    [curveButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+    [curveButton setTitleColor:RGBFromHex(0x505050) forState:UIControlStateNormal];
+    [_scrollView addSubview:curveButton];
+    curveButton.frame = CGRectMake(IPHONE_WIDTH - 121.0f, graphView.bottom + 5.0f, 48.0f, 19.0f);
+    curveButton.selected = YES;
+    
+    trackButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [trackButton addTarget:self action:@selector(trackButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    [trackButton setBackgroundImage:[UIImage imageNamed:@"button1"] forState:UIControlStateNormal];
+    [trackButton setBackgroundImage:[UIImage imageNamed:@"button2"] forState:UIControlStateSelected];
+    [trackButton setTitle:@"轨迹图" forState:UIControlStateNormal];
+    [trackButton.titleLabel setFont:[UIFont systemFontOfSize:9.0f]];
+    [trackButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+    [trackButton setTitleColor:RGBFromHex(0x505050) forState:UIControlStateNormal];
+    [_scrollView addSubview:trackButton];
+    trackButton.frame = CGRectMake(curveButton.right + 5.0f, graphView.bottom + 5.0f, 48.0f, 19.0f);
+    
+    trackButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [trackButton addTarget:self action:@selector(trackButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    [trackButton setBackgroundImage:[UIImage imageNamed:@"button1"] forState:UIControlStateNormal];
+    [trackButton setBackgroundImage:[UIImage imageNamed:@"button2"] forState:UIControlStateSelected];
+    [trackButton setTitle:@"轨迹图" forState:UIControlStateNormal];
+    [trackButton.titleLabel setFont:[UIFont systemFontOfSize:9.0f]];
+    [trackButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+    [trackButton setTitleColor:RGBFromHex(0x505050) forState:UIControlStateNormal];
+    [_scrollView addSubview:trackButton];
+    trackButton.frame = CGRectMake(curveButton.right + 5.0f, graphView.bottom + 5.0f, 48.0f, 19.0f);
+    
+    calorieButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [calorieButton addTarget:self action:@selector(calorieButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    [calorieButton setBackgroundImage:[UIImage imageNamed:@"left_1"] forState:UIControlStateNormal];
+    [calorieButton setBackgroundImage:[UIImage imageNamed:@"left_2"] forState:UIControlStateSelected];
+    [calorieButton setImage:[UIImage imageNamed:@"ico_卡路里1"] forState:UIControlStateNormal];
+    [calorieButton setImage:[UIImage imageNamed:@"ico_卡路里2"] forState:UIControlStateSelected];
+    [calorieButton setTitle:@"卡路里" forState:UIControlStateNormal];
+    calorieButton.titleEdgeInsets = UIEdgeInsetsMake(2.0f, 8.0f, 0.0f, 0.0f);
+    [calorieButton.titleLabel setFont:[UIFont systemFontOfSize:11.0f]];
+    [calorieButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+    [calorieButton setTitleColor:RGBFromHex(0x505050) forState:UIControlStateNormal];
+    [_scrollView addSubview:calorieButton];
+    calorieButton.frame = CGRectMake((IPHONE_WIDTH - 3 * 96.0f) / 2.0f, trackButton.bottom + 13.0f, 96.0f, 39.0f);
+    calorieButton.selected = YES;
+    
+    stepButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [stepButton addTarget:self action:@selector(stepButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    [stepButton setBackgroundImage:[UIImage imageNamed:@"m_1"] forState:UIControlStateNormal];
+    [stepButton setBackgroundImage:[UIImage imageNamed:@"m_2"] forState:UIControlStateSelected];
+    [stepButton setImage:[UIImage imageNamed:@"ico_步数1"] forState:UIControlStateNormal];
+    [stepButton setImage:[UIImage imageNamed:@"ico_步数2"] forState:UIControlStateSelected];
+    [stepButton setTitle:@"步数" forState:UIControlStateNormal];
+    stepButton.titleEdgeInsets = UIEdgeInsetsMake(2.0f, 8.0f, 0.0f, 0.0f);
+    [stepButton.titleLabel setFont:[UIFont systemFontOfSize:11.0f]];
+    [stepButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+    [stepButton setTitleColor:RGBFromHex(0x505050) forState:UIControlStateNormal];
+    [_scrollView addSubview:stepButton];
+    stepButton.frame = CGRectMake(calorieButton.right, trackButton.bottom + 13.0f, 96.0f, 39.0f);
+    
+    sleepButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [sleepButton addTarget:self action:@selector(sleepButtonClick) forControlEvents:UIControlEventTouchUpInside];
+    [sleepButton setBackgroundImage:[UIImage imageNamed:@"right_1"] forState:UIControlStateNormal];
+    [sleepButton setBackgroundImage:[UIImage imageNamed:@"right_2"] forState:UIControlStateSelected];
+    [sleepButton setImage:[UIImage imageNamed:@"ico_睡眠1"] forState:UIControlStateNormal];
+    [sleepButton setImage:[UIImage imageNamed:@"ico_睡眠2"] forState:UIControlStateSelected];
+    [sleepButton setTitle:@"睡眠" forState:UIControlStateNormal];
+    sleepButton.titleEdgeInsets = UIEdgeInsetsMake(2.0f, 8.0f, 0.0f, 0.0f);
+    [sleepButton.titleLabel setFont:[UIFont systemFontOfSize:11.0f]];
+    [sleepButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+    [sleepButton setTitleColor:RGBFromHex(0x505050) forState:UIControlStateNormal];
+    [_scrollView addSubview:sleepButton];
+    sleepButton.frame = CGRectMake(stepButton.right, trackButton.bottom + 13.0f, 96.0f, 39.0f);
+    
+    _scrollView.contentSize = CGSizeMake(IPHONE_WIDTH, sleepButton.bottom + 13.0f);
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -113,6 +216,50 @@
 
 - (void)shareClick {
     [[SWShareKit sharedInstance] sendMessage:@"test" WithUrl:@"http://baidu.com" WithType:SWShareTypeWechatSession];
+}
+
+- (void)curveButtonClick {
+    if (curveButton.selected) {
+        return;
+    }
+    curveButton.selected = YES;
+    trackButton.selected = NO;
+}
+
+- (void)trackButtonClick {
+    if (trackButton.selected) {
+        return;
+    }
+    curveButton.selected = NO;
+    trackButton.selected = YES;
+
+}
+
+- (void)calorieButtonClick {
+    if (calorieButton.selected) {
+        return;
+    }
+    calorieButton.selected = YES;
+    stepButton.selected = NO;
+    sleepButton.selected = NO;
+}
+
+- (void)stepButtonClick {
+    if (stepButton.selected) {
+        return;
+    }
+    calorieButton.selected = NO;
+    stepButton.selected = YES;
+    sleepButton.selected = NO;
+}
+
+- (void)sleepButtonClick {
+    if (sleepButton.selected) {
+        return;
+    }
+    calorieButton.selected = NO;
+    stepButton.selected = NO;
+    sleepButton.selected = YES;
 }
 
 @end

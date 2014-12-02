@@ -94,6 +94,7 @@
 		CE7EE1431A20FB67006F3294 /* 日期左选择_正常@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7EE13F1A20FB67006F3294 /* 日期左选择_正常@2x.png */; };
 		CE7EE14C1A21D7A0006F3294 /* SWCircleProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7EE14B1A21D7A0006F3294 /* SWCircleProgressView.m */; };
 		CE7EE14F1A21D7DE006F3294 /* SWEnvironmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7EE14E1A21D7DE006F3294 /* SWEnvironmentView.m */; };
+		CE828E551A2DF3E60036BEC2 /* SWDashboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE828E541A2DF3E60036BEC2 /* SWDashboardView.m */; };
 		CEE0D7F71A18793500CE643C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D7F61A18793500CE643C /* main.m */; };
 		CEE0D7FA1A18793500CE643C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D7F91A18793500CE643C /* AppDelegate.m */; };
 		CEE0D8141A18793500CE643C /* SmartWatchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D8131A18793500CE643C /* SmartWatchTests.m */; };
@@ -217,6 +218,8 @@
 		CE7EE14B1A21D7A0006F3294 /* SWCircleProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWCircleProgressView.m; sourceTree = "<group>"; };
 		CE7EE14D1A21D7DE006F3294 /* SWEnvironmentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWEnvironmentView.h; sourceTree = "<group>"; };
 		CE7EE14E1A21D7DE006F3294 /* SWEnvironmentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWEnvironmentView.m; sourceTree = "<group>"; };
+		CE828E531A2DF3E60036BEC2 /* SWDashboardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWDashboardView.h; sourceTree = "<group>"; };
+		CE828E541A2DF3E60036BEC2 /* SWDashboardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWDashboardView.m; sourceTree = "<group>"; };
 		CEE0D7F11A18793500CE643C /* SmartWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEE0D7F51A18793500CE643C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEE0D7F61A18793500CE643C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -298,6 +301,8 @@
 				CE7EE14E1A21D7DE006F3294 /* SWEnvironmentView.m */,
 				CE7EE14A1A21D7A0006F3294 /* SWCircleProgressView.h */,
 				CE7EE14B1A21D7A0006F3294 /* SWCircleProgressView.m */,
+				CE828E531A2DF3E60036BEC2 /* SWDashboardView.h */,
+				CE828E541A2DF3E60036BEC2 /* SWDashboardView.m */,
 			);
 			name = SWUIKit;
 			path = SmartWatch/SWUIKit;
@@ -854,6 +859,7 @@
 				CEE0D8431A18885C00CE643C /* UIView+SW.m in Sources */,
 				CEE0D8371A18870200CE643C /* SWShareKit.m in Sources */,
 				CEE0D85A1A1888CF00CE643C /* GCDGroup.m in Sources */,
+				CE828E551A2DF3E60036BEC2 /* SWDashboardView.m in Sources */,
 				CEE0D8291A187D8900CE643C /* SWProfileViewController.m in Sources */,
 				CEE0D8231A187CEF00CE643C /* SWExerciseRecordsViewController.m in Sources */,
 				CEE0D82C1A187DC800CE643C /* SWSettingViewController.m in Sources */,
