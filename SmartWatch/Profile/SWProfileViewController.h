@@ -2,12 +2,12 @@
 //  SWProfileViewController.h
 //  SmartWatch
 //
-//  Created by zhuzhi on 14/11/16.
-//  Copyright (c) 2014年 SW. All rights reserved.
+//  Created by zhuzhi on 14/12/3.
+//
 //
 
 #import <UIKit/UIKit.h>
 
-@interface SWProfileViewController : UIViewController
+@interface SWProfileViewController : UITableViewController
 
 @end

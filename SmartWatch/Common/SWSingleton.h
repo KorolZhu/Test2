@@ -9,7 +9,7 @@
 #ifndef SmartWatch_SWSingleton_h
 #define SmartWatch_SWSingleton_h
 
-#define SM_AS_SINGLETON( __class , __method) \
+#define SW_AS_SINGLETON( __class , __method) \
 + (__class *)__method;
 
 

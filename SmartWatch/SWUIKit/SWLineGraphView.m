@@ -121,6 +121,7 @@ NSString *const kDotSizeKey                 = @"kDotSizeKey";
     chartBackView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.2f];
     [self addSubview:chartBackView];
     [chartBackView autoPinEdgesToSuperviewEdgesWithInsets:UIEdgeInsetsMake(_headView.height + ITEM_PADDING, yDescriptionLabel.width + 2 * ITEM_PADDING, 0.0f, yDescriptionLabel.width + 2 * ITEM_PADDING)];
+    _headView.left = yDescriptionLabel.width + 2 * ITEM_PADDING;
     
     xDescriptionLabel = [[UILabel alloc] init];
     xDescriptionLabel.font = [_themeAttributes objectForKey:kXAxisDescLabelFontKey];

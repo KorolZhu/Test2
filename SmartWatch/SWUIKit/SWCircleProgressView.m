@@ -57,6 +57,15 @@
     return self;
 }
 
+- (void)setStyle:(SWCircleProgressViewStyle)style {
+    _style = style;
+    if (style == SWCircleProgressViewStyleSmall) {
+        valueLabel.font = [UIFont systemFontOfSize:22.0f];
+        topDescLabel.font = [UIFont systemFontOfSize:11.0f];
+        bottomDescLabel.font = [UIFont systemFontOfSize:11.0f];
+    }
+}
+
 - (void)setBackImage:(UIImage *)backImage {
     _backImage = backImage;
     backImageView.image = backImage;
@@ -91,12 +100,12 @@
         progressLayer.strokeColor = [[UIColor whiteColor] CGColor];
         progressLayer.fillColor = [[UIColor clearColor] CGColor];
         progressLayer.lineCap = @"round";
-        progressLayer.lineWidth = 6.0f;
+        progressLayer.lineWidth =  (_style == SWCircleProgressViewStyleLarge ? 6.0f : 3.0f);
         [self.layer addSublayer:progressLayer];
         
         circleStartAngle = 116.0f;
         circleEndAngle = 450.0f - (circleStartAngle - 90.0f);
-        radius = self.width / 2.0f - 9.0f;
+        radius = self.width / 2.0f - (_style == SWCircleProgressViewStyleLarge ? 9.0f : 5.0f);
     }
     
     CGFloat endAngle = circleStartAngle + (circleEndAngle - circleStartAngle) * progress;
@@ -116,11 +125,11 @@
     
     [topDescLabel sizeToFit];
     topDescLabel.centerX = self.width / 2.0f;
-    topDescLabel.bottom = valueLabel.top - 4.0f;
+    topDescLabel.bottom = valueLabel.top - (_style == SWCircleProgressViewStyleLarge ? 4.0f : 0.0f);
     
     [bottomDescLabel sizeToFit];
     bottomDescLabel.centerX = self.width / 2.0f;
-    bottomDescLabel.top = valueLabel.bottom + 4.0f;
+    bottomDescLabel.top = valueLabel.bottom + (_style == SWCircleProgressViewStyleLarge ? 4.0f : 0.0f);
 }
 
 @end

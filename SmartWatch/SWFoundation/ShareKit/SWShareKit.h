@@ -12,7 +12,7 @@
 
 @interface SWShareKit : NSObject
 
-SM_AS_SINGLETON(SWShareKit, sharedInstance);
+SW_AS_SINGLETON(SWShareKit, sharedInstance);
 
 - (void)registerApp;
 

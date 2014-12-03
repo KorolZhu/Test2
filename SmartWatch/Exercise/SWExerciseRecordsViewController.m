@@ -15,7 +15,7 @@
 #import "SWLineGraphView.h"
 #import "SWPlot.h"
 
-@interface SWExerciseRecordsViewController ()
+@interface SWExerciseRecordsViewController ()<BLEDelegate>
 {
     SWExerciseRecordsTitleView *titleView;
     SWEnvironmentView *environmentView;
@@ -53,7 +53,7 @@
     
     UIBarButtonItem *leftBtn = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"蓝牙"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(bleClick)];
     self.navigationItem.leftBarButtonItem = leftBtn;
-    
+
     UIBarButtonItem *rightBtn = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"分享"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(shareClick)];
     self.navigationItem.rightBarButtonItem = rightBtn;
     
@@ -204,6 +204,9 @@
     sleepButton.frame = CGRectMake(stepButton.right, trackButton.bottom + 13.0f, 96.0f, 39.0f);
     
     _scrollView.contentSize = CGSizeMake(IPHONE_WIDTH, sleepButton.bottom + 13.0f);
+    
+    [BLEShareInstance controlSetup];
+    BLEShareInstance.delegate = self;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -211,7 +214,28 @@
 }
 
 - (void)bleClick {
+    self.navigationItem.leftBarButtonItem.enabled = NO;
+        
+    if (BLEShareInstance.activePeripheral)
+        if([BLE shareInstance].activePeripheral.state == CBPeripheralStateConnected)
+        {
+            [[BLEShareInstance CM] cancelPeripheralConnection:BLEShareInstance.activePeripheral];
+            return;
+        }
     
+    if (BLEShareInstance.peripherals)
+        BLEShareInstance.peripherals = nil;
+    
+    [BLEShareInstance findBLEPeripherals:2];
+    [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(scanPeripheraTimer) userInfo:nil repeats:NO];
+}
+
+- (void)scanPeripheraTimer {
+    if (BLEShareInstance.peripherals.count > 0) {
+        [BLEShareInstance connectPeripheral:[BLEShareInstance.peripherals objectAtIndex:0]];
+    } else {
+        self.navigationItem.leftBarButtonItem.enabled = YES;
+    }
 }
 
 - (void)shareClick {
@@ -260,6 +284,41 @@
     calorieButton.selected = NO;
     stepButton.selected = NO;
     sleepButton.selected = YES;
+}
+
+#pragma mark - BLEDelegate
+
+- (void)bleDidConnect {
+    [self write];
+}
+
+-(void)write {
+    UInt8 buf[] = {0x10};
+    NSData *data = [[NSData alloc] initWithBytes:buf length:1];
+    [BLEShareInstance write:data];
+}
+
+- (void)bleDidWriteValue {
+    
+}
+
+- (void)bleDidDisconnect {
+    
+}
+
+- (void)bleDidReceiveData:(unsigned char *)data length:(int)length {
+    if (length >= 3) {
+        UInt8 data0 = data[0];
+        UInt8 data1 = data[1];
+        UInt8 data2 = data[2];
+        UInt8 data3 = data[3];
+        UInt8 data4 = data[4];
+        UInt8 data5 = data[5];
+        UInt8 data6 = data[6];
+        
+        NSLog(@"%d,%d,%d,%d,%d,%d,%d", (int)data0, (int)data1, (int)data2, (int)data3, (int)data4, (int)data5, (int)data6);
+
+    }
 }
 
 @end
