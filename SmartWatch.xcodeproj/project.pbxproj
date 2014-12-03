@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		CE208F571A1A4C8A001D6482 /* SWLineGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE208F541A1A4C8A001D6482 /* SWLineGraphView.m */; };
 		CE208F581A1A4C8A001D6482 /* SWPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = CE208F561A1A4C8A001D6482 /* SWPlot.m */; };
+		CE44E28E1A2F79DF0081F09E /* SWHeadImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE44E28B1A2F79DF0081F09E /* SWHeadImageCell.m */; };
+		CE44E28F1A2F79DF0081F09E /* SWProfileInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE44E28D1A2F79DF0081F09E /* SWProfileInfoCell.m */; };
+		CE44E2921A2F79ED0081F09E /* SWProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE44E2911A2F79ED0081F09E /* SWProfileViewController.m */; };
 		CE7EE0BF1A20EA33006F3294 /* 1运动记录_70@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7EE0921A20EA33006F3294 /* 1运动记录_70@2x.png */; };
 		CE7EE0C01A20EA33006F3294 /* 1运动记录_73@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7EE0931A20EA33006F3294 /* 1运动记录_73@2x.png */; };
 		CE7EE0C11A20EA33006F3294 /* 1运动记录_卡路里-标注(标注)@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7EE0941A20EA33006F3294 /* 1运动记录_卡路里-标注(标注)@2x.png */; };
@@ -96,9 +99,6 @@
 		CE7EE14F1A21D7DE006F3294 /* SWEnvironmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7EE14E1A21D7DE006F3294 /* SWEnvironmentView.m */; };
 		CE828E551A2DF3E60036BEC2 /* SWDashboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE828E541A2DF3E60036BEC2 /* SWDashboardView.m */; };
 		CE828E5A1A2E12020036BEC2 /* BLE.m in Sources */ = {isa = PBXBuildFile; fileRef = CE828E581A2E12020036BEC2 /* BLE.m */; };
-		CE9F572E1A2F7342000D49F2 /* SWHeadImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9F57291A2F7342000D49F2 /* SWHeadImageCell.m */; };
-		CE9F572F1A2F7342000D49F2 /* SWProfileInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9F572B1A2F7342000D49F2 /* SWProfileInfoCell.m */; };
-		CE9F57301A2F7342000D49F2 /* SWProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9F572D1A2F7342000D49F2 /* SWProfileViewController.m */; };
 		CEE0D7F71A18793500CE643C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D7F61A18793500CE643C /* main.m */; };
 		CEE0D7FA1A18793500CE643C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D7F91A18793500CE643C /* AppDelegate.m */; };
 		CEE0D8141A18793500CE643C /* SmartWatchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D8131A18793500CE643C /* SmartWatchTests.m */; };
@@ -133,6 +133,12 @@
 		CE208F541A1A4C8A001D6482 /* SWLineGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWLineGraphView.m; sourceTree = "<group>"; };
 		CE208F551A1A4C8A001D6482 /* SWPlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWPlot.h; sourceTree = "<group>"; };
 		CE208F561A1A4C8A001D6482 /* SWPlot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWPlot.m; sourceTree = "<group>"; };
+		CE44E28A1A2F79DF0081F09E /* SWHeadImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWHeadImageCell.h; sourceTree = "<group>"; };
+		CE44E28B1A2F79DF0081F09E /* SWHeadImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWHeadImageCell.m; sourceTree = "<group>"; };
+		CE44E28C1A2F79DF0081F09E /* SWProfileInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWProfileInfoCell.h; sourceTree = "<group>"; };
+		CE44E28D1A2F79DF0081F09E /* SWProfileInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWProfileInfoCell.m; sourceTree = "<group>"; };
+		CE44E2901A2F79ED0081F09E /* SWProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWProfileViewController.h; sourceTree = "<group>"; };
+		CE44E2911A2F79ED0081F09E /* SWProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWProfileViewController.m; sourceTree = "<group>"; };
 		CE7EE0921A20EA33006F3294 /* 1运动记录_70@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1运动记录_70@2x.png"; sourceTree = "<group>"; };
 		CE7EE0931A20EA33006F3294 /* 1运动记录_73@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1运动记录_73@2x.png"; sourceTree = "<group>"; };
 		CE7EE0941A20EA33006F3294 /* 1运动记录_卡路里-标注(标注)@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1运动记录_卡路里-标注(标注)@2x.png"; sourceTree = "<group>"; };
@@ -226,12 +232,6 @@
 		CE828E571A2E12020036BEC2 /* BLE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLE.h; sourceTree = "<group>"; };
 		CE828E581A2E12020036BEC2 /* BLE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLE.m; sourceTree = "<group>"; };
 		CE828E591A2E12020036BEC2 /* BLEDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLEDefines.h; sourceTree = "<group>"; };
-		CE9F57281A2F7342000D49F2 /* SWHeadImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWHeadImageCell.h; sourceTree = "<group>"; };
-		CE9F57291A2F7342000D49F2 /* SWHeadImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWHeadImageCell.m; sourceTree = "<group>"; };
-		CE9F572A1A2F7342000D49F2 /* SWProfileInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWProfileInfoCell.h; sourceTree = "<group>"; };
-		CE9F572B1A2F7342000D49F2 /* SWProfileInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWProfileInfoCell.m; sourceTree = "<group>"; };
-		CE9F572C1A2F7342000D49F2 /* SWProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWProfileViewController.h; sourceTree = "<group>"; };
-		CE9F572D1A2F7342000D49F2 /* SWProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWProfileViewController.m; sourceTree = "<group>"; };
 		CEE0D7F11A18793500CE643C /* SmartWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEE0D7F51A18793500CE643C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEE0D7F61A18793500CE643C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -316,6 +316,19 @@
 			);
 			name = SWUIKit;
 			path = SmartWatch/SWUIKit;
+			sourceTree = "<group>";
+		};
+		CE44E2891A2F79D60081F09E /* Profile1 */ = {
+			isa = PBXGroup;
+			children = (
+				CE44E2901A2F79ED0081F09E /* SWProfileViewController.h */,
+				CE44E2911A2F79ED0081F09E /* SWProfileViewController.m */,
+				CE44E28A1A2F79DF0081F09E /* SWHeadImageCell.h */,
+				CE44E28B1A2F79DF0081F09E /* SWHeadImageCell.m */,
+				CE44E28C1A2F79DF0081F09E /* SWProfileInfoCell.h */,
+				CE44E28D1A2F79DF0081F09E /* SWProfileInfoCell.m */,
+			);
+			path = Profile1;
 			sourceTree = "<group>";
 		};
 		CE7EE0391A20E5E2006F3294 /* Resource */ = {
@@ -483,19 +496,6 @@
 			path = SmartWatch/BLE;
 			sourceTree = "<group>";
 		};
-		CE9F57271A2F7342000D49F2 /* Profile */ = {
-			isa = PBXGroup;
-			children = (
-				CE9F572C1A2F7342000D49F2 /* SWProfileViewController.h */,
-				CE9F572D1A2F7342000D49F2 /* SWProfileViewController.m */,
-				CE9F57281A2F7342000D49F2 /* SWHeadImageCell.h */,
-				CE9F57291A2F7342000D49F2 /* SWHeadImageCell.m */,
-				CE9F572A1A2F7342000D49F2 /* SWProfileInfoCell.h */,
-				CE9F572B1A2F7342000D49F2 /* SWProfileInfoCell.m */,
-			);
-			path = Profile;
-			sourceTree = "<group>";
-		};
 		CEE0D7E81A18793400CE643C = {
 			isa = PBXGroup;
 			children = (
@@ -526,7 +526,7 @@
 			children = (
 				CEE0D81D1A187C9D00CE643C /* Exercise */,
 				CEE0D81E1A187C9D00CE643C /* History */,
-				CE9F57271A2F7342000D49F2 /* Profile */,
+				CE44E2891A2F79D60081F09E /* Profile1 */,
 				CEE0D8201A187C9D00CE643C /* Setting */,
 				CEE0D7F81A18793500CE643C /* AppDelegate.h */,
 				CEE0D7F91A18793500CE643C /* AppDelegate.m */,
@@ -873,9 +873,9 @@
 				CEE0D85C1A1888CF00CE643C /* GCDSemaphore.m in Sources */,
 				CEE0D8461A18887800CE643C /* UIColor+SW.m in Sources */,
 				CE7EE13B1A20F946006F3294 /* SWExerciseRecordsTitleView.m in Sources */,
-				CE9F572E1A2F7342000D49F2 /* SWHeadImageCell.m in Sources */,
+				CE44E28E1A2F79DF0081F09E /* SWHeadImageCell.m in Sources */,
 				CEE0D85F1A1888CF00CE643C /* NSLayoutConstraint+PureLayout.m in Sources */,
-				CE9F57301A2F7342000D49F2 /* SWProfileViewController.m in Sources */,
+				CE44E2921A2F79ED0081F09E /* SWProfileViewController.m in Sources */,
 				CEE0D85D1A1888CF00CE643C /* ALView+PureLayout.m in Sources */,
 				CEE0D85E1A1888CF00CE643C /* NSArray+PureLayout.m in Sources */,
 				CE7EE14F1A21D7DE006F3294 /* SWEnvironmentView.m in Sources */,
@@ -889,7 +889,7 @@
 				CEE0D8371A18870200CE643C /* SWShareKit.m in Sources */,
 				CEE0D85A1A1888CF00CE643C /* GCDGroup.m in Sources */,
 				CE828E551A2DF3E60036BEC2 /* SWDashboardView.m in Sources */,
-				CE9F572F1A2F7342000D49F2 /* SWProfileInfoCell.m in Sources */,
+				CE44E28F1A2F79DF0081F09E /* SWProfileInfoCell.m in Sources */,
 				CEE0D8231A187CEF00CE643C /* SWExerciseRecordsViewController.m in Sources */,
 				CEE0D82C1A187DC800CE643C /* SWSettingViewController.m in Sources */,
 			);
