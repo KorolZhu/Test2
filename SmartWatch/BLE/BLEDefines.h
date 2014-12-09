@@ -17,3 +17,4 @@
 #define WRISTBAND_CHARACTERISTIC2_UUID    @"FFF2"
 
 #define RBL_BLE_FRAMEWORK_VER                    0x0200
+

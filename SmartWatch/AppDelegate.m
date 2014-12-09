@@ -12,6 +12,7 @@
 #import "SWProfileViewController.h"
 #import "SWSettingViewController.h"
 #import "SWShareKit.h"
+#import "WBDatabaseService.h"
 
 @interface AppDelegate ()
 
@@ -22,6 +23,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [[SWShareKit sharedInstance] registerApp];
+    
+    [WBDatabaseService defaultService];
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     

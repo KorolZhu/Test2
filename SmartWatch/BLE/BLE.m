@@ -24,8 +24,6 @@
 static bool isConnected = false;
 static int rssi = 0;
 
-SW_DEF_SINGLETON(BLE, shareInstance);
-
 -(void) readRSSI
 {
     [activePeripheral readRSSI];

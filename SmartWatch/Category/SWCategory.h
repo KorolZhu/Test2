@@ -12,6 +12,6 @@
 #import "UIDevice+SW.h"
 #import "UIView+SW.h"
 #import "UIColor+SW.h"
-
+#import "NSString+SW.h"
 
 #endif

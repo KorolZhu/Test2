@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		69DF3329866ED80E774AA8D6 /* libPods-SmartWatch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C73B39E88090B44A198085E /* libPods-SmartWatch.a */; };
 		CE208F571A1A4C8A001D6482 /* SWLineGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE208F541A1A4C8A001D6482 /* SWLineGraphView.m */; };
 		CE208F581A1A4C8A001D6482 /* SWPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = CE208F561A1A4C8A001D6482 /* SWPlot.m */; };
 		CE44E28E1A2F79DF0081F09E /* SWHeadImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE44E28B1A2F79DF0081F09E /* SWHeadImageCell.m */; };
@@ -99,6 +100,18 @@
 		CE7EE14F1A21D7DE006F3294 /* SWEnvironmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7EE14E1A21D7DE006F3294 /* SWEnvironmentView.m */; };
 		CE828E551A2DF3E60036BEC2 /* SWDashboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE828E541A2DF3E60036BEC2 /* SWDashboardView.m */; };
 		CE828E5A1A2E12020036BEC2 /* BLE.m in Sources */ = {isa = PBXBuildFile; fileRef = CE828E581A2E12020036BEC2 /* BLE.m */; };
+		CEAA01BD1A35CEDD0047BAF2 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEAA01BC1A35CEDD0047BAF2 /* MapKit.framework */; };
+		CEAA01D41A35E3190047BAF2 /* WBFMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAA01C21A35E3190047BAF2 /* WBFMDatabase.m */; };
+		CEAA01D51A35E3190047BAF2 /* WBEntityBase.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAA01C51A35E3190047BAF2 /* WBEntityBase.m */; };
+		CEAA01D61A35E3190047BAF2 /* WBDatabaseResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAA01C81A35E3190047BAF2 /* WBDatabaseResultSet.m */; };
+		CEAA01D71A35E3190047BAF2 /* default.sql in Resources */ = {isa = PBXBuildFile; fileRef = CEAA01CA1A35E3190047BAF2 /* default.sql */; };
+		CEAA01D81A35E3190047BAF2 /* WBMutableSQLBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAA01CD1A35E3190047BAF2 /* WBMutableSQLBuffer.m */; };
+		CEAA01D91A35E3190047BAF2 /* WBSQLBuffer.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAA01CF1A35E3190047BAF2 /* WBSQLBuffer.m */; };
+		CEAA01DA1A35E3190047BAF2 /* WBDatabaseService.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAA01D11A35E3190047BAF2 /* WBDatabaseService.m */; };
+		CEAA01DB1A35E3190047BAF2 /* WBDatabaseTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAA01D31A35E3190047BAF2 /* WBDatabaseTransaction.m */; };
+		CEAA01DE1A35E4FE0047BAF2 /* NSString+SW.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAA01DD1A35E4FE0047BAF2 /* NSString+SW.m */; };
+		CEAA01E11A35E56E0047BAF2 /* WBPath.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAA01E01A35E56E0047BAF2 /* WBPath.m */; };
+		CEAA01E41A35F0D60047BAF2 /* SWBLECenter.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAA01E31A35F0D60047BAF2 /* SWBLECenter.m */; };
 		CEE0D7F71A18793500CE643C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D7F61A18793500CE643C /* main.m */; };
 		CEE0D7FA1A18793500CE643C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D7F91A18793500CE643C /* AppDelegate.m */; };
 		CEE0D8141A18793500CE643C /* SmartWatchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D8131A18793500CE643C /* SmartWatchTests.m */; };
@@ -129,6 +142,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6C73B39E88090B44A198085E /* libPods-SmartWatch.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SmartWatch.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		A8816FA7DAB27B228C992029 /* Pods-SmartWatch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartWatch.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartWatch/Pods-SmartWatch.debug.xcconfig"; sourceTree = "<group>"; };
+		BA52D8F885518A25BB028142 /* Pods-SmartWatch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartWatch.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartWatch/Pods-SmartWatch.release.xcconfig"; sourceTree = "<group>"; };
 		CE208F531A1A4C8A001D6482 /* SWLineGraphView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWLineGraphView.h; sourceTree = "<group>"; };
 		CE208F541A1A4C8A001D6482 /* SWLineGraphView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWLineGraphView.m; sourceTree = "<group>"; };
 		CE208F551A1A4C8A001D6482 /* SWPlot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWPlot.h; sourceTree = "<group>"; };
@@ -232,6 +248,30 @@
 		CE828E571A2E12020036BEC2 /* BLE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLE.h; sourceTree = "<group>"; };
 		CE828E581A2E12020036BEC2 /* BLE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLE.m; sourceTree = "<group>"; };
 		CE828E591A2E12020036BEC2 /* BLEDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLEDefines.h; sourceTree = "<group>"; };
+		CEAA01BC1A35CEDD0047BAF2 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		CEAA01C01A35E3190047BAF2 /* WBDatabaseLogicType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBDatabaseLogicType.h; sourceTree = "<group>"; };
+		CEAA01C11A35E3190047BAF2 /* WBFMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBFMDatabase.h; sourceTree = "<group>"; };
+		CEAA01C21A35E3190047BAF2 /* WBFMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBFMDatabase.m; sourceTree = "<group>"; };
+		CEAA01C41A35E3190047BAF2 /* WBEntityBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBEntityBase.h; sourceTree = "<group>"; };
+		CEAA01C51A35E3190047BAF2 /* WBEntityBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBEntityBase.m; sourceTree = "<group>"; };
+		CEAA01C71A35E3190047BAF2 /* WBDatabaseResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBDatabaseResultSet.h; sourceTree = "<group>"; };
+		CEAA01C81A35E3190047BAF2 /* WBDatabaseResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBDatabaseResultSet.m; sourceTree = "<group>"; };
+		CEAA01CA1A35E3190047BAF2 /* default.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = default.sql; sourceTree = "<group>"; };
+		CEAA01CC1A35E3190047BAF2 /* WBMutableSQLBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBMutableSQLBuffer.h; sourceTree = "<group>"; };
+		CEAA01CD1A35E3190047BAF2 /* WBMutableSQLBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBMutableSQLBuffer.m; sourceTree = "<group>"; };
+		CEAA01CE1A35E3190047BAF2 /* WBSQLBuffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBSQLBuffer.h; sourceTree = "<group>"; };
+		CEAA01CF1A35E3190047BAF2 /* WBSQLBuffer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBSQLBuffer.m; sourceTree = "<group>"; };
+		CEAA01D01A35E3190047BAF2 /* WBDatabaseService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBDatabaseService.h; sourceTree = "<group>"; };
+		CEAA01D11A35E3190047BAF2 /* WBDatabaseService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBDatabaseService.m; sourceTree = "<group>"; };
+		CEAA01D21A35E3190047BAF2 /* WBDatabaseTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBDatabaseTransaction.h; sourceTree = "<group>"; };
+		CEAA01D31A35E3190047BAF2 /* WBDatabaseTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBDatabaseTransaction.m; sourceTree = "<group>"; };
+		CEAA01DC1A35E4FE0047BAF2 /* NSString+SW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SW.h"; sourceTree = "<group>"; };
+		CEAA01DD1A35E4FE0047BAF2 /* NSString+SW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SW.m"; sourceTree = "<group>"; };
+		CEAA01DF1A35E56E0047BAF2 /* WBPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBPath.h; sourceTree = "<group>"; };
+		CEAA01E01A35E56E0047BAF2 /* WBPath.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WBPath.m; sourceTree = "<group>"; };
+		CEAA01E21A35F0D60047BAF2 /* SWBLECenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWBLECenter.h; sourceTree = "<group>"; };
+		CEAA01E31A35F0D60047BAF2 /* SWBLECenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWBLECenter.m; sourceTree = "<group>"; };
+		CEAA01E81A35F2CB0047BAF2 /* SWCmdDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWCmdDefines.h; sourceTree = "<group>"; };
 		CEE0D7F11A18793500CE643C /* SmartWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEE0D7F51A18793500CE643C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEE0D7F61A18793500CE643C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -286,7 +326,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEAA01BD1A35CEDD0047BAF2 /* MapKit.framework in Frameworks */,
 				CEE0D8321A1884FC00CE643C /* libWeChatSDK.a in Frameworks */,
+				69DF3329866ED80E774AA8D6 /* libPods-SmartWatch.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,27 +530,98 @@
 		CE828E561A2E12020036BEC2 /* BLE */ = {
 			isa = PBXGroup;
 			children = (
+				CE828E591A2E12020036BEC2 /* BLEDefines.h */,
 				CE828E571A2E12020036BEC2 /* BLE.h */,
 				CE828E581A2E12020036BEC2 /* BLE.m */,
-				CE828E591A2E12020036BEC2 /* BLEDefines.h */,
+				CEAA01E21A35F0D60047BAF2 /* SWBLECenter.h */,
+				CEAA01E31A35F0D60047BAF2 /* SWBLECenter.m */,
+				CEAA01E81A35F2CB0047BAF2 /* SWCmdDefines.h */,
 			);
 			name = BLE;
 			path = SmartWatch/BLE;
 			sourceTree = "<group>";
 		};
+		CEAA01BE1A35E3190047BAF2 /* DB */ = {
+			isa = PBXGroup;
+			children = (
+				CEAA01BF1A35E3190047BAF2 /* Common */,
+				CEAA01C31A35E3190047BAF2 /* Entity */,
+				CEAA01C61A35E3190047BAF2 /* ResultSet */,
+				CEAA01C91A35E3190047BAF2 /* Sql */,
+				CEAA01CB1A35E3190047BAF2 /* SQLBuffer */,
+				CEAA01D01A35E3190047BAF2 /* WBDatabaseService.h */,
+				CEAA01D11A35E3190047BAF2 /* WBDatabaseService.m */,
+				CEAA01D21A35E3190047BAF2 /* WBDatabaseTransaction.h */,
+				CEAA01D31A35E3190047BAF2 /* WBDatabaseTransaction.m */,
+			);
+			name = DB;
+			path = SmartWatch/DB;
+			sourceTree = "<group>";
+		};
+		CEAA01BF1A35E3190047BAF2 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				CEAA01C01A35E3190047BAF2 /* WBDatabaseLogicType.h */,
+				CEAA01C11A35E3190047BAF2 /* WBFMDatabase.h */,
+				CEAA01C21A35E3190047BAF2 /* WBFMDatabase.m */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		CEAA01C31A35E3190047BAF2 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				CEAA01C41A35E3190047BAF2 /* WBEntityBase.h */,
+				CEAA01C51A35E3190047BAF2 /* WBEntityBase.m */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		CEAA01C61A35E3190047BAF2 /* ResultSet */ = {
+			isa = PBXGroup;
+			children = (
+				CEAA01C71A35E3190047BAF2 /* WBDatabaseResultSet.h */,
+				CEAA01C81A35E3190047BAF2 /* WBDatabaseResultSet.m */,
+			);
+			path = ResultSet;
+			sourceTree = "<group>";
+		};
+		CEAA01C91A35E3190047BAF2 /* Sql */ = {
+			isa = PBXGroup;
+			children = (
+				CEAA01CA1A35E3190047BAF2 /* default.sql */,
+			);
+			path = Sql;
+			sourceTree = "<group>";
+		};
+		CEAA01CB1A35E3190047BAF2 /* SQLBuffer */ = {
+			isa = PBXGroup;
+			children = (
+				CEAA01CC1A35E3190047BAF2 /* WBMutableSQLBuffer.h */,
+				CEAA01CD1A35E3190047BAF2 /* WBMutableSQLBuffer.m */,
+				CEAA01CE1A35E3190047BAF2 /* WBSQLBuffer.h */,
+				CEAA01CF1A35E3190047BAF2 /* WBSQLBuffer.m */,
+			);
+			path = SQLBuffer;
+			sourceTree = "<group>";
+		};
 		CEE0D7E81A18793400CE643C = {
 			isa = PBXGroup;
 			children = (
+				CEAA01BC1A35CEDD0047BAF2 /* MapKit.framework */,
 				CE7EE0391A20E5E2006F3294 /* Resource */,
 				CEE0D8381A18877600CE643C /* Common */,
 				CEE0D83C1A1887F600CE643C /* Category */,
 				CEE0D82D1A1884D000CE643C /* ThirdParty */,
+				CEAA01BE1A35E3190047BAF2 /* DB */,
 				CE208F521A1A4C5F001D6482 /* SWUIKit */,
 				CEE0D8331A18866200CE643C /* SWFoundation */,
 				CE828E561A2E12020036BEC2 /* BLE */,
 				CEE0D7F31A18793500CE643C /* SmartWatch */,
 				CEE0D8101A18793500CE643C /* SmartWatchTests */,
 				CEE0D7F21A18793500CE643C /* Products */,
+				F9944010BAB8634FBF057B72 /* Pods */,
+				DB60BD39C50C94E7C9E5EFF4 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -636,6 +749,8 @@
 			children = (
 				CEE0D83B1A1887C200CE643C /* SWMacros.h */,
 				CEE0D8661A188E1500CE643C /* SWSingleton.h */,
+				CEAA01DF1A35E56E0047BAF2 /* WBPath.h */,
+				CEAA01E01A35E56E0047BAF2 /* WBPath.m */,
 			);
 			name = Common;
 			path = SmartWatch/Common;
@@ -651,6 +766,8 @@
 				CEE0D8421A18885C00CE643C /* UIView+SW.m */,
 				CEE0D8441A18887800CE643C /* UIColor+SW.h */,
 				CEE0D8451A18887800CE643C /* UIColor+SW.m */,
+				CEAA01DC1A35E4FE0047BAF2 /* NSString+SW.h */,
+				CEAA01DD1A35E4FE0047BAF2 /* NSString+SW.m */,
 			);
 			name = Category;
 			path = SmartWatch/Category;
@@ -687,6 +804,23 @@
 			path = PureLayout;
 			sourceTree = "<group>";
 		};
+		DB60BD39C50C94E7C9E5EFF4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				6C73B39E88090B44A198085E /* libPods-SmartWatch.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F9944010BAB8634FBF057B72 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A8816FA7DAB27B228C992029 /* Pods-SmartWatch.debug.xcconfig */,
+				BA52D8F885518A25BB028142 /* Pods-SmartWatch.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -694,9 +828,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CEE0D8171A18793500CE643C /* Build configuration list for PBXNativeTarget "SmartWatch" */;
 			buildPhases = (
+				A3183238E3737B2FBCF08B08 /* Check Pods Manifest.lock */,
 				CEE0D7ED1A18793400CE643C /* Sources */,
 				CEE0D7EE1A18793400CE643C /* Frameworks */,
 				CEE0D7EF1A18793400CE643C /* Resources */,
+				784A8D4E2CA1CCE0EB36BBD0 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -737,6 +873,14 @@
 				TargetAttributes = {
 					CEE0D7F01A18793400CE643C = {
 						CreatedOnToolsVersion = 6.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Maps.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					CEE0D80C1A18793500CE643C = {
 						CreatedOnToolsVersion = 6.1;
@@ -833,6 +977,7 @@
 				CE7EE0C71A20EA33006F3294 /* m_2@2x.png in Resources */,
 				CE7EE1131A20EC3B006F3294 /* 3背景-ios_01@2x.png in Resources */,
 				CE7EE0C51A20EA33006F3294 /* left_2@2x.png in Resources */,
+				CEAA01D71A35E3190047BAF2 /* default.sql in Resources */,
 				CE7EE0E31A20EA33006F3294 /* 曲线图_bg@2x.png in Resources */,
 				CE7EE0D71A20EA33006F3294 /* 运动记录1@2x.png in Resources */,
 				CE7EE0CD1A20EA33006F3294 /* ico_步数2@2x.png in Resources */,
@@ -862,23 +1007,65 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		784A8D4E2CA1CCE0EB36BBD0 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SmartWatch/Pods-SmartWatch-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A3183238E3737B2FBCF08B08 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		CEE0D7ED1A18793400CE643C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEAA01D41A35E3190047BAF2 /* WBFMDatabase.m in Sources */,
 				CE828E5A1A2E12020036BEC2 /* BLE.m in Sources */,
 				CE208F581A1A4C8A001D6482 /* SWPlot.m in Sources */,
 				CEE0D8261A187D7600CE643C /* SWHistoryRecordsViewController.m in Sources */,
 				CEE0D85C1A1888CF00CE643C /* GCDSemaphore.m in Sources */,
+				CEAA01E41A35F0D60047BAF2 /* SWBLECenter.m in Sources */,
 				CEE0D8461A18887800CE643C /* UIColor+SW.m in Sources */,
+				CEAA01DB1A35E3190047BAF2 /* WBDatabaseTransaction.m in Sources */,
+				CEAA01D51A35E3190047BAF2 /* WBEntityBase.m in Sources */,
+				CEAA01D91A35E3190047BAF2 /* WBSQLBuffer.m in Sources */,
 				CE7EE13B1A20F946006F3294 /* SWExerciseRecordsTitleView.m in Sources */,
+				CEAA01DE1A35E4FE0047BAF2 /* NSString+SW.m in Sources */,
 				CE44E28E1A2F79DF0081F09E /* SWHeadImageCell.m in Sources */,
 				CEE0D85F1A1888CF00CE643C /* NSLayoutConstraint+PureLayout.m in Sources */,
+				CEAA01D81A35E3190047BAF2 /* WBMutableSQLBuffer.m in Sources */,
 				CE44E2921A2F79ED0081F09E /* SWProfileViewController.m in Sources */,
 				CEE0D85D1A1888CF00CE643C /* ALView+PureLayout.m in Sources */,
 				CEE0D85E1A1888CF00CE643C /* NSArray+PureLayout.m in Sources */,
+				CEAA01D61A35E3190047BAF2 /* WBDatabaseResultSet.m in Sources */,
 				CE7EE14F1A21D7DE006F3294 /* SWEnvironmentView.m in Sources */,
+				CEAA01E11A35E56E0047BAF2 /* WBPath.m in Sources */,
 				CEE0D7FA1A18793500CE643C /* AppDelegate.m in Sources */,
 				CEE0D7F71A18793500CE643C /* main.m in Sources */,
 				CE208F571A1A4C8A001D6482 /* SWLineGraphView.m in Sources */,
@@ -886,6 +1073,7 @@
 				CE7EE14C1A21D7A0006F3294 /* SWCircleProgressView.m in Sources */,
 				CEE0D8401A18884700CE643C /* UIDevice+SW.m in Sources */,
 				CEE0D8431A18885C00CE643C /* UIView+SW.m in Sources */,
+				CEAA01DA1A35E3190047BAF2 /* WBDatabaseService.m in Sources */,
 				CEE0D8371A18870200CE643C /* SWShareKit.m in Sources */,
 				CEE0D85A1A1888CF00CE643C /* GCDGroup.m in Sources */,
 				CE828E551A2DF3E60036BEC2 /* SWDashboardView.m in Sources */,
@@ -992,6 +1180,7 @@
 		};
 		CEE0D8181A18793500CE643C /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A8816FA7DAB27B228C992029 /* Pods-SmartWatch.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PREFIX_HEADER = SmartWatch/SmartWatch_Prefix.pch;
@@ -1008,6 +1197,7 @@
 		};
 		CEE0D8191A18793500CE643C /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BA52D8F885518A25BB028142 /* Pods-SmartWatch.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PREFIX_HEADER = SmartWatch/SmartWatch_Prefix.pch;

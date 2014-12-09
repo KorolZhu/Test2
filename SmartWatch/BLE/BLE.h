@@ -18,10 +18,6 @@
     #import <IOBluetooth/IOBluetooth.h>
 #endif
 
-#import "SWSingleton.h"
-
-#define BLEShareInstance [BLE shareInstance]
-
 @protocol BLEDelegate
 @optional
 -(void) bleDidConnect;
@@ -40,8 +36,6 @@
 @property (strong, nonatomic) NSMutableArray *peripherals;
 @property (strong, nonatomic) CBCentralManager *CM;
 @property (strong, nonatomic) CBPeripheral *activePeripheral;
-
-SW_AS_SINGLETON(BLE, shareInstance)
 
 -(void) enableReadNotification:(CBPeripheral *)p;
 -(void) read;
