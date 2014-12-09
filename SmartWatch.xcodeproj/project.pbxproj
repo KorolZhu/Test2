@@ -112,6 +112,9 @@
 		CEAA01DE1A35E4FE0047BAF2 /* NSString+SW.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAA01DD1A35E4FE0047BAF2 /* NSString+SW.m */; };
 		CEAA01E11A35E56E0047BAF2 /* WBPath.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAA01E01A35E56E0047BAF2 /* WBPath.m */; };
 		CEAA01E41A35F0D60047BAF2 /* SWBLECenter.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAA01E31A35F0D60047BAF2 /* SWBLECenter.m */; };
+		CEBB8CA81A372F7D00EBE67F /* SWPacketHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBB8CA71A372F7D00EBE67F /* SWPacketHeader.m */; };
+		CEBB8CAB1A37316E00EBE67F /* SWActivityCountResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBB8CAA1A37316E00EBE67F /* SWActivityCountResponse.m */; };
+		CEBB8CAE1A374EE700EBE67F /* SWActivityResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBB8CAD1A374EE700EBE67F /* SWActivityResponse.m */; };
 		CEE0D7F71A18793500CE643C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D7F61A18793500CE643C /* main.m */; };
 		CEE0D7FA1A18793500CE643C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D7F91A18793500CE643C /* AppDelegate.m */; };
 		CEE0D8141A18793500CE643C /* SmartWatchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D8131A18793500CE643C /* SmartWatchTests.m */; };
@@ -272,6 +275,12 @@
 		CEAA01E21A35F0D60047BAF2 /* SWBLECenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWBLECenter.h; sourceTree = "<group>"; };
 		CEAA01E31A35F0D60047BAF2 /* SWBLECenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWBLECenter.m; sourceTree = "<group>"; };
 		CEAA01E81A35F2CB0047BAF2 /* SWCmdDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWCmdDefines.h; sourceTree = "<group>"; };
+		CEBB8CA61A372F7D00EBE67F /* SWPacketHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWPacketHeader.h; sourceTree = "<group>"; };
+		CEBB8CA71A372F7D00EBE67F /* SWPacketHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWPacketHeader.m; sourceTree = "<group>"; };
+		CEBB8CA91A37316E00EBE67F /* SWActivityCountResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWActivityCountResponse.h; sourceTree = "<group>"; };
+		CEBB8CAA1A37316E00EBE67F /* SWActivityCountResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWActivityCountResponse.m; sourceTree = "<group>"; };
+		CEBB8CAC1A374EE700EBE67F /* SWActivityResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWActivityResponse.h; sourceTree = "<group>"; };
+		CEBB8CAD1A374EE700EBE67F /* SWActivityResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWActivityResponse.m; sourceTree = "<group>"; };
 		CEE0D7F11A18793500CE643C /* SmartWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEE0D7F51A18793500CE643C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEE0D7F61A18793500CE643C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -530,6 +539,7 @@
 		CE828E561A2E12020036BEC2 /* BLE */ = {
 			isa = PBXGroup;
 			children = (
+				CEBB8CA51A372F4D00EBE67F /* Packet */,
 				CE828E591A2E12020036BEC2 /* BLEDefines.h */,
 				CE828E571A2E12020036BEC2 /* BLE.h */,
 				CE828E581A2E12020036BEC2 /* BLE.m */,
@@ -603,6 +613,19 @@
 				CEAA01CF1A35E3190047BAF2 /* WBSQLBuffer.m */,
 			);
 			path = SQLBuffer;
+			sourceTree = "<group>";
+		};
+		CEBB8CA51A372F4D00EBE67F /* Packet */ = {
+			isa = PBXGroup;
+			children = (
+				CEBB8CA61A372F7D00EBE67F /* SWPacketHeader.h */,
+				CEBB8CA71A372F7D00EBE67F /* SWPacketHeader.m */,
+				CEBB8CA91A37316E00EBE67F /* SWActivityCountResponse.h */,
+				CEBB8CAA1A37316E00EBE67F /* SWActivityCountResponse.m */,
+				CEBB8CAC1A374EE700EBE67F /* SWActivityResponse.h */,
+				CEBB8CAD1A374EE700EBE67F /* SWActivityResponse.m */,
+			);
+			path = Packet;
 			sourceTree = "<group>";
 		};
 		CEE0D7E81A18793400CE643C = {
@@ -1075,11 +1098,14 @@
 				CEE0D8431A18885C00CE643C /* UIView+SW.m in Sources */,
 				CEAA01DA1A35E3190047BAF2 /* WBDatabaseService.m in Sources */,
 				CEE0D8371A18870200CE643C /* SWShareKit.m in Sources */,
+				CEBB8CA81A372F7D00EBE67F /* SWPacketHeader.m in Sources */,
 				CEE0D85A1A1888CF00CE643C /* GCDGroup.m in Sources */,
 				CE828E551A2DF3E60036BEC2 /* SWDashboardView.m in Sources */,
+				CEBB8CAE1A374EE700EBE67F /* SWActivityResponse.m in Sources */,
 				CE44E28F1A2F79DF0081F09E /* SWProfileInfoCell.m in Sources */,
 				CEE0D8231A187CEF00CE643C /* SWExerciseRecordsViewController.m in Sources */,
 				CEE0D82C1A187DC800CE643C /* SWSettingViewController.m in Sources */,
+				CEBB8CAB1A37316E00EBE67F /* SWActivityCountResponse.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

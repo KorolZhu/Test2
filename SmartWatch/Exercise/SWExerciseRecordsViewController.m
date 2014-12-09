@@ -14,6 +14,7 @@
 #import "SWShareKit.h"
 #import "SWLineGraphView.h"
 #import "SWPlot.h"
+#import "SWBLECenter.h"
 
 @interface SWExerciseRecordsViewController ()<BLEDelegate>
 {
@@ -39,6 +40,10 @@
     }
     
     return self;
+}
+
+- (void)dealloc {
+    [[SWBLECenter shareInstance] removeObserver:self forKeyPath:@"state" context:NULL];
 }
 
 - (void)viewDidLoad {
@@ -204,6 +209,8 @@
     sleepButton.frame = CGRectMake(stepButton.right, trackButton.bottom + 13.0f, 96.0f, 39.0f);
     
     _scrollView.contentSize = CGSizeMake(IPHONE_WIDTH, sleepButton.bottom + 13.0f);
+    
+    [[SWBLECenter shareInstance] addObserver:self forKeyPath:@"state" options:NSKeyValueObservingOptionNew context:NULL];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -211,7 +218,7 @@
 }
 
 - (void)bleClick {
-    
+    [[SWBLECenter shareInstance] connectDevice];
 }
 
 - (void)shareClick {
@@ -260,6 +267,29 @@
     calorieButton.selected = NO;
     stepButton.selected = NO;
     sleepButton.selected = YES;
+}
+
+#pragma mark - KVO
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if ([keyPath isEqualToString:@"state"]) {
+        NSInteger state = [[change objectForKey:NSKeyValueChangeNewKey] integerValue];
+        switch (state) {
+            case SWPeripheralStateDisconnected: {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    self.navigationItem.leftBarButtonItem.enabled = YES;
+                });
+            }
+                break;
+                
+            default: {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    self.navigationItem.leftBarButtonItem.enabled = NO;
+                });
+            }
+                break;
+        }
+    }
 }
 
 @end

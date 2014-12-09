@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SWSingleton.h"
 
 typedef NS_ENUM(NSInteger, SWPeripheralState) {
     SWPeripheralStateDisconnected = 0,
@@ -16,6 +17,8 @@ typedef NS_ENUM(NSInteger, SWPeripheralState) {
 };
 
 @interface SWBLECenter : NSObject
+
+SW_AS_SINGLETON(SWBLECenter, shareInstance);
 
 @property(readonly) SWPeripheralState state;
 

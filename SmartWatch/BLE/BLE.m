@@ -542,7 +542,7 @@ static int rssi = 0;
                 
                 if (len >= 20)
                 {
-                    [[self delegate] bleDidReceiveData:buf length:len];
+                    [[self delegate] bleDidReceiveData:characteristic.value];
                     len = 0;
                 }
             }

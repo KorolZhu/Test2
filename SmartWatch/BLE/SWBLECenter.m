@@ -8,6 +8,10 @@
 
 #import "SWBLECenter.h"
 #import "BLE.h"
+#import "SWCmdDefines.h"
+#import "SWPacketHeader.h"
+#import "SWActivityCountResponse.h"
+#import "SWActivityResponse.h"
 
 @interface SWBLECenter ()<BLEDelegate>
 
@@ -16,6 +20,8 @@
 @end
 
 @implementation SWBLECenter
+
+SW_DEF_SINGLETON(SWBLECenter, shareInstance);
 
 - (instancetype)init {
     self = [super init];
@@ -33,7 +39,7 @@
         return;
     }
     
-    _state = CBPeripheralStateConnecting;
+    _state = SWPeripheralStateConnecting;
     [self.ble findBLEPeripherals:3];
     [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(scanPeripheraTimer) userInfo:nil repeats:NO];
 }
@@ -42,31 +48,50 @@
     if (self.ble.peripherals.count > 0) {
         [self.ble connectPeripheral:[self.ble.peripherals objectAtIndex:0]];
     } else {
-        _state = CBPeripheralStateDisconnected;
+        _state = SWPeripheralStateDisconnected;
     }
 }
 
 - (void)disconnectDevice {
     if (self.ble.activePeripheral) {
         [self.ble.CM cancelPeripheralConnection:self.ble.activePeripheral];
+        _state = SWPeripheralStateDisConnecting;
     }
+}
+
+#pragma mark - BLE Request
+
+- (void)sendActivityCountRequest {
+    UInt8 buf[] = {BLE_CMD_ACTIVITY_COUNT_REQUEST};
+    NSData *data = [[NSData alloc] initWithBytes:buf length:1];
+    [self.ble write:data];
+}
+
+- (void)sendGetActivityRequestWithIndex:(UInt8)index startHour:(UInt8)startHour {
+    UInt8 buf[] = {BLE_CMD_ACTIVITY_GETBYSN_REQUEST, index, startHour};
+    NSData *data = [[NSData alloc] initWithBytes:buf length:3];
+    [self.ble write:data];
+}
+
+#pragma mark - BLE Response
+
+- (void)handleActivityCountResponse:(NSData *)data {
+    SWActivityCountResponse *response = [[SWActivityCountResponse alloc] initWithData:data];
+    if (response.count > 0) {
+        [self sendGetActivityRequestWithIndex:response.currentIndex - 10 startHour:6];
+    }
+}
+
+- (void)handleGetActivityRequest:(NSData *)data {
+    SWActivityResponse *response = [[SWActivityResponse alloc] initWithData:data];
 }
 
 #pragma mark - BLE delegate
 
 - (void)bleDidConnect {
-    _state = CBPeripheralStateConnected;
-}
-
--(void)write {
-    //    int sn = 12;
-    //    int hh = 0;
-    //    NSMutableData* headerData = [NSMutableData data];
-    //    [headerData appendBytes:&_flag length:1];
+    _state = SWPeripheralStateConnected;
     
-    UInt8 buf[] = {0x13,0,0};
-    NSData *data = [[NSData alloc] initWithBytes:buf length:3];
-    [self.ble write:data];
+    [self sendActivityCountRequest];
 }
 
 - (void)bleDidWriteValue {
@@ -74,21 +99,22 @@
 }
 
 - (void)bleDidDisconnect {
-    
+    _state = SWPeripheralStateDisconnected;
 }
 
-- (void)bleDidReceiveData:(unsigned char *)data length:(int)length {
-    if (length >= 3) {
-        UInt8 data0 = data[0];
-        UInt8 data1 = data[1];
-        UInt8 data2 = data[2];
-        UInt8 data3 = data[3];
-        UInt8 data4 = data[4];
-        UInt8 data5 = data[5];
-        UInt8 data6 = data[6];
-        
-        NSLog(@"%d,%d,%d,%d,%d,%d,%d", (int)data0, (int)data1, (int)data2, (int)data3, (int)data4, (int)data5, (int)data6);
-        
+- (void)bleDidReceiveData:(NSData *)data {
+    if (data.length >= 20) {
+        SWPacketHeader *response = [[SWPacketHeader alloc] initWithData:data];
+        switch (response.cmdID) {
+            case BLE_CMD_ACTIVITY_COUNT_RESPONSE:
+                [self handleActivityCountResponse:data];
+                break;
+            case BLE_CMD_ACTIVITY_GETBYSN_RESPONSE:
+                [self handleGetActivityRequest:data];
+                break;
+            default:
+                break;
+        }
     }
 }
 
