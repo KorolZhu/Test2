@@ -15,6 +15,7 @@
 #import "SWLineGraphView.h"
 #import "SWPlot.h"
 #import "SWBLECenter.h"
+#import "SWExerciseRecordsModel.h"
 
 @interface SWExerciseRecordsViewController ()<BLEDelegate>
 {
@@ -24,6 +25,8 @@
     SWDashboardView *dashboardView;
     UIButton *curveButton, *trackButton;
     UIButton *calorieButton, *stepButton, *sleepButton;
+	
+	SWExerciseRecordsModel *model;
 }
 
 @property (nonatomic,strong) UIScrollView *scrollView;
@@ -37,6 +40,8 @@
     if (self) {
         self.edgesForExtendedLayout = UIRectEdgeNone;
         self.extendedLayoutIncludesOpaqueBars = NO;
+		
+		model = [[SWExerciseRecordsModel alloc] initWithResponder:self];
     }
     
     return self;
@@ -154,17 +159,6 @@
     [_scrollView addSubview:trackButton];
     trackButton.frame = CGRectMake(curveButton.right + 5.0f, graphView.bottom + 5.0f, 48.0f, 19.0f);
     
-    trackButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    [trackButton addTarget:self action:@selector(trackButtonClick) forControlEvents:UIControlEventTouchUpInside];
-    [trackButton setBackgroundImage:[UIImage imageNamed:@"button1"] forState:UIControlStateNormal];
-    [trackButton setBackgroundImage:[UIImage imageNamed:@"button2"] forState:UIControlStateSelected];
-    [trackButton setTitle:@"轨迹图" forState:UIControlStateNormal];
-    [trackButton.titleLabel setFont:[UIFont systemFontOfSize:9.0f]];
-    [trackButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
-    [trackButton setTitleColor:RGBFromHex(0x505050) forState:UIControlStateNormal];
-    [_scrollView addSubview:trackButton];
-    trackButton.frame = CGRectMake(curveButton.right + 5.0f, graphView.bottom + 5.0f, 48.0f, 19.0f);
-    
     calorieButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [calorieButton addTarget:self action:@selector(calorieButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [calorieButton setBackgroundImage:[UIImage imageNamed:@"left_1"] forState:UIControlStateNormal];
@@ -211,6 +205,8 @@
     _scrollView.contentSize = CGSizeMake(IPHONE_WIDTH, sleepButton.bottom + 13.0f);
     
     [[SWBLECenter shareInstance] addObserver:self forKeyPath:@"state" options:NSKeyValueObservingOptionNew context:NULL];
+	
+	[model queryExerciseRecords];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -267,6 +263,12 @@
     calorieButton.selected = NO;
     stepButton.selected = NO;
     sleepButton.selected = YES;
+}
+
+#pragma mark - Model
+
+- (void)exerciseRecordsQueryFinished {
+//	[self reloadData];
 }
 
 #pragma mark - KVO

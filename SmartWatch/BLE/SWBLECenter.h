@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "SWSingleton.h"
 
+extern NSString *const kSWBLEDataReadCompletionNotification;
+
 typedef NS_ENUM(NSInteger, SWPeripheralState) {
     SWPeripheralStateDisconnected = 0,
     SWPeripheralStateConnecting,

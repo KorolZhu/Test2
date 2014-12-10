@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		455851001A37E1D700649397 /* SWDAILYSTEPS.m in Sources */ = {isa = PBXBuildFile; fileRef = 455850FF1A37E1D700649397 /* SWDAILYSTEPS.m */; };
+		455851031A37ED5800649397 /* SWExerciseRecordsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 455851021A37ED5800649397 /* SWExerciseRecordsModel.m */; };
+		455851061A37EF0900649397 /* NSDate+WB.m in Sources */ = {isa = PBXBuildFile; fileRef = 455851051A37EF0900649397 /* NSDate+WB.m */; };
+		4558510B1A37F92D00649397 /* SWModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4558510A1A37F92D00649397 /* SWModel.m */; };
 		69DF3329866ED80E774AA8D6 /* libPods-SmartWatch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C73B39E88090B44A198085E /* libPods-SmartWatch.a */; };
 		CE208F571A1A4C8A001D6482 /* SWLineGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE208F541A1A4C8A001D6482 /* SWLineGraphView.m */; };
 		CE208F581A1A4C8A001D6482 /* SWPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = CE208F561A1A4C8A001D6482 /* SWPlot.m */; };
@@ -145,6 +149,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		455850FE1A37E1D700649397 /* SWDAILYSTEPS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWDAILYSTEPS.h; path = ../Sql/SWDAILYSTEPS.h; sourceTree = "<group>"; };
+		455850FF1A37E1D700649397 /* SWDAILYSTEPS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWDAILYSTEPS.m; path = ../Sql/SWDAILYSTEPS.m; sourceTree = "<group>"; };
+		455851011A37ED5800649397 /* SWExerciseRecordsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWExerciseRecordsModel.h; sourceTree = "<group>"; };
+		455851021A37ED5800649397 /* SWExerciseRecordsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWExerciseRecordsModel.m; sourceTree = "<group>"; };
+		455851041A37EF0900649397 /* NSDate+WB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+WB.h"; sourceTree = "<group>"; };
+		455851051A37EF0900649397 /* NSDate+WB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+WB.m"; sourceTree = "<group>"; };
+		455851091A37F92D00649397 /* SWModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWModel.h; sourceTree = "<group>"; };
+		4558510A1A37F92D00649397 /* SWModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWModel.m; sourceTree = "<group>"; };
 		6C73B39E88090B44A198085E /* libPods-SmartWatch.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SmartWatch.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8816FA7DAB27B228C992029 /* Pods-SmartWatch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartWatch.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartWatch/Pods-SmartWatch.debug.xcconfig"; sourceTree = "<group>"; };
 		BA52D8F885518A25BB028142 /* Pods-SmartWatch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartWatch.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartWatch/Pods-SmartWatch.release.xcconfig"; sourceTree = "<group>"; };
@@ -351,6 +363,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		455851071A37F8FD00649397 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				455851091A37F92D00649397 /* SWModel.h */,
+				4558510A1A37F92D00649397 /* SWModel.m */,
+			);
+			name = Model;
+			path = SmartWatch/Model;
+			sourceTree = "<group>";
+		};
 		CE208F521A1A4C5F001D6482 /* SWUIKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -583,6 +605,8 @@
 			children = (
 				CEAA01C41A35E3190047BAF2 /* WBEntityBase.h */,
 				CEAA01C51A35E3190047BAF2 /* WBEntityBase.m */,
+				455850FE1A37E1D700649397 /* SWDAILYSTEPS.h */,
+				455850FF1A37E1D700649397 /* SWDAILYSTEPS.m */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -640,6 +664,7 @@
 				CE208F521A1A4C5F001D6482 /* SWUIKit */,
 				CEE0D8331A18866200CE643C /* SWFoundation */,
 				CE828E561A2E12020036BEC2 /* BLE */,
+				455851071A37F8FD00649397 /* Model */,
 				CEE0D7F31A18793500CE643C /* SmartWatch */,
 				CEE0D8101A18793500CE643C /* SmartWatchTests */,
 				CEE0D7F21A18793500CE643C /* Products */,
@@ -705,6 +730,8 @@
 				CEE0D8221A187CEF00CE643C /* SWExerciseRecordsViewController.m */,
 				CE7EE1391A20F946006F3294 /* SWExerciseRecordsTitleView.h */,
 				CE7EE13A1A20F946006F3294 /* SWExerciseRecordsTitleView.m */,
+				455851011A37ED5800649397 /* SWExerciseRecordsModel.h */,
+				455851021A37ED5800649397 /* SWExerciseRecordsModel.m */,
 			);
 			path = Exercise;
 			sourceTree = "<group>";
@@ -791,6 +818,8 @@
 				CEE0D8451A18887800CE643C /* UIColor+SW.m */,
 				CEAA01DC1A35E4FE0047BAF2 /* NSString+SW.h */,
 				CEAA01DD1A35E4FE0047BAF2 /* NSString+SW.m */,
+				455851041A37EF0900649397 /* NSDate+WB.h */,
+				455851051A37EF0900649397 /* NSDate+WB.m */,
 			);
 			name = Category;
 			path = SmartWatch/Category;
@@ -1068,11 +1097,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				455851031A37ED5800649397 /* SWExerciseRecordsModel.m in Sources */,
 				CEAA01D41A35E3190047BAF2 /* WBFMDatabase.m in Sources */,
 				CE828E5A1A2E12020036BEC2 /* BLE.m in Sources */,
 				CE208F581A1A4C8A001D6482 /* SWPlot.m in Sources */,
 				CEE0D8261A187D7600CE643C /* SWHistoryRecordsViewController.m in Sources */,
 				CEE0D85C1A1888CF00CE643C /* GCDSemaphore.m in Sources */,
+				455851061A37EF0900649397 /* NSDate+WB.m in Sources */,
 				CEAA01E41A35F0D60047BAF2 /* SWBLECenter.m in Sources */,
 				CEE0D8461A18887800CE643C /* UIColor+SW.m in Sources */,
 				CEAA01DB1A35E3190047BAF2 /* WBDatabaseTransaction.m in Sources */,
@@ -1081,6 +1112,7 @@
 				CE7EE13B1A20F946006F3294 /* SWExerciseRecordsTitleView.m in Sources */,
 				CEAA01DE1A35E4FE0047BAF2 /* NSString+SW.m in Sources */,
 				CE44E28E1A2F79DF0081F09E /* SWHeadImageCell.m in Sources */,
+				4558510B1A37F92D00649397 /* SWModel.m in Sources */,
 				CEE0D85F1A1888CF00CE643C /* NSLayoutConstraint+PureLayout.m in Sources */,
 				CEAA01D81A35E3190047BAF2 /* WBMutableSQLBuffer.m in Sources */,
 				CE44E2921A2F79ED0081F09E /* SWProfileViewController.m in Sources */,
@@ -1091,6 +1123,7 @@
 				CEAA01E11A35E56E0047BAF2 /* WBPath.m in Sources */,
 				CEE0D7FA1A18793500CE643C /* AppDelegate.m in Sources */,
 				CEE0D7F71A18793500CE643C /* main.m in Sources */,
+				455851001A37E1D700649397 /* SWDAILYSTEPS.m in Sources */,
 				CE208F571A1A4C8A001D6482 /* SWLineGraphView.m in Sources */,
 				CEE0D85B1A1888CF00CE643C /* GCDQueue.m in Sources */,
 				CE7EE14C1A21D7A0006F3294 /* SWCircleProgressView.m in Sources */,
