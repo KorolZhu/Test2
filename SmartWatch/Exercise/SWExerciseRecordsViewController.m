@@ -25,7 +25,14 @@
     SWDashboardView *dashboardView;
     UIButton *curveButton, *trackButton;
     UIButton *calorieButton, *stepButton, *sleepButton;
-	
+    
+    SWLineGraphView *calorieGraphView;
+    SWLineGraphView *stepsGraphView;
+    SWLineGraphView *sleepGraphView;
+    
+    SWPlot *caloriePlot;
+    SWPlot *stepsPlot;
+    SWPlot *sleepPlot;
 	SWExerciseRecordsModel *model;
 }
 
@@ -131,7 +138,7 @@
                                   kPlotStrokeWidthKey : @1,
                                   kPlotStrokeColorKey : RGBFromHex(0x00F0FF),
                                   kPlotPointFillColorKey : RGBFromHex(0x00F0FF)};
-    [graphView addPlot:plot];
+//    [graphView addPlot:plot];
     
     [graphView setupTheView];
     [_scrollView addSubview:graphView];

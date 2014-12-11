@@ -39,6 +39,8 @@
 	[[GCDQueue globalQueue] queueBlock:^{
 		NSString *date = [[NSDate date] stringWithFormat:@"yyyyMMdd"];
 		currentDateymd = [date longLongValue];
+        
+        currentDateymd = 20141121;
 		
 		WBSQLBuffer *sqlBuffer = [[WBSQLBuffer alloc] init];
 		sqlBuffer.SELECT(@"*").FROM(DBDAILYSTEPS._tableName).WHERE([NSString stringWithFormat:@"%@=%@", DBDAILYSTEPS._DATEYMD, @(currentDateymd).stringValue]);
@@ -58,10 +60,14 @@
 					if (steps > 65280) {
 						[sleepTempDictionary setObject:@(steps - 65280) forKey:@(hour + 1)];
 					} else {
-						[stepsTempDictionary setObject:@(steps) forKey:@(hour + 1)];
+                        if (steps > 0) {
+                            [stepsTempDictionary setObject:@(steps) forKey:@(hour + 1)];
+                        }
 						
-						NSInteger calorie = 0.53 * 175 + 0.58 * 62 + 0.04 * steps - 135;
-						[calorieTempDictionary setObject:@(calorie) forKey:@(hour + 1)];
+						float calorie = 0.53 * 175 + 0.58 * 62 + 0.04 * steps - 135;
+                        if (calorie > 0.0f) {
+                            [calorieTempDictionary setObject:@(calorie) forKey:@(hour + 1)];
+                        }
 					}
 				}
 			}];

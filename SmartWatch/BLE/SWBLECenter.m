@@ -87,6 +87,7 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
 
 - (void)handleActivityCountResponse:(NSData *)data {
     activityCountResponse = [[SWActivityCountResponse alloc] initWithData:data];
+    activityCountResponse.currentIndex = activityCountResponse.count - 1;
     if (activityCountResponse.count > 0 && activityCountResponse.currentIndex < activityCountResponse.count && activityCountResponse.currentIndex >= 0) {
         [self sendGetActivityRequestWithIndex:activityCountResponse.currentIndex];
     }
@@ -94,44 +95,50 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
 
 - (void)handleGetActivityRequest:(NSData *)data {
 	SWActivityResponse *response = [[SWActivityResponse alloc] initWithData:data];
-	
-	BOOL isUpdate = NO;
-	WBSQLBuffer *isUpdateSqlBuffer = [[WBSQLBuffer alloc] init];
-	isUpdateSqlBuffer.SELECT(@"*").FROM(DBDAILYSTEPS._tableName).WHERE([NSString stringWithFormat:@"%@=%@", DBDAILYSTEPS._DATEYMD, @(response.dateYMD).stringValue]);
-	WBDatabaseTransaction *isUpdateTransaction = [[WBDatabaseTransaction alloc] initWithSQLBuffer:isUpdateSqlBuffer];
-	[[WBDatabaseService defaultService] readWithTransaction:isUpdateTransaction completionBlock:^{}];
-	if (isUpdateTransaction.resultSet.resultArray.count > 0) {
-		isUpdate = YES;
-	}
-	
-	WBSQLBuffer *sqlBuffer = [[WBSQLBuffer alloc] init];
-	if (isUpdate) {
-		sqlBuffer.UPDATE(DBDAILYSTEPS._tableName);
-		sqlBuffer.WHERE([NSString stringWithFormat:@"%@=%@", DBDAILYSTEPS._DATEYMD, @(response.dateYMD).stringValue]);
-	} else {
-		sqlBuffer.INSERT(DBDAILYSTEPS._tableName);
-		sqlBuffer.SET(DBDAILYSTEPS._DATEYMD, @(response.dateYMD).stringValue);
-	}
-	
-	sqlBuffer.SET([NSString stringWithFormat:@"%@%d", DBDAILYSTEPS._STEPCOUNT, response.startHour], @(response.value0));
-	sqlBuffer.SET([NSString stringWithFormat:@"%@%d", DBDAILYSTEPS._STEPCOUNT, response.startHour + 1], @(response.value1));
-	sqlBuffer.SET([NSString stringWithFormat:@"%@%d", DBDAILYSTEPS._STEPCOUNT, response.startHour + 2], @(response.value2));
-	sqlBuffer.SET([NSString stringWithFormat:@"%@%d", DBDAILYSTEPS._STEPCOUNT, response.startHour + 3], @(response.value3));
-	sqlBuffer.SET([NSString stringWithFormat:@"%@%d", DBDAILYSTEPS._STEPCOUNT, response.startHour + 4], @(response.value4));
-	sqlBuffer.SET([NSString stringWithFormat:@"%@%d", DBDAILYSTEPS._STEPCOUNT, response.startHour + 5], @(response.value5));
-	WBDatabaseTransaction *transaction = [[WBDatabaseTransaction alloc] initWithSQLBuffer:sqlBuffer];
-	[[WBDatabaseService defaultService] writeWithTransaction:transaction completionBlock:^{}];
+    
+    if ([@(response.dateYMD).stringValue hasPrefix:@"20"] && @(response.dateYMD).stringValue.length == 8) {
+        BOOL isUpdate = NO;
+        WBSQLBuffer *isUpdateSqlBuffer = [[WBSQLBuffer alloc] init];
+        isUpdateSqlBuffer.SELECT(@"*").FROM(DBDAILYSTEPS._tableName).WHERE([NSString stringWithFormat:@"%@=%@", DBDAILYSTEPS._DATEYMD, @(response.dateYMD).stringValue]);
+        WBDatabaseTransaction *isUpdateTransaction = [[WBDatabaseTransaction alloc] initWithSQLBuffer:isUpdateSqlBuffer];
+        [[WBDatabaseService defaultService] readWithTransaction:isUpdateTransaction completionBlock:^{}];
+        if (isUpdateTransaction.resultSet.resultArray.count > 0) {
+            isUpdate = YES;
+        }
+        
+        WBSQLBuffer *sqlBuffer = [[WBSQLBuffer alloc] init];
+        if (isUpdate) {
+            sqlBuffer.UPDATE(DBDAILYSTEPS._tableName);
+            sqlBuffer.WHERE([NSString stringWithFormat:@"%@=%@", DBDAILYSTEPS._DATEYMD, @(response.dateYMD).stringValue]);
+        } else {
+            sqlBuffer.INSERT(DBDAILYSTEPS._tableName);
+            sqlBuffer.SET(DBDAILYSTEPS._DATEYMD, @(response.dateYMD).stringValue);
+        }
+        
+        sqlBuffer.SET([NSString stringWithFormat:@"%@%d", DBDAILYSTEPS._STEPCOUNT, response.startHour], @(response.value0));
+        sqlBuffer.SET([NSString stringWithFormat:@"%@%d", DBDAILYSTEPS._STEPCOUNT, response.startHour + 1], @(response.value1));
+        sqlBuffer.SET([NSString stringWithFormat:@"%@%d", DBDAILYSTEPS._STEPCOUNT, response.startHour + 2], @(response.value2));
+        sqlBuffer.SET([NSString stringWithFormat:@"%@%d", DBDAILYSTEPS._STEPCOUNT, response.startHour + 3], @(response.value3));
+        sqlBuffer.SET([NSString stringWithFormat:@"%@%d", DBDAILYSTEPS._STEPCOUNT, response.startHour + 4], @(response.value4));
+        sqlBuffer.SET([NSString stringWithFormat:@"%@%d", DBDAILYSTEPS._STEPCOUNT, response.startHour + 5], @(response.value5));
+        WBDatabaseTransaction *transaction = [[WBDatabaseTransaction alloc] initWithSQLBuffer:sqlBuffer];
+        [[WBDatabaseService defaultService] writeWithTransaction:transaction completionBlock:^{}];
+    }
 
 	startHour += 6;
 	if (startHour <= 18) {
 		[self sendGetActivityRequestWithIndex:activityCountResponse.currentIndex];
 	} else {
+        if (activityCountResponse.currentIndex == 0) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:kSWBLEDataReadCompletionNotification object:nil];
+            
+            return;
+        }
+        
 		startHour = 0;
 		activityCountResponse.currentIndex--;
 		if (activityCountResponse.currentIndex >= 0) {
 			[self sendGetActivityRequestWithIndex:activityCountResponse.currentIndex];
-		} else {
-			[[NSNotificationCenter defaultCenter] postNotificationName:kSWBLEDataReadCompletionNotification object:nil];
 		}
 	}
 }

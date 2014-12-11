@@ -22,6 +22,9 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    NSLog(@"%@", NSHomeDirectory());
+    
     [[SWShareKit sharedInstance] registerApp];
     
     [WBDatabaseService defaultService];

@@ -16,6 +16,10 @@ SW_DEF_SINGLETON(SWDAILYSTEPS, shareInstant);
 	return @"DAILYSTEPS";
 }
 
+- (NSString *)_DATEYMD {
+    return @"DATEYMD";
+}
+
 - (NSString *)_STEPCOUNT0 {
 	return @"STEPCOUNT0";
 }
