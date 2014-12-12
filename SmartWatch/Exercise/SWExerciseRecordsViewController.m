@@ -106,43 +106,46 @@
     dashboardView.unit3 = @"步";
     dashboardView.descri3 = @"步数";
     
-    SWLineGraphView *graphView = [[SWLineGraphView alloc] initWithFrame:CGRectMake(0.0f, progressView.bottom + 10.0f, IPHONE_WIDTH, 166.0f)];
-    graphView.backgroundColor = [UIColor clearColor];
-    graphView.xAxisValues = @[@{@6 : @"6"},@{@12 : @"12"},@{@18 : @"18"},@{@24 : @"24"}];
-    graphView.xIntervalCount = 24;
-    graphView.xAxisDescription = @"时间";
-    graphView.yAxisRange = 100.0f;
-    graphView.yIntervalCount = 2;
-    graphView.yAxisDescription = @"卡路里（千卡）";
-    
-    SWPlot *plot = [[SWPlot alloc] init];
-    plot.plottingValues = @[
-                              @{ @6 : @20.0f },
-                              @{ @7 : @70.0f },
-                              @{ @8 : @50.0f },
-                              @{ @9 : @40.0f },
-                              @{ @10 : @15.0f },
-                              @{ @11 : @10.0f },
-                              @{ @12 : @13.0f },
-                              @{ @13 : @20.0f },
-                              @{ @14 : @14.0f },
-                              @{ @15 : @10.0f },
-                              @{ @16 : @6.0f },
-                              @{ @18 : @25.0f },
-                              @{ @19 : @40.0f },
-                              @{ @20 : @30.0f },
-                              @{ @21 : @20.0f }];
-    
-    plot.plotThemeAttributes = @{
-                                  kPlotFillColorKey : [UIColor clearColor],
-                                  kPlotStrokeWidthKey : @1,
-                                  kPlotStrokeColorKey : RGBFromHex(0x00F0FF),
-                                  kPlotPointFillColorKey : RGBFromHex(0x00F0FF)};
-//    [graphView addPlot:plot];
-    
-    [graphView setupTheView];
-    [_scrollView addSubview:graphView];
-    
+    calorieGraphView = [[SWLineGraphView alloc] initWithFrame:CGRectMake(0.0f, progressView.bottom + 10.0f, IPHONE_WIDTH, 166.0f)];
+    calorieGraphView.backgroundColor = [UIColor clearColor];
+    calorieGraphView.xAxisValues = @[@{@6 : @"6"},@{@12 : @"12"},@{@18 : @"18"},@{@24 : @"24"}];
+    calorieGraphView.xIntervalCount = 24;
+    calorieGraphView.xAxisDescription = @"时间";
+    calorieGraphView.yAxisRange = 500.0f;
+    calorieGraphView.yIntervalCount = 2;
+    calorieGraphView.yAxisDescription = @"卡路里（千卡）";
+	
+	[model queryExerciseRecords];
+	
+	caloriePlot = [[SWPlot alloc] init];
+	caloriePlot.plottingValues = model.calorieDictionary;
+	caloriePlot.plotThemeAttributes = @{
+										kPlotFillColorKey : [UIColor clearColor],
+										kPlotStrokeWidthKey : @1,
+										kPlotStrokeColorKey : RGBFromHex(0x00F0FF),
+										kPlotPointFillColorKey : RGBFromHex(0x00F0FF)};
+	[calorieGraphView addPlot:caloriePlot];
+	[calorieGraphView setupTheView];
+	[_scrollView addSubview:calorieGraphView];
+
+//    SWPlot *plot = [[SWPlot alloc] init];
+//    plot.plottingValues = @[
+//                              @{ @6 : @20.0f },
+//                              @{ @7 : @70.0f },
+//                              @{ @8 : @50.0f },
+//                              @{ @9 : @40.0f },
+//                              @{ @10 : @15.0f },
+//                              @{ @11 : @10.0f },
+//                              @{ @12 : @13.0f },
+//                              @{ @13 : @20.0f },
+//                              @{ @14 : @14.0f },
+//                              @{ @15 : @10.0f },
+//                              @{ @16 : @6.0f },
+//                              @{ @18 : @25.0f },
+//                              @{ @19 : @40.0f },
+//                              @{ @20 : @30.0f },
+//                              @{ @21 : @20.0f }];
+	
     curveButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [curveButton addTarget:self action:@selector(curveButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [curveButton setBackgroundImage:[UIImage imageNamed:@"button1"] forState:UIControlStateNormal];
@@ -152,7 +155,7 @@
     [curveButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
     [curveButton setTitleColor:RGBFromHex(0x505050) forState:UIControlStateNormal];
     [_scrollView addSubview:curveButton];
-    curveButton.frame = CGRectMake(IPHONE_WIDTH - 121.0f, graphView.bottom + 5.0f, 48.0f, 19.0f);
+    curveButton.frame = CGRectMake(IPHONE_WIDTH - 121.0f, calorieGraphView.bottom + 5.0f, 48.0f, 19.0f);
     curveButton.selected = YES;
     
     trackButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -164,7 +167,7 @@
     [trackButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
     [trackButton setTitleColor:RGBFromHex(0x505050) forState:UIControlStateNormal];
     [_scrollView addSubview:trackButton];
-    trackButton.frame = CGRectMake(curveButton.right + 5.0f, graphView.bottom + 5.0f, 48.0f, 19.0f);
+    trackButton.frame = CGRectMake(curveButton.right + 5.0f, calorieGraphView.bottom + 5.0f, 48.0f, 19.0f);
     
     calorieButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [calorieButton addTarget:self action:@selector(calorieButtonClick) forControlEvents:UIControlEventTouchUpInside];
@@ -213,7 +216,6 @@
     
     [[SWBLECenter shareInstance] addObserver:self forKeyPath:@"state" options:NSKeyValueObservingOptionNew context:NULL];
 	
-	[model queryExerciseRecords];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -252,6 +254,10 @@
     calorieButton.selected = YES;
     stepButton.selected = NO;
     sleepButton.selected = NO;
+
+	calorieGraphView.hidden = NO;
+	stepsGraphView.hidden = YES;
+	sleepGraphView.hidden = YES;
 }
 
 - (void)stepButtonClick {
@@ -261,6 +267,32 @@
     calorieButton.selected = NO;
     stepButton.selected = YES;
     sleepButton.selected = NO;
+	
+	if (!stepsGraphView) {
+		stepsGraphView = [[SWLineGraphView alloc] initWithFrame:calorieGraphView.frame];
+		stepsGraphView.backgroundColor = [UIColor clearColor];
+		stepsGraphView.xAxisValues = @[@{@6 : @"6"},@{@12 : @"12"},@{@18 : @"18"},@{@24 : @"24"}];
+		stepsGraphView.xIntervalCount = 24;
+		stepsGraphView.xAxisDescription = @"时间";
+		stepsGraphView.yAxisRange = 1000.0f;
+		stepsGraphView.yIntervalCount = 2;
+		stepsGraphView.yAxisDescription = @"步数";
+		
+		stepsPlot = [[SWPlot alloc] init];
+		stepsPlot.plottingValues = model.stepsDictionary;
+		stepsPlot.plotThemeAttributes = @{
+											kPlotFillColorKey : [UIColor clearColor],
+											kPlotStrokeWidthKey : @1,
+											kPlotStrokeColorKey : RGBFromHex(0x00F0FF),
+											kPlotPointFillColorKey : RGBFromHex(0x00F0FF)};
+		[stepsGraphView addPlot:stepsPlot];
+		[stepsGraphView setupTheView];
+		[_scrollView addSubview:stepsGraphView];
+	}
+	
+	calorieGraphView.hidden = YES;
+	stepsGraphView.hidden = NO;
+	sleepGraphView.hidden = YES;
 }
 
 - (void)sleepButtonClick {
@@ -270,12 +302,43 @@
     calorieButton.selected = NO;
     stepButton.selected = NO;
     sleepButton.selected = YES;
+	
+	if (!sleepGraphView) {
+		sleepGraphView = [[SWLineGraphView alloc] initWithFrame:calorieGraphView.frame];
+		sleepGraphView.backgroundColor = [UIColor clearColor];
+		sleepGraphView.xAxisValues = @[@{@6 : @"6"},@{@12 : @"12"},@{@18 : @"18"},@{@24 : @"24"}];
+		sleepGraphView.xIntervalCount = 24;
+		sleepGraphView.xAxisDescription = @"时间";
+		sleepGraphView.yAxisRange = 100;
+		sleepGraphView.yIntervalCount = 2;
+		sleepGraphView.yAxisDescription = @"睡眠";
+		
+		sleepPlot = [[SWPlot alloc] init];
+		sleepPlot.plottingValues = model.sleepDictionary;
+		sleepPlot.plotThemeAttributes = @{
+										  kPlotFillColorKey : [UIColor clearColor],
+										  kPlotStrokeWidthKey : @1,
+										  kPlotStrokeColorKey : RGBFromHex(0x00F0FF),
+										  kPlotPointFillColorKey : RGBFromHex(0x00F0FF)};
+		[sleepGraphView addPlot:sleepPlot];
+		[sleepGraphView setupTheView];
+		[_scrollView addSubview:sleepGraphView];
+	}
+	
+	calorieGraphView.hidden = YES;
+	stepsGraphView.hidden = YES;
+	sleepGraphView.hidden = NO;
 }
 
 #pragma mark - Model
 
 - (void)exerciseRecordsQueryFinished {
-//	[self reloadData];
+	caloriePlot.plottingValues = model.calorieDictionary;
+	stepsPlot.plottingValues = model.stepsDictionary;
+	sleepPlot.plottingValues = model.sleepDictionary;
+	[calorieGraphView reloadPlot];
+	[stepsGraphView reloadPlot];
+	[sleepGraphView reloadPlot];
 }
 
 #pragma mark - KVO
