@@ -55,6 +55,7 @@
  *  @param newPlot the Plot that you want to draw on the Graph.
  */
 - (void)addPlot:(SWPlot *)newPlot;
+- (void)removePlot:(SWPlot *)plot;
 
 /**
  *  this method is the actual method which starts the drawing of the graph and does all the magic. call this method when
@@ -62,6 +63,8 @@
  */
 - (void)setupTheView;
 
+//
+- (void)reloadPlot;
 
 //===== Theme Attribute Keys =====
 

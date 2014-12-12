@@ -11,11 +11,11 @@
 @interface SWPlot : NSObject
 
 /**
- *  Array of dictionaries, where the key is the same as the one which you specified in the `xAxisValues` in `SHLineGraphView`,
+ *  NSDictionary, where the key is the same as the one which you specified in the `xAxisValues` in `SHLineGraphView`,
  *  the value is the number which will determine the point location along the y-axis line. make sure the values are not
  *  greater than the `yAxisRange` specified in `SHLineGraphView`.
  */
-@property (nonatomic, strong) NSArray *plottingValues;
+@property (nonatomic, strong) NSDictionary *plottingValues;
 
 /**
  *  the dictionary which you can use to assing the theme attributes of the plot. if this property is nil, a default theme

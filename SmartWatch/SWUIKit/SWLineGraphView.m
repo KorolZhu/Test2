@@ -87,6 +87,18 @@ NSString *const kDotSizeKey                 = @"kDotSizeKey";
     [_plots addObject:newPlot];
 }
 
+- (void)removePlot:(SWPlot *)plot {
+	if (plot != nil) {
+		
+		if ([_plots containsObject:plot]) {
+			[_plots removeObject:plot];
+
+			[self reloadPlot];
+		}
+	}
+	
+}
+
 - (void)setupTheView
 {
     [self drawBackground];
@@ -95,9 +107,24 @@ NSString *const kDotSizeKey                 = @"kDotSizeKey";
     [self drawXAxis];
     [self drawLines];
     
-    for(SWPlot *plot in _plots) {
-        [self drawPlot:plot];
-    }
+	[self reloadPlot];
+}
+
+- (void)reloadPlot {
+	NSMutableArray *shapelayerArr = [NSMutableArray array];
+	for (CALayer *layer in self.layer.sublayers) {
+		if ([layer isKindOfClass:[CAShapeLayer class]]) {
+			[shapelayerArr addObject:layer];
+		}
+	}
+	
+	for (CALayer *layer in shapelayerArr) {
+		[layer removeFromSuperlayer];
+	}
+	
+	for(SWPlot *plot in _plots) {
+		[self drawPlot:plot];
+	}
 }
 
 #pragma mark - Actual Plot Drawing Methods
@@ -247,16 +274,18 @@ NSString *const kDotSizeKey                 = @"kDotSizeKey";
 }
 
 - (float)getValueForIndex:(NSNumber *)index forPlot:(SWPlot *)plot {
-    __block float value = 0.0f;
-    [plot.plottingValues enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NSDictionary *dic = obj;
-        if ([dic.allKeys containsObject:index]) {
-            value = [dic.allValues.firstObject floatValue];
-            *stop = YES;
-        }
-    }];
-    
-    return value;
+	NSNumber *value = [plot.plottingValues objectForKey:index];
+	return value.floatValue;
+	
+//    [plot.plottingValues enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+//        NSDictionary *dic = obj;
+//        if ([dic.allKeys containsObject:index]) {
+//            value = [dic.allValues.firstObject floatValue];
+//            *stop = YES;
+//        }
+//    }];
+//	
+//    return value;
 }
 
 - (void)drawPlot:(SWPlot *)plot {
