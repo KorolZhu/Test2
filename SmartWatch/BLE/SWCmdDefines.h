@@ -9,6 +9,10 @@
 #ifndef SmartWatch_CmdDefines_h
 #define SmartWatch_CmdDefines_h
 
+// 设置日期时间
+#define BLE_CMD_SET_DAY_TIME_REQUEST 0x01
+#define BLE_CMD_SET_DAY_TIME_RESPONSE 0x81
+
 // 获取活动数量
 #define BLE_CMD_ACTIVITY_COUNT_REQUEST 0x10
 #define BLE_CMD_ACTIVITY_COUNT_RESPONSE 0x90

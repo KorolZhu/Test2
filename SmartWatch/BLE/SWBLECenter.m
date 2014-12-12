@@ -71,6 +71,12 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
 
 #pragma mark - BLE Request
 
+- (void)sendSetDateTimeRequest {
+    UInt8 buf[] = {BLE_CMD_SET_DAY_TIME_REQUEST, 20, 14, 12, 11, 22, 14, 00};
+    NSData *data = [[NSData alloc] initWithBytes:buf length:8];
+    [self.ble write:data];
+}
+
 - (void)sendActivityCountRequest {
     UInt8 buf[] = {BLE_CMD_ACTIVITY_COUNT_REQUEST};
     NSData *data = [[NSData alloc] initWithBytes:buf length:1];
@@ -149,6 +155,7 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
     _state = SWPeripheralStateConnected;
     
     [self sendActivityCountRequest];
+//    [self sendSetDateTimeRequest];
 }
 
 - (void)bleDidWriteValue {
@@ -170,6 +177,9 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
                 break;
             case BLE_CMD_ACTIVITY_GETBYSN_RESPONSE:
                 [self handleGetActivityRequest:data];
+                break;
+            case BLE_CMD_SET_DAY_TIME_RESPONSE:
+                
                 break;
             default:
                 break;
