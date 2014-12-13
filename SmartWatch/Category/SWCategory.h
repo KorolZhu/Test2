@@ -14,5 +14,8 @@
 #import "UIColor+SW.h"
 #import "NSString+SW.h"
 #import "NSDate+WB.h"
+#import "UITableViewCell+SW.h"
+#import "NSDictionary+HT.h"
+#import "UIBarButtonItem+HT.h"
 
 #endif

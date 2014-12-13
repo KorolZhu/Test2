@@ -17,6 +17,22 @@
 		CE44E28E1A2F79DF0081F09E /* SWHeadImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE44E28B1A2F79DF0081F09E /* SWHeadImageCell.m */; };
 		CE44E28F1A2F79DF0081F09E /* SWProfileInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE44E28D1A2F79DF0081F09E /* SWProfileInfoCell.m */; };
 		CE44E2921A2F79ED0081F09E /* SWProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE44E2911A2F79ED0081F09E /* SWProfileViewController.m */; };
+		CE61B5EA1A3BF78100B18811 /* UITableViewCell+SW.m in Sources */ = {isa = PBXBuildFile; fileRef = CE61B5E91A3BF78100B18811 /* UITableViewCell+SW.m */; };
+		CE61B5ED1A3C016500B18811 /* SWUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CE61B5EC1A3C016500B18811 /* SWUserInfo.m */; };
+		CE61B5F01A3C022100B18811 /* SWProfileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE61B5EF1A3C022100B18811 /* SWProfileModel.m */; };
+		CE61B5F31A3C02DB00B18811 /* SWPROFILE.m in Sources */ = {isa = PBXBuildFile; fileRef = CE61B5F21A3C02DB00B18811 /* SWPROFILE.m */; };
+		CE61B5F91A3C093200B18811 /* NSDictionary+HT.m in Sources */ = {isa = PBXBuildFile; fileRef = CE61B5F81A3C093200B18811 /* NSDictionary+HT.m */; };
+		CE61B5FE1A3C1F1700B18811 /* AMBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE61B5FB1A3C1F1700B18811 /* AMBlurView.m */; };
+		CE61B5FF1A3C1F1700B18811 /* HTDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = CE61B5FD1A3C1F1700B18811 /* HTDatePicker.m */; };
+		CE61B6021A3C2D5600B18811 /* SWPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE61B6011A3C2D5600B18811 /* SWPickerView.m */; };
+		CE61B6051A3C463F00B18811 /* SWTargetSetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE61B6041A3C463F00B18811 /* SWTargetSetViewController.m */; };
+		CE61B6081A3C491D00B18811 /* SWSettingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE61B6071A3C491D00B18811 /* SWSettingModel.m */; };
+		CE61B60B1A3C492F00B18811 /* SWSettingInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CE61B60A1A3C492F00B18811 /* SWSettingInfo.m */; };
+		CE61B60E1A3C49AE00B18811 /* SWSETTING.m in Sources */ = {isa = PBXBuildFile; fileRef = CE61B60D1A3C49AE00B18811 /* SWSETTING.m */; };
+		CE61B6111A3C4DA200B18811 /* UIBarButtonItem+HT.m in Sources */ = {isa = PBXBuildFile; fileRef = CE61B6101A3C4DA200B18811 /* UIBarButtonItem+HT.m */; };
+		CE61B6141A3C517800B18811 /* SWDaylightSetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE61B6131A3C517800B18811 /* SWDaylightSetViewController.m */; };
+		CE61B6171A3C58A700B18811 /* SWPickerView2.m in Sources */ = {isa = PBXBuildFile; fileRef = CE61B6161A3C58A700B18811 /* SWPickerView2.m */; };
+		CE61B61A1A3C74E800B18811 /* SWAlarmSetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE61B6191A3C74E800B18811 /* SWAlarmSetViewController.m */; };
 		CE7EE0BF1A20EA33006F3294 /* 1运动记录_70@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7EE0921A20EA33006F3294 /* 1运动记录_70@2x.png */; };
 		CE7EE0C01A20EA33006F3294 /* 1运动记录_73@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7EE0931A20EA33006F3294 /* 1运动记录_73@2x.png */; };
 		CE7EE0C11A20EA33006F3294 /* 1运动记录_卡路里-标注(标注)@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7EE0941A20EA33006F3294 /* 1运动记录_卡路里-标注(标注)@2x.png */; };
@@ -170,6 +186,38 @@
 		CE44E28D1A2F79DF0081F09E /* SWProfileInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWProfileInfoCell.m; sourceTree = "<group>"; };
 		CE44E2901A2F79ED0081F09E /* SWProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWProfileViewController.h; sourceTree = "<group>"; };
 		CE44E2911A2F79ED0081F09E /* SWProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWProfileViewController.m; sourceTree = "<group>"; };
+		CE61B5E81A3BF78100B18811 /* UITableViewCell+SW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+SW.h"; sourceTree = "<group>"; };
+		CE61B5E91A3BF78100B18811 /* UITableViewCell+SW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+SW.m"; sourceTree = "<group>"; };
+		CE61B5EB1A3C016500B18811 /* SWUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWUserInfo.h; sourceTree = "<group>"; };
+		CE61B5EC1A3C016500B18811 /* SWUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWUserInfo.m; sourceTree = "<group>"; };
+		CE61B5EE1A3C022100B18811 /* SWProfileModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWProfileModel.h; sourceTree = "<group>"; };
+		CE61B5EF1A3C022100B18811 /* SWProfileModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWProfileModel.m; sourceTree = "<group>"; };
+		CE61B5F11A3C02DB00B18811 /* SWPROFILE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWPROFILE.h; sourceTree = "<group>"; };
+		CE61B5F21A3C02DB00B18811 /* SWPROFILE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWPROFILE.m; sourceTree = "<group>"; };
+		CE61B5F71A3C093200B18811 /* NSDictionary+HT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+HT.h"; sourceTree = "<group>"; };
+		CE61B5F81A3C093200B18811 /* NSDictionary+HT.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+HT.m"; sourceTree = "<group>"; };
+		CE61B5FA1A3C1F1700B18811 /* AMBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMBlurView.h; sourceTree = "<group>"; };
+		CE61B5FB1A3C1F1700B18811 /* AMBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMBlurView.m; sourceTree = "<group>"; };
+		CE61B5FC1A3C1F1700B18811 /* HTDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTDatePicker.h; sourceTree = "<group>"; };
+		CE61B5FD1A3C1F1700B18811 /* HTDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTDatePicker.m; sourceTree = "<group>"; };
+		CE61B6001A3C2D5600B18811 /* SWPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWPickerView.h; sourceTree = "<group>"; };
+		CE61B6011A3C2D5600B18811 /* SWPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWPickerView.m; sourceTree = "<group>"; };
+		CE61B6031A3C463F00B18811 /* SWTargetSetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWTargetSetViewController.h; sourceTree = "<group>"; };
+		CE61B6041A3C463F00B18811 /* SWTargetSetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWTargetSetViewController.m; sourceTree = "<group>"; };
+		CE61B6061A3C491D00B18811 /* SWSettingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWSettingModel.h; sourceTree = "<group>"; };
+		CE61B6071A3C491D00B18811 /* SWSettingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWSettingModel.m; sourceTree = "<group>"; };
+		CE61B6091A3C492F00B18811 /* SWSettingInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWSettingInfo.h; sourceTree = "<group>"; };
+		CE61B60A1A3C492F00B18811 /* SWSettingInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWSettingInfo.m; sourceTree = "<group>"; };
+		CE61B60C1A3C49AE00B18811 /* SWSETTING.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWSETTING.h; sourceTree = "<group>"; };
+		CE61B60D1A3C49AE00B18811 /* SWSETTING.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWSETTING.m; sourceTree = "<group>"; };
+		CE61B60F1A3C4DA200B18811 /* UIBarButtonItem+HT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+HT.h"; sourceTree = "<group>"; };
+		CE61B6101A3C4DA200B18811 /* UIBarButtonItem+HT.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+HT.m"; sourceTree = "<group>"; };
+		CE61B6121A3C517800B18811 /* SWDaylightSetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWDaylightSetViewController.h; sourceTree = "<group>"; };
+		CE61B6131A3C517800B18811 /* SWDaylightSetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWDaylightSetViewController.m; sourceTree = "<group>"; };
+		CE61B6151A3C58A700B18811 /* SWPickerView2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWPickerView2.h; sourceTree = "<group>"; };
+		CE61B6161A3C58A700B18811 /* SWPickerView2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWPickerView2.m; sourceTree = "<group>"; };
+		CE61B6181A3C74E800B18811 /* SWAlarmSetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWAlarmSetViewController.h; sourceTree = "<group>"; };
+		CE61B6191A3C74E800B18811 /* SWAlarmSetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWAlarmSetViewController.m; sourceTree = "<group>"; };
 		CE7EE0921A20EA33006F3294 /* 1运动记录_70@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1运动记录_70@2x.png"; sourceTree = "<group>"; };
 		CE7EE0931A20EA33006F3294 /* 1运动记录_73@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1运动记录_73@2x.png"; sourceTree = "<group>"; };
 		CE7EE0941A20EA33006F3294 /* 1运动记录_卡路里-标注(标注)@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1运动记录_卡路里-标注(标注)@2x.png"; sourceTree = "<group>"; };
@@ -368,6 +416,10 @@
 			children = (
 				455851091A37F92D00649397 /* SWModel.h */,
 				4558510A1A37F92D00649397 /* SWModel.m */,
+				CE61B5EB1A3C016500B18811 /* SWUserInfo.h */,
+				CE61B5EC1A3C016500B18811 /* SWUserInfo.m */,
+				CE61B6091A3C492F00B18811 /* SWSettingInfo.h */,
+				CE61B60A1A3C492F00B18811 /* SWSettingInfo.m */,
 			);
 			name = Model;
 			path = SmartWatch/Model;
@@ -386,6 +438,14 @@
 				CE7EE14B1A21D7A0006F3294 /* SWCircleProgressView.m */,
 				CE828E531A2DF3E60036BEC2 /* SWDashboardView.h */,
 				CE828E541A2DF3E60036BEC2 /* SWDashboardView.m */,
+				CE61B5FA1A3C1F1700B18811 /* AMBlurView.h */,
+				CE61B5FB1A3C1F1700B18811 /* AMBlurView.m */,
+				CE61B5FC1A3C1F1700B18811 /* HTDatePicker.h */,
+				CE61B5FD1A3C1F1700B18811 /* HTDatePicker.m */,
+				CE61B6001A3C2D5600B18811 /* SWPickerView.h */,
+				CE61B6011A3C2D5600B18811 /* SWPickerView.m */,
+				CE61B6151A3C58A700B18811 /* SWPickerView2.h */,
+				CE61B6161A3C58A700B18811 /* SWPickerView2.m */,
 			);
 			name = SWUIKit;
 			path = SmartWatch/SWUIKit;
@@ -400,6 +460,8 @@
 				CE44E28B1A2F79DF0081F09E /* SWHeadImageCell.m */,
 				CE44E28C1A2F79DF0081F09E /* SWProfileInfoCell.h */,
 				CE44E28D1A2F79DF0081F09E /* SWProfileInfoCell.m */,
+				CE61B5EE1A3C022100B18811 /* SWProfileModel.h */,
+				CE61B5EF1A3C022100B18811 /* SWProfileModel.m */,
 			);
 			path = Profile1;
 			sourceTree = "<group>";
@@ -607,6 +669,10 @@
 				CEAA01C51A35E3190047BAF2 /* WBEntityBase.m */,
 				455850FE1A37E1D700649397 /* SWDAILYSTEPS.h */,
 				455850FF1A37E1D700649397 /* SWDAILYSTEPS.m */,
+				CE61B5F11A3C02DB00B18811 /* SWPROFILE.h */,
+				CE61B5F21A3C02DB00B18811 /* SWPROFILE.m */,
+				CE61B60C1A3C49AE00B18811 /* SWSETTING.h */,
+				CE61B60D1A3C49AE00B18811 /* SWSETTING.m */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -750,6 +816,14 @@
 			children = (
 				CEE0D82A1A187DC800CE643C /* SWSettingViewController.h */,
 				CEE0D82B1A187DC800CE643C /* SWSettingViewController.m */,
+				CE61B6031A3C463F00B18811 /* SWTargetSetViewController.h */,
+				CE61B6041A3C463F00B18811 /* SWTargetSetViewController.m */,
+				CE61B6121A3C517800B18811 /* SWDaylightSetViewController.h */,
+				CE61B6131A3C517800B18811 /* SWDaylightSetViewController.m */,
+				CE61B6181A3C74E800B18811 /* SWAlarmSetViewController.h */,
+				CE61B6191A3C74E800B18811 /* SWAlarmSetViewController.m */,
+				CE61B6061A3C491D00B18811 /* SWSettingModel.h */,
+				CE61B6071A3C491D00B18811 /* SWSettingModel.m */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -820,6 +894,12 @@
 				CEAA01DD1A35E4FE0047BAF2 /* NSString+SW.m */,
 				455851041A37EF0900649397 /* NSDate+WB.h */,
 				455851051A37EF0900649397 /* NSDate+WB.m */,
+				CE61B5E81A3BF78100B18811 /* UITableViewCell+SW.h */,
+				CE61B5E91A3BF78100B18811 /* UITableViewCell+SW.m */,
+				CE61B5F71A3C093200B18811 /* NSDictionary+HT.h */,
+				CE61B5F81A3C093200B18811 /* NSDictionary+HT.m */,
+				CE61B60F1A3C4DA200B18811 /* UIBarButtonItem+HT.h */,
+				CE61B6101A3C4DA200B18811 /* UIBarButtonItem+HT.m */,
 			);
 			name = Category;
 			path = SmartWatch/Category;
@@ -1098,11 +1178,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				455851031A37ED5800649397 /* SWExerciseRecordsModel.m in Sources */,
+				CE61B5ED1A3C016500B18811 /* SWUserInfo.m in Sources */,
 				CEAA01D41A35E3190047BAF2 /* WBFMDatabase.m in Sources */,
 				CE828E5A1A2E12020036BEC2 /* BLE.m in Sources */,
+				CE61B5F91A3C093200B18811 /* NSDictionary+HT.m in Sources */,
 				CE208F581A1A4C8A001D6482 /* SWPlot.m in Sources */,
 				CEE0D8261A187D7600CE643C /* SWHistoryRecordsViewController.m in Sources */,
+				CE61B5EA1A3BF78100B18811 /* UITableViewCell+SW.m in Sources */,
+				CE61B6081A3C491D00B18811 /* SWSettingModel.m in Sources */,
 				CEE0D85C1A1888CF00CE643C /* GCDSemaphore.m in Sources */,
+				CE61B6111A3C4DA200B18811 /* UIBarButtonItem+HT.m in Sources */,
 				455851061A37EF0900649397 /* NSDate+WB.m in Sources */,
 				CEAA01E41A35F0D60047BAF2 /* SWBLECenter.m in Sources */,
 				CEE0D8461A18887800CE643C /* UIColor+SW.m in Sources */,
@@ -1110,6 +1195,7 @@
 				CEAA01D51A35E3190047BAF2 /* WBEntityBase.m in Sources */,
 				CEAA01D91A35E3190047BAF2 /* WBSQLBuffer.m in Sources */,
 				CE7EE13B1A20F946006F3294 /* SWExerciseRecordsTitleView.m in Sources */,
+				CE61B6021A3C2D5600B18811 /* SWPickerView.m in Sources */,
 				CEAA01DE1A35E4FE0047BAF2 /* NSString+SW.m in Sources */,
 				CE44E28E1A2F79DF0081F09E /* SWHeadImageCell.m in Sources */,
 				4558510B1A37F92D00649397 /* SWModel.m in Sources */,
@@ -1118,23 +1204,33 @@
 				CE44E2921A2F79ED0081F09E /* SWProfileViewController.m in Sources */,
 				CEE0D85D1A1888CF00CE643C /* ALView+PureLayout.m in Sources */,
 				CEE0D85E1A1888CF00CE643C /* NSArray+PureLayout.m in Sources */,
+				CE61B6141A3C517800B18811 /* SWDaylightSetViewController.m in Sources */,
 				CEAA01D61A35E3190047BAF2 /* WBDatabaseResultSet.m in Sources */,
+				CE61B5F01A3C022100B18811 /* SWProfileModel.m in Sources */,
+				CE61B5F31A3C02DB00B18811 /* SWPROFILE.m in Sources */,
 				CE7EE14F1A21D7DE006F3294 /* SWEnvironmentView.m in Sources */,
 				CEAA01E11A35E56E0047BAF2 /* WBPath.m in Sources */,
 				CEE0D7FA1A18793500CE643C /* AppDelegate.m in Sources */,
+				CE61B6051A3C463F00B18811 /* SWTargetSetViewController.m in Sources */,
+				CE61B5FF1A3C1F1700B18811 /* HTDatePicker.m in Sources */,
 				CEE0D7F71A18793500CE643C /* main.m in Sources */,
 				455851001A37E1D700649397 /* SWDAILYSTEPS.m in Sources */,
 				CE208F571A1A4C8A001D6482 /* SWLineGraphView.m in Sources */,
 				CEE0D85B1A1888CF00CE643C /* GCDQueue.m in Sources */,
+				CE61B60E1A3C49AE00B18811 /* SWSETTING.m in Sources */,
 				CE7EE14C1A21D7A0006F3294 /* SWCircleProgressView.m in Sources */,
 				CEE0D8401A18884700CE643C /* UIDevice+SW.m in Sources */,
 				CEE0D8431A18885C00CE643C /* UIView+SW.m in Sources */,
+				CE61B6171A3C58A700B18811 /* SWPickerView2.m in Sources */,
+				CE61B5FE1A3C1F1700B18811 /* AMBlurView.m in Sources */,
 				CEAA01DA1A35E3190047BAF2 /* WBDatabaseService.m in Sources */,
+				CE61B60B1A3C492F00B18811 /* SWSettingInfo.m in Sources */,
 				CEE0D8371A18870200CE643C /* SWShareKit.m in Sources */,
 				CEBB8CA81A372F7D00EBE67F /* SWPacketHeader.m in Sources */,
 				CEE0D85A1A1888CF00CE643C /* GCDGroup.m in Sources */,
 				CE828E551A2DF3E60036BEC2 /* SWDashboardView.m in Sources */,
 				CEBB8CAE1A374EE700EBE67F /* SWActivityResponse.m in Sources */,
+				CE61B61A1A3C74E800B18811 /* SWAlarmSetViewController.m in Sources */,
 				CE44E28F1A2F79DF0081F09E /* SWProfileInfoCell.m in Sources */,
 				CEE0D8231A187CEF00CE643C /* SWExerciseRecordsViewController.m in Sources */,
 				CEE0D82C1A187DC800CE643C /* SWSettingViewController.m in Sources */,

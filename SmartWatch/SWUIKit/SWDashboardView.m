@@ -10,7 +10,7 @@
 
 @interface SWCircleView : UIView
 
-@property (nonatomic)NSInteger value;
+@property (nonatomic,strong)NSString *value;
 @property (nonatomic,strong)NSString *unit;
 @property (nonatomic,strong)NSString *descri;
 
@@ -53,14 +53,14 @@
     return self;
 }
 
-- (void)setValue:(NSInteger)value {
+- (void)setValue:(NSString *)value {
     _value = value;
-    valueLabel.text = [NSString stringWithFormat:@"%@\n%@", @(_value).stringValue, _unit];
+    valueLabel.text = [NSString stringWithFormat:@"%@\n%@", _value, _unit];
 }
 
 - (void)setUnit:(NSString *)unit {
     _unit = unit;
-    valueLabel.text = [NSString stringWithFormat:@"%@\n%@", @(_value).stringValue, _unit];
+    valueLabel.text = [NSString stringWithFormat:@"%@\n%@", _value, _unit];
 }
 
 - (void)setDescri:(NSString *)descri {
@@ -95,8 +95,8 @@
     return self;
 }
 
-- (void)setValue1:(NSInteger)value {
-    _circleView1.value = value;
+- (void)setValue1:(NSString *)value1 {
+    _circleView1.value = value1;
 }
 
 - (void)setUnit1:(NSString *)unit {
@@ -107,8 +107,8 @@
     _circleView1.descri = descri;
 }
 
-- (void)setValue2:(NSInteger)value {
-    _circleView2.value = value;
+- (void)setValue2:(NSString *)value2 {
+    _circleView2.value = value2;
 }
 
 - (void)setUnit2:(NSString *)unit {
@@ -119,8 +119,8 @@
     _circleView2.descri = descri;
 }
 
-- (void)setValue3:(NSInteger)value {
-    _circleView3.value = value;
+- (void)setValue3:(NSString *)value3 {
+    _circleView3.value = value3;
 }
 
 - (void)setUnit3:(NSString *)unit {

@@ -10,7 +10,7 @@
 
 @interface SWHeadImageCell : UITableViewCell
 
-@property (nonatomic,strong) UIImage *headImage;
-@property (nonatomic,strong) NSString *name;
+@property (nonatomic,strong) UIImageView *headImageView;
+@property (nonatomic,strong) UITextField *nameTextField;
 
 @end

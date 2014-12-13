@@ -7,14 +7,32 @@
 //
 
 #import "SWSettingViewController.h"
+#import "SWTargetSetViewController.h"
+#import "SWDaylightSetViewController.h"
+#import "SWSettingModel.h"
+#import "SWAlarmSetViewController.h"
 
 @interface SWSettingViewController ()<UITableViewDataSource,UITableViewDelegate>
+{
+    SWSettingModel *model;
+}
 
 @property (nonatomic,strong) UITableView *tableView;
 
 @end
 
 @implementation SWSettingViewController
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+        self.extendedLayoutIncludesOpaqueBars = NO;
+        model = [[SWSettingModel alloc] initWithResponder:self];
+    }
+    
+    return self;
+}
 
 - (void)viewDidLoad {
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"4背景-ios_01"] forBarMetrics:UIBarMetricsDefault];
@@ -34,6 +52,14 @@
     UIView *footView = [[UIView alloc] init];
     footView.backgroundColor = [UIColor clearColor];
     self.tableView.tableFooterView = footView;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if (self.tableView.indexPathForSelectedRow) {
+        [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -78,5 +104,25 @@
     return 45.0f;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == 1) {
+        SWAlarmSetViewController *alarmViewController = [[SWAlarmSetViewController alloc] init];
+        alarmViewController.model = model;
+        [self.navigationController pushViewController:alarmViewController animated:YES];
+    } else if (indexPath.row == 2) {
+        SWDaylightSetViewController *daylightSetViewController = [[SWDaylightSetViewController alloc] init];
+        daylightSetViewController.model = model;
+        [self.navigationController pushViewController:daylightSetViewController animated:YES];
+    } else if (indexPath.row == 3) {
+        SWTargetSetViewController *targetSetViewController = [[SWTargetSetViewController alloc] init];
+        targetSetViewController.model = model;
+        [self.navigationController pushViewController:targetSetViewController animated:YES];
+        
+    } else if (indexPath.row == 4) {
+        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+        [imagePicker setSourceType:UIImagePickerControllerSourceTypeCamera];
+        [self presentViewController:imagePicker animated:YES completion:nil];
+    }
+}
 
 @end

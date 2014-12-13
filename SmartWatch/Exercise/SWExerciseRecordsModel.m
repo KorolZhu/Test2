@@ -40,7 +40,7 @@
 		NSString *date = [[NSDate date] stringWithFormat:@"yyyyMMdd"];
 		currentDateymd = [date longLongValue];
         
-        currentDateymd = 20141121;
+        currentDateymd = 20141212;
 		
 		WBSQLBuffer *sqlBuffer = [[WBSQLBuffer alloc] init];
 		sqlBuffer.SELECT(@"*").FROM(DBDAILYSTEPS._tableName).WHERE([NSString stringWithFormat:@"%@=%@", DBDAILYSTEPS._DATEYMD, @(currentDateymd).stringValue]);
@@ -52,6 +52,9 @@
 			NSMutableDictionary *calorieTempDictionary = [NSMutableDictionary dictionary];
 			NSMutableDictionary *sleepTempDictionary = [NSMutableDictionary dictionary];
 			
+            __block NSInteger tempTotalSteps = 0;
+            __block float tempTotalCalorie = 0.0f;
+            __block NSInteger tempTotalActivityTime = 0;
 			[resultDictionary enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
 				NSString *keyString = key;
 				if ([keyString hasPrefix:DBDAILYSTEPS._STEPCOUNT]) {
@@ -62,15 +65,32 @@
 					} else {
                         if (steps > 0) {
                             [stepsTempDictionary setObject:@(steps) forKey:@(hour + 1)];
+                            
+                            tempTotalSteps += steps;
+                            
+                            if (steps > 100) {
+                                tempTotalActivityTime += 1;
+                            }
                         }
 						
 						float calorie = 0.53 * 175 + 0.58 * 62 + 0.04 * steps - 135;
                         if (calorie > 0.0f) {
                             [calorieTempDictionary setObject:@(calorie) forKey:@(hour + 1)];
+                            
+                            tempTotalCalorie += calorie;
                         }
 					}
 				}
 			}];
+            
+            _totalSteps = tempTotalSteps;
+            _stepsPercent = _totalSteps / 10000;
+            _stepsPercentString = [NSString stringWithFormat:@"%d%%", (int)(_stepsPercent * 100)];
+            _totalCalorie = tempTotalCalorie / 1000;
+            _totalDistance = tempTotalSteps * 175 * 0.45 * 0.01 / 1000;
+            _caloriePercent = tempTotalCalorie / 10000;
+            _caloriePercentString = [NSString stringWithFormat:@"%d%%", (int)(_caloriePercent * 100)];
+            _daylightActivitytime = tempTotalActivityTime;
 			_stepsDictionary = [NSDictionary dictionaryWithDictionary:stepsTempDictionary];
 			_sleepDictionary = [NSDictionary dictionaryWithDictionary:sleepTempDictionary];
 			_calorieDictionary = [NSDictionary dictionaryWithDictionary:calorieTempDictionary];

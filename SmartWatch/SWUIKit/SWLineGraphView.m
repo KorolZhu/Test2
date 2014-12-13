@@ -275,6 +275,9 @@ NSString *const kDotSizeKey                 = @"kDotSizeKey";
 
 - (float)getValueForIndex:(NSNumber *)index forPlot:(SWPlot *)plot {
 	NSNumber *value = [plot.plottingValues objectForKey:index];
+    if (value.floatValue > _yAxisRange) {
+        value = @(_yAxisRange);
+    }
 	return value.floatValue;
 	
 //    [plot.plottingValues enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {

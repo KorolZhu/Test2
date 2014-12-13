@@ -90,19 +90,17 @@
     progressView.backImage = [UIImage imageNamed:@"1运动记录_70"];
     progressView.topDesc = NSLocalizedString(@"今日", nil);
     progressView.bottomDesc = NSLocalizedString(@"目标", nil);
-    progressView.progress = 0.83;
-    progressView.valueString = @"83%";
     [_scrollView addSubview:progressView];
     
     dashboardView = [[SWDashboardView alloc] initWithFrame:CGRectMake(progressView.right + 16.0f, progressView.top + 10.0f, 112.0f, 171.0f)];
     [_scrollView addSubview:dashboardView];
-    dashboardView.value1 = 3089;
+    dashboardView.value1 = 0;
     dashboardView.unit1 = @"千卡";
     dashboardView.descri1 = @"燃烧";
-    dashboardView.value2 = 554;
+    dashboardView.value2 = 0;
     dashboardView.unit2 = @"公里";
     dashboardView.descri2 = @"距离";
-    dashboardView.value3 = 2565;
+    dashboardView.value3 = 0;
     dashboardView.unit3 = @"步";
     dashboardView.descri3 = @"步数";
     
@@ -111,14 +109,11 @@
     calorieGraphView.xAxisValues = @[@{@6 : @"6"},@{@12 : @"12"},@{@18 : @"18"},@{@24 : @"24"}];
     calorieGraphView.xIntervalCount = 24;
     calorieGraphView.xAxisDescription = @"时间";
-    calorieGraphView.yAxisRange = 500.0f;
+    calorieGraphView.yAxisRange = 1000.0;
     calorieGraphView.yIntervalCount = 2;
     calorieGraphView.yAxisDescription = @"卡路里（千卡）";
-	
-	[model queryExerciseRecords];
-	
+		
 	caloriePlot = [[SWPlot alloc] init];
-	caloriePlot.plottingValues = model.calorieDictionary;
 	caloriePlot.plotThemeAttributes = @{
 										kPlotFillColorKey : [UIColor clearColor],
 										kPlotStrokeWidthKey : @1,
@@ -215,6 +210,8 @@
     _scrollView.contentSize = CGSizeMake(IPHONE_WIDTH, sleepButton.bottom + 13.0f);
     
     [[SWBLECenter shareInstance] addObserver:self forKeyPath:@"state" options:NSKeyValueObservingOptionNew context:NULL];
+    
+    [model queryExerciseRecords];
 	
 }
 
@@ -255,6 +252,8 @@
     stepButton.selected = NO;
     sleepButton.selected = NO;
 
+    [self reloadProgressData];
+
 	calorieGraphView.hidden = NO;
 	stepsGraphView.hidden = YES;
 	sleepGraphView.hidden = YES;
@@ -274,7 +273,7 @@
 		stepsGraphView.xAxisValues = @[@{@6 : @"6"},@{@12 : @"12"},@{@18 : @"18"},@{@24 : @"24"}];
 		stepsGraphView.xIntervalCount = 24;
 		stepsGraphView.xAxisDescription = @"时间";
-		stepsGraphView.yAxisRange = 1000.0f;
+		stepsGraphView.yAxisRange = 30000.0f;
 		stepsGraphView.yIntervalCount = 2;
 		stepsGraphView.yAxisDescription = @"步数";
 		
@@ -290,6 +289,8 @@
 		[_scrollView addSubview:stepsGraphView];
 	}
 	
+    [self reloadProgressData];
+
 	calorieGraphView.hidden = YES;
 	stepsGraphView.hidden = NO;
 	sleepGraphView.hidden = YES;
@@ -324,15 +325,57 @@
 		[sleepGraphView setupTheView];
 		[_scrollView addSubview:sleepGraphView];
 	}
+    
+    [self reloadProgressData];
 	
 	calorieGraphView.hidden = YES;
 	stepsGraphView.hidden = YES;
 	sleepGraphView.hidden = NO;
 }
 
+- (void)reloadProgressData {
+    if (calorieButton.selected) {
+        progressView.topDesc = NSLocalizedString(@"今日", nil);
+        progressView.bottomDesc = NSLocalizedString(@"目标", nil);
+        progressView.progress = model.caloriePercent;
+        progressView.valueString = model.caloriePercentString;
+        dashboardView.value1 = @((int)model.totalCalorie).stringValue;
+        dashboardView.unit1 = @"千卡";
+        dashboardView.descri1 = @"燃烧";
+        dashboardView.value2 = @((int)model.totalDistance).stringValue;
+        dashboardView.unit2 = @"公里";
+        dashboardView.descri2 = @"距离";
+        dashboardView.value3 = @(model.totalSteps).stringValue;
+        dashboardView.unit3 = @"步";
+        dashboardView.descri3 = @"步数";
+    } else if (stepButton.selected) {
+        progressView.topDesc = NSLocalizedString(@"今日", nil);
+        progressView.bottomDesc = NSLocalizedString(@"步", nil);
+        progressView.progress = model.stepsPercent;
+        progressView.valueString = @(model.totalSteps).stringValue;
+        dashboardView.value1 = @(model.daylightActivitytime).stringValue;
+        dashboardView.unit1 = @"小时";
+        dashboardView.descri1 = @"活动";
+        dashboardView.value2 = @(24 - model.daylightActivitytime).stringValue;
+        dashboardView.unit2 = @"小时";
+        dashboardView.descri2 = @"非活动";
+        dashboardView.value3 = model.stepsPercentString;
+        dashboardView.descri3 = @"步数";
+    } else {
+        
+    }
+    
+}
+
+- (void)reloadGraphData {
+    
+}
+
 #pragma mark - Model
 
 - (void)exerciseRecordsQueryFinished {
+    [self reloadProgressData];
+
 	caloriePlot.plottingValues = model.calorieDictionary;
 	stepsPlot.plottingValues = model.stepsDictionary;
 	sleepPlot.plottingValues = model.sleepDictionary;

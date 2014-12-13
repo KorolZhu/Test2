@@ -123,27 +123,27 @@
     graphView.headView = graphHeadView;
     
     SWPlot *plot = [[SWPlot alloc] init];
-    plot.plottingValues = @[
-                            @{ @1 : @0.2f },
-                            @{ @2 : @0.3f },
-                            @{ @3 : @0.4f },
-                            @{ @4 : @0.2f },
-                            @{ @5 : @0.8f },
-                            @{ @6 : @0.0f },
-                            @{ @7 : @0.7f },
-                            ];
+//    plot.plottingValues = @[
+//                            @{ @1 : @0.2f },
+//                            @{ @2 : @0.3f },
+//                            @{ @3 : @0.4f },
+//                            @{ @4 : @0.2f },
+//                            @{ @5 : @0.8f },
+//                            @{ @6 : @0.0f },
+//                            @{ @7 : @0.7f },
+//                            ];
     [graphView addPlot:plot];
     
     SWPlot *plot2 = [[SWPlot alloc] init];
-    plot2.plottingValues = @[
-                             @{ @1 : @1.0f },
-                             @{ @2 : @0.5f },
-                             @{ @3 : @0.6f },
-                             @{ @4 : @0.4f },
-                             @{ @5 : @0.7f },
-                             @{ @6 : @0.2f },
-                             @{ @7 : @0.3f },
-                             ];
+//    plot2.plottingValues = @[
+//                             @{ @1 : @1.0f },
+//                             @{ @2 : @0.5f },
+//                             @{ @3 : @0.6f },
+//                             @{ @4 : @0.4f },
+//                             @{ @5 : @0.7f },
+//                             @{ @6 : @0.2f },
+//                             @{ @7 : @0.3f },
+//                             ];
     plot2.plotThemeAttributes = @{
                                   kPlotFillColorKey : [UIColor clearColor],
                                   kPlotStrokeWidthKey : @1,
