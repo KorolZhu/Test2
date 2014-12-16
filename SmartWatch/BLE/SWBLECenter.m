@@ -72,7 +72,7 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
 #pragma mark - BLE Request
 
 - (void)sendSetDateTimeRequest {
-    UInt8 buf[] = {BLE_CMD_SET_DAY_TIME_REQUEST, 20, 14, 12, 11, 22, 14, 00};
+    UInt8 buf[] = {BLE_CMD_SET_DAY_TIME_REQUEST, 20, 14, 12, 15, 20, 30, 00};
     NSData *data = [[NSData alloc] initWithBytes:buf length:8];
     [self.ble write:data];
 }

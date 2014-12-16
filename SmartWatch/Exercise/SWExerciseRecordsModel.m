@@ -11,6 +11,8 @@
 #import "WBSQLBuffer.h"
 #import "SWDAILYSTEPS.h"
 #import "SWBLECenter.h"
+#import "SWUserInfo.h"
+#import "SWSettingInfo.h"
 
 @interface SWExerciseRecordsModel ()
 {
@@ -73,7 +75,7 @@
                             }
                         }
 						
-						float calorie = 0.53 * 175 + 0.58 * 62 + 0.04 * steps - 135;
+						float calorie = 0.53 * [[SWUserInfo shareInstance] height] + 0.58 * [[SWUserInfo shareInstance] weight] + 0.04 * steps - 135;
                         if (calorie > 0.0f) {
                             [calorieTempDictionary setObject:@(calorie) forKey:@(hour + 1)];
                             
@@ -84,11 +86,13 @@
 			}];
             
             _totalSteps = tempTotalSteps;
-            _stepsPercent = _totalSteps / 10000;
+            _stepsPercent = _totalSteps / [[SWSettingInfo shareInstance] stepsTarget];
             _stepsPercentString = [NSString stringWithFormat:@"%d%%", (int)(_stepsPercent * 100)];
+            
+            _totalDistance = tempTotalSteps * [[SWUserInfo shareInstance] height] * 0.45 * 0.01 * 0.001;
+            
             _totalCalorie = tempTotalCalorie / 1000;
-            _totalDistance = tempTotalSteps * 175 * 0.45 * 0.01 / 1000;
-            _caloriePercent = tempTotalCalorie / 10000;
+            _caloriePercent = tempTotalCalorie / [[SWSettingInfo shareInstance] calorieTarget];
             _caloriePercentString = [NSString stringWithFormat:@"%d%%", (int)(_caloriePercent * 100)];
             _daylightActivitytime = tempTotalActivityTime;
 			_stepsDictionary = [NSDictionary dictionaryWithDictionary:stepsTempDictionary];

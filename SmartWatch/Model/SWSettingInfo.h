@@ -14,8 +14,10 @@
 SW_AS_SINGLETON(SWSettingInfo, shareInstance);
 
 @property (nonatomic) NSInteger stepsTarget;
+@property (nonatomic) float calorieTarget;
 @property (nonatomic) NSInteger startHour;
 @property (nonatomic) NSInteger endHour;
+@property (nonatomic) NSArray *alarmArray;
 
 - (void)loadDataWithDictionary:(NSDictionary *)dictionary;
 

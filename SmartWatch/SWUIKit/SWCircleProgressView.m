@@ -94,6 +94,13 @@
 
 - (void)setProgress:(float)progress {
     _progress = progress;
+    if (_progress > 1.0f) {
+        _progress = 1.0f;
+    }
+    
+    if (_progress < 0.0f) {
+        _progress = 0.0f;
+    }
     
     if (!progressLayer) {
         progressLayer = [[CAShapeLayer alloc] init];
@@ -108,7 +115,7 @@
         radius = self.width / 2.0f - (_style == SWCircleProgressViewStyleLarge ? 9.0f : 5.0f);
     }
     
-    CGFloat endAngle = circleStartAngle + (circleEndAngle - circleStartAngle) * progress;
+    CGFloat endAngle = circleStartAngle + (circleEndAngle - circleStartAngle) * _progress;
     UIBezierPath* aPath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(self.width / 2.0f, self.height / 2.0f)
                                                          radius:radius
                                                      startAngle:DEGREES_2_RADIANS(circleStartAngle)

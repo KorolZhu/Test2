@@ -17,5 +17,6 @@
 #import "UITableViewCell+SW.h"
 #import "NSDictionary+HT.h"
 #import "UIBarButtonItem+HT.h"
+#import "HTJSONAdapter.h"
 
 #endif

@@ -27,4 +27,7 @@ SW_AS_SINGLETON(SWBLECenter, shareInstance);
 - (void)connectDevice;
 - (void)disconnectDevice;
 
+- (void)setDaylightWithStartHour:(NSInteger)startHour endHour:(NSInteger)endHour;
+- (void)setAlarm;
+
 @end

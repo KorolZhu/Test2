@@ -11,9 +11,9 @@
 
 @interface SWExerciseRecordsModel : SWModel
 
-@property (nonatomic,readonly)float totalCalorie;
-@property (nonatomic,readonly)float totalDistance;
 @property (nonatomic,readonly)NSInteger totalSteps;
+@property (nonatomic,readonly)float totalDistance;
+@property (nonatomic,readonly)float totalCalorie;
 @property (nonatomic,readonly) NSDictionary *calorieDictionary;
 @property (nonatomic,readonly) NSDictionary *stepsDictionary;
 @property (nonatomic,readonly) NSDictionary *sleepDictionary;
@@ -23,7 +23,6 @@
 @property (nonatomic,readonly)float stepsPercent;
 @property (nonatomic,readonly)NSString *stepsPercentString;
 @property (nonatomic,readonly)float daylightActivitytime;
-
 
 - (void)queryExerciseRecords;
 

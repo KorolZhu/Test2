@@ -120,6 +120,10 @@
 		CE7EE14F1A21D7DE006F3294 /* SWEnvironmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7EE14E1A21D7DE006F3294 /* SWEnvironmentView.m */; };
 		CE828E551A2DF3E60036BEC2 /* SWDashboardView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE828E541A2DF3E60036BEC2 /* SWDashboardView.m */; };
 		CE828E5A1A2E12020036BEC2 /* BLE.m in Sources */ = {isa = PBXBuildFile; fileRef = CE828E581A2E12020036BEC2 /* BLE.m */; };
+		CE9178931A405B7100A80136 /* SWAlarmInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9178921A405B7100A80136 /* SWAlarmInfo.m */; };
+		CE9178961A405C7900A80136 /* HTJSONAdapter.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9178951A405C7900A80136 /* HTJSONAdapter.m */; };
+		CE9178991A40684000A80136 /* SWAlarmCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE9178981A40684000A80136 /* SWAlarmCell.m */; };
+		CE91789C1A406EC300A80136 /* SWAlarmEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE91789B1A406EC300A80136 /* SWAlarmEditViewController.m */; };
 		CEAA01BD1A35CEDD0047BAF2 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEAA01BC1A35CEDD0047BAF2 /* MapKit.framework */; };
 		CEAA01D41A35E3190047BAF2 /* WBFMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAA01C21A35E3190047BAF2 /* WBFMDatabase.m */; };
 		CEAA01D51A35E3190047BAF2 /* WBEntityBase.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAA01C51A35E3190047BAF2 /* WBEntityBase.m */; };
@@ -311,6 +315,14 @@
 		CE828E571A2E12020036BEC2 /* BLE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLE.h; sourceTree = "<group>"; };
 		CE828E581A2E12020036BEC2 /* BLE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLE.m; sourceTree = "<group>"; };
 		CE828E591A2E12020036BEC2 /* BLEDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLEDefines.h; sourceTree = "<group>"; };
+		CE9178911A405B7100A80136 /* SWAlarmInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWAlarmInfo.h; sourceTree = "<group>"; };
+		CE9178921A405B7100A80136 /* SWAlarmInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWAlarmInfo.m; sourceTree = "<group>"; };
+		CE9178941A405C7900A80136 /* HTJSONAdapter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTJSONAdapter.h; sourceTree = "<group>"; };
+		CE9178951A405C7900A80136 /* HTJSONAdapter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTJSONAdapter.m; sourceTree = "<group>"; };
+		CE9178971A40684000A80136 /* SWAlarmCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWAlarmCell.h; sourceTree = "<group>"; };
+		CE9178981A40684000A80136 /* SWAlarmCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWAlarmCell.m; sourceTree = "<group>"; };
+		CE91789A1A406EC300A80136 /* SWAlarmEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWAlarmEditViewController.h; sourceTree = "<group>"; };
+		CE91789B1A406EC300A80136 /* SWAlarmEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWAlarmEditViewController.m; sourceTree = "<group>"; };
 		CEAA01BC1A35CEDD0047BAF2 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		CEAA01C01A35E3190047BAF2 /* WBDatabaseLogicType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBDatabaseLogicType.h; sourceTree = "<group>"; };
 		CEAA01C11A35E3190047BAF2 /* WBFMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBFMDatabase.h; sourceTree = "<group>"; };
@@ -420,6 +432,8 @@
 				CE61B5EC1A3C016500B18811 /* SWUserInfo.m */,
 				CE61B6091A3C492F00B18811 /* SWSettingInfo.h */,
 				CE61B60A1A3C492F00B18811 /* SWSettingInfo.m */,
+				CE9178911A405B7100A80136 /* SWAlarmInfo.h */,
+				CE9178921A405B7100A80136 /* SWAlarmInfo.m */,
 			);
 			name = Model;
 			path = SmartWatch/Model;
@@ -824,6 +838,10 @@
 				CE61B6191A3C74E800B18811 /* SWAlarmSetViewController.m */,
 				CE61B6061A3C491D00B18811 /* SWSettingModel.h */,
 				CE61B6071A3C491D00B18811 /* SWSettingModel.m */,
+				CE9178971A40684000A80136 /* SWAlarmCell.h */,
+				CE9178981A40684000A80136 /* SWAlarmCell.m */,
+				CE91789A1A406EC300A80136 /* SWAlarmEditViewController.h */,
+				CE91789B1A406EC300A80136 /* SWAlarmEditViewController.m */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -900,6 +918,8 @@
 				CE61B5F81A3C093200B18811 /* NSDictionary+HT.m */,
 				CE61B60F1A3C4DA200B18811 /* UIBarButtonItem+HT.h */,
 				CE61B6101A3C4DA200B18811 /* UIBarButtonItem+HT.m */,
+				CE9178941A405C7900A80136 /* HTJSONAdapter.h */,
+				CE9178951A405C7900A80136 /* HTJSONAdapter.m */,
 			);
 			name = Category;
 			path = SmartWatch/Category;
@@ -1178,6 +1198,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				455851031A37ED5800649397 /* SWExerciseRecordsModel.m in Sources */,
+				CE9178991A40684000A80136 /* SWAlarmCell.m in Sources */,
 				CE61B5ED1A3C016500B18811 /* SWUserInfo.m in Sources */,
 				CEAA01D41A35E3190047BAF2 /* WBFMDatabase.m in Sources */,
 				CE828E5A1A2E12020036BEC2 /* BLE.m in Sources */,
@@ -1194,6 +1215,7 @@
 				CEAA01DB1A35E3190047BAF2 /* WBDatabaseTransaction.m in Sources */,
 				CEAA01D51A35E3190047BAF2 /* WBEntityBase.m in Sources */,
 				CEAA01D91A35E3190047BAF2 /* WBSQLBuffer.m in Sources */,
+				CE91789C1A406EC300A80136 /* SWAlarmEditViewController.m in Sources */,
 				CE7EE13B1A20F946006F3294 /* SWExerciseRecordsTitleView.m in Sources */,
 				CE61B6021A3C2D5600B18811 /* SWPickerView.m in Sources */,
 				CEAA01DE1A35E4FE0047BAF2 /* NSString+SW.m in Sources */,
@@ -1202,6 +1224,7 @@
 				CEE0D85F1A1888CF00CE643C /* NSLayoutConstraint+PureLayout.m in Sources */,
 				CEAA01D81A35E3190047BAF2 /* WBMutableSQLBuffer.m in Sources */,
 				CE44E2921A2F79ED0081F09E /* SWProfileViewController.m in Sources */,
+				CE9178961A405C7900A80136 /* HTJSONAdapter.m in Sources */,
 				CEE0D85D1A1888CF00CE643C /* ALView+PureLayout.m in Sources */,
 				CEE0D85E1A1888CF00CE643C /* NSArray+PureLayout.m in Sources */,
 				CE61B6141A3C517800B18811 /* SWDaylightSetViewController.m in Sources */,
@@ -1221,6 +1244,7 @@
 				CE7EE14C1A21D7A0006F3294 /* SWCircleProgressView.m in Sources */,
 				CEE0D8401A18884700CE643C /* UIDevice+SW.m in Sources */,
 				CEE0D8431A18885C00CE643C /* UIView+SW.m in Sources */,
+				CE9178931A405B7100A80136 /* SWAlarmInfo.m in Sources */,
 				CE61B6171A3C58A700B18811 /* SWPickerView2.m in Sources */,
 				CE61B5FE1A3C1F1700B18811 /* AMBlurView.m in Sources */,
 				CEAA01DA1A35E3190047BAF2 /* WBDatabaseService.m in Sources */,
@@ -1347,6 +1371,8 @@
 					"$(PROJECT_DIR)/SmartWatch/ThirdParty/WeChat",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "35131dfd-355b-4520-bf65-36c61772feb6";
+				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Debug;
 		};
@@ -1364,6 +1390,8 @@
 					"$(PROJECT_DIR)/SmartWatch/ThirdParty/WeChat",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "35131dfd-355b-4520-bf65-36c61772feb6";
+				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Release;
 		};

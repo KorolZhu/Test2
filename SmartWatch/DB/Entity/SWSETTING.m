@@ -28,4 +28,8 @@ SW_DEF_SINGLETON(SWSETTING, shareInstant);
     return @"DAYTIMEENDTHOUR";
 }
 
+- (NSString *)_ALARM {
+    return @"ALARM";
+}
+
 @end

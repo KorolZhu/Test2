@@ -26,4 +26,9 @@
 #define IPHONE_WIDTHDIFF_HALF           (IPHONE_WIDTH - 320.0f) / 2.0f
 #define IPHONE_HEIGHTDIFF_HALF          (IPHONE_HEIGHT - 480.0f) / 2.0ftBand_WBMacros_h
 
+#define ALARMHOUR @"alarmHour"
+#define ALARMMINUTE @"alarmminute"
+#define ALARMSTATE @"alarmstate"
+#define ALARMREPEAT @"alarmrepeat"
+
 #endif

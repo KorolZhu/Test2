@@ -320,7 +320,7 @@
             [model saveSex:1];
         } else {
             [model saveSex:0];
-        }
+         }
     } else if (pickerView == heightPickerView) {
         [model saveHeight:value.integerValue];
     } else if (pickerView == weightPickerView) {

@@ -7,6 +7,11 @@
 //
 
 #import "SWAlarmSetViewController.h"
+#import "SWAlarmCell.h"
+#import "SWSettingInfo.h"
+#import "SWAlarmEditViewController.h"
+
+static NSString *alarmCellIdentifier = @"alarmCellIdentifier";
 
 @interface SWAlarmSetViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
@@ -52,6 +57,7 @@
     [addLabel autoAlignAxisToSuperviewAxis:ALAxisVertical];
     
     addButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [addButton addTarget:self action:@selector(addButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [addButton setBackgroundImage:[UIImage imageNamed:@"4设置_21"] forState:UIControlStateNormal];
     [self.view addSubview:addButton];
     [addButton autoSetDimensionsToSize:CGSizeMake(36.0f, 36.0f)];
@@ -63,6 +69,7 @@
     _tableView.dataSource = self;
     _tableView.backgroundColor = [UIColor clearColor];
     _tableView.backgroundView = nil;
+    [_tableView registerClass:[SWAlarmCell class] forCellReuseIdentifier:alarmCellIdentifier];
     [self.view addSubview:_tableView];
     [_tableView autoPinEdgeToSuperviewEdge:ALEdgeTop];
     [_tableView autoPinEdgeToSuperviewEdge:ALEdgeLeft];
@@ -78,13 +85,28 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)addButtonClick {
+    SWAlarmEditViewController *viewController = [[SWAlarmEditViewController alloc]init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:viewController];
+    [self presentViewController:nav animated:YES completion:NULL];
+}
+
+- (void)switchChanged:(UISwitch *)stateSwitch event:(UIEvent *)event {
+    NSSet *touches = [event allTouches];
+    UITouch *touch = [touches anyObject];
+    CGPoint currentTouchPosition = [touch locationInView:self.tableView];
+    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:currentTouchPosition];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    return [[SWSettingInfo shareInstance] alarmArray].count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    return nil;
+    SWAlarmCell *cell = [tableView dequeueReusableCellWithIdentifier:alarmCellIdentifier forIndexPath:indexPath];
+    [cell.stateSwitch addTarget:self action:@selector(switchChanged:event:) forControlEvents:UIControlEventValueChanged];
+    cell.alarmInfo = [[SWSettingInfo shareInstance].alarmArray objectAtIndex:indexPath.row];
+    return cell;
 }
 
 @end
