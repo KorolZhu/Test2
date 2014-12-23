@@ -24,6 +24,9 @@
 @property (nonatomic,readonly)NSString *stepsPercentString;
 @property (nonatomic,readonly)float daylightActivitytime;
 
-- (void)queryExerciseRecords;
+@property (nonatomic,readonly)NSDate *currentDate;
+@property (nonatomic,readonly)NSString *currentDateString;
+
+- (void)queryExerciseRecordsWithDate:(NSDate *)date;
 
 @end

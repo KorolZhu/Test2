@@ -112,10 +112,12 @@
 
 - (void)pickerView:(SWPickerView *)pickerView didFinished:(NSString *)value {
     if (pickerView == _stepPickerView) {
-        [_model saveStepsTarget:value.integerValue];
+        if ([[SWBLECenter shareInstance] setStepTargets:value.integerValue]) {
+            [_model saveStepsTarget:value.integerValue];
+            [self.tableView reloadData];
+        }
     }
     
-    [self.tableView reloadData];
     
     [pickerView hideFromView:self.view];
 }

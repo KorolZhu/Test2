@@ -16,7 +16,6 @@
 
 @interface SWExerciseRecordsModel ()
 {
-	long long currentDateymd;
 }
 
 @end
@@ -36,13 +35,12 @@
 	return self;
 }
 
-- (void)queryExerciseRecords {
+- (void)queryExerciseRecordsWithDate:(NSDate *)date {
 	//
 	[[GCDQueue globalQueue] queueBlock:^{
-		NSString *date = [[NSDate date] stringWithFormat:@"yyyyMMdd"];
-		currentDateymd = [date longLongValue];
-        
-        currentDateymd = 20141212;
+        _currentDate = date;
+		_currentDateString = [_currentDate stringWithFormat:@"yyyyMMdd"];
+		long long currentDateymd = [_currentDateString longLongValue];
 		
 		WBSQLBuffer *sqlBuffer = [[WBSQLBuffer alloc] init];
 		sqlBuffer.SELECT(@"*").FROM(DBDAILYSTEPS._tableName).WHERE([NSString stringWithFormat:@"%@=%@", DBDAILYSTEPS._DATEYMD, @(currentDateymd).stringValue]);
@@ -91,7 +89,7 @@
             
             _totalDistance = tempTotalSteps * [[SWUserInfo shareInstance] height] * 0.45 * 0.01 * 0.001;
             
-            _totalCalorie = tempTotalCalorie / 1000;
+            _totalCalorie = tempTotalCalorie;
             _caloriePercent = tempTotalCalorie / [[SWSettingInfo shareInstance] calorieTarget];
             _caloriePercentString = [NSString stringWithFormat:@"%d%%", (int)(_caloriePercent * 100)];
             _daylightActivitytime = tempTotalActivityTime;
@@ -105,7 +103,7 @@
 }
 
 - (void)bleDataReadCompletion {
-	[self queryExerciseRecords];
+	[self queryExerciseRecordsWithDate:_currentDate];
 }
 
 @end

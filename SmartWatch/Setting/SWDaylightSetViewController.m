@@ -120,8 +120,11 @@
 #pragma mark - SWPickerView2Delegate
 
 - (void)pickerView2:(SWPickerView2 *)pickerView didFinishedWithValue1:(NSString *)value1 value2:(NSString *)value2 {
-    [self.model saveDaylightTimeWithStartHour:value1.integerValue endHour:value2.integerValue];
-    [self.tableView reloadData];
+    if ([[SWBLECenter shareInstance] setDaylightWithStartHour:value1.integerValue endHour:value2.integerValue]) {
+        [self.model saveDaylightTimeWithStartHour:value1.integerValue endHour:value2.integerValue];
+        [self.tableView reloadData];
+    }
+    
     [pickerView hideFromView:self.view];
     self.tableView.userInteractionEnabled = YES;
 }

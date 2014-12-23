@@ -191,7 +191,7 @@
 #pragma mark - Text field delegate
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-    if (!datePicker.hidden) {
+    if (datePicker && !datePicker.hidden) {
         return NO;
     }
     
@@ -221,7 +221,7 @@
 #pragma mark - Action sheet
 
 - (void)headImageTap {
-    if (!datePicker.hidden) {
+    if (datePicker && !datePicker.hidden) {
         return;
     }
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
@@ -316,15 +316,18 @@
 
 - (void)pickerView:(SWPickerView *)pickerView didFinished:(NSString *)value {
     if (pickerView == sexPickerView) {
-        if ([value isEqualToString:@"男"]) {
-            [model saveSex:1];
-        } else {
-            [model saveSex:0];
-         }
+        NSInteger sex = [value isEqualToString:@"男"] ? 1 : 0;
+        if ([[SWBLECenter shareInstance] setUserInfoWithHeight:[SWUserInfo shareInstance].height weight:[SWUserInfo shareInstance].weight sex:sex]) {
+            [model saveSex:sex];
+        }
     } else if (pickerView == heightPickerView) {
-        [model saveHeight:value.integerValue];
+        if ([[SWBLECenter shareInstance] setUserInfoWithHeight:value.integerValue weight:[SWUserInfo shareInstance].weight sex:[SWUserInfo shareInstance].sex]) {
+            [model saveHeight:value.integerValue];
+        }
     } else if (pickerView == weightPickerView) {
-        [model saveWeight:value.integerValue];
+        if ([[SWBLECenter shareInstance] setUserInfoWithHeight:[SWUserInfo shareInstance].height weight:value.integerValue sex:[SWUserInfo shareInstance].sex]) {
+            [model saveWeight:value.integerValue];
+        }
     }
     
     [self.tableView reloadData];

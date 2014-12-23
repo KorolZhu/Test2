@@ -14,5 +14,6 @@
 #import "GCDObjC.h"
 #import "PureLayout.h"
 #import "BLE.h"
+#import "SWBLECenter.h"
 
 #endif

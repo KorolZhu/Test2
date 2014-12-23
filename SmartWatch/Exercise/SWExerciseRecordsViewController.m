@@ -19,6 +19,7 @@
 
 @interface SWExerciseRecordsViewController ()<BLEDelegate>
 {
+    UIButton *leftBarButton;
     SWExerciseRecordsTitleView *titleView;
     SWEnvironmentView *environmentView;
     SWCircleProgressView *progressView;
@@ -68,13 +69,21 @@
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"1背景-ios_02"]];
     
-    UIBarButtonItem *leftBtn = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"蓝牙"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(bleClick)];
+    leftBarButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    leftBarButton.frame = CGRectMake(0.0f, 0.0f, 44.0f, 44.0f);
+    [leftBarButton setImage:[UIImage imageNamed:@"蓝牙"] forState:UIControlStateNormal];
+    [leftBarButton addTarget:self action:@selector(bleClick) forControlEvents:UIControlEventTouchUpInside];
+    leftBarButton.titleLabel.font = [UIFont systemFontOfSize:13.0f];
+    leftBarButton.titleLabel.minimumScaleFactor = 10.f/13.0f;
+    UIBarButtonItem *leftBtn = [[UIBarButtonItem alloc] initWithCustomView:leftBarButton];
     self.navigationItem.leftBarButtonItem = leftBtn;
 
     UIBarButtonItem *rightBtn = [[UIBarButtonItem alloc] initWithImage:[[UIImage imageNamed:@"分享"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] style:UIBarButtonItemStylePlain target:self action:@selector(shareClick)];
     self.navigationItem.rightBarButtonItem = rightBtn;
     
     titleView = [[SWExerciseRecordsTitleView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 220.0f, 44.0f)];
+    [titleView.lastButton addTarget:self action:@selector(preDateClick) forControlEvents:UIControlEventTouchUpInside];
+    [titleView.nextButton addTarget:self action:@selector(nextDateClick) forControlEvents:UIControlEventTouchUpInside];
     titleView.date = [NSDate date];
     self.navigationItem.titleView = titleView;
     
@@ -109,7 +118,7 @@
     calorieGraphView.xAxisValues = @[@{@6 : @"6"},@{@12 : @"12"},@{@18 : @"18"},@{@24 : @"24"}];
     calorieGraphView.xIntervalCount = 24;
     calorieGraphView.xAxisDescription = @"时间";
-    calorieGraphView.yAxisRange = 1000.0;
+    calorieGraphView.yAxisRange = 100;
     calorieGraphView.yIntervalCount = 2;
     calorieGraphView.yAxisDescription = @"卡路里（千卡）";
 		
@@ -211,7 +220,8 @@
     
     [[SWBLECenter shareInstance] addObserver:self forKeyPath:@"state" options:NSKeyValueObservingOptionNew context:NULL];
     
-    [model queryExerciseRecords];
+    [model queryExerciseRecordsWithDate:[NSDate date]];
+    titleView.nextButton.enabled = NO;
 	
 }
 
@@ -220,11 +230,35 @@
 }
 
 - (void)bleClick {
-    [[SWBLECenter shareInstance] connectDevice];
+    if ([SWBLECenter shareInstance].state == SWPeripheralStateDisconnected) {
+        [[SWBLECenter shareInstance] connectDevice];
+    } else {
+        [[SWBLECenter shareInstance] disconnectDevice];
+    }
 }
 
 - (void)shareClick {
     [[SWShareKit sharedInstance] sendMessage:@"test" WithUrl:@"http://baidu.com" WithType:SWShareTypeWechatSession];
+}
+
+- (void)preDateClick {
+    NSDate *preDate = [model.currentDate dateByAddingTimeInterval:-24 * 3600];
+    [model queryExerciseRecordsWithDate:preDate];
+    [titleView setDate:preDate];
+    
+    if (!titleView.nextButton.enabled) {
+        titleView.nextButton.enabled = YES;
+    }
+}
+
+- (void)nextDateClick {
+    if ([[NSDate date] timeIntervalSinceDate:model.currentDate] < 2 * 24 * 3600) {
+        titleView.nextButton.enabled = NO;
+    }
+    
+    NSDate *nextDate = [model.currentDate dateByAddingTimeInterval:24 * 3600];
+    [model queryExerciseRecordsWithDate:nextDate];
+    [titleView setDate:nextDate];
 }
 
 - (void)curveButtonClick {
@@ -273,7 +307,7 @@
 		stepsGraphView.xAxisValues = @[@{@6 : @"6"},@{@12 : @"12"},@{@18 : @"18"},@{@24 : @"24"}];
 		stepsGraphView.xIntervalCount = 24;
 		stepsGraphView.xAxisDescription = @"时间";
-		stepsGraphView.yAxisRange = 30000.0f;
+		stepsGraphView.yAxisRange = 2000.0;
 		stepsGraphView.yIntervalCount = 2;
 		stepsGraphView.yAxisDescription = @"步数";
 		
@@ -392,15 +426,27 @@
         switch (state) {
             case SWPeripheralStateDisconnected: {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    self.navigationItem.leftBarButtonItem.enabled = YES;
+                    leftBarButton.enabled = YES;
+                    [leftBarButton setImage:[UIImage imageNamed:@"蓝牙"] forState:UIControlStateNormal];
+                    [leftBarButton setTitle:nil forState:UIControlStateNormal];
                 });
             }
                 break;
-                
+            case SWPeripheralStateConnected: {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    leftBarButton.enabled = YES;
+                    [leftBarButton setImage:nil forState:UIControlStateNormal];
+                    [leftBarButton setTitle:NSLocalizedString(@"已连接", nil) forState:UIControlStateNormal];
+                });
+            }
+                break;
             default: {
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    self.navigationItem.leftBarButtonItem.enabled = NO;
+                    leftBarButton.enabled = NO;
+                    [leftBarButton setImage:[UIImage imageNamed:@"蓝牙"] forState:UIControlStateNormal];
+                    [leftBarButton setTitle:nil forState:UIControlStateNormal];
                 });
+
             }
                 break;
         }

@@ -11,6 +11,7 @@
 #import "WBSQLBuffer.h"
 #import "SWSETTING.h"
 #import "SWSettingInfo.h"
+#import "SWAlarmInfo.h"
 
 @implementation SWSettingModel
 
@@ -41,6 +42,14 @@
     sqlBuffer.SET(DBSETTING._TARGETSTEP,@([[SWSettingInfo shareInstance] stepsTarget]));
     sqlBuffer.SET(DBSETTING._DAYTIMESTARTHOUR,@([SWSettingInfo shareInstance].startHour));
     sqlBuffer.SET(DBSETTING._DAYTIMEENDTHOUR,@([SWSettingInfo shareInstance].endHour));
+    
+    NSMutableArray *array = [NSMutableArray array];
+    for (SWAlarmInfo *info in [[SWSettingInfo shareInstance] alarmArray]) {
+        NSDictionary *dict = @{ALARMHOUR: @(info.hour), ALARMMINUTE: @(info.minute), ALARMSTATE : @(info.state), ALARMREPEAT: @(info.repeat)};
+        [array addObject:dict];
+    }
+    sqlBuffer.SET(DBSETTING._ALARM, [array jsonString]);
+    
     [mutableSqlBuffer addBuffer:sqlBuffer];
     
     WBDatabaseTransaction *transaction = [[WBDatabaseTransaction alloc] initWithMutalbeSQLBuffer:mutableSqlBuffer];
@@ -59,6 +68,31 @@
     [[SWSettingInfo shareInstance] setStartHour:startHour];
     [[SWSettingInfo shareInstance] setEndHour:endHour];
     [self updateToDB];
+}
+
+- (void)addNewAlarm:(SWAlarmInfo *)alarmInfo {
+    if (![SWSettingInfo shareInstance].alarmArray) {
+        [SWSettingInfo shareInstance].alarmArray = [NSMutableArray array];
+    }
+    
+    [[SWSettingInfo shareInstance] willChangeValueForKey:@"alarmArray"];
+    [[[SWSettingInfo shareInstance] alarmArray] removeAllObjects];
+    [[[SWSettingInfo shareInstance] alarmArray] addObject:alarmInfo];
+    [self updateToDB];
+    [[SWSettingInfo shareInstance] didChangeValueForKey:@"alarmArray"];
+}
+
+- (void)removeAlarm:(SWAlarmInfo *)alarmInfo {
+    [[SWSettingInfo shareInstance] willChangeValueForKey:@"alarmArray"];
+    [[[SWSettingInfo shareInstance] alarmArray] removeObject:alarmInfo];
+    [self updateToDB];
+    [[SWSettingInfo shareInstance] didChangeValueForKey:@"alarmArray"];
+}
+
+- (void)updateAlarmInfo {
+    [[SWSettingInfo shareInstance] willChangeValueForKey:@"alarmArray"];
+    [self updateToDB];
+    [[SWSettingInfo shareInstance] didChangeValueForKey:@"alarmArray"];
 }
 
 @end

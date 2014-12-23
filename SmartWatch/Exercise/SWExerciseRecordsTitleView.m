@@ -10,8 +10,6 @@
 
 @interface SWExerciseRecordsTitleView ()
 {
-    UIButton *lastButton;
-    UIButton *nextButton;
     UILabel *dateLabel;
 }
 
@@ -22,15 +20,17 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        lastButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [lastButton setImage:[UIImage imageNamed:@"日期左选择_正常"] forState:UIControlStateNormal];
-        [lastButton setImage:[UIImage imageNamed:@"日期左选择_禁用"] forState:UIControlStateDisabled];
-        [self addSubview:lastButton];
+        _lastButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_lastButton setImage:[UIImage imageNamed:@"日期左选择_正常"] forState:UIControlStateNormal];
+        [_lastButton setImage:[UIImage imageNamed:@"日期左选择_禁用"] forState:UIControlStateDisabled];
+        _lastButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+        [self addSubview:_lastButton];
         
-        nextButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [nextButton setImage:[UIImage imageNamed:@"日期右选择_正常"] forState:UIControlStateNormal];
-        [nextButton setImage:[UIImage imageNamed:@"日期右选择_禁用"] forState:UIControlStateDisabled];
-        [self addSubview:nextButton];
+        _nextButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        [_nextButton setImage:[UIImage imageNamed:@"日期右选择_正常"] forState:UIControlStateNormal];
+        [_nextButton setImage:[UIImage imageNamed:@"日期右选择_禁用"] forState:UIControlStateDisabled];
+        _nextButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+        [self addSubview:_nextButton];
         
         dateLabel = [[UILabel alloc] init];
         dateLabel.textAlignment = NSTextAlignmentCenter;
@@ -40,10 +40,12 @@
         [self addSubview:dateLabel];
         
         [dateLabel autoCenterInSuperview];
-        [lastButton autoAlignAxis:ALAxisHorizontal toSameAxisOfView:dateLabel];
-        [lastButton autoPinEdge:ALEdgeRight toEdge:ALEdgeLeft ofView:dateLabel withOffset:-5.0f];
-        [nextButton autoAlignAxis:ALAxisHorizontal toSameAxisOfView:dateLabel];
-        [nextButton autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:dateLabel withOffset:5.0f];
+        [_lastButton autoAlignAxis:ALAxisHorizontal toSameAxisOfView:dateLabel];
+        [_lastButton autoPinEdge:ALEdgeRight toEdge:ALEdgeLeft ofView:dateLabel withOffset:-5.0f];
+        [_lastButton autoSetDimension:ALDimensionWidth toSize:35.0f];
+        [_nextButton autoAlignAxis:ALAxisHorizontal toSameAxisOfView:dateLabel];
+        [_nextButton autoPinEdge:ALEdgeLeft toEdge:ALEdgeRight ofView:dateLabel withOffset:5.0f];
+        [_nextButton autoSetDimension:ALDimensionWidth toSize:35.0f];
         
     }
     
@@ -53,7 +55,7 @@
 - (void)setDate:(NSDate *)date {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy年MM月dd日"];
-    dateLabel.text = [dateFormatter stringFromDate:[NSDate date]];
+    dateLabel.text = [dateFormatter stringFromDate:date];
     
     [self setNeedsLayout];
 }

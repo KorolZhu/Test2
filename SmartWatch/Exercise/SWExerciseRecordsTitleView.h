@@ -11,7 +11,7 @@
 @interface SWExerciseRecordsTitleView : UIView
 
 @property (nonatomic, strong) NSDate *date;
-@property (nonatomic) BOOL lastEnable;
-@property (nonatomic) BOOL nextEnable;
+@property (nonatomic, strong) UIButton *lastButton;
+@property (nonatomic, strong) UIButton *nextButton;;
 
 @end

@@ -11,6 +11,8 @@
 
 extern NSString *const kSWBLEDataReadCompletionNotification;
 
+@class SWAlarmInfo;
+
 typedef NS_ENUM(NSInteger, SWPeripheralState) {
     SWPeripheralStateDisconnected = 0,
     SWPeripheralStateConnecting,
@@ -22,12 +24,17 @@ typedef NS_ENUM(NSInteger, SWPeripheralState) {
 
 SW_AS_SINGLETON(SWBLECenter, shareInstance);
 
-@property(readonly) SWPeripheralState state;
+@property(nonatomic) SWPeripheralState state;
+@property (strong, readonly) CBPeripheral *activePeripheral;
 
 - (void)connectDevice;
 - (void)disconnectDevice;
 
-- (void)setDaylightWithStartHour:(NSInteger)startHour endHour:(NSInteger)endHour;
-- (void)setAlarm;
+- (BOOL)setDaylightWithStartHour:(NSInteger)startHour endHour:(NSInteger)endHour;
+- (BOOL)setAlarmWithAlarmInfo:(SWAlarmInfo *)alarmInfo;
+- (BOOL)setStepTargets:(NSInteger)steps;
+- (BOOL)setUserInfoWithHeight:(NSInteger)height
+                       weight:(NSInteger)weight
+                          sex:(NSInteger)sex;
 
 @end

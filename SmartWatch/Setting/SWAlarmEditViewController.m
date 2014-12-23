@@ -8,6 +8,8 @@
 
 #import "SWAlarmEditViewController.h"
 #import "SWAlarmInfo.h"
+#import "SWSettingInfo.h"
+#import "SWSettingModel.h"
 
 static NSString *alarmEditCellIdentifier = @"alarmEditCellIdentifier";
 
@@ -85,11 +87,25 @@ static NSString *alarmEditCellIdentifier = @"alarmEditCellIdentifier";
     NSInteger hour = [comps hour];
     NSInteger minute = [comps minute];
     
-    SWAlarmInfo *alarmInfo = [[SWAlarmInfo alloc] init];
-    alarmInfo.hour = hour;
-    alarmInfo.minute = minute;
-    alarmInfo.state = 1;
-    alarmInfo.repeat = repeat;
+    if (!self.alarmInfo) {
+        SWAlarmInfo *alarmInfo = [[SWAlarmInfo alloc] init];
+        alarmInfo.hour = hour;
+        alarmInfo.minute = minute;
+        alarmInfo.state = 1;
+        alarmInfo.repeat = repeat;
+        if ([[SWBLECenter shareInstance] setAlarmWithAlarmInfo:alarmInfo]) {
+            [self.model addNewAlarm:alarmInfo];
+            [self dismissViewControllerAnimated:YES completion:NULL];
+        }
+    } else {
+        self.alarmInfo.hour = hour;
+        self.alarmInfo.minute = minute;
+        self.alarmInfo.repeat = repeat;
+        if ([[SWBLECenter shareInstance] setAlarmWithAlarmInfo:self.alarmInfo]) {
+            [self.model updateAlarmInfo];
+            [self dismissViewControllerAnimated:YES completion:NULL];
+        }
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

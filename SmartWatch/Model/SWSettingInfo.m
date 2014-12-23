@@ -22,12 +22,11 @@ SW_DEF_SINGLETON(SWSettingInfo, shareInstance);
     NSString *string = [dictionary stringForKey:DBSETTING._ALARM];
     NSArray *array = [string jsonValue];
     NSMutableArray *mutableArray = [NSMutableArray array];
-    for (NSString *string in array) {
-        NSDictionary *dict = [string jsonValue];
+    for (NSDictionary *dict in array) {
         SWAlarmInfo *info = [[SWAlarmInfo alloc] initWithDictionary:dict];
         [mutableArray addObject:info];
     }
-    self.alarmArray = [NSArray arrayWithArray:mutableArray];
+    self.alarmArray = mutableArray;
 }
 
 - (float)calorieTarget {

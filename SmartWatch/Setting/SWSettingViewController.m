@@ -11,6 +11,7 @@
 #import "SWDaylightSetViewController.h"
 #import "SWSettingModel.h"
 #import "SWAlarmSetViewController.h"
+#import "SWDeviceConnectdViewController.h"
 
 @interface SWSettingViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
@@ -63,7 +64,8 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 6;
+//    return 6;
+    return 5;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -89,10 +91,12 @@
     } else if (indexPath.row == 3) {
         cell.imageView.image = [UIImage imageNamed:@"4设置_32"];
         cell.textLabel.text = @"目标设置";
-    } else if (indexPath.row == 4) {
-        cell.imageView.image = [UIImage imageNamed:@"4设置_37"];
-        cell.textLabel.text = @"遥控拍照";
-    } else if (indexPath.row == 5) {
+    }
+//    else if (indexPath.row == 4) {
+//        cell.imageView.image = [UIImage imageNamed:@"4设置_37"];
+//        cell.textLabel.text = @"遥控拍照";
+//    }
+    else if (indexPath.row == 4) {
         cell.imageView.image = [UIImage imageNamed:@"4设置_41"];
         cell.textLabel.text = @"关于我们";
     }
@@ -105,7 +109,11 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 1) {
+    if (indexPath.row == 0) {
+        SWDeviceConnectdViewController *viewController = [[SWDeviceConnectdViewController alloc] init];
+        viewController.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:viewController animated:YES];
+    } else if (indexPath.row == 1) {
         SWAlarmSetViewController *alarmViewController = [[SWAlarmSetViewController alloc] init];
         alarmViewController.model = model;
         [self.navigationController pushViewController:alarmViewController animated:YES];
@@ -118,10 +126,14 @@
         targetSetViewController.model = model;
         [self.navigationController pushViewController:targetSetViewController animated:YES];
         
-    } else if (indexPath.row == 4) {
-        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-        [imagePicker setSourceType:UIImagePickerControllerSourceTypeCamera];
-        [self presentViewController:imagePicker animated:YES completion:nil];
+    }
+//    else if (indexPath.row == 4) {
+//        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+//        [imagePicker setSourceType:UIImagePickerControllerSourceTypeCamera];
+//        [self presentViewController:imagePicker animated:YES completion:nil];
+//    }
+    else if (indexPath.row == 4) {
+        
     }
 }
 

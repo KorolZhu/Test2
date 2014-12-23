@@ -187,7 +187,7 @@ NSString *const kDotSizeKey                 = @"kDotSizeKey";
         yAxisLabel.textColor = [_themeAttributes objectForKey:kYAxisLabelColorKey];
         yAxisLabel.textAlignment = NSTextAlignmentCenter;
         float val = i * yIntervalValue;
-        yAxisLabel.text = [NSString stringWithFormat:@"%.1f%@", val, _yAxisSuffix.length == 0
+        yAxisLabel.text = [NSString stringWithFormat:@"%.0f%@", val, _yAxisSuffix.length == 0
                            ? @"" : _yAxisSuffix];
         [yAxisLabel sizeToFit];
         if (yAxisLabel.width > maxWidth) {

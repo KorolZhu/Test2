@@ -10,11 +10,14 @@
 #import "SWAlarmCell.h"
 #import "SWSettingInfo.h"
 #import "SWAlarmEditViewController.h"
+#import "SWSettingModel.h"
+#import "SWAlarmInfo.h"
 
 static NSString *alarmCellIdentifier = @"alarmCellIdentifier";
 
 @interface SWAlarmSetViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
+    UIBarButtonItem *rightBarButtonItem;
     UIButton *addButton;
     UILabel *addLabel;
 }
@@ -36,9 +39,15 @@ static NSString *alarmCellIdentifier = @"alarmCellIdentifier";
     return self;
 }
 
+- (void)dealloc {
+    [[SWSettingInfo shareInstance] removeObserver:self forKeyPath:@"alarmArray"];
+}
+
 - (void)viewDidLoad {
     UIBarButtonItem *backButton = [UIBarButtonItem backItemWithTarget:self action:@selector(backClick)];
     self.navigationItem.leftBarButtonItem = backButton;
+    rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editClick)];
+    self.navigationItem.rightBarButtonItem = rightBarButtonItem;
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"4背景-ios_01"] forBarMetrics:UIBarMetricsDefault];
     
@@ -65,6 +74,7 @@ static NSString *alarmCellIdentifier = @"alarmCellIdentifier";
     [addButton autoAlignAxisToSuperviewAxis:ALAxisVertical];
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+    _tableView.allowsSelectionDuringEditing = YES;
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.backgroundColor = [UIColor clearColor];
@@ -79,14 +89,39 @@ static NSString *alarmCellIdentifier = @"alarmCellIdentifier";
     UIView *footView = [[UIView alloc] init];
     footView.backgroundColor = [UIColor clearColor];
     self.tableView.tableFooterView = footView;
+    
+    [[SWSettingInfo shareInstance] addObserver:self forKeyPath:@"alarmArray" options:NSKeyValueObservingOptionNew context:NULL];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if ([keyPath isEqual:@"alarmArray"]) {
+        if ([NSThread isMainThread]) {
+            [self.tableView reloadData];
+        } else {
+            [[GCDQueue mainQueue] queueBlock:^{
+                [self.tableView reloadData];
+            }];
+        }
+    }
 }
 
 - (void)backClick {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (void)editClick {
+    [self.tableView setEditing:!self.tableView.editing animated:YES];
+
+    if (self.tableView.isEditing) {
+        rightBarButtonItem.title = @"取消";
+    } else {
+        rightBarButtonItem.title = @"编辑";
+    }
+}
+
 - (void)addButtonClick {
     SWAlarmEditViewController *viewController = [[SWAlarmEditViewController alloc]init];
+    viewController.model = self.model;
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:viewController];
     [self presentViewController:nav animated:YES completion:NULL];
 }
@@ -96,6 +131,9 @@ static NSString *alarmCellIdentifier = @"alarmCellIdentifier";
     UITouch *touch = [touches anyObject];
     CGPoint currentTouchPosition = [touch locationInView:self.tableView];
     NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint:currentTouchPosition];
+    SWAlarmInfo *info = [[[SWSettingInfo shareInstance] alarmArray] objectAtIndex:indexPath.row];
+    info.state = stateSwitch.on;
+    [self.model updateAlarmInfo];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -107,6 +145,35 @@ static NSString *alarmCellIdentifier = @"alarmCellIdentifier";
     [cell.stateSwitch addTarget:self action:@selector(switchChanged:event:) forControlEvents:UIControlEventValueChanged];
     cell.alarmInfo = [[SWSettingInfo shareInstance].alarmArray objectAtIndex:indexPath.row];
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 70.0f;
+}
+
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (!tableView.isEditing) {
+        return nil;
+    }
+    
+    return indexPath;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    SWAlarmEditViewController *viewController = [[SWAlarmEditViewController alloc]init];
+    viewController.model = self.model;
+    viewController.alarmInfo = [[[SWSettingInfo shareInstance] alarmArray] objectAtIndex:indexPath.row];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:viewController];
+    [self presentViewController:nav animated:YES completion:NULL];
+}
+
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        SWAlarmInfo *info = [[[SWSettingInfo shareInstance] alarmArray] objectAtIndex:indexPath.row];
+        [self.model removeAlarm:info];
+    }
 }
 
 @end
