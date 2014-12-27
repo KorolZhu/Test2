@@ -22,7 +22,7 @@
 - (void)respondSelectorOnMainThread:(SEL)selector {
 	if ([self.responder respondsToSelector:selector]) {
 		if ([NSThread isMainThread]) {
-			NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[self methodSignatureForSelector:selector]];
+			NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[self.responder methodSignatureForSelector:selector]];
 			invocation.target = self.responder;
 			invocation.selector = selector;
 			[invocation invoke];

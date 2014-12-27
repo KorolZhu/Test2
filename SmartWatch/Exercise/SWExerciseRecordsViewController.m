@@ -393,10 +393,23 @@
         dashboardView.value2 = @(24 - model.daylightActivitytime).stringValue;
         dashboardView.unit2 = @"小时";
         dashboardView.descri2 = @"非活动";
+        dashboardView.unit3 = @"小时";
         dashboardView.value3 = model.stepsPercentString;
         dashboardView.descri3 = @"步数";
     } else {
-        
+        progressView.topDesc = NSLocalizedString(@"今日", nil);
+        progressView.bottomDesc = NSLocalizedString(@"睡眠", nil);
+        progressView.progress = (model.deepSleepHour + model.lightSleepHour) / 7.0f;
+        progressView.valueString = [NSString stringWithFormat:@"%@h", @(model.deepSleepHour + model.lightSleepHour).stringValue];
+        dashboardView.value1 = @(model.deepSleepHour).stringValue;
+        dashboardView.unit1 = @"小时";
+        dashboardView.descri1 = @"深睡";
+        dashboardView.value2 = @(model.lightSleepHour).stringValue;
+        dashboardView.unit2 = @"小时";
+        dashboardView.descri2 = @"浅睡";
+        dashboardView.unit3 = @"小时";
+        dashboardView.value3 = @(model.nightActivityHour).stringValue;
+        dashboardView.descri3 = @"活动";
     }
     
 }

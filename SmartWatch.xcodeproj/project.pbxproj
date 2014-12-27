@@ -19,6 +19,7 @@
 		CE44E28E1A2F79DF0081F09E /* SWHeadImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE44E28B1A2F79DF0081F09E /* SWHeadImageCell.m */; };
 		CE44E28F1A2F79DF0081F09E /* SWProfileInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE44E28D1A2F79DF0081F09E /* SWProfileInfoCell.m */; };
 		CE44E2921A2F79ED0081F09E /* SWProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE44E2911A2F79ED0081F09E /* SWProfileViewController.m */; };
+		CE4CCEEE1A4EBD9400C53E56 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4CCEED1A4EBD9400C53E56 /* MBProgressHUD.m */; };
 		CE61B5EA1A3BF78100B18811 /* UITableViewCell+SW.m in Sources */ = {isa = PBXBuildFile; fileRef = CE61B5E91A3BF78100B18811 /* UITableViewCell+SW.m */; };
 		CE61B5ED1A3C016500B18811 /* SWUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = CE61B5EC1A3C016500B18811 /* SWUserInfo.m */; };
 		CE61B5F01A3C022100B18811 /* SWProfileModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE61B5EF1A3C022100B18811 /* SWProfileModel.m */; };
@@ -196,6 +197,8 @@
 		CE44E28D1A2F79DF0081F09E /* SWProfileInfoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWProfileInfoCell.m; sourceTree = "<group>"; };
 		CE44E2901A2F79ED0081F09E /* SWProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWProfileViewController.h; sourceTree = "<group>"; };
 		CE44E2911A2F79ED0081F09E /* SWProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWProfileViewController.m; sourceTree = "<group>"; };
+		CE4CCEEC1A4EBD9400C53E56 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
+		CE4CCEED1A4EBD9400C53E56 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
 		CE61B5E81A3BF78100B18811 /* UITableViewCell+SW.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableViewCell+SW.h"; sourceTree = "<group>"; };
 		CE61B5E91A3BF78100B18811 /* UITableViewCell+SW.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableViewCell+SW.m"; sourceTree = "<group>"; };
 		CE61B5EB1A3C016500B18811 /* SWUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWUserInfo.h; sourceTree = "<group>"; };
@@ -484,6 +487,15 @@
 				CE61B5EF1A3C022100B18811 /* SWProfileModel.m */,
 			);
 			path = Profile1;
+			sourceTree = "<group>";
+		};
+		CE4CCEEB1A4EBD9400C53E56 /* MBProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				CE4CCEEC1A4EBD9400C53E56 /* MBProgressHUD.h */,
+				CE4CCEED1A4EBD9400C53E56 /* MBProgressHUD.m */,
+			);
+			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
 		CE7EE0391A20E5E2006F3294 /* Resource */ = {
@@ -859,6 +871,7 @@
 		CEE0D82D1A1884D000CE643C /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				CE4CCEEB1A4EBD9400C53E56 /* MBProgressHUD */,
 				CEE0D8501A1888CF00CE643C /* PureLayout */,
 				CEE0D8471A1888CF00CE643C /* GCDObjC */,
 				CEE0D82E1A1884EF00CE643C /* WeChat */,
@@ -1229,6 +1242,7 @@
 				CEAA01D91A35E3190047BAF2 /* WBSQLBuffer.m in Sources */,
 				CE91789C1A406EC300A80136 /* SWAlarmEditViewController.m in Sources */,
 				CE7EE13B1A20F946006F3294 /* SWExerciseRecordsTitleView.m in Sources */,
+				CE4CCEEE1A4EBD9400C53E56 /* MBProgressHUD.m in Sources */,
 				CE61B6021A3C2D5600B18811 /* SWPickerView.m in Sources */,
 				CEAA01DE1A35E4FE0047BAF2 /* NSString+SW.m in Sources */,
 				CE44E28E1A2F79DF0081F09E /* SWHeadImageCell.m in Sources */,

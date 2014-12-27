@@ -13,30 +13,38 @@
 @property (nonatomic,readonly) NSDictionary *dayCalorieDictionary;
 @property (nonatomic,readonly) NSDictionary *dayStepsDictionary;
 @property (nonatomic,readonly) long dayTotalSteps;
-@property (nonatomic,readonly) float daytotalDistance;
+@property (nonatomic,readonly) float dayStepsPercent;
 @property (nonatomic,readonly) long dayTotalCalorie;
+@property (nonatomic,readonly) float dayCaloriePercent;
+@property (nonatomic,readonly) float dayTotalSleep;
 
 @property (nonatomic,readonly) NSDictionary *weekCalorieDictionary;
 @property (nonatomic,readonly) NSDictionary *weekStepsDictionary;
-@property (nonatomic,readonly) long weekTotalSteps;
-@property (nonatomic,readonly) float weekTotalDistance;
-@property (nonatomic,readonly) long weekTotalCalorie;
+@property (nonatomic,readonly) long weekStepsPerday;
+@property (nonatomic,readonly) float weekStepsPercent;
+@property (nonatomic,readonly) long weekCaloriePerday;
+@property (nonatomic,readonly) float weekCaloriePercent;
+@property (nonatomic,readonly) float weekSleepPerday;
 
 @property (nonatomic,readonly) NSDictionary *monthCalorieDictionary;
 @property (nonatomic,readonly) NSDictionary *monthStepsDictionary;
-@property (nonatomic,readonly) long monthTotalSteps;
-@property (nonatomic,readonly) float monthTotalDistance;
-@property (nonatomic,readonly) long monthTotalCalorie;
+@property (nonatomic,readonly) long monthStepsPerday;
+@property (nonatomic,readonly) float monthStepsPercent;
+@property (nonatomic,readonly) long monthCaloriePerday;
+@property (nonatomic,readonly) float monthCaloriePercent;
+@property (nonatomic,readonly) float monthSleepPerday;
 
 @property (nonatomic,readonly) NSDictionary *yearCalorieDictionary;
 @property (nonatomic,readonly) NSDictionary *yearStepsDictionary;
-@property (nonatomic,readonly) long yearTotalSteps;
-@property (nonatomic,readonly) float yearTotalDistance;
-@property (nonatomic,readonly) long yearTotalCalorie;
+@property (nonatomic,readonly) long yearStepsPerday;
+@property (nonatomic,readonly) float yearStepsPercent;
+@property (nonatomic,readonly) long yearCaloriePerday;
+@property (nonatomic,readonly) float yearCaloriePercent;
+@property (nonatomic,readonly) float yearSleepPerday;
 
-- (void)queryDailyReport;
-- (void)queryWeeklyReport;
-- (void)queryMonthlyReport;
-- (void)queryAnnualReport;
+- (BOOL)queryDailyReport;
+- (BOOL)queryWeeklyReport;
+- (BOOL)queryMonthlyReport;
+- (BOOL)queryAnnualReport;
 
 @end
