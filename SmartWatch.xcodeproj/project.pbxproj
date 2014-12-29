@@ -159,6 +159,7 @@
 		CEE0D85D1A1888CF00CE643C /* ALView+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D8521A1888CF00CE643C /* ALView+PureLayout.m */; };
 		CEE0D85E1A1888CF00CE643C /* NSArray+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D8541A1888CF00CE643C /* NSArray+PureLayout.m */; };
 		CEE0D85F1A1888CF00CE643C /* NSLayoutConstraint+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D8561A1888CF00CE643C /* NSLayoutConstraint+PureLayout.m */; };
+		CEE2245C1A519D20004D1965 /* SWAccessoryPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE2245B1A519D20004D1965 /* SWAccessoryPickerView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -409,6 +410,8 @@
 		CEE0D8651A188D1500CE643C /* SmartWatch_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SmartWatch_Prefix.pch; sourceTree = "<group>"; };
 		CEE0D8661A188E1500CE643C /* SWSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWSingleton.h; sourceTree = "<group>"; };
 		CEE0D8671A1891BB00CE643C /* SWShareConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWShareConstant.h; sourceTree = "<group>"; };
+		CEE2245A1A519D20004D1965 /* SWAccessoryPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWAccessoryPickerView.h; sourceTree = "<group>"; };
+		CEE2245B1A519D20004D1965 /* SWAccessoryPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWAccessoryPickerView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -469,6 +472,8 @@
 				CE61B6011A3C2D5600B18811 /* SWPickerView.m */,
 				CE61B6151A3C58A700B18811 /* SWPickerView2.h */,
 				CE61B6161A3C58A700B18811 /* SWPickerView2.m */,
+				CEE2245A1A519D20004D1965 /* SWAccessoryPickerView.h */,
+				CEE2245B1A519D20004D1965 /* SWAccessoryPickerView.m */,
 			);
 			name = SWUIKit;
 			path = SmartWatch/SWUIKit;
@@ -1257,6 +1262,7 @@
 				CEAA01D61A35E3190047BAF2 /* WBDatabaseResultSet.m in Sources */,
 				CE61B5F01A3C022100B18811 /* SWProfileModel.m in Sources */,
 				CE61B5F31A3C02DB00B18811 /* SWPROFILE.m in Sources */,
+				CEE2245C1A519D20004D1965 /* SWAccessoryPickerView.m in Sources */,
 				CE7EE14F1A21D7DE006F3294 /* SWEnvironmentView.m in Sources */,
 				CEAA01E11A35E56E0047BAF2 /* WBPath.m in Sources */,
 				CEE0D7FA1A18793500CE643C /* AppDelegate.m in Sources */,

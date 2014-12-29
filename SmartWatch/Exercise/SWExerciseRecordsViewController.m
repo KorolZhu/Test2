@@ -16,8 +16,9 @@
 #import "SWPlot.h"
 #import "SWBLECenter.h"
 #import "SWExerciseRecordsModel.h"
+#import "SWAccessoryPickerView.h"
 
-@interface SWExerciseRecordsViewController ()<BLEDelegate>
+@interface SWExerciseRecordsViewController ()<BLEDelegate,SWAccessoryPickerViewDelegate>
 {
     UIButton *leftBarButton;
     SWExerciseRecordsTitleView *titleView;
@@ -35,6 +36,8 @@
     SWPlot *stepsPlot;
     SWPlot *sleepPlot;
 	SWExerciseRecordsModel *model;
+    
+    SWAccessoryPickerView *accessoryPickerView;
 }
 
 @property (nonatomic,strong) UIScrollView *scrollView;
@@ -231,10 +234,32 @@
 
 - (void)bleClick {
     if ([SWBLECenter shareInstance].state == SWPeripheralStateDisconnected) {
-        [[SWBLECenter shareInstance] connectDevice];
+        if (!accessoryPickerView) {
+            accessoryPickerView = [[SWAccessoryPickerView alloc] initWithFrame:CGRectMake(22.0f, 100.0f, IPHONE_WIDTH - 44.0f, IPHONE_HEIGHT - 200.0f)];
+            accessoryPickerView.title = NSLocalizedString(@"请选择蓝牙设备", nil);
+            accessoryPickerView.delegate = self;
+        }
+        
+        [accessoryPickerView show];
+        [accessoryPickerView setDataSource:nil];
+        [[SWBLECenter shareInstance] scanBLEPeripherals];
+        [[SWBLECenter shareInstance].ble addObserver:self forKeyPath:@"peripherals" options: NSKeyValueObservingOptionNew context:NULL];
     } else {
         [[SWBLECenter shareInstance] disconnectDevice];
     }
+}
+
+- (void)accessoryPickerView:(SWAccessoryPickerView *)pickerView didSelectPeripheral:(CBPeripheral *)peripheral {
+    [[SWBLECenter shareInstance].ble removeObserver:self forKeyPath:@"peripherals"];
+    [[SWBLECenter shareInstance] stopScanBLEPeripherals];
+    [accessoryPickerView hide];
+    [[SWBLECenter shareInstance] connectPeripheral:peripheral];
+}
+
+- (void)accessoryPickerViewDidCancel:(SWAccessoryPickerView *)pickerView {
+    [[SWBLECenter shareInstance].ble removeObserver:self forKeyPath:@"peripherals"];
+    [[SWBLECenter shareInstance] stopScanBLEPeripherals];
+    [accessoryPickerView hide];
 }
 
 - (void)shareClick {
@@ -463,6 +488,12 @@
             }
                 break;
         }
+    } else if ([keyPath isEqualToString:@"peripherals"]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (accessoryPickerView.isVisible) {
+                accessoryPickerView.dataSource = [NSArray arrayWithArray:[SWBLECenter shareInstance].ble.peripherals];
+            }
+        });
     }
 }
 

@@ -24,9 +24,14 @@ typedef NS_ENUM(NSInteger, SWPeripheralState) {
 
 SW_AS_SINGLETON(SWBLECenter, shareInstance);
 
+@property (nonatomic,readonly) BLE *ble;
 @property(nonatomic) SWPeripheralState state;
 @property (strong, readonly) CBPeripheral *activePeripheral;
 
+- (void)scanBLEPeripherals;
+- (void)stopScanBLEPeripherals;
+
+- (void)connectPeripheral:(CBPeripheral *)eripheral;
 - (void)connectDevice;
 - (void)disconnectDevice;
 

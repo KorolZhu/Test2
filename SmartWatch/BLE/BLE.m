@@ -199,6 +199,27 @@ static int rssi = 0;
     return 0; // Started scanning OK !
 }
 
+- (int)findBLEPeripherals {
+    if (self.CM.state != CBCentralManagerStatePoweredOn)
+    {
+        NSLog(@"CoreBluetooth not correctly initialized !");
+        NSLog(@"State = %d (%s)\r\n", (int)self.CM.state, [self centralManagerStateToString:self.CM.state]);
+        return -1;
+    }
+    
+    [self.peripherals removeAllObjects];
+    
+#if TARGET_OS_IPHONE
+    [self.CM scanForPeripheralsWithServices:[NSArray arrayWithObject:[CBUUID UUIDWithString:WRISTBAND_SERVICE_UUID]] options:nil];
+#else
+    [self.CM scanForPeripheralsWithServices:nil options:nil]; // Start scanning
+#endif
+    
+    NSLog(@"scanForPeripheralsWithServices");
+    
+    return 0; // Started scanning OK !
+}
+
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error;
 {
     [[self delegate] bleDidDisconnect];
@@ -418,8 +439,11 @@ static int rssi = 0;
 
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
-    if (!self.peripherals)
+    if (!self.peripherals) {
+        [self willChangeValueForKey:@"peripherals"];
         self.peripherals = [[NSMutableArray alloc] initWithObjects:peripheral,nil];
+        [self didChangeValueForKey:@"peripherals"];
+    }
     else
     {
         for(int i = 0; i < self.peripherals.count; i++)
@@ -431,13 +455,17 @@ static int rssi = 0;
             
             if ([self UUIDSAreEqual:p.identifier UUID2:peripheral.identifier])
             {
+                [self willChangeValueForKey:@"peripherals"];
                 [self.peripherals replaceObjectAtIndex:i withObject:peripheral];
+                [self didChangeValueForKey:@"peripherals"];
                 NSLog(@"Duplicate UUID found updating...");
                 return;
             }
         }
         
+        [self willChangeValueForKey:@"peripherals"];
         [self.peripherals addObject:peripheral];
+        [self didChangeValueForKey:@"peripherals"];
         
         NSLog(@"New UUID, adding");
     }

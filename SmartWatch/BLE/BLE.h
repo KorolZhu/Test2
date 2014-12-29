@@ -47,6 +47,7 @@
 
 -(void) controlSetup;
 -(int) findBLEPeripherals:(int) timeout;
+-(int) findBLEPeripherals;
 -(void) connectPeripheral:(CBPeripheral *)peripheral;
 
 -(UInt16) swap:(UInt16) s;

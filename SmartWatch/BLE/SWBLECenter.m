@@ -28,8 +28,6 @@ NSString *const kSWBLEDataReadCompletionNotification = @"kSWBLEDataReadCompletio
 	int activitystartHour;
 }
 
-@property (nonatomic,strong) BLE *ble;
-
 @end
 
 @implementation SWBLECenter
@@ -39,12 +37,25 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
 - (instancetype)init {
     self = [super init];
     if (self) {
-        self.ble = [[BLE alloc] init];
+        _ble = [[BLE alloc] init];
         [self.ble controlSetup];
         self.ble.delegate = self;
     }
     
     return self;
+}
+
+- (void)scanBLEPeripherals {
+    [self.ble findBLEPeripherals];
+}
+
+- (void)stopScanBLEPeripherals {
+    [self.ble.CM stopScan];
+}
+
+- (void)connectPeripheral:(CBPeripheral *)eripheral {
+    self.state = SWPeripheralStateConnecting;
+    [self.ble connectPeripheral:[self.ble.peripherals objectAtIndex:0]];
 }
 
 - (void)connectDevice {
@@ -70,6 +81,10 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
         [self.ble.CM cancelPeripheralConnection:self.ble.activePeripheral];
         self.state = SWPeripheralStateDisConnecting;
     }
+}
+
+- (NSMutableArray *)peripherals {
+    return _ble.peripherals;
 }
 
 - (CBPeripheral *)activePeripheral {
@@ -129,6 +144,17 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
     return YES;
 }
 
+- (BOOL)getDaylightInfo {
+    if (![self isDeviceConnected]) {
+        return NO;
+    }
+    
+    UInt8 buf[] = {BLE_CMD_GET_DAYMODE_REQUEST};
+    NSData *data = [[NSData alloc] initWithBytes:buf length:1];
+    [self.ble write:data];
+    return YES;
+}
+
 - (BOOL)setAlarmWithAlarmInfo:(SWAlarmInfo *)alarmInfo {
     if (![self isDeviceConnected]) {
         return NO;
@@ -151,6 +177,17 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
     [data appendBytes:buf length:2];
     [data appendBytes:&steps length:2];
     
+    [self.ble write:data];
+    return YES;
+}
+
+- (BOOL)getStepsTarget {
+    if (![self isDeviceConnected]) {
+        return NO;
+    }
+    
+    UInt8 buf[] = {BLE_CMD_SET_STEPTARGET_REQUEST, 0x00};
+    NSData *data = [[NSData alloc] initWithBytes:buf length:2];
     [self.ble write:data];
     return YES;
 }
@@ -252,7 +289,14 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
     }
 }
 
-- (void)handleSetDaymodeResponse:(NSData *)data {
+- (void)handleStepsTargetResponse:(NSData *)data {
+    if (data.length >= 20) {
+        UInt8 ret = 0;
+        [data getBytes:&ret range:NSMakeRange(1, 1)];
+    }
+}
+
+- (void)handleGetDaylightInfoResponse:(NSData *)data {
     if (data.length >= 20) {
         UInt8 ret = 0;
         [data getBytes:&ret range:NSMakeRange(1, 1)];
@@ -274,6 +318,8 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
     
     [self sendGetBatteryRequest];
     [self sendGetIndexRequest];
+    [self getDaylightInfo];
+    [self getStepsTarget];
     [self sendActivityCountRequest];
 //    [self sendSetDateTimeRequest];
 }
@@ -305,13 +351,13 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
                 [self handleGetActivityRequest:data];
                 break;
             case BLE_CMD_SET_DAY_TIME_RESPONSE:
-                
+                [self handleGetDaylightInfoResponse:data];
                 break;
             case BLE_CMD_SET_ALARM_RESPONSE:
                 [self handleSetAlarmResponse:data];
                 break;
             case BLE_CMD_SET_STEPTARGET_RESPONSE:
-                [self handleSetDaymodeResponse:data];
+                [self handleStepsTargetResponse:data];
                 break;
             case BLE_CMD_SET_BODY_RESPONSE:
                 [self handleSetUserInfoResponse:data];
