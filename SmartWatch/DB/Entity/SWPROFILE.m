@@ -40,4 +40,12 @@ SW_DEF_SINGLETON(SWPROFILE, shareInstant);
     return @"WEIGHT";
 }
 
+- (NSString *)_PHYSIOLOGICALDATESTRING {
+    return @"PHYSIOLOGICALDATESTRING";
+}
+
+- (NSString *)_PHYSIOLOGICALDAYS {
+    return @"PHYSIOLOGICALDAYS";
+}
+
 @end

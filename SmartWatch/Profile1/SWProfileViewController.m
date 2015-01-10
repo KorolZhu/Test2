@@ -30,6 +30,11 @@
     SWPickerView *weightPickerView;
     NSArray *weightPickerViewDataSource;
     
+    SWPickerView *physiologicalDaysPickerView;
+    NSArray *physiologicalDaysPickerViewDataSource;
+    
+    HTDatePicker *physiologicalDatePicker;
+    
     SWProfileModel *model;
 }
 
@@ -76,7 +81,10 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 5;
+    if ([SWUserInfo shareInstance].sex == 1) {
+        return 5;
+    }
+    return 7;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -113,6 +121,16 @@
     } else if (indexPath.row == 4) {
         cell.title = @"体重";
         cell.value = [NSString stringWithFormat:@"%@kg", @([[SWUserInfo shareInstance] weight]).stringValue];
+    } else if (indexPath.row == 5) {
+        cell.title = @"生理周期";
+        cell.value = [NSString stringWithFormat:@"%@天", @([[SWUserInfo shareInstance] physiologicalDays]).stringValue];
+    } else if (indexPath.row == 6) {
+        cell.title = @"生理日期";
+        if ([[SWUserInfo shareInstance] physiologicalDateString].length > 0) {
+            cell.value = [NSString stringWithFormat:@"%@", [[SWUserInfo shareInstance] physiologicalDateString]];
+        } else {
+            cell.value = @"";
+        }
     }
     
     return cell;
@@ -128,6 +146,10 @@
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (datePicker && !datePicker.hidden) {
+        return nil;
+    }
+    
+    if (physiologicalDatePicker && !physiologicalDatePicker.hidden) {
         return nil;
     }
     
@@ -185,6 +207,29 @@
             weightPickerView.dataSource = weightPickerViewDataSource;
         }
         [weightPickerView showFromView:self.view];
+    } else if (indexPath.row == 5) {
+        if (!physiologicalDaysPickerView) {
+            physiologicalDaysPickerView = [[SWPickerView alloc] init];
+            physiologicalDaysPickerView.hidden = YES;
+            physiologicalDaysPickerView.delegate = self;
+            
+            NSMutableArray *arr = [NSMutableArray array];
+            for (NSInteger i = 1; i <= 30; i++) {
+                [arr addObject:@(i).stringValue];
+            }
+            physiologicalDaysPickerViewDataSource = arr;
+            physiologicalDaysPickerView.titleSuffix = @"天";
+            physiologicalDaysPickerView.dataSource = physiologicalDaysPickerViewDataSource;
+        }
+        [physiologicalDaysPickerView showFromView:self.view];
+    } else if (indexPath.row == 6) {
+        if (!physiologicalDatePicker) {
+            physiologicalDatePicker = [[HTDatePicker alloc] initWithFrame:CGRectMake(0, self.view.height, IPHONE_WIDTH, 260) date:[NSDate date]];
+            physiologicalDatePicker.hidden = YES;
+            physiologicalDatePicker.delegate = self;
+            [self.view addSubview:physiologicalDatePicker];
+        }
+        [self showPhysiologicalDatePicker:YES];
     }
 }
 
@@ -192,6 +237,10 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     if (datePicker && !datePicker.hidden) {
+        return NO;
+    }
+    
+    if (physiologicalDatePicker && !physiologicalDatePicker.hidden) {
         return NO;
     }
     
@@ -224,6 +273,11 @@
     if (datePicker && !datePicker.hidden) {
         return;
     }
+    
+    if (physiologicalDatePicker && !physiologicalDatePicker.hidden) {
+        return;
+    }
+    
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
                                                              delegate:self
                                                     cancelButtonTitle:NSLocalizedString(@"取消",@"Cancel button text")
@@ -287,17 +341,29 @@
 
 #pragma mark - HTDatePickerDelegate
 
-- (void)datePickerCancel {
+- (void)datePickerCancel:(HTDatePicker *)datePicker {
     [self showDatePicker:NO];
 }
 
-- (void)datePickerFinished:(NSDate *)date {
-    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy/MM/dd"];
-    NSString *dateString = [dateFormatter stringFromDate:date];
-    [model saveBirthday:dateString];
-    [self showDatePicker:NO];
-    [self.tableView reloadData];
+- (void)datePickerFinished:(HTDatePicker *)datePic date:(NSDate *)date {
+    if (datePic == datePicker) {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy/MM/dd"];
+        NSString *dateString = [dateFormatter stringFromDate:date];
+        [model saveBirthday:dateString];
+        [self showDatePicker:NO];
+        [self.tableView reloadData];
+    } else if (datePic == physiologicalDatePicker) {
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy/MM/dd"];
+        NSString *dateString = [dateFormatter stringFromDate:date];
+        if ([[SWBLECenter shareInstance] setphysiologicalInfoWithDateymd:dateString physiologicalDay:[SWUserInfo shareInstance].physiologicalDays]) {
+            [model savePhysiologicalDate:dateString];
+        }
+        [self showPhysiologicalDatePicker:NO];
+        [self.tableView reloadData];
+    }
+    
 }
 
 - (void)showDatePicker:(BOOL)show {
@@ -308,6 +374,18 @@
     } completion:^(BOOL finished) {
         if (!show) {
             datePicker.hidden = YES;
+        }
+    }];
+}
+
+- (void)showPhysiologicalDatePicker:(BOOL)show {
+    self.tableView.userInteractionEnabled = show ? NO : YES;
+    physiologicalDatePicker.hidden = NO;
+    [UIView animateWithDuration:0.3 animations:^{
+        physiologicalDatePicker.top = show ? self.view.height - 260.0f: self.view.height;
+    } completion:^(BOOL finished) {
+        if (!show) {
+            physiologicalDatePicker.hidden = YES;
         }
     }];
 }
@@ -327,6 +405,10 @@
     } else if (pickerView == weightPickerView) {
         if ([[SWBLECenter shareInstance] setUserInfoWithHeight:[SWUserInfo shareInstance].height weight:value.integerValue sex:[SWUserInfo shareInstance].sex]) {
             [model saveWeight:value.integerValue];
+        }
+    } else if (pickerView == physiologicalDaysPickerView) {
+        if ([[SWBLECenter shareInstance] setphysiologicalInfoWithDateymd:[SWUserInfo shareInstance].physiologicalDateString physiologicalDay:value.integerValue]) {
+            [model savePhysiologicalDays:value.integerValue];
         }
     }
     

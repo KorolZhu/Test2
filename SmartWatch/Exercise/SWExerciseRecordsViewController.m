@@ -17,6 +17,7 @@
 #import "SWBLECenter.h"
 #import "SWExerciseRecordsModel.h"
 #import "SWAccessoryPickerView.h"
+#import <MapKit/MapKit.h>
 
 @interface SWExerciseRecordsViewController ()<BLEDelegate,SWAccessoryPickerViewDelegate>
 {
@@ -31,6 +32,7 @@
     SWLineGraphView *calorieGraphView;
     SWLineGraphView *stepsGraphView;
     SWLineGraphView *sleepGraphView;
+    SWLineGraphView *currentGraphView;
     
     SWPlot *caloriePlot;
     SWPlot *stepsPlot;
@@ -38,6 +40,8 @@
 	SWExerciseRecordsModel *model;
     
     SWAccessoryPickerView *accessoryPickerView;
+    
+    MKMapView *mapView;
 }
 
 @property (nonatomic,strong) UIScrollView *scrollView;
@@ -135,6 +139,8 @@
 	[calorieGraphView setupTheView];
 	[_scrollView addSubview:calorieGraphView];
 
+    currentGraphView = calorieGraphView;
+    
 //    SWPlot *plot = [[SWPlot alloc] init];
 //    plot.plottingValues = @[
 //                              @{ @6 : @20.0f },
@@ -292,6 +298,12 @@
     }
     curveButton.selected = YES;
     trackButton.selected = NO;
+    
+    if (mapView.superview) {
+        [mapView removeFromSuperview];
+    }
+    
+    currentGraphView.hidden = NO;
 }
 
 - (void)trackButtonClick {
@@ -300,7 +312,17 @@
     }
     curveButton.selected = NO;
     trackButton.selected = YES;
-
+    
+    if (!mapView) {
+        mapView = [[MKMapView alloc] initWithFrame:CGRectMake(12.0f, progressView.bottom + 10.0f, IPHONE_WIDTH - 24.0f, 166.0f)];
+        mapView.layer.cornerRadius = 3.5f;
+    }
+    
+    if (!mapView.superview) {
+        [_scrollView addSubview:mapView];
+    }
+    
+    currentGraphView.hidden = YES;
 }
 
 - (void)calorieButtonClick {
@@ -316,6 +338,9 @@
 	calorieGraphView.hidden = NO;
 	stepsGraphView.hidden = YES;
 	sleepGraphView.hidden = YES;
+    
+    currentGraphView = calorieGraphView;
+    [self curveButtonClick];
 }
 
 - (void)stepButtonClick {
@@ -353,6 +378,9 @@
 	calorieGraphView.hidden = YES;
 	stepsGraphView.hidden = NO;
 	sleepGraphView.hidden = YES;
+    
+    currentGraphView = stepsGraphView;
+    [self curveButtonClick];
 }
 
 - (void)sleepButtonClick {
@@ -390,6 +418,9 @@
 	calorieGraphView.hidden = YES;
 	stepsGraphView.hidden = YES;
 	sleepGraphView.hidden = NO;
+    
+    currentGraphView = sleepGraphView;
+    [self curveButtonClick];
 }
 
 - (void)reloadProgressData {

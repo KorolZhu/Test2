@@ -21,6 +21,7 @@ SW_AS_SINGLETON(SWPROFILE, shareInstant);
 @property (nonatomic,readonly)NSString *_BIRTHDAY;
 @property (nonatomic,readonly)NSString *_HEIGHT;
 @property (nonatomic,readonly)NSString *_WEIGHT;
-
+@property (nonatomic,readonly)NSString *_PHYSIOLOGICALDATESTRING;
+@property (nonatomic,readonly)NSString *_PHYSIOLOGICALDAYS;
 
 @end

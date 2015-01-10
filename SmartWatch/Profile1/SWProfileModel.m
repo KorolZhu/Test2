@@ -54,6 +54,8 @@
     sqlBuffer.SET(DBPROFILE._SEX,@([[SWUserInfo shareInstance] sex]));
     sqlBuffer.SET(DBPROFILE._HEIGHT,@([[SWUserInfo shareInstance] height]));
     sqlBuffer.SET(DBPROFILE._WEIGHT,@([[SWUserInfo shareInstance] weight]));
+    sqlBuffer.SET(DBPROFILE._PHYSIOLOGICALDAYS,@([[SWUserInfo shareInstance] physiologicalDays]));
+    sqlBuffer.SET(DBPROFILE._PHYSIOLOGICALDATESTRING,[[SWUserInfo shareInstance] physiologicalDateString]);
     [mutableSqlBuffer addBuffer:sqlBuffer];
     
     WBDatabaseTransaction *transaction = [[WBDatabaseTransaction alloc] initWithMutalbeSQLBuffer:mutableSqlBuffer];
@@ -96,6 +98,16 @@
 
 - (void)saveWeight:(NSInteger)weight {
     [[SWUserInfo shareInstance] setWeight:weight];
+    [self updateToDB];
+}
+
+- (void)savePhysiologicalDays:(NSInteger)days {
+    [[SWUserInfo shareInstance] setPhysiologicalDays:days];
+    [self updateToDB];
+}
+
+- (void)savePhysiologicalDate:(NSString *)dateString {
+    [[SWUserInfo shareInstance] setPhysiologicalDateString:dateString];
     [self updateToDB];
 }
 

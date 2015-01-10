@@ -42,4 +42,7 @@ SW_AS_SINGLETON(SWBLECenter, shareInstance);
                        weight:(NSInteger)weight
                           sex:(NSInteger)sex;
 
+- (BOOL)setphysiologicalInfoWithDateymd:(NSString *)dateymd
+                    physiologicalDay:(NSInteger)physiologicalDay;
+
 @end

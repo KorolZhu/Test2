@@ -20,6 +20,8 @@ SW_DEF_SINGLETON(SWUserInfo, shareInstance);
     self.sex = [dictionary intForKey:DBPROFILE._SEX];
     self.height = [dictionary intForKey:DBPROFILE._HEIGHT];
     self.weight = [dictionary intForKey:DBPROFILE._WEIGHT];
+    self.physiologicalDays = [dictionary intForKey:DBPROFILE._PHYSIOLOGICALDAYS];
+    self.physiologicalDateString = [dictionary stringForKey:DBPROFILE._PHYSIOLOGICALDATESTRING];
     [self setup];
 }
 

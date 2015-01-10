@@ -16,5 +16,7 @@
 - (void)saveSex:(NSInteger)sex;
 - (void)saveHeight:(NSInteger)height;
 - (void)saveWeight:(NSInteger)weight;
+- (void)savePhysiologicalDays:(NSInteger)days;
+- (void)savePhysiologicalDate:(NSString *)dateString;
 
 @end

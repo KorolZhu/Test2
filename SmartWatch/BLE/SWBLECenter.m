@@ -206,6 +206,33 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
     return YES;
 }
 
+- (BOOL)setphysiologicalInfoWithDateymd:(NSString *)dateymd physiologicalDay:(NSInteger)physiologicalDay {
+    if (![self isDeviceConnected]) {
+        return NO;
+    }
+    
+    if (dateymd.length != 8) {
+        return NO;
+    }
+    
+    NSString *dateString = [dateymd stringByReplacingOccurrencesOfString:@"/" withString:@""];
+    
+    NSInteger year = [dateString substringWithRange:NSMakeRange(0, 4)].integerValue;
+    NSInteger month = [dateString substringWithRange:NSMakeRange(4, 2)].integerValue;
+    NSInteger day = [dateString substringWithRange:NSMakeRange(6, 2)].integerValue;
+    
+    NSInteger yy1 = year / 100;
+    NSInteger yy2 = year % 100;
+    
+    UInt8 buf[] = {BLE_CMD_SET_WOMEN_REQUEST, yy1, yy2, month, day, physiologicalDay};
+    
+    NSMutableData *data = [NSMutableData data];
+    [data appendBytes:buf length:6];
+    
+    [self.ble write:data];
+    return YES;
+}
+
 #pragma mark - BLE Response
 
 - (void)handleResetReponse:(NSData *)data {
@@ -310,6 +337,13 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
     }
 }
 
+- (void)handleSetPhysiologicalInfo:(NSData *)data {
+    if (data.length >= 20) {
+        UInt8 ret = 0;
+        [data getBytes:&ret range:NSMakeRange(1, 1)];
+    }
+}
+
 #pragma mark - BLE delegate
 
 - (void)bleDidConnect {
@@ -361,6 +395,9 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
                 break;
             case BLE_CMD_SET_BODY_RESPONSE:
                 [self handleSetUserInfoResponse:data];
+                break;
+            case BLE_CMD_SET_WOMEN_RESPONSE:
+                [self handleSetPhysiologicalInfo:data];
                 break;
             default:
                 break;

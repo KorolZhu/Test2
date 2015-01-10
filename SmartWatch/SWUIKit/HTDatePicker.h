@@ -9,11 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "AMBlurView.h"
 
+@class HTDatePicker;
+
 @protocol HTDatePickerDelegate <NSObject>
 
 @optional
-- (void)datePickerCancel;
-- (void)datePickerFinished:(NSDate *)date;
+- (void)datePickerCancel:(HTDatePicker *)datePicker;
+- (void)datePickerFinished:(HTDatePicker *)datePicker date:(NSDate *)date;
 
 @end
 

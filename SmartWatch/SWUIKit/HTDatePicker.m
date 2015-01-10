@@ -70,14 +70,14 @@
 }
 
 - (void)cancelBtnClick{
-    if (self.delegate && [self.delegate respondsToSelector:@selector(datePickerCancel)]) {
-        [self.delegate datePickerCancel];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(datePickerCancel:)]) {
+        [self.delegate datePickerCancel:self];
     }
 }
 
 - (void)saveBtnClick{
-    if (self.delegate && [self.delegate respondsToSelector:@selector(datePickerFinished:)]) {
-        [self.delegate datePickerFinished:_datePick.date];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(datePickerFinished:date:)]) {
+        [self.delegate datePickerFinished:self date:_datePick.date];
     }
 }
 
