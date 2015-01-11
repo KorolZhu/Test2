@@ -37,6 +37,8 @@
     UIBarButtonItem *backButton = [UIBarButtonItem backItemWithTarget:self action:@selector(backClick)];
     self.navigationItem.leftBarButtonItem = backButton;
     
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"同步", nil) style:UIBarButtonItemStylePlain target:self action:@selector(synchronizeClick)];
+    
     _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     _tableView.allowsSelectionDuringEditing = YES;
     _tableView.delegate = self;
@@ -53,6 +55,10 @@
 
 - (void)backClick {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)synchronizeClick {
+    
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

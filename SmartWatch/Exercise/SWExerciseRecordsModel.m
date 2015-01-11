@@ -10,9 +10,11 @@
 #import "WBDatabaseService.h"
 #import "WBSQLBuffer.h"
 #import "SWDAILYSTEPS.h"
+#import "SWLOCATION.h"
 #import "SWBLECenter.h"
 #import "SWUserInfo.h"
 #import "SWSettingInfo.h"
+#import <CoreLocation/CoreLocation.h>
 
 @interface SWExerciseRecordsModel ()
 {
@@ -140,6 +142,30 @@
         
         [self respondSelectorOnMainThread:@selector(exerciseRecordsQueryFinished)];
 	}];
+}
+
+- (void)queryLocationWithDate:(NSDate *)date {
+    [[GCDQueue globalQueue] queueBlock:^{
+        _currentDate = date;
+        _currentDateString = [_currentDate stringWithFormat:@"yyyyMMdd"];
+        long long currentDateymd = [_currentDateString longLongValue];
+        WBSQLBuffer *sqlBuffer = [[WBSQLBuffer alloc] init];
+        sqlBuffer.SELECT(@"*").FROM(DBLOCATION._tableName).WHERE([NSString stringWithFormat:@"%@=%@", DBLOCATION._dateymd, @(currentDateymd).stringValue]);
+        WBDatabaseTransaction *transaction = [[WBDatabaseTransaction alloc] initWithSQLBuffer:sqlBuffer];
+        [[WBDatabaseService defaultService] readWithTransaction:transaction completionBlock:^{}];
+        
+        NSMutableArray *tempArray = [NSMutableArray array];
+        for (NSDictionary *dic in transaction.resultSet.resultArray) {
+            double latitude = [dic doubleForKey:DBLOCATION._latitude];
+            double longitude = [dic doubleForKey:DBLOCATION._longitude];
+            CLLocation *location = [[CLLocation alloc] initWithLatitude:latitude longitude:longitude];
+            [tempArray addObject:location];
+        }
+        _locationArray = [NSArray arrayWithArray:tempArray];
+        
+        [self respondSelectorOnMainThread:@selector(locationQueryFinished)];
+
+    }];
 }
 
 - (void)bleDataReadCompletion {

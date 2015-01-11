@@ -17,9 +17,10 @@
 #import "SWBLECenter.h"
 #import "SWExerciseRecordsModel.h"
 #import "SWAccessoryPickerView.h"
+#import "MBProgressHUD.h"
 #import <MapKit/MapKit.h>
 
-@interface SWExerciseRecordsViewController ()<BLEDelegate,SWAccessoryPickerViewDelegate>
+@interface SWExerciseRecordsViewController ()<BLEDelegate,SWAccessoryPickerViewDelegate,MKMapViewDelegate>
 {
     UIButton *leftBarButton;
     SWExerciseRecordsTitleView *titleView;
@@ -42,9 +43,12 @@
     SWAccessoryPickerView *accessoryPickerView;
     
     MKMapView *mapView;
+    MKPolyline *polyline;
+    MKPolylineView *polylineView;
 }
 
 @property (nonatomic,strong) UIScrollView *scrollView;
+@property (nonatomic, strong) MBProgressHUD *HUD;
 
 @end
 
@@ -231,7 +235,9 @@
     
     [model queryExerciseRecordsWithDate:[NSDate date]];
     titleView.nextButton.enabled = NO;
-	
+    
+    _HUD = [[MBProgressHUD alloc] initWithView:self.view];
+    [self.view addSubview:_HUD];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -269,7 +275,13 @@
 }
 
 - (void)shareClick {
-    [[SWShareKit sharedInstance] sendMessage:@"test" WithUrl:@"http://baidu.com" WithType:SWShareTypeWechatSession];
+    UIView *view = [[UIApplication sharedApplication] keyWindow];
+    UIGraphicsBeginImageContextWithOptions(view.bounds.size, NO, 0);
+    [view drawViewHierarchyInRect:view.bounds afterScreenUpdates:YES];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    [[SWShareKit sharedInstance] sendImage:image withType:SWShareTypeWechatTimeline];
 }
 
 - (void)preDateClick {
@@ -315,7 +327,10 @@
     
     if (!mapView) {
         mapView = [[MKMapView alloc] initWithFrame:CGRectMake(12.0f, progressView.bottom + 10.0f, IPHONE_WIDTH - 24.0f, 166.0f)];
+        mapView.delegate = self;
         mapView.layer.cornerRadius = 3.5f;
+        
+        [model queryLocationWithDate:[NSDate date]];
     }
     
     if (!mapView.superview) {
@@ -474,6 +489,34 @@
     
 }
 
+#pragma mark - Mpa view
+
+- (void)mapView:(MKMapView *)mapView didAddOverlayViews:(NSArray *)overlayViews
+{
+}
+
+- (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id <MKOverlay>)overlay
+{
+    MKOverlayView* overlayView = nil;
+    
+    if(overlay == polyline)
+    {
+        //if we have not yet created an overlay view for this overlay, create it now.
+        if (polylineView) {
+            [polylineView removeFromSuperview];
+        }
+        
+        polylineView = [[MKPolylineView alloc] initWithPolyline:polyline];
+        polylineView.fillColor = RGBFromHex(0x00F0FF);
+        polylineView.strokeColor = RGBFromHex(0x00F0FF);
+        polylineView.lineWidth = 5.0;
+        
+        overlayView = polylineView;
+    }
+    
+    return overlayView;
+}
+
 #pragma mark - Model
 
 - (void)exerciseRecordsQueryFinished {
@@ -485,6 +528,61 @@
 	[calorieGraphView reloadPlot];
 	[stepsGraphView reloadPlot];
 	[sleepGraphView reloadPlot];
+    
+    [_HUD hide:YES];
+}
+
+- (void)locationQueryFinished {
+    MKMapPoint northEastPoint = MKMapPointMake(0.f, 0.f);
+    MKMapPoint southWestPoint = MKMapPointMake(0.f, 0.f);
+    
+    MKMapPoint* pointArray = malloc(sizeof(CLLocationCoordinate2D) * model.locationArray.count);
+    for(int idx = 0; idx < model.locationArray.count; idx++)
+    {
+        CLLocation *location = [model.locationArray objectAtIndex:idx];
+        CLLocationDegrees latitude  = location.coordinate.latitude;
+        CLLocationDegrees longitude = location.coordinate.longitude;
+        
+        // create our coordinate and add it to the correct spot in the array
+        CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(latitude, longitude);
+        MKMapPoint point = MKMapPointForCoordinate(coordinate);
+        
+        // if it is the first point, just use them, since we have nothing to compare to yet.
+        if (idx == 0) {
+            northEastPoint = point;
+            southWestPoint = point;
+        } else {
+            if (point.x > northEastPoint.x)
+                northEastPoint.x = point.x;
+            if(point.y > northEastPoint.y)
+                northEastPoint.y = point.y;
+            if (point.x < southWestPoint.x)
+                southWestPoint.x = point.x;
+            if (point.y < southWestPoint.y) 
+                southWestPoint.y = point.y;
+        }
+        
+        pointArray[idx] = point;        
+    }
+    
+    if (polyline) {
+        [mapView removeOverlay:polyline];
+    }
+    
+    polyline = [MKPolyline polylineWithPoints:pointArray count:model.locationArray.count];
+    
+    if (nil != polyline) {
+        [mapView addOverlay:polyline];
+    }
+    
+    free(pointArray);
+    
+    double width = northEastPoint.x - southWestPoint.x;
+    double height = northEastPoint.y - southWestPoint.y;
+    
+    MKMapRect routeRect = MKMapRectMake(southWestPoint.x, southWestPoint.y, width, height);
+    
+    [mapView setVisibleMapRect:routeRect];
 }
 
 #pragma mark - KVO
@@ -498,6 +596,8 @@
                     leftBarButton.enabled = YES;
                     [leftBarButton setImage:[UIImage imageNamed:@"蓝牙"] forState:UIControlStateNormal];
                     [leftBarButton setTitle:nil forState:UIControlStateNormal];
+                    
+                    [_HUD hide:YES];
                 });
             }
                 break;
@@ -506,6 +606,8 @@
                     leftBarButton.enabled = YES;
                     [leftBarButton setImage:nil forState:UIControlStateNormal];
                     [leftBarButton setTitle:NSLocalizedString(@"已连接", nil) forState:UIControlStateNormal];
+                    
+                    [_HUD show:YES];
                 });
             }
                 break;

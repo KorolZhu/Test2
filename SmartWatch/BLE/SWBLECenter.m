@@ -349,13 +349,12 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
 - (void)bleDidConnect {
     self.state = SWPeripheralStateConnected;
     
-    
+    [self sendSetDateTimeRequest];
     [self sendGetBatteryRequest];
     [self sendGetIndexRequest];
     [self getDaylightInfo];
     [self getStepsTarget];
     [self sendActivityCountRequest];
-//    [self sendSetDateTimeRequest];
 }
 
 - (void)bleDidWriteValue {

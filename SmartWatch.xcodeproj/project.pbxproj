@@ -16,6 +16,12 @@
 		CE208F571A1A4C8A001D6482 /* SWLineGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE208F541A1A4C8A001D6482 /* SWLineGraphView.m */; };
 		CE208F581A1A4C8A001D6482 /* SWPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = CE208F561A1A4C8A001D6482 /* SWPlot.m */; };
 		CE33DDD01A49A8FD0069E8AE /* SWDeviceConnectdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE33DDCF1A49A8FD0069E8AE /* SWDeviceConnectdViewController.m */; };
+		CE386C2F1A615D2F00AE91D8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE386C311A615D2F00AE91D8 /* Localizable.strings */; };
+		CE386C361A615DCB00AE91D8 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CE386C381A615DCB00AE91D8 /* InfoPlist.strings */; };
+		CE386C421A617EE400AE91D8 /* LocationTracker.m in Sources */ = {isa = PBXBuildFile; fileRef = CE386C3D1A617EE400AE91D8 /* LocationTracker.m */; };
+		CE386C431A617EE400AE91D8 /* BackgroundTaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE386C3F1A617EE400AE91D8 /* BackgroundTaskManager.m */; };
+		CE386C441A617EE400AE91D8 /* LocationShareModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CE386C411A617EE400AE91D8 /* LocationShareModel.m */; };
+		CE386C471A61825D00AE91D8 /* SWLOCATION.m in Sources */ = {isa = PBXBuildFile; fileRef = CE386C461A61825D00AE91D8 /* SWLOCATION.m */; };
 		CE44E28E1A2F79DF0081F09E /* SWHeadImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE44E28B1A2F79DF0081F09E /* SWHeadImageCell.m */; };
 		CE44E28F1A2F79DF0081F09E /* SWProfileInfoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE44E28D1A2F79DF0081F09E /* SWProfileInfoCell.m */; };
 		CE44E2921A2F79ED0081F09E /* SWProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE44E2911A2F79ED0081F09E /* SWProfileViewController.m */; };
@@ -36,6 +42,8 @@
 		CE61B6141A3C517800B18811 /* SWDaylightSetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE61B6131A3C517800B18811 /* SWDaylightSetViewController.m */; };
 		CE61B6171A3C58A700B18811 /* SWPickerView2.m in Sources */ = {isa = PBXBuildFile; fileRef = CE61B6161A3C58A700B18811 /* SWPickerView2.m */; };
 		CE61B61A1A3C74E800B18811 /* SWAlarmSetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE61B6191A3C74E800B18811 /* SWAlarmSetViewController.m */; };
+		CE62A7661A614C3200362C8D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE62A7651A614C3200362C8D /* CoreLocation.framework */; };
+		CE62A7721A6151BD00362C8D /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE62A7711A6151BD00362C8D /* Info.plist */; };
 		CE7EE0BF1A20EA33006F3294 /* 1运动记录_70@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7EE0921A20EA33006F3294 /* 1运动记录_70@2x.png */; };
 		CE7EE0C01A20EA33006F3294 /* 1运动记录_73@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7EE0931A20EA33006F3294 /* 1运动记录_73@2x.png */; };
 		CE7EE0C11A20EA33006F3294 /* 1运动记录_卡路里-标注(标注)@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7EE0941A20EA33006F3294 /* 1运动记录_卡路里-标注(标注)@2x.png */; };
@@ -192,6 +200,20 @@
 		CE208F561A1A4C8A001D6482 /* SWPlot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWPlot.m; sourceTree = "<group>"; };
 		CE33DDCE1A49A8FD0069E8AE /* SWDeviceConnectdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWDeviceConnectdViewController.h; sourceTree = "<group>"; };
 		CE33DDCF1A49A8FD0069E8AE /* SWDeviceConnectdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWDeviceConnectdViewController.m; sourceTree = "<group>"; };
+		CE386C301A615D2F00AE91D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		CE386C321A615D4200AE91D8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		CE386C331A615D5100AE91D8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		CE386C371A615DCB00AE91D8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CE386C391A615DD000AE91D8 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CE386C3A1A615DD100AE91D8 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
+		CE386C3C1A617EE400AE91D8 /* LocationTracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationTracker.h; sourceTree = "<group>"; };
+		CE386C3D1A617EE400AE91D8 /* LocationTracker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationTracker.m; sourceTree = "<group>"; };
+		CE386C3E1A617EE400AE91D8 /* BackgroundTaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BackgroundTaskManager.h; sourceTree = "<group>"; };
+		CE386C3F1A617EE400AE91D8 /* BackgroundTaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BackgroundTaskManager.m; sourceTree = "<group>"; };
+		CE386C401A617EE400AE91D8 /* LocationShareModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationShareModel.h; sourceTree = "<group>"; };
+		CE386C411A617EE400AE91D8 /* LocationShareModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationShareModel.m; sourceTree = "<group>"; };
+		CE386C451A61825D00AE91D8 /* SWLOCATION.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWLOCATION.h; sourceTree = "<group>"; };
+		CE386C461A61825D00AE91D8 /* SWLOCATION.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWLOCATION.m; sourceTree = "<group>"; };
 		CE44E28A1A2F79DF0081F09E /* SWHeadImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWHeadImageCell.h; sourceTree = "<group>"; };
 		CE44E28B1A2F79DF0081F09E /* SWHeadImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWHeadImageCell.m; sourceTree = "<group>"; };
 		CE44E28C1A2F79DF0081F09E /* SWProfileInfoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWProfileInfoCell.h; sourceTree = "<group>"; };
@@ -232,6 +254,8 @@
 		CE61B6161A3C58A700B18811 /* SWPickerView2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWPickerView2.m; sourceTree = "<group>"; };
 		CE61B6181A3C74E800B18811 /* SWAlarmSetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWAlarmSetViewController.h; sourceTree = "<group>"; };
 		CE61B6191A3C74E800B18811 /* SWAlarmSetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWAlarmSetViewController.m; sourceTree = "<group>"; };
+		CE62A7651A614C3200362C8D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		CE62A7711A6151BD00362C8D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE7EE0921A20EA33006F3294 /* 1运动记录_70@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1运动记录_70@2x.png"; sourceTree = "<group>"; };
 		CE7EE0931A20EA33006F3294 /* 1运动记录_73@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1运动记录_73@2x.png"; sourceTree = "<group>"; };
 		CE7EE0941A20EA33006F3294 /* 1运动记录_卡路里-标注(标注)@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1运动记录_卡路里-标注(标注)@2x.png"; sourceTree = "<group>"; };
@@ -364,7 +388,6 @@
 		CEBB8CAC1A374EE700EBE67F /* SWActivityResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWActivityResponse.h; sourceTree = "<group>"; };
 		CEBB8CAD1A374EE700EBE67F /* SWActivityResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWActivityResponse.m; sourceTree = "<group>"; };
 		CEE0D7F11A18793500CE643C /* SmartWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		CEE0D7F51A18793500CE643C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEE0D7F61A18793500CE643C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CEE0D7F81A18793500CE643C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CEE0D7F91A18793500CE643C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -419,6 +442,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE62A7661A614C3200362C8D /* CoreLocation.framework in Frameworks */,
 				CEAA01BD1A35CEDD0047BAF2 /* MapKit.framework in Frameworks */,
 				CEE0D8321A1884FC00CE643C /* libWeChatSDK.a in Frameworks */,
 				69DF3329866ED80E774AA8D6 /* libPods-SmartWatch.a in Frameworks */,
@@ -477,6 +501,19 @@
 			);
 			name = SWUIKit;
 			path = SmartWatch/SWUIKit;
+			sourceTree = "<group>";
+		};
+		CE386C3B1A617ED200AE91D8 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				CE386C3C1A617EE400AE91D8 /* LocationTracker.h */,
+				CE386C3D1A617EE400AE91D8 /* LocationTracker.m */,
+				CE386C3E1A617EE400AE91D8 /* BackgroundTaskManager.h */,
+				CE386C3F1A617EE400AE91D8 /* BackgroundTaskManager.m */,
+				CE386C401A617EE400AE91D8 /* LocationShareModel.h */,
+				CE386C411A617EE400AE91D8 /* LocationShareModel.m */,
+			);
+			path = Location;
 			sourceTree = "<group>";
 		};
 		CE44E2891A2F79D60081F09E /* Profile1 */ = {
@@ -710,6 +747,8 @@
 				CE61B5F21A3C02DB00B18811 /* SWPROFILE.m */,
 				CE61B60C1A3C49AE00B18811 /* SWSETTING.h */,
 				CE61B60D1A3C49AE00B18811 /* SWSETTING.m */,
+				CE386C451A61825D00AE91D8 /* SWLOCATION.h */,
+				CE386C461A61825D00AE91D8 /* SWLOCATION.m */,
 			);
 			path = Entity;
 			sourceTree = "<group>";
@@ -802,9 +841,11 @@
 		CEE0D7F41A18793500CE643C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				CEE0D7F51A18793500CE643C /* Info.plist */,
+				CE62A7711A6151BD00362C8D /* Info.plist */,
 				CEE0D7F61A18793500CE643C /* main.m */,
 				CEE0D8651A188D1500CE643C /* SmartWatch_Prefix.pch */,
+				CE386C311A615D2F00AE91D8 /* Localizable.strings */,
+				CE386C381A615DCB00AE91D8 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -898,6 +939,7 @@
 		CEE0D8331A18866200CE643C /* SWFoundation */ = {
 			isa = PBXGroup;
 			children = (
+				CE386C3B1A617ED200AE91D8 /* Location */,
 				CEE0D8341A18869400CE643C /* ShareKit */,
 			);
 			name = SWFoundation;
@@ -987,6 +1029,7 @@
 		DB60BD39C50C94E7C9E5EFF4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CE62A7651A614C3200362C8D /* CoreLocation.framework */,
 				6C73B39E88090B44A198085E /* libPods-SmartWatch.a */,
 			);
 			name = Frameworks;
@@ -1073,8 +1116,9 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				en,
+				"zh-Hans",
 			);
 			mainGroup = CEE0D7E81A18793400CE643C;
 			productRefGroup = CEE0D7F21A18793500CE643C /* Products */;
@@ -1092,6 +1136,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE386C2F1A615D2F00AE91D8 /* Localizable.strings in Resources */,
 				CE7EE12D1A20EC3B006F3294 /* 4设置_32@2x.png in Resources */,
 				CE7EE1381A20F56B006F3294 /* Images.xcassets in Resources */,
 				CE7EE0D61A20EA33006F3294 /* 设置2@2x.png in Resources */,
@@ -1112,6 +1157,7 @@
 				CE7EE0C21A20EA33006F3294 /* button1@2x.png in Resources */,
 				CE7EE1361A20EC3B006F3294 /* 4背景-ios_02@2x.png in Resources */,
 				CE7EE0C11A20EA33006F3294 /* 1运动记录_卡路里-标注(标注)@2x.png in Resources */,
+				CE62A7721A6151BD00362C8D /* Info.plist in Resources */,
 				CE7EE0D81A20EA33006F3294 /* 运动记录2@2x.png in Resources */,
 				CE7EE12E1A20EC3B006F3294 /* 4设置_37@2x.png in Resources */,
 				CE7EE1251A20EC3B006F3294 /* 4设置_05@2x.png in Resources */,
@@ -1157,6 +1203,7 @@
 				CE7EE0C71A20EA33006F3294 /* m_2@2x.png in Resources */,
 				CE7EE1131A20EC3B006F3294 /* 3背景-ios_01@2x.png in Resources */,
 				CE7EE0C51A20EA33006F3294 /* left_2@2x.png in Resources */,
+				CE386C361A615DCB00AE91D8 /* InfoPlist.strings in Resources */,
 				CEAA01D71A35E3190047BAF2 /* default.sql in Resources */,
 				CE7EE0E31A20EA33006F3294 /* 曲线图_bg@2x.png in Resources */,
 				CE7EE0D71A20EA33006F3294 /* 运动记录1@2x.png in Resources */,
@@ -1233,6 +1280,7 @@
 				CE828E5A1A2E12020036BEC2 /* BLE.m in Sources */,
 				CE61B5F91A3C093200B18811 /* NSDictionary+HT.m in Sources */,
 				CE208F581A1A4C8A001D6482 /* SWPlot.m in Sources */,
+				CE386C431A617EE400AE91D8 /* BackgroundTaskManager.m in Sources */,
 				CEE0D8261A187D7600CE643C /* SWHistoryRecordsViewController.m in Sources */,
 				CE61B5EA1A3BF78100B18811 /* UITableViewCell+SW.m in Sources */,
 				CE61B6081A3C491D00B18811 /* SWSettingModel.m in Sources */,
@@ -1254,6 +1302,7 @@
 				4558510B1A37F92D00649397 /* SWModel.m in Sources */,
 				CEE0D85F1A1888CF00CE643C /* NSLayoutConstraint+PureLayout.m in Sources */,
 				CEAA01D81A35E3190047BAF2 /* WBMutableSQLBuffer.m in Sources */,
+				CE386C421A617EE400AE91D8 /* LocationTracker.m in Sources */,
 				CE44E2921A2F79ED0081F09E /* SWProfileViewController.m in Sources */,
 				CE9178961A405C7900A80136 /* HTJSONAdapter.m in Sources */,
 				CEE0D85D1A1888CF00CE643C /* ALView+PureLayout.m in Sources */,
@@ -1285,7 +1334,9 @@
 				CEBB8CA81A372F7D00EBE67F /* SWPacketHeader.m in Sources */,
 				CEE0D85A1A1888CF00CE643C /* GCDGroup.m in Sources */,
 				CE828E551A2DF3E60036BEC2 /* SWDashboardView.m in Sources */,
+				CE386C441A617EE400AE91D8 /* LocationShareModel.m in Sources */,
 				CEBB8CAE1A374EE700EBE67F /* SWActivityResponse.m in Sources */,
+				CE386C471A61825D00AE91D8 /* SWLOCATION.m in Sources */,
 				CE61B61A1A3C74E800B18811 /* SWAlarmSetViewController.m in Sources */,
 				CE44E28F1A2F79DF0081F09E /* SWProfileInfoCell.m in Sources */,
 				CEE0D8231A187CEF00CE643C /* SWExerciseRecordsViewController.m in Sources */,
@@ -1311,6 +1362,29 @@
 			targetProxy = CEE0D80E1A18793500CE643C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		CE386C311A615D2F00AE91D8 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE386C301A615D2F00AE91D8 /* Base */,
+				CE386C321A615D4200AE91D8 /* zh-Hans */,
+				CE386C331A615D5100AE91D8 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		CE386C381A615DCB00AE91D8 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CE386C371A615DCB00AE91D8 /* Base */,
+				CE386C391A615DD000AE91D8 /* en */,
+				CE386C3A1A615DD100AE91D8 /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		CEE0D8151A18793500CE643C /* Debug */ = {
@@ -1394,6 +1468,7 @@
 			baseConfigurationReference = A8816FA7DAB27B228C992029 /* Pods-SmartWatch.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PREFIX_HEADER = SmartWatch/SmartWatch_Prefix.pch;
 				INFOPLIST_FILE = SmartWatch/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -1413,6 +1488,7 @@
 			baseConfigurationReference = BA52D8F885518A25BB028142 /* Pods-SmartWatch.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				GCC_PREFIX_HEADER = SmartWatch/SmartWatch_Prefix.pch;
 				INFOPLIST_FILE = SmartWatch/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;

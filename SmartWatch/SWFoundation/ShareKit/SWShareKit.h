@@ -19,5 +19,6 @@ SW_AS_SINGLETON(SWShareKit, sharedInstance);
 - (BOOL)handleOpenURL:(NSURL *)url;
 
 - (void)sendMessage:(NSString*)message WithUrl:(NSString*)url WithType:(SWShareType)shareType;
+- (void)sendImage:(UIImage *)image withType:(SWShareType)shareType;
 
 @end

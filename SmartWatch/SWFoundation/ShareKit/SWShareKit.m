@@ -48,6 +48,24 @@ SW_DEF_SINGLETON(SWShareKit, sharedInstance)
     [WXApi sendReq:req];
 }
 
+- (void)sendImage:(UIImage *)image withType:(SWShareType)shareType {
+    WXMediaMessage *mediaMessage = [WXMediaMessage message];
+    mediaMessage.title = @"title";
+    mediaMessage.description = @"description";
+    
+    WXImageObject *imageObject = [WXImageObject object];
+    imageObject.imageData = UIImageJPEGRepresentation(image, 0.8);
+    
+    mediaMessage.mediaObject = imageObject;
+    
+    SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
+    req.bText = NO;
+    req.message = mediaMessage;
+    req.scene = shareType == SWShareTypeWechatTimeline ? WXSceneTimeline : WXSceneSession;
+    
+    [WXApi sendReq:req];
+}
+
 #pragma mark - WXApiDelegate 
 
 

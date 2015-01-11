@@ -28,9 +28,12 @@
 @property (nonatomic,readonly) NSInteger lightSleepHour;
 @property (nonatomic,readonly) NSInteger nightActivityHour;
 
-@property (nonatomic,readonly)NSDate *currentDate;
-@property (nonatomic,readonly)NSString *currentDateString;
+@property (nonatomic,readonly) NSDate *currentDate;
+@property (nonatomic,readonly) NSString *currentDateString;
+
+@property (nonatomic,readonly) NSArray *locationArray;
 
 - (void)queryExerciseRecordsWithDate:(NSDate *)date;
+- (void)queryLocationWithDate:(NSDate *)date;
 
 @end
