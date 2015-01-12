@@ -21,4 +21,6 @@
 - (void)removeAlarm:(SWAlarmInfo *)alarmInfo;
 - (void)updateAlarmInfo;
 
+- (void)saveLostMeter:(NSInteger)meter;
+
 @end

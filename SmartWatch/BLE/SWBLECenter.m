@@ -181,6 +181,20 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
     return YES;
 }
 
+- (BOOL)setLostMeters:(NSInteger)meters {
+	if (![self isDeviceConnected]) {
+		return NO;
+	}
+	
+	UInt8 buf[] = {BLE_CMD_SET_STEPTARGET_REQUEST, 0x01};
+	
+	NSMutableData *data = [NSMutableData data];
+	[data appendBytes:buf length:2];
+	
+	[self.ble write:data];
+	return YES;
+}
+
 - (BOOL)getStepsTarget {
     if (![self isDeviceConnected]) {
         return NO;

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		45393F0E1A63B2CD00BDFB43 /* SWLostSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45393F0D1A63B2CD00BDFB43 /* SWLostSettingViewController.m */; };
 		455851001A37E1D700649397 /* SWDAILYSTEPS.m in Sources */ = {isa = PBXBuildFile; fileRef = 455850FF1A37E1D700649397 /* SWDAILYSTEPS.m */; };
 		455851031A37ED5800649397 /* SWExerciseRecordsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 455851021A37ED5800649397 /* SWExerciseRecordsModel.m */; };
 		455851061A37EF0900649397 /* NSDate+WB.m in Sources */ = {isa = PBXBuildFile; fileRef = 455851051A37EF0900649397 /* NSDate+WB.m */; };
@@ -181,6 +182,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		45393F0C1A63B2CD00BDFB43 /* SWLostSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWLostSettingViewController.h; sourceTree = "<group>"; };
+		45393F0D1A63B2CD00BDFB43 /* SWLostSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWLostSettingViewController.m; sourceTree = "<group>"; };
 		455850FE1A37E1D700649397 /* SWDAILYSTEPS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWDAILYSTEPS.h; path = ../Sql/SWDAILYSTEPS.h; sourceTree = "<group>"; };
 		455850FF1A37E1D700649397 /* SWDAILYSTEPS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SWDAILYSTEPS.m; path = ../Sql/SWDAILYSTEPS.m; sourceTree = "<group>"; };
 		455851011A37ED5800649397 /* SWExerciseRecordsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWExerciseRecordsModel.h; sourceTree = "<group>"; };
@@ -910,6 +913,8 @@
 				CE9178981A40684000A80136 /* SWAlarmCell.m */,
 				CE91789A1A406EC300A80136 /* SWAlarmEditViewController.h */,
 				CE91789B1A406EC300A80136 /* SWAlarmEditViewController.m */,
+				45393F0C1A63B2CD00BDFB43 /* SWLostSettingViewController.h */,
+				45393F0D1A63B2CD00BDFB43 /* SWLostSettingViewController.m */,
 			);
 			path = Setting;
 			sourceTree = "<group>";
@@ -1340,6 +1345,7 @@
 				CE61B61A1A3C74E800B18811 /* SWAlarmSetViewController.m in Sources */,
 				CE44E28F1A2F79DF0081F09E /* SWProfileInfoCell.m in Sources */,
 				CEE0D8231A187CEF00CE643C /* SWExerciseRecordsViewController.m in Sources */,
+				45393F0E1A63B2CD00BDFB43 /* SWLostSettingViewController.m in Sources */,
 				CEE0D82C1A187DC800CE643C /* SWSettingViewController.m in Sources */,
 				CEBB8CAB1A37316E00EBE67F /* SWActivityCountResponse.m in Sources */,
 			);
@@ -1478,7 +1484,7 @@
 					"$(PROJECT_DIR)/SmartWatch/ThirdParty/WeChat",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "35131dfd-355b-4520-bf65-36c61772feb6";
+				PROVISIONING_PROFILE = "7c8cb04f-2beb-4db7-a19b-97ea50f4d990";
 				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Debug;
@@ -1498,7 +1504,7 @@
 					"$(PROJECT_DIR)/SmartWatch/ThirdParty/WeChat",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "35131dfd-355b-4520-bf65-36c61772feb6";
+				PROVISIONING_PROFILE = "7c8cb04f-2beb-4db7-a19b-97ea50f4d990";
 				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Release;

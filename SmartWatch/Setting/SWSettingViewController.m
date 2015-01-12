@@ -8,6 +8,7 @@
 
 #import "SWSettingViewController.h"
 #import "SWTargetSetViewController.h"
+#import "SWLostSettingViewController.h"
 #import "SWDaylightSetViewController.h"
 #import "SWSettingModel.h"
 #import "SWAlarmSetViewController.h"
@@ -64,8 +65,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    return 6;
-    return 5;
+    return 6;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -92,11 +92,11 @@
         cell.imageView.image = [UIImage imageNamed:@"4设置_32"];
         cell.textLabel.text = @"目标设置";
     }
-//    else if (indexPath.row == 4) {
-//        cell.imageView.image = [UIImage imageNamed:@"4设置_37"];
-//        cell.textLabel.text = @"遥控拍照";
-//    }
     else if (indexPath.row == 4) {
+        cell.imageView.image = [UIImage imageNamed:@"4设置_37"];
+        cell.textLabel.text = @"防丢设置";
+    }
+    else if (indexPath.row == 5) {
         cell.imageView.image = [UIImage imageNamed:@"4设置_41"];
         cell.textLabel.text = @"关于我们";
     }
@@ -127,12 +127,12 @@
         [self.navigationController pushViewController:targetSetViewController animated:YES];
         
     }
-//    else if (indexPath.row == 4) {
-//        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-//        [imagePicker setSourceType:UIImagePickerControllerSourceTypeCamera];
-//        [self presentViewController:imagePicker animated:YES completion:nil];
-//    }
     else if (indexPath.row == 4) {
+		SWLostSettingViewController *lostSetViewController = [[SWLostSettingViewController alloc] init];
+		lostSetViewController.model = model;
+		[self.navigationController pushViewController:lostSetViewController animated:YES];
+    }
+    else if (indexPath.row == 5) {
         
     }
 }

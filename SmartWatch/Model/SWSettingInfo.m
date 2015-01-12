@@ -27,6 +27,7 @@ SW_DEF_SINGLETON(SWSettingInfo, shareInstance);
         [mutableArray addObject:info];
     }
     self.alarmArray = mutableArray;
+	self.lostMeters = [dictionary intForKey:DBSETTING._LOSTMETERS];
 }
 
 - (float)calorieTarget {

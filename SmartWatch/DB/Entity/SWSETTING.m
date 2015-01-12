@@ -32,4 +32,8 @@ SW_DEF_SINGLETON(SWSETTING, shareInstant);
     return @"ALARM";
 }
 
+- (NSString *)_LOSTMETERS {
+	return @"LOSTMETERS";
+}
+
 @end

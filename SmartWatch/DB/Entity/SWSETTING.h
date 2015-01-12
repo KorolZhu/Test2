@@ -17,6 +17,7 @@
 @property (nonatomic,readonly)NSString *_DAYTIMESTARTHOUR;
 @property (nonatomic,readonly)NSString *_DAYTIMEENDTHOUR;
 @property (nonatomic,readonly)NSString *_ALARM;
+@property (nonatomic,readonly)NSString *_LOSTMETERS;
 
 SW_AS_SINGLETON(SWSETTING, shareInstant);
 

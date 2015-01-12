@@ -38,6 +38,7 @@ SW_AS_SINGLETON(SWBLECenter, shareInstance);
 - (BOOL)setDaylightWithStartHour:(NSInteger)startHour endHour:(NSInteger)endHour;
 - (BOOL)setAlarmWithAlarmInfo:(SWAlarmInfo *)alarmInfo;
 - (BOOL)setStepTargets:(NSInteger)steps;
+- (BOOL)setLostMeters:(NSInteger)meters;
 - (BOOL)setUserInfoWithHeight:(NSInteger)height
                        weight:(NSInteger)weight
                           sex:(NSInteger)sex;
