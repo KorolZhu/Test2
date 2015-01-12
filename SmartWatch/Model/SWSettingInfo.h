@@ -18,6 +18,7 @@ SW_AS_SINGLETON(SWSettingInfo, shareInstance);
 @property (nonatomic) NSInteger startHour;
 @property (nonatomic) NSInteger endHour;
 @property (nonatomic) NSMutableArray *alarmArray;
+@property (nonatomic) NSInteger lostMeters;
 
 - (void)loadDataWithDictionary:(NSDictionary *)dictionary;
 

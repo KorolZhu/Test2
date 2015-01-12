@@ -95,4 +95,8 @@
     [[SWSettingInfo shareInstance] didChangeValueForKey:@"alarmArray"];
 }
 
+- (void)saveLostMeter:(NSInteger)meter {
+	
+}
+
 @end
