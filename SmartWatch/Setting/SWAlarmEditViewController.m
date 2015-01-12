@@ -72,7 +72,7 @@ static NSString *alarmEditCellIdentifier = @"alarmEditCellIdentifier";
 
 - (void)saveClick {
     NSInteger repeat = 0;
-    NSArray *arr = @[@16,@8,@4,@2,@1,@64,@32];
+    NSArray *arr = @[@1,@2,@4,@8,@16,@32,@64];
     for (NSIndexPath *indexPath in selectedArray) {
         repeat |= [[arr objectAtIndex:indexPath.row] integerValue];
     }

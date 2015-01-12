@@ -238,7 +238,7 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
     }
     
     if (dateymd.length != 10) {
-        return NO;
+        dateymd = @"2015/01/13";
     }
     
     NSString *dateString = [dateymd stringByReplacingOccurrencesOfString:@"/" withString:@""];

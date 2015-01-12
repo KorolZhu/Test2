@@ -112,10 +112,10 @@
 
 - (void)pickerView:(SWPickerView *)pickerView didFinished:(NSString *)value {
 	if (pickerView == _stepPickerView) {
-		if ([[SWBLECenter shareInstance] setLostMeters:value.integerValue]) {
-			[_model saveLostMeter:value.integerValue];
-			[self.tableView reloadData];
-		}
+//		if ([[SWBLECenter shareInstance] setLostMeters:value.integerValue]) {
+//			[_model saveLostMeter:value.integerValue];
+//			[self.tableView reloadData];
+//		}
 	}
 	
 	

@@ -56,11 +56,11 @@
     timeLabel.text = [NSString stringWithFormat:@"%02d:%02d", _alarmInfo.hour, alarmInfo.minute];
     
     NSMutableString *repeatString = [NSMutableString string];
-    if ((alarmInfo.repeat & 16) > 0) {
+    if ((alarmInfo.repeat & 1) > 0) {
         [repeatString appendString:@"星期一 "];
     }
     
-    if ((alarmInfo.repeat & 8) > 0) {
+    if ((alarmInfo.repeat & 2) > 0) {
         [repeatString appendString:@"星期二 "];
     }
     
@@ -68,19 +68,19 @@
         [repeatString appendString:@"星期三 "];
     }
     
-    if ((alarmInfo.repeat & 2) > 0) {
+    if ((alarmInfo.repeat & 8) > 0) {
         [repeatString appendString:@"星期四 "];
     }
     
-    if ((alarmInfo.repeat & 1) > 0) {
+    if ((alarmInfo.repeat & 16) > 0) {
         [repeatString appendString:@"星期五 "];
     }
     
-    if ((alarmInfo.repeat & 64) > 0) {
+    if ((alarmInfo.repeat & 32) > 0) {
         [repeatString appendString:@"星期六 "];
     }
     
-    if ((alarmInfo.repeat & 32) > 0) {
+    if ((alarmInfo.repeat & 64) > 0) {
         [repeatString appendString:@"星期日 "];
     }
     
