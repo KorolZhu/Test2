@@ -15,5 +15,6 @@
 #import "PureLayout.h"
 #import "BLE.h"
 #import "SWBLECenter.h"
+#import "SWSettingInfo.h"
 
 #endif

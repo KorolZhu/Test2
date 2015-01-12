@@ -36,4 +36,8 @@ SW_DEF_SINGLETON(SWSETTING, shareInstant);
 	return @"LOSTMETERS";
 }
 
+- (NSString *)_PREVENTLOST {
+    return @"PREVENTLOST";
+}
+
 @end

@@ -14,4 +14,6 @@
 
 - (BOOL)containString:(NSString *)string;
 
+- (NSDate *)dateWithFormat:(NSString *)format;
+
 @end

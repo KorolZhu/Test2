@@ -172,6 +172,7 @@
             sexPickerViewDataSource = @[@"男", @"女"];
             sexPickerView.dataSource = sexPickerViewDataSource;
         }
+        [sexPickerView selectRow:[SWUserInfo shareInstance].sex == 0 ? 1 : 0 inComponent:0 animated:NO];
         [sexPickerView showFromView:self.view];
     } else if (indexPath.row == 2) {
         if (!datePicker) {
@@ -179,6 +180,11 @@
             datePicker.hidden = YES;
             datePicker.delegate = self;
             [self.view addSubview:datePicker];
+        }
+        
+        NSDate *date = [[SWUserInfo shareInstance].birthdayString dateWithFormat:@"yyy/MM/dd"];
+        if (date) {
+            [datePicker setDate:date animated:NO];
         }
         [self showDatePicker:YES];
     } else if (indexPath.row == 3) {
@@ -191,6 +197,11 @@
             heightPickerView.titleSuffix = @"cm";
             heightPickerView.dataSource = heightPickerViewDataSource;
         }
+        
+        NSUInteger index = [heightPickerViewDataSource indexOfObject:@([SWUserInfo shareInstance].height)];
+        if (index != NSNotFound) {
+            [heightPickerView selectRow:index inComponent:0 animated:NO];
+        }
         [heightPickerView showFromView:self.view];
     } else if (indexPath.row == 4) {
         if (!weightPickerView) {
@@ -200,11 +211,15 @@
             
             NSMutableArray *arr = [NSMutableArray array];
             for (NSInteger i = 20; i < 201; i++) {
-                [arr addObject:@(i).stringValue];
+                [arr addObject:@(i)];
             }
             weightPickerViewDataSource = arr;
             weightPickerView.titleSuffix = @"kg";
             weightPickerView.dataSource = weightPickerViewDataSource;
+        }
+        NSUInteger index = [weightPickerViewDataSource indexOfObject:@([SWUserInfo shareInstance].weight)];
+        if (index != NSNotFound) {
+            [weightPickerView selectRow:index inComponent:0 animated:NO];
         }
         [weightPickerView showFromView:self.view];
     } else if (indexPath.row == 5) {
@@ -215,11 +230,15 @@
             
             NSMutableArray *arr = [NSMutableArray array];
             for (NSInteger i = 1; i <= 30; i++) {
-                [arr addObject:@(i).stringValue];
+                [arr addObject:@(i)];
             }
             physiologicalDaysPickerViewDataSource = arr;
             physiologicalDaysPickerView.titleSuffix = @"天";
             physiologicalDaysPickerView.dataSource = physiologicalDaysPickerViewDataSource;
+        }
+        NSUInteger index = [physiologicalDaysPickerViewDataSource indexOfObject:@([SWUserInfo shareInstance].physiologicalDays)];
+        if (index != NSNotFound) {
+            [physiologicalDaysPickerView selectRow:index inComponent:0 animated:NO];
         }
         [physiologicalDaysPickerView showFromView:self.view];
     } else if (indexPath.row == 6) {
@@ -229,6 +248,11 @@
             physiologicalDatePicker.delegate = self;
             [self.view addSubview:physiologicalDatePicker];
         }
+        NSDate *date = [[SWUserInfo shareInstance].physiologicalDateString dateWithFormat:@"yyy/MM/dd"];
+        if (date) {
+            [physiologicalDatePicker setDate:date animated:NO];
+        }
+        
         [self showPhysiologicalDatePicker:YES];
     }
 }
@@ -326,23 +350,30 @@
     [model saveHeadImage:originalImage];
     
     [self dismissViewControllerAnimated:YES completion:nil];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)selectedImage editingInfo:(NSDictionary *)editingInfo {
     headImageCell.headImageView.image = selectedImage;
     [model saveHeadImage:selectedImage];
     [self dismissViewControllerAnimated:YES completion:nil];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker {
     [self dismissViewControllerAnimated:YES completion:nil];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 }
 
 #pragma mark - HTDatePickerDelegate
 
-- (void)datePickerCancel:(HTDatePicker *)datePicker {
-    [self showDatePicker:NO];
+- (void)datePickerCancel:(HTDatePicker *)datePic {
+    if (datePic == datePicker) {
+        [self showDatePicker:NO];
+    } else {
+        [self showPhysiologicalDatePicker:NO];
+    }
 }
 
 - (void)datePickerFinished:(HTDatePicker *)datePic date:(NSDate *)date {

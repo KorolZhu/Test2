@@ -93,6 +93,14 @@ static NSString *alarmCellIdentifier = @"alarmCellIdentifier";
     [[SWSettingInfo shareInstance] addObserver:self forKeyPath:@"alarmArray" options:NSKeyValueObservingOptionNew context:NULL];
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    if (self.tableView.editing) {
+        [self editClick];
+    }
+}
+
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if ([keyPath isEqual:@"alarmArray"]) {
         if ([NSThread isMainThread]) {

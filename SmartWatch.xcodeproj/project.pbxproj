@@ -1475,6 +1475,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_PREFIX_HEADER = SmartWatch/SmartWatch_Prefix.pch;
 				INFOPLIST_FILE = SmartWatch/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -1484,7 +1485,7 @@
 					"$(PROJECT_DIR)/SmartWatch/ThirdParty/WeChat",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7c8cb04f-2beb-4db7-a19b-97ea50f4d990";
+				PROVISIONING_PROFILE = "35131dfd-355b-4520-bf65-36c61772feb6";
 				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Debug;
@@ -1504,7 +1505,7 @@
 					"$(PROJECT_DIR)/SmartWatch/ThirdParty/WeChat",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7c8cb04f-2beb-4db7-a19b-97ea50f4d990";
+				PROVISIONING_PROFILE = "35131dfd-355b-4520-bf65-36c61772feb6";
 				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Release;

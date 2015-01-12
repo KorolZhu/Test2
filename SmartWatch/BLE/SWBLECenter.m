@@ -20,7 +20,9 @@
 #import "SWAlarmInfo.h"
 #import "SWUserInfo.h"
 
-NSString *const kSWBLEDataReadCompletionNotification = @"kSWBLEDataReadCompletionNotification";
+NSString *const kSWBLESynchronizeStartNotification = @"kSWBLESynchronizeStartNotification";
+NSString *const kSWBLESynchronizeSuccessNotification = @"kSWBLESynchronizeSuccessNotification";
+NSString *const kSWBLESynchronizeFailNotification = @"kSWBLESynchronizeFailNotification";
 
 @interface SWBLECenter ()<BLEDelegate>
 {
@@ -101,27 +103,59 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
     return YES;
 }
 
+- (void)synchronize {
+    if (self.state != SWPeripheralStateConnected) {
+        return;
+    }
+    [self sendSetDateTimeRequest];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kSWBLESynchronizeStartNotification object:nil];
+}
+
 #pragma mark - BLE Request
 
 - (void)sendSetDateTimeRequest {
-    UInt8 buf[] = {BLE_CMD_SET_DAY_TIME_REQUEST, 20, 14, 12, 23, 21, 29, 00};
+    NSDate *now = [NSDate date];
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSUInteger unitFlags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit |NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+    NSDateComponents *dateComponent = [calendar components:unitFlags fromDate:now];
+    NSInteger year = [dateComponent year];
+    NSInteger month = [dateComponent month];
+    NSInteger day = [dateComponent day];
+    NSInteger hour = [dateComponent hour];
+    NSInteger minute = [dateComponent minute];
+    NSInteger second = [dateComponent second];
+    
+    UInt8 buf[] = {BLE_CMD_SET_DATE_TIME_REQUEST, year / 100, year % 100, month, day, hour, minute, second};
     NSData *data = [[NSData alloc] initWithBytes:buf length:8];
     [self.ble write:data];
 }
 
 - (void)sendGetBatteryRequest {
-    UInt8 buf[] = {BLE_CMD_SET_RESET_REQUEST};
+    UInt8 buf[] = {BLE_CMD_GET_BATTERY_REQUEST};
     NSData *data = [[NSData alloc] initWithBytes:buf length:1];
     [self.ble write:data];
 }
 
 - (void)sendGetIndexRequest {
-    UInt8 buf[] = {BLE_CMD_SET_INDEX_REQUEST};
+    UInt8 buf[] = {BLE_CMD_GET_INDEX_REQUEST};
     NSData *data = [[NSData alloc] initWithBytes:buf length:1];
     [self.ble write:data];
 }
 
-- (void)sendActivityCountRequest {
+- (void)sendGetDayModeRequest {
+    UInt8 buf[] = {BLE_CMD_GET_DAYMODE_REQUEST};
+    NSData *data = [[NSData alloc] initWithBytes:buf length:1];
+    [self.ble write:data];
+}
+
+- (void)sendGetStepsTargetRequest {
+    UInt8 buf[] = {BLE_CMD_SET_STEPTARGET_REQUEST, 0x00};
+    NSData *data = [[NSData alloc] initWithBytes:buf length:2];
+    [self.ble write:data];
+}
+
+- (void)sendGetActivityCountRequest {
     UInt8 buf[] = {BLE_CMD_ACTIVITY_COUNT_REQUEST};
     NSData *data = [[NSData alloc] initWithBytes:buf length:1];
     [self.ble write:data];
@@ -140,17 +174,6 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
     
     UInt8 buf[] = {BLE_CMD_SET_DAYMODE_REQUEST, startHour, endHour};
     NSData *data = [[NSData alloc] initWithBytes:buf length:3];
-    [self.ble write:data];
-    return YES;
-}
-
-- (BOOL)getDaylightInfo {
-    if (![self isDeviceConnected]) {
-        return NO;
-    }
-    
-    UInt8 buf[] = {BLE_CMD_GET_DAYMODE_REQUEST};
-    NSData *data = [[NSData alloc] initWithBytes:buf length:1];
     [self.ble write:data];
     return YES;
 }
@@ -181,30 +204,19 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
     return YES;
 }
 
-- (BOOL)setLostMeters:(NSInteger)meters {
-	if (![self isDeviceConnected]) {
-		return NO;
-	}
-	
-	UInt8 buf[] = {BLE_CMD_SET_STEPTARGET_REQUEST, 0x01};
-	
-	NSMutableData *data = [NSMutableData data];
-	[data appendBytes:buf length:2];
-	
-	[self.ble write:data];
-	return YES;
-}
-
-- (BOOL)getStepsTarget {
-    if (![self isDeviceConnected]) {
-        return NO;
-    }
-    
-    UInt8 buf[] = {BLE_CMD_SET_STEPTARGET_REQUEST, 0x00};
-    NSData *data = [[NSData alloc] initWithBytes:buf length:2];
-    [self.ble write:data];
-    return YES;
-}
+//- (BOOL)setLostMeters:(NSInteger)meters {
+//	if (![self isDeviceConnected]) {
+//		return NO;
+//	}
+//	
+//	UInt8 buf[] = {BLE_CMD_SET_STEPTARGET_REQUEST, 0x01};
+//	
+//	NSMutableData *data = [NSMutableData data];
+//	[data appendBytes:buf length:2];
+//	
+//	[self.ble write:data];
+//	return YES;
+//}
 
 - (BOOL)setUserInfoWithHeight:(NSInteger)height weight:(NSInteger)weight sex:(NSInteger)sex {
     if (![self isDeviceConnected]) {
@@ -225,7 +237,7 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
         return NO;
     }
     
-    if (dateymd.length != 8) {
+    if (dateymd.length != 10) {
         return NO;
     }
     
@@ -247,29 +259,83 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
     return YES;
 }
 
+- (BOOL)setPreventLostState:(NSInteger)state {
+    if (![self isDeviceConnected]) {
+        return NO;
+    }
+    
+    UInt8 buf[] = {BLE_CMD_PREVENT_LOST_REQUEST, state};
+    
+    NSMutableData *data = [NSMutableData data];
+    [data appendBytes:buf length:2];
+    
+    [self.ble write:data];
+    return YES;
+}
+
 #pragma mark - BLE Response
 
-- (void)handleResetReponse:(NSData *)data {
+- (void)handleSetDateTimeResponse:(NSData *)data {
+    if (data.length >= 20) {
+        UInt8 ret = 0;
+        [data getBytes:&ret range:NSMakeRange(1, 1)];
+    }
+    
+    [self sendGetBatteryRequest];
+}
+
+- (void)handleGetBatteryReponse:(NSData *)data {
     if (data.length >= 2) {
         UInt8 battery = 0;
         [data getBytes:&battery range:NSMakeRange(1, 1)];
-        
+        [SWSettingInfo shareInstance].battery = battery;
     }
+    
+    [self sendGetIndexRequest];
 }
 
-- (void)handleIndexResponse:(NSData *)data {
+- (void)handleGetIndexResponse:(NSData *)data {
     if (data.length >= 2) {
         UInt8 index = 0;
         [data getBytes:&index range:NSMakeRange(1, 1)];
-        
+        [SWSettingInfo shareInstance].ultravioletIndex = index;
     }
+    
+    [self sendGetDayModeRequest];
 }
 
-- (void)handleActivityCountResponse:(NSData *)data {
+- (void)handleGetDayModeResponse:(NSData *)data {
+    if (data.length >= 3) {
+        UInt8 startHour = 0;
+        UInt8 endHour = 0;
+        [data getBytes:&startHour range:NSMakeRange(1, 1)];
+        [data getBytes:&endHour range:NSMakeRange(2, 1)];
+        [SWSettingInfo shareInstance].startHour = startHour;
+        [SWSettingInfo shareInstance].endHour = endHour;
+    }
+    
+    [self sendGetStepsTargetRequest];
+}
+
+- (void)handleGetStepsTargetResponse:(NSData *)data {
+    if (data.length >= 5) {
+        UInt8 step1 = 0;
+        UInt8 step2 = 0;
+        [data getBytes:&step1 range:NSMakeRange(3, 1)];
+        [data getBytes:&step2 range:NSMakeRange(4, 1)];
+        [SWSettingInfo shareInstance].stepsTarget = step2 * 256 + step1;
+    }
+    [[SWSettingInfo shareInstance] updateToDB];
+    [self sendGetActivityCountRequest];
+}
+
+- (void)handleGetActivityCountResponse:(NSData *)data {
     activityCountResponse = [[SWActivityCountResponse alloc] initWithData:data];
-    activityCountResponse.currentIndex = activityCountResponse.count - 1;
-    if (activityCountResponse.count > 0 && activityCountResponse.currentIndex < activityCountResponse.count && activityCountResponse.currentIndex >= 0) {
+    if (activityCountResponse.count > 0) {
+        activityCountResponse.currentIndex = activityCountResponse.count - 1;
         [self sendGetActivityRequestWithIndex:activityCountResponse.currentIndex];
+    } else {
+        [[NSNotificationCenter defaultCenter] postNotificationName:kSWBLESynchronizeSuccessNotification object:nil];
     }
 }
 
@@ -310,7 +376,7 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
 		[self sendGetActivityRequestWithIndex:activityCountResponse.currentIndex];
 	} else {
         if (activityCountResponse.currentIndex == 0) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:kSWBLEDataReadCompletionNotification object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:kSWBLESynchronizeSuccessNotification object:nil];
             
             return;
         }
@@ -330,17 +396,10 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
     }
 }
 
-- (void)handleStepsTargetResponse:(NSData *)data {
+- (void)handleSetStepsTargetResponse:(NSData *)data {
     if (data.length >= 20) {
         UInt8 ret = 0;
-        [data getBytes:&ret range:NSMakeRange(1, 1)];
-    }
-}
-
-- (void)handleGetDaylightInfoResponse:(NSData *)data {
-    if (data.length >= 20) {
-        UInt8 ret = 0;
-        [data getBytes:&ret range:NSMakeRange(1, 1)];
+        [data getBytes:&ret range:NSMakeRange(2, 1)];
     }
 }
 
@@ -358,17 +417,26 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
     }
 }
 
+- (void)handleSetPreventLostState:(NSData *)data {
+    if (data.length >= 20) {
+        UInt8 ret = 0;
+        [data getBytes:&ret range:NSMakeRange(1, 1)];
+    }
+}
+
 #pragma mark - BLE delegate
 
 - (void)bleDidConnect {
     self.state = SWPeripheralStateConnected;
-    
     [self sendSetDateTimeRequest];
-    [self sendGetBatteryRequest];
-    [self sendGetIndexRequest];
-    [self getDaylightInfo];
-    [self getStepsTarget];
-    [self sendActivityCountRequest];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kSWBLESynchronizeStartNotification object:nil];
+    
+//    [self sendGetBatteryRequest];
+//    [self sendGetIndexRequest];
+//    [self getDaylightInfo];
+//    [self getStepsTarget];
+//    [self sendActivityCountRequest];
 }
 
 - (void)bleDidWriteValue {
@@ -377,40 +445,57 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
 
 - (void)bleDidDisconnect {
     self.state = SWPeripheralStateDisconnected;
-	
 	activityCountResponse = nil;
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:kSWBLESynchronizeFailNotification object:nil];
 }
 
 - (void)bleDidReceiveData:(NSData *)data {
     if (data.length >= 20) {
         SWPacketHeader *response = [[SWPacketHeader alloc] initWithData:data];
         switch (response.cmdID) {
-            case BLE_CMD_SET_RESET_RESPONSE:
-                [self handleResetReponse:data];
+            case BLE_CMD_SET_DATE_TIME_RESPONSE:
+                [self handleSetDateTimeResponse:data];
                 break;
-            case BLE_CMD_SET_INDEX_RESPONSE:
-                [self handleIndexResponse:data];
+            case BLE_CMD_GET_BATTERY_RESPONSE:
+                [self handleGetBatteryReponse:data];
+                break;
+            case BLE_CMD_GET_INDEX_RESPONSE:
+                [self handleGetIndexResponse:data];
+                break;
+            case BLE_CMD_GET_DAYMODE_RESPONSE:
+                [self handleGetDayModeResponse:data];
+                break;
+            case BLE_CMD_SET_STEPTARGET_RESPONSE: {
+                if (data.length >= 2) {
+                    UInt8 tag = 0;
+                    [data getBytes:&tag range:NSMakeRange(1, 1)];
+                    if (tag == 0) {
+                        [self handleGetStepsTargetResponse:data];
+                    } else if (tag == 1) {
+                        [self handleSetStepsTargetResponse:data];
+                    }
+                }
+                
+            }
                 break;
             case BLE_CMD_ACTIVITY_COUNT_RESPONSE:
-                [self handleActivityCountResponse:data];
+                [self handleGetActivityCountResponse:data];
                 break;
             case BLE_CMD_ACTIVITY_GETBYSN_RESPONSE:
                 [self handleGetActivityRequest:data];
                 break;
-            case BLE_CMD_SET_DAY_TIME_RESPONSE:
-                [self handleGetDaylightInfoResponse:data];
-                break;
             case BLE_CMD_SET_ALARM_RESPONSE:
                 [self handleSetAlarmResponse:data];
-                break;
-            case BLE_CMD_SET_STEPTARGET_RESPONSE:
-                [self handleStepsTargetResponse:data];
                 break;
             case BLE_CMD_SET_BODY_RESPONSE:
                 [self handleSetUserInfoResponse:data];
                 break;
             case BLE_CMD_SET_WOMEN_RESPONSE:
                 [self handleSetPhysiologicalInfo:data];
+                break;
+            case BLE_CMD_PREVENT_LOST_RESPONSE:
+                [self handleSetPreventLostState:data];
                 break;
             default:
                 break;

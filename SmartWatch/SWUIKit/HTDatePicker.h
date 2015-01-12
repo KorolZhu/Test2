@@ -25,5 +25,6 @@
 
 //@property (nonatomic,strong) NSString *title;
 - (id)initWithFrame:(CGRect)frame date:(NSDate *)date;
+- (void)setDate:(NSDate *)date animated:(BOOL)animated;
 
 @end

@@ -64,19 +64,39 @@
     }
 }
 
+- (void)preventLostSwitchValueChanged:(UISwitch *)switc {
+    if ([[SWBLECenter shareInstance] setPreventLostState:switc.on]) {
+        [model savePreventLost:switc.on];
+    } else {
+        switc.on = !switc.on;
+    }
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 6;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *cellIdentifier = @"cellIdentifier";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+    static NSString *lostCellIdentifier = @"lostCellIdentifier";
+
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:indexPath.row == 4 ? lostCellIdentifier : cellIdentifier];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:indexPath.row == 4 ? lostCellIdentifier : cellIdentifier];
+        cell.accessoryType = indexPath.row == 4 ? UITableViewCellAccessoryNone : UITableViewCellAccessoryDisclosureIndicator;
         cell.backgroundColor = [UIColor clearColor];
         cell.textLabel.textColor = [UIColor whiteColor];
         cell.textLabel.font = [UIFont systemFontOfSize:14.0f];
+        
+        if (indexPath.row == 4) {
+            UISwitch *switc = [[UISwitch alloc] init];
+            [switc addTarget:self action:@selector(preventLostSwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
+            switc.right = IPHONE_WIDTH - 12.0f;
+            switc.centerY = 22.0f;
+            [cell.contentView addSubview:switc];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            switc.on = ([SWSettingInfo shareInstance].preventLost == 1);
+        }
     }
     
     if (indexPath.row == 0) {
@@ -128,9 +148,9 @@
         
     }
     else if (indexPath.row == 4) {
-		SWLostSettingViewController *lostSetViewController = [[SWLostSettingViewController alloc] init];
-		lostSetViewController.model = model;
-		[self.navigationController pushViewController:lostSetViewController animated:YES];
+//		SWLostSettingViewController *lostSetViewController = [[SWLostSettingViewController alloc] init];
+//		lostSetViewController.model = model;
+//		[self.navigationController pushViewController:lostSetViewController animated:YES];
     }
     else if (indexPath.row == 5) {
         

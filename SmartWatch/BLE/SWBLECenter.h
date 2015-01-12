@@ -9,7 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "SWSingleton.h"
 
-extern NSString *const kSWBLEDataReadCompletionNotification;
+NSString *const kSWBLESynchronizeStartNotification;
+NSString *const kSWBLESynchronizeSuccessNotification;
+NSString *const kSWBLESynchronizeFailNotification;
 
 @class SWAlarmInfo;
 
@@ -35,15 +37,18 @@ SW_AS_SINGLETON(SWBLECenter, shareInstance);
 - (void)connectDevice;
 - (void)disconnectDevice;
 
+- (void)synchronize;
+
 - (BOOL)setDaylightWithStartHour:(NSInteger)startHour endHour:(NSInteger)endHour;
 - (BOOL)setAlarmWithAlarmInfo:(SWAlarmInfo *)alarmInfo;
 - (BOOL)setStepTargets:(NSInteger)steps;
-- (BOOL)setLostMeters:(NSInteger)meters;
+//- (BOOL)setLostMeters:(NSInteger)meters;
 - (BOOL)setUserInfoWithHeight:(NSInteger)height
                        weight:(NSInteger)weight
                           sex:(NSInteger)sex;
 
 - (BOOL)setphysiologicalInfoWithDateymd:(NSString *)dateymd
                     physiologicalDay:(NSInteger)physiologicalDay;
+- (BOOL)setPreventLostState:(NSInteger)state;
 
 @end

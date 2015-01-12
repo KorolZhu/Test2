@@ -30,44 +30,15 @@
     return  self;
 }
 
-- (void)updateToDB {
-    WBMutableSQLBuffer *mutableSqlBuffer = [[WBMutableSQLBuffer alloc] init];
-    
-    WBSQLBuffer *deleteSqlbuffer = [[WBSQLBuffer alloc] init];
-    deleteSqlbuffer.DELELTE(DBSETTING._tableName).WHERE([NSString stringWithFormat:@"1=1"]);
-    [mutableSqlBuffer addBuffer:deleteSqlbuffer];
-    
-    WBSQLBuffer *sqlBuffer = [[WBSQLBuffer alloc] init];
-    sqlBuffer.INSERT(DBSETTING._tableName);
-    sqlBuffer.SET(DBSETTING._TARGETSTEP,@([[SWSettingInfo shareInstance] stepsTarget]));
-    sqlBuffer.SET(DBSETTING._DAYTIMESTARTHOUR,@([SWSettingInfo shareInstance].startHour));
-    sqlBuffer.SET(DBSETTING._DAYTIMEENDTHOUR,@([SWSettingInfo shareInstance].endHour));
-    
-    NSMutableArray *array = [NSMutableArray array];
-    for (SWAlarmInfo *info in [[SWSettingInfo shareInstance] alarmArray]) {
-        NSDictionary *dict = @{ALARMHOUR: @(info.hour), ALARMMINUTE: @(info.minute), ALARMSTATE : @(info.state), ALARMREPEAT: @(info.repeat)};
-        [array addObject:dict];
-    }
-    sqlBuffer.SET(DBSETTING._ALARM, [array jsonString]);
-    
-    [mutableSqlBuffer addBuffer:sqlBuffer];
-    
-    WBDatabaseTransaction *transaction = [[WBDatabaseTransaction alloc] initWithMutalbeSQLBuffer:mutableSqlBuffer];
-    
-    [[WBDatabaseService defaultService] writeWithTransaction:transaction completionBlock:^{
-    }];
-    
-}
-
 - (void)saveStepsTarget:(NSInteger)steps {
     [[SWSettingInfo shareInstance] setStepsTarget:steps];
-    [self updateToDB];
+    [[SWSettingInfo shareInstance] updateToDB];
 }
 
 - (void)saveDaylightTimeWithStartHour:(NSInteger)startHour endHour:(NSInteger)endHour {
     [[SWSettingInfo shareInstance] setStartHour:startHour];
     [[SWSettingInfo shareInstance] setEndHour:endHour];
-    [self updateToDB];
+    [[SWSettingInfo shareInstance] updateToDB];
 }
 
 - (void)addNewAlarm:(SWAlarmInfo *)alarmInfo {
@@ -78,25 +49,26 @@
     [[SWSettingInfo shareInstance] willChangeValueForKey:@"alarmArray"];
     [[[SWSettingInfo shareInstance] alarmArray] removeAllObjects];
     [[[SWSettingInfo shareInstance] alarmArray] addObject:alarmInfo];
-    [self updateToDB];
+    [[SWSettingInfo shareInstance] updateToDB];
     [[SWSettingInfo shareInstance] didChangeValueForKey:@"alarmArray"];
 }
 
 - (void)removeAlarm:(SWAlarmInfo *)alarmInfo {
     [[SWSettingInfo shareInstance] willChangeValueForKey:@"alarmArray"];
     [[[SWSettingInfo shareInstance] alarmArray] removeObject:alarmInfo];
-    [self updateToDB];
+    [[SWSettingInfo shareInstance] updateToDB];
     [[SWSettingInfo shareInstance] didChangeValueForKey:@"alarmArray"];
 }
 
 - (void)updateAlarmInfo {
     [[SWSettingInfo shareInstance] willChangeValueForKey:@"alarmArray"];
-    [self updateToDB];
+    [[SWSettingInfo shareInstance] updateToDB];
     [[SWSettingInfo shareInstance] didChangeValueForKey:@"alarmArray"];
 }
 
-- (void)saveLostMeter:(NSInteger)meter {
-	
+- (void)savePreventLost:(NSInteger)state {
+    [SWSettingInfo shareInstance].preventLost = state;
+    [[SWSettingInfo shareInstance] updateToDB];
 }
 
 @end

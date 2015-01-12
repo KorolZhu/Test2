@@ -7,8 +7,12 @@
 //
 
 #import "SWDeviceConnectdViewController.h"
+#import "SWAccessoryPickerView.h"
 
-@interface SWDeviceConnectdViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface SWDeviceConnectdViewController ()<UITableViewDataSource,UITableViewDelegate,SWAccessoryPickerViewDelegate>
+{
+    SWAccessoryPickerView *accessoryPickerView;
+}
 
 @property (nonatomic,strong) UITableView *tableView;
 
@@ -25,6 +29,11 @@
     }
     
     return self;
+}
+
+- (void)dealloc {
+    [[SWBLECenter shareInstance] removeObserver:self forKeyPath:@"state"];
+    [[SWBLECenter shareInstance].ble removeObserver:self forKeyPath:@"peripherals"];
 }
 
 - (void)viewDidLoad {
@@ -51,6 +60,9 @@
     UIView *footView = [[UIView alloc] init];
     footView.backgroundColor = [UIColor clearColor];
     self.tableView.tableFooterView = footView;
+    
+    [[SWBLECenter shareInstance] addObserver:self forKeyPath:@"state" options:NSKeyValueObservingOptionNew context:NULL];
+    [[SWBLECenter shareInstance].ble addObserver:self forKeyPath:@"peripherals" options: NSKeyValueObservingOptionNew context:NULL];
 }
 
 - (void)backClick {
@@ -58,7 +70,19 @@
 }
 
 - (void)synchronizeClick {
-    
+    if ([SWBLECenter shareInstance].state == SWPeripheralStateDisconnected) {
+        if (!accessoryPickerView) {
+            accessoryPickerView = [[SWAccessoryPickerView alloc] initWithFrame:CGRectMake(22.0f, 100.0f, IPHONE_WIDTH - 44.0f, IPHONE_HEIGHT - 200.0f)];
+            accessoryPickerView.title = NSLocalizedString(@"请选择蓝牙设备", nil);
+            accessoryPickerView.delegate = self;
+        }
+        
+        [accessoryPickerView show];
+        [accessoryPickerView setDataSource:nil];
+        [[SWBLECenter shareInstance] scanBLEPeripherals];
+    } else if ([SWBLECenter shareInstance].state == SWPeripheralStateConnected) {
+        [[SWBLECenter shareInstance] synchronize];
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -76,6 +100,45 @@
         cell.textLabel.text = nil;
     }
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+#pragma mark - AccessoryPickerView
+
+- (void)accessoryPickerView:(SWAccessoryPickerView *)pickerView didSelectPeripheral:(CBPeripheral *)peripheral {
+    [[SWBLECenter shareInstance] stopScanBLEPeripherals];
+    [accessoryPickerView hide];
+    [[SWBLECenter shareInstance] connectPeripheral:peripheral];
+}
+
+- (void)accessoryPickerViewDidCancel:(SWAccessoryPickerView *)pickerView {
+    [[SWBLECenter shareInstance] stopScanBLEPeripherals];
+    [accessoryPickerView hide];
+}
+
+#pragma mark - KVO
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if ([keyPath isEqualToString:@"state"]) {
+        NSInteger state = [[change objectForKey:NSKeyValueChangeNewKey] integerValue];
+        switch (state) {
+            case SWPeripheralStateDisconnected:
+            case SWPeripheralStateConnected:
+                [self.tableView reloadData];
+                break;
+            default:
+                break;
+        }
+    } else if ([keyPath isEqualToString:@"peripherals"]) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (accessoryPickerView.isVisible) {
+                accessoryPickerView.dataSource = [NSArray arrayWithArray:[SWBLECenter shareInstance].ble.peripherals];
+            }
+        });
+    }
 }
 
 @end

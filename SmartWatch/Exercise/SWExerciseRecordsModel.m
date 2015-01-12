@@ -25,13 +25,12 @@
 @implementation SWExerciseRecordsModel
 
 - (void)dealloc {
-	[[NSNotificationCenter defaultCenter] removeObserver:self name:kSWBLEDataReadCompletionNotification object:nil];
+	
 }
 
 - (instancetype)initWithResponder:(id)responder {
 	self = [super initWithResponder:responder];
 	if (self) {
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(bleDataReadCompletion) name:kSWBLEDataReadCompletionNotification object:nil];
 	}
 	
 	return self;
@@ -68,7 +67,7 @@
 				if ([keyString hasPrefix:DBDAILYSTEPS._STEPCOUNT]) {
 					NSInteger hour = [[keyString stringByReplacingOccurrencesOfString:DBDAILYSTEPS._STEPCOUNT withString:@""] integerValue];
 					NSInteger steps = [obj integerValue];
-					if (steps > 65280) {
+					if (steps >= 65280) {
 						[sleepTempDictionary setObject:@(steps - 65280) forKey:@(hour + 1)];
 					} else {
                         if (steps > 0) {
@@ -81,7 +80,17 @@
                             }
                         }
 						
-						float calorie = 0.53 * [[SWUserInfo shareInstance] height] + 0.58 * [[SWUserInfo shareInstance] weight] + 0.04 * steps - 135;
+                        NSInteger height = [[SWUserInfo shareInstance] height];
+                        if (height <= 0) {
+                            height = 170;
+                        }
+                        
+                        NSInteger weight = [[SWUserInfo shareInstance] weight];
+                        if (weight <= 0) {
+                            weight = 55;
+                        }
+                        
+						float calorie = 0.53 * height + 0.58 * weight + 0.04 * steps - 135;
                         if (calorie > 0.0f) {
                             [calorieTempDictionary setObject:@(calorie) forKey:@(hour + 1)];
                             
@@ -91,7 +100,15 @@
                     
                     // 计算睡眠时间
                     NSInteger daylightStartHour = [[SWSettingInfo shareInstance] startHour];
+                    if (daylightStartHour <= 0) {
+                        daylightStartHour = 9;
+                    }
+                    
                     NSInteger daylightEndHour = [[SWSettingInfo shareInstance] endHour];
+                    if (daylightEndHour <= 0) {
+                        daylightEndHour = 21;
+                    }
+                    
                     BOOL night = NO;
                     if (daylightStartHour > daylightEndHour) {
                         if (hour >= daylightStartHour || hour <= daylightEndHour) {
@@ -121,8 +138,13 @@
 			}];
 		}
         
+        NSInteger stepsTarget = [[SWSettingInfo shareInstance] stepsTarget];
+        if (stepsTarget <= 0) {
+            stepsTarget = 2500;
+        }
+        
         _totalSteps = tempTotalSteps;
-        _stepsPercent = _totalSteps / [[SWSettingInfo shareInstance] stepsTarget];
+        _stepsPercent = _totalSteps / stepsTarget;
         _stepsPercentString = [NSString stringWithFormat:@"%d%%", (int)(_stepsPercent * 100)];
         
         _totalDistance = tempTotalSteps * [[SWUserInfo shareInstance] height] * 0.45 * 0.01 * 0.001;

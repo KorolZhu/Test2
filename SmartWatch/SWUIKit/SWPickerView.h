@@ -24,6 +24,8 @@
 @property (nonatomic,strong) NSString *titleSuffix;
 @property (nonatomic,weak) id<SWPickerViewDelegate> delegate;
 
+- (void)selectRow:(NSInteger)row inComponent:(NSInteger)component animated:(BOOL)animated;
+
 - (void)showFromView:(UIView *)view;
 - (void)hideFromView:(UIView *)view;
 

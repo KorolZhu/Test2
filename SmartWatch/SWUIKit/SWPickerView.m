@@ -49,6 +49,10 @@
     return self;
 }
 
+- (void)selectRow:(NSInteger)row inComponent:(NSInteger)component animated:(BOOL)animated {
+    [_pickerView selectRow:row inComponent:component animated:animated];
+}
+
 - (void)showFromView:(UIView *)view {
     if (!self.hidden) {
         return;

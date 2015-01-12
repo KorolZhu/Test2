@@ -69,6 +69,10 @@
     return self;
 }
 
+- (void)setDate:(NSDate *)date animated:(BOOL)animated {
+    [_datePick setDate:date animated:animated];
+}
+
 - (void)cancelBtnClick{
     if (self.delegate && [self.delegate respondsToSelector:@selector(datePickerCancel:)]) {
         [self.delegate datePickerCancel:self];

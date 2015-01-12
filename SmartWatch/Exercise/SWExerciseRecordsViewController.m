@@ -48,7 +48,6 @@
 }
 
 @property (nonatomic,strong) UIScrollView *scrollView;
-@property (nonatomic, strong) MBProgressHUD *HUD;
 
 @end
 
@@ -61,6 +60,9 @@
         self.extendedLayoutIncludesOpaqueBars = NO;
 		
 		model = [[SWExerciseRecordsModel alloc] initWithResponder:self];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(synchronizeStart) name:kSWBLESynchronizeStartNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(synchronizeSucceed) name:kSWBLESynchronizeSuccessNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(synchronizeFailed) name:kSWBLESynchronizeFailNotification object:nil];
     }
     
     return self;
@@ -68,6 +70,7 @@
 
 - (void)dealloc {
     [[SWBLECenter shareInstance] removeObserver:self forKeyPath:@"state" context:NULL];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewDidLoad {
@@ -100,10 +103,10 @@
     
     
     environmentView = [[SWEnvironmentView alloc] initWithFrame:CGRectMake(14.0f, 12.0f, IPHONE_WIDTH - 28.0f, 25.0f)];
-    environmentView.uvLevel = 5;
-    environmentView.temperature = 25;
-    environmentView.humidity = 66;
-    environmentView.leftPower = 77;
+    environmentView.uvLevel = [SWSettingInfo shareInstance].ultravioletIndex;
+    environmentView.temperature = 0;
+    environmentView.humidity = 0;
+    environmentView.leftPower = [SWSettingInfo shareInstance].battery;
     [_scrollView addSubview:environmentView];
     
     progressView = [[SWCircleProgressView alloc] initWithFrame:CGRectMake(14.0f, environmentView.bottom + 15.0f, 0.0f, 0.0f)];
@@ -112,7 +115,7 @@
     progressView.bottomDesc = NSLocalizedString(@"目标", nil);
     [_scrollView addSubview:progressView];
     
-    dashboardView = [[SWDashboardView alloc] initWithFrame:CGRectMake(progressView.right + 16.0f, progressView.top + 10.0f, 112.0f, 171.0f)];
+    dashboardView = [[SWDashboardView alloc] initWithFrame:CGRectMake(progressView.right + 11.0f, progressView.top + 10.0f, 107.0f, 171.0f)];
     [_scrollView addSubview:dashboardView];
     dashboardView.value1 = 0;
     dashboardView.unit1 = @"千卡";
@@ -235,13 +238,23 @@
     
     [model queryExerciseRecordsWithDate:[NSDate date]];
     titleView.nextButton.enabled = NO;
-    
-    _HUD = [[MBProgressHUD alloc] initWithView:self.view];
-    [self.view addSubview:_HUD];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+}
+
+- (void)synchronizeStart {
+    [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+}
+
+- (void)synchronizeSucceed {
+    [model queryExerciseRecordsWithDate:[NSDate date]];
+    [titleView setDate:[NSDate date]];
+}
+
+- (void)synchronizeFailed {
+    [MBProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
 }
 
 - (void)bleClick {
@@ -451,7 +464,7 @@
         dashboardView.unit2 = @"公里";
         dashboardView.descri2 = @"距离";
         dashboardView.value3 = @(model.totalSteps).stringValue;
-        dashboardView.unit3 = @"步";
+        dashboardView.unit3 = @"";
         dashboardView.descri3 = @"步数";
     } else if (stepButton.selected) {
         progressView.topDesc = NSLocalizedString(@"今日", nil);
@@ -464,9 +477,9 @@
         dashboardView.value2 = @(24 - model.daylightActivitytime).stringValue;
         dashboardView.unit2 = @"小时";
         dashboardView.descri2 = @"非活动";
-        dashboardView.unit3 = @"小时";
+        dashboardView.unit3 = @"";
         dashboardView.value3 = model.stepsPercentString;
-        dashboardView.descri3 = @"步数";
+        dashboardView.descri3 = @"目标百分比";
     } else {
         progressView.topDesc = NSLocalizedString(@"今日", nil);
         progressView.bottomDesc = NSLocalizedString(@"睡眠", nil);
@@ -520,6 +533,9 @@
 #pragma mark - Model
 
 - (void)exerciseRecordsQueryFinished {
+    environmentView.uvLevel = [SWSettingInfo shareInstance].ultravioletIndex;
+    environmentView.leftPower = [SWSettingInfo shareInstance].battery;
+    
     [self reloadProgressData];
 
 	caloriePlot.plottingValues = model.calorieDictionary;
@@ -529,7 +545,7 @@
 	[stepsGraphView reloadPlot];
 	[sleepGraphView reloadPlot];
     
-    [_HUD hide:YES];
+    [MBProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
 }
 
 - (void)locationQueryFinished {
@@ -596,8 +612,6 @@
                     leftBarButton.enabled = YES;
                     [leftBarButton setImage:[UIImage imageNamed:@"蓝牙"] forState:UIControlStateNormal];
                     [leftBarButton setTitle:nil forState:UIControlStateNormal];
-                    
-                    [_HUD hide:YES];
                 });
             }
                 break;
@@ -606,8 +620,6 @@
                     leftBarButton.enabled = YES;
                     [leftBarButton setImage:nil forState:UIControlStateNormal];
                     [leftBarButton setTitle:NSLocalizedString(@"已连接", nil) forState:UIControlStateNormal];
-                    
-                    [_HUD show:YES];
                 });
             }
                 break;

@@ -49,6 +49,15 @@
     
 }
 
+- (NSInteger)stepsTarget {
+    NSInteger stepsTarget = [[SWSettingInfo shareInstance] stepsTarget];
+    if (stepsTarget <= 0) {
+        stepsTarget = 2500;
+    }
+    
+    return stepsTarget;
+}
+
 - (void)queryReportWithDateymd:(long long)dateymd {
     [self resetTempData];
     
@@ -63,7 +72,7 @@
             if ([keyString hasPrefix:DBDAILYSTEPS._STEPCOUNT]) {
                 NSInteger hour = [[keyString stringByReplacingOccurrencesOfString:DBDAILYSTEPS._STEPCOUNT withString:@""] integerValue];
                 NSInteger steps = [obj integerValue];
-                if (steps > 65280) {
+                if (steps >= 65280) {
                     // 睡眠评分
                 } else {
                     if (steps > 0) {
@@ -76,7 +85,17 @@
                         }
                     }
                     
-                    float calorie = 0.53 * [[SWUserInfo shareInstance] height] + 0.58 * [[SWUserInfo shareInstance] weight] + 0.04 * steps - 135;
+                    NSInteger height = [[SWUserInfo shareInstance] height];
+                    if (height <= 0) {
+                        height = 170;
+                    }
+                    
+                    NSInteger weight = [[SWUserInfo shareInstance] weight];
+                    if (weight <= 0) {
+                        weight = 55;
+                    }
+                    
+                    float calorie = 0.53 * height + 0.58 * weight + 0.04 * steps - 135;
                     if (calorie > 0.0f) {
                         [calorieTempDictionary setObject:@(calorie) forKey:@(hour + 1)];
                         
@@ -121,7 +140,7 @@
         currentDayDateymd = dateymd;
         [self queryReportWithDateymd:currentDayDateymd];
         _dayTotalSteps = tempTotalSteps;
-        _dayStepsPercent = tempTotalSteps / [[SWSettingInfo shareInstance] stepsTarget];
+        _dayStepsPercent = tempTotalSteps / [self stepsTarget];
         
         _dayTotalCalorie = tempTotalCalorie;
         _dayCaloriePercent = tempTotalCalorie / [[SWSettingInfo shareInstance] calorieTarget];
@@ -167,7 +186,7 @@
         _weekCalorieDictionary = [NSDictionary dictionaryWithDictionary:tempWeekCalorieDictionary];
         _weekStepsDictionary = [NSDictionary dictionaryWithDictionary:tempWeekStepsDictionary];
         _weekStepsPerday = tempWeekTotalSteps / 7.0f;
-        _weekStepsPercent = _weekStepsPerday / (float)[[SWSettingInfo shareInstance] stepsTarget];
+        _weekStepsPercent = _weekStepsPerday / (float)[self stepsTarget];
         _weekCaloriePerday = tempWeekTotalCalorie / 7.0f;
         _weekCaloriePercent = _weekCaloriePerday / (float)[[SWSettingInfo shareInstance] calorieTarget];
         _weekSleepPerday = tempWeekTotalSleep / 7.0f;
@@ -209,7 +228,7 @@
         _monthCalorieDictionary = [NSDictionary dictionaryWithDictionary:tempMonthCalorieDictionary];
         _monthStepsDictionary = [NSDictionary dictionaryWithDictionary:tempMonthStepsDictionary];
         _monthStepsPerday = tempMonthTotalSteps / 30.0f;
-        _monthStepsPercent = _monthStepsPerday / (float)[[SWSettingInfo shareInstance] stepsTarget];
+        _monthStepsPercent = _monthStepsPerday / (float)[self stepsTarget];
         _monthCaloriePerday = tempMonthTotalCalorie / 30.0f;
         _monthCaloriePercent = _monthCaloriePerday / (float)[[SWSettingInfo shareInstance] calorieTarget];
         _monthSleepPerday = tempMonthTotalSleep / 30.0f;
@@ -267,7 +286,7 @@
         _yearCalorieDictionary = [NSDictionary dictionaryWithDictionary:tempYearCalorieDictionary];
         _yearStepsDictionary = [NSDictionary dictionaryWithDictionary:tempYearStepsDictionary];
         _yearStepsPerday = tempYearTotalSteps / 365.0f;
-        _yearStepsPercent = _yearStepsPerday / (float)[[SWSettingInfo shareInstance] stepsTarget];
+        _yearStepsPercent = _yearStepsPerday / (float)[self stepsTarget];
         _yearCaloriePerday = tempYearTotalCalorie / 365.0f;
         _yearCaloriePercent = _yearCaloriePerday / (float)[[SWSettingInfo shareInstance] calorieTarget];
         _yearSleepPerday = tempYearTotalSleep / 30.0f;

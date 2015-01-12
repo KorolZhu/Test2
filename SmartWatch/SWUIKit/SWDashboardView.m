@@ -43,6 +43,7 @@
         [self addSubview:valueLabel];
         
         descriLabel = [[UILabel alloc] initWithFrame:CGRectMake(61.0f, 0.0f, 51.0f, 51.0f)];
+        descriLabel.numberOfLines = 0;
         descriLabel.textAlignment = NSTextAlignmentLeft;
         descriLabel.backgroundColor = [UIColor clearColor];
         descriLabel.font = [UIFont systemFontOfSize:11.0f];
@@ -55,12 +56,16 @@
 
 - (void)setValue:(NSString *)value {
     _value = value;
-    valueLabel.text = [NSString stringWithFormat:@"%@\n%@", _value, _unit];
+    if (_unit.length > 0) {
+        valueLabel.text = [NSString stringWithFormat:@"%@\n%@", _value, _unit];
+    } else {
+        valueLabel.text = [NSString stringWithFormat:@"%@", _value];
+    }
 }
 
 - (void)setUnit:(NSString *)unit {
     _unit = unit;
-    valueLabel.text = [NSString stringWithFormat:@"%@\n%@", _value, _unit];
+    [self setValue:_value];
 }
 
 - (void)setDescri:(NSString *)descri {
