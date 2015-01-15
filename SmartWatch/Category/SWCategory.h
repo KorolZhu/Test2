@@ -18,5 +18,7 @@
 #import "NSDictionary+HT.h"
 #import "UIBarButtonItem+HT.h"
 #import "HTJSONAdapter.h"
+#import "UIImage-Extension.h"
+#import "UIImage+Rotating.h"
 
 #endif

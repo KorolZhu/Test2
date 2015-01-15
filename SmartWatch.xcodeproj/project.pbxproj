@@ -13,6 +13,19 @@
 		455851061A37EF0900649397 /* NSDate+WB.m in Sources */ = {isa = PBXBuildFile; fileRef = 455851051A37EF0900649397 /* NSDate+WB.m */; };
 		4558510B1A37F92D00649397 /* SWModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4558510A1A37F92D00649397 /* SWModel.m */; };
 		458687591A4A6AFD0079059D /* SWHistoryRecordsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 458687581A4A6AFD0079059D /* SWHistoryRecordsModel.m */; };
+		45DD4DB51A67985C00D28071 /* ic_marker_direct.png in Resources */ = {isa = PBXBuildFile; fileRef = 45DD4DB31A67985C00D28071 /* ic_marker_direct.png */; };
+		45DD4DB61A67985C00D28071 /* ic_marker_direct@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45DD4DB41A67985C00D28071 /* ic_marker_direct@2x.png */; };
+		45DD4DB91A67986800D28071 /* ic_marker_end.png in Resources */ = {isa = PBXBuildFile; fileRef = 45DD4DB71A67986800D28071 /* ic_marker_end.png */; };
+		45DD4DBA1A67986800D28071 /* ic_marker_end@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45DD4DB81A67986800D28071 /* ic_marker_end@2x.png */; };
+		45DD4DBD1A679BA300D28071 /* mainMap_SmallBlue.png in Resources */ = {isa = PBXBuildFile; fileRef = 45DD4DBB1A679BA300D28071 /* mainMap_SmallBlue.png */; };
+		45DD4DBE1A679BA300D28071 /* mainMap_SmallBlue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45DD4DBC1A679BA300D28071 /* mainMap_SmallBlue@2x.png */; };
+		45E8F5C11A67A2C700DDE39B /* aw_mapview_track_line_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = 45E8F5BD1A67A2C700DDE39B /* aw_mapview_track_line_selected.png */; };
+		45E8F5C21A67A2C700DDE39B /* aw_mapview_track_line_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45E8F5BE1A67A2C700DDE39B /* aw_mapview_track_line_selected@2x.png */; };
+		45E8F5C31A67A2C700DDE39B /* aw_mapview_track_line.png in Resources */ = {isa = PBXBuildFile; fileRef = 45E8F5BF1A67A2C700DDE39B /* aw_mapview_track_line.png */; };
+		45E8F5C41A67A2C700DDE39B /* aw_mapview_track_line@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45E8F5C01A67A2C700DDE39B /* aw_mapview_track_line@2x.png */; };
+		45E8F5C71A67C24400DDE39B /* UIImage-Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E8F5C61A67C24400DDE39B /* UIImage-Extension.m */; };
+		45E8F5CA1A67D07400DDE39B /* UIImage+Rotating.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E8F5C91A67D07400DDE39B /* UIImage+Rotating.m */; };
+		45E8F5CD1A67D08E00DDE39B /* NYXImagesHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 45E8F5CC1A67D08E00DDE39B /* NYXImagesHelper.m */; };
 		69DF3329866ED80E774AA8D6 /* libPods-SmartWatch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C73B39E88090B44A198085E /* libPods-SmartWatch.a */; };
 		CE208F571A1A4C8A001D6482 /* SWLineGraphView.m in Sources */ = {isa = PBXBuildFile; fileRef = CE208F541A1A4C8A001D6482 /* SWLineGraphView.m */; };
 		CE208F581A1A4C8A001D6482 /* SWPlot.m in Sources */ = {isa = PBXBuildFile; fileRef = CE208F561A1A4C8A001D6482 /* SWPlot.m */; };
@@ -194,6 +207,22 @@
 		4558510A1A37F92D00649397 /* SWModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWModel.m; sourceTree = "<group>"; };
 		458687571A4A6AFD0079059D /* SWHistoryRecordsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWHistoryRecordsModel.h; sourceTree = "<group>"; };
 		458687581A4A6AFD0079059D /* SWHistoryRecordsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWHistoryRecordsModel.m; sourceTree = "<group>"; };
+		45DD4DB31A67985C00D28071 /* ic_marker_direct.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_marker_direct.png; sourceTree = "<group>"; };
+		45DD4DB41A67985C00D28071 /* ic_marker_direct@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_marker_direct@2x.png"; sourceTree = "<group>"; };
+		45DD4DB71A67986800D28071 /* ic_marker_end.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_marker_end.png; sourceTree = "<group>"; };
+		45DD4DB81A67986800D28071 /* ic_marker_end@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ic_marker_end@2x.png"; sourceTree = "<group>"; };
+		45DD4DBB1A679BA300D28071 /* mainMap_SmallBlue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mainMap_SmallBlue.png; sourceTree = "<group>"; };
+		45DD4DBC1A679BA300D28071 /* mainMap_SmallBlue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mainMap_SmallBlue@2x.png"; sourceTree = "<group>"; };
+		45E8F5BD1A67A2C700DDE39B /* aw_mapview_track_line_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aw_mapview_track_line_selected.png; sourceTree = "<group>"; };
+		45E8F5BE1A67A2C700DDE39B /* aw_mapview_track_line_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aw_mapview_track_line_selected@2x.png"; sourceTree = "<group>"; };
+		45E8F5BF1A67A2C700DDE39B /* aw_mapview_track_line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = aw_mapview_track_line.png; sourceTree = "<group>"; };
+		45E8F5C01A67A2C700DDE39B /* aw_mapview_track_line@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "aw_mapview_track_line@2x.png"; sourceTree = "<group>"; };
+		45E8F5C51A67C24400DDE39B /* UIImage-Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage-Extension.h"; sourceTree = "<group>"; };
+		45E8F5C61A67C24400DDE39B /* UIImage-Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage-Extension.m"; sourceTree = "<group>"; };
+		45E8F5C81A67D07400DDE39B /* UIImage+Rotating.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+Rotating.h"; sourceTree = "<group>"; };
+		45E8F5C91A67D07400DDE39B /* UIImage+Rotating.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+Rotating.m"; sourceTree = "<group>"; };
+		45E8F5CB1A67D08E00DDE39B /* NYXImagesHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYXImagesHelper.h; sourceTree = "<group>"; };
+		45E8F5CC1A67D08E00DDE39B /* NYXImagesHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYXImagesHelper.m; sourceTree = "<group>"; };
 		6C73B39E88090B44A198085E /* libPods-SmartWatch.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SmartWatch.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8816FA7DAB27B228C992029 /* Pods-SmartWatch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartWatch.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SmartWatch/Pods-SmartWatch.debug.xcconfig"; sourceTree = "<group>"; };
 		BA52D8F885518A25BB028142 /* Pods-SmartWatch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartWatch.release.xcconfig"; path = "Pods/Target Support Files/Pods-SmartWatch/Pods-SmartWatch.release.xcconfig"; sourceTree = "<group>"; };
@@ -566,6 +595,16 @@
 				CE7EE0921A20EA33006F3294 /* 1运动记录_70@2x.png */,
 				CE7EE0931A20EA33006F3294 /* 1运动记录_73@2x.png */,
 				CE7EE0941A20EA33006F3294 /* 1运动记录_卡路里-标注(标注)@2x.png */,
+				45DD4DB31A67985C00D28071 /* ic_marker_direct.png */,
+				45DD4DB41A67985C00D28071 /* ic_marker_direct@2x.png */,
+				45DD4DB71A67986800D28071 /* ic_marker_end.png */,
+				45DD4DB81A67986800D28071 /* ic_marker_end@2x.png */,
+				45DD4DBB1A679BA300D28071 /* mainMap_SmallBlue.png */,
+				45DD4DBC1A679BA300D28071 /* mainMap_SmallBlue@2x.png */,
+				45E8F5BD1A67A2C700DDE39B /* aw_mapview_track_line_selected.png */,
+				45E8F5BE1A67A2C700DDE39B /* aw_mapview_track_line_selected@2x.png */,
+				45E8F5BF1A67A2C700DDE39B /* aw_mapview_track_line.png */,
+				45E8F5C01A67A2C700DDE39B /* aw_mapview_track_line@2x.png */,
 				CE7EE0951A20EA33006F3294 /* button */,
 				CE7EE09E1A20EA33006F3294 /* icon */,
 				CE7EE0A51A20EA33006F3294 /* nav */,
@@ -995,6 +1034,12 @@
 				CE61B6101A3C4DA200B18811 /* UIBarButtonItem+HT.m */,
 				CE9178941A405C7900A80136 /* HTJSONAdapter.h */,
 				CE9178951A405C7900A80136 /* HTJSONAdapter.m */,
+				45E8F5C51A67C24400DDE39B /* UIImage-Extension.h */,
+				45E8F5C61A67C24400DDE39B /* UIImage-Extension.m */,
+				45E8F5CB1A67D08E00DDE39B /* NYXImagesHelper.h */,
+				45E8F5CC1A67D08E00DDE39B /* NYXImagesHelper.m */,
+				45E8F5C81A67D07400DDE39B /* UIImage+Rotating.h */,
+				45E8F5C91A67D07400DDE39B /* UIImage+Rotating.m */,
 			);
 			name = Category;
 			path = SmartWatch/Category;
@@ -1141,6 +1186,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45DD4DBD1A679BA300D28071 /* mainMap_SmallBlue.png in Resources */,
 				CE386C2F1A615D2F00AE91D8 /* Localizable.strings in Resources */,
 				CE7EE12D1A20EC3B006F3294 /* 4设置_32@2x.png in Resources */,
 				CE7EE1381A20F56B006F3294 /* Images.xcassets in Resources */,
@@ -1168,13 +1214,17 @@
 				CE7EE1251A20EC3B006F3294 /* 4设置_05@2x.png in Resources */,
 				CE7EE1261A20EC3B006F3294 /* 4设置_08@2x.png in Resources */,
 				CE7EE12A1A20EC3B006F3294 /* 4设置_21@2x.png in Resources */,
+				45DD4DBE1A679BA300D28071 /* mainMap_SmallBlue@2x.png in Resources */,
 				CE7EE0D51A20EA33006F3294 /* 设置1@2x.png in Resources */,
 				CE7EE0E41A20EA33006F3294 /* 曲线图_竖线@2x.png in Resources */,
 				CE7EE1211A20EC3B006F3294 /* 2背景-ios_02@2x.png in Resources */,
 				CE7EE1351A20EC3B006F3294 /* 4背景-ios_01@2x.png in Resources */,
+				45E8F5C31A67A2C700DDE39B /* aw_mapview_track_line.png in Resources */,
 				CE7EE0D01A20EA33006F3294 /* nav_bg@2x.png in Resources */,
 				CE7EE0C41A20EA33006F3294 /* left_1@2x.png in Resources */,
+				45E8F5C41A67A2C700DDE39B /* aw_mapview_track_line@2x.png in Resources */,
 				CE7EE0D11A20EA33006F3294 /* 个人中心1@2x.png in Resources */,
+				45DD4DB91A67986800D28071 /* ic_marker_end.png in Resources */,
 				CE7EE1221A20EC3B006F3294 /* 4设置-智能闹钟标注(标注)@2x.png in Resources */,
 				CE7EE0D31A20EA33006F3294 /* 历史记录1@2x.png in Resources */,
 				CE7EE0E51A20EA33006F3294 /* 1背景-ios_01@2x.png in Resources */,
@@ -1182,8 +1232,10 @@
 				CE7EE0E71A20EA33006F3294 /* 蓝牙@2x.png in Resources */,
 				CE7EE1331A20EC3B006F3294 /* 4设置_55@2x.png in Resources */,
 				CE7EE0C31A20EA33006F3294 /* button2@2x.png in Resources */,
+				45DD4DBA1A67986800D28071 /* ic_marker_end@2x.png in Resources */,
 				CE7EE11A1A20EC3B006F3294 /* 历史记录_18@2x.png in Resources */,
 				CE7EE1401A20FB67006F3294 /* 日期右选择_禁用@2x.png in Resources */,
+				45DD4DB61A67985C00D28071 /* ic_marker_direct@2x.png in Resources */,
 				CE7EE1231A20EC3B006F3294 /* 4设置-白天时间设置标注(标注)@2x.png in Resources */,
 				CE7EE0CA1A20EA33006F3294 /* ico_卡路里1@2x.png in Resources */,
 				CE7EE1341A20EC3B006F3294 /* 4设置标注1(标注)@2x.png in Resources */,
@@ -1207,6 +1259,7 @@
 				CE7EE0CF1A20EA33006F3294 /* ico_睡眠2@2x.png in Resources */,
 				CE7EE0C71A20EA33006F3294 /* m_2@2x.png in Resources */,
 				CE7EE1131A20EC3B006F3294 /* 3背景-ios_01@2x.png in Resources */,
+				45E8F5C21A67A2C700DDE39B /* aw_mapview_track_line_selected@2x.png in Resources */,
 				CE7EE0C51A20EA33006F3294 /* left_2@2x.png in Resources */,
 				CE386C361A615DCB00AE91D8 /* InfoPlist.strings in Resources */,
 				CEAA01D71A35E3190047BAF2 /* default.sql in Resources */,
@@ -1224,9 +1277,11 @@
 				CE7EE0CB1A20EA33006F3294 /* ico_卡路里2@2x.png in Resources */,
 				CE7EE0DC1A20EA33006F3294 /* ico_电量@2x.png in Resources */,
 				CE7EE0CE1A20EA33006F3294 /* ico_睡眠1@2x.png in Resources */,
+				45E8F5C11A67A2C700DDE39B /* aw_mapview_track_line_selected.png in Resources */,
 				CE7EE1291A20EC3B006F3294 /* 4设置_18@2x.png in Resources */,
 				CE7EE0CC1A20EA33006F3294 /* ico_步数1@2x.png in Resources */,
 				CE7EE1411A20FB67006F3294 /* 日期右选择_正常@2x.png in Resources */,
+				45DD4DB51A67985C00D28071 /* ic_marker_direct.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1302,6 +1357,7 @@
 				CE7EE13B1A20F946006F3294 /* SWExerciseRecordsTitleView.m in Sources */,
 				CE4CCEEE1A4EBD9400C53E56 /* MBProgressHUD.m in Sources */,
 				CE61B6021A3C2D5600B18811 /* SWPickerView.m in Sources */,
+				45E8F5C71A67C24400DDE39B /* UIImage-Extension.m in Sources */,
 				CEAA01DE1A35E4FE0047BAF2 /* NSString+SW.m in Sources */,
 				CE44E28E1A2F79DF0081F09E /* SWHeadImageCell.m in Sources */,
 				4558510B1A37F92D00649397 /* SWModel.m in Sources */,
@@ -1325,6 +1381,7 @@
 				CEE0D7F71A18793500CE643C /* main.m in Sources */,
 				455851001A37E1D700649397 /* SWDAILYSTEPS.m in Sources */,
 				CE208F571A1A4C8A001D6482 /* SWLineGraphView.m in Sources */,
+				45E8F5CD1A67D08E00DDE39B /* NYXImagesHelper.m in Sources */,
 				CEE0D85B1A1888CF00CE643C /* GCDQueue.m in Sources */,
 				CE61B60E1A3C49AE00B18811 /* SWSETTING.m in Sources */,
 				CE7EE14C1A21D7A0006F3294 /* SWCircleProgressView.m in Sources */,
@@ -1333,6 +1390,7 @@
 				CE9178931A405B7100A80136 /* SWAlarmInfo.m in Sources */,
 				CE61B6171A3C58A700B18811 /* SWPickerView2.m in Sources */,
 				CE61B5FE1A3C1F1700B18811 /* AMBlurView.m in Sources */,
+				45E8F5CA1A67D07400DDE39B /* UIImage+Rotating.m in Sources */,
 				CEAA01DA1A35E3190047BAF2 /* WBDatabaseService.m in Sources */,
 				CE61B60B1A3C492F00B18811 /* SWSettingInfo.m in Sources */,
 				CEE0D8371A18870200CE643C /* SWShareKit.m in Sources */,
@@ -1485,7 +1543,7 @@
 					"$(PROJECT_DIR)/SmartWatch/ThirdParty/WeChat",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "92a1fde2-88c5-4265-a0f3-0127652cbd23";
+				PROVISIONING_PROFILE = "8751f291-5463-44e8-aa1d-a1cc079a6b72";
 				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Debug;
@@ -1505,7 +1563,7 @@
 					"$(PROJECT_DIR)/SmartWatch/ThirdParty/WeChat",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "92a1fde2-88c5-4265-a0f3-0127652cbd23";
+				PROVISIONING_PROFILE = "8751f291-5463-44e8-aa1d-a1cc079a6b72";
 				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Release;

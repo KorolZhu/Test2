@@ -41,13 +41,14 @@
 	SWExerciseRecordsModel *model;
     
     SWAccessoryPickerView *accessoryPickerView;
-    
-    MKMapView *mapView;
+	
     MKPolyline *polyline;
     MKPolylineView *polylineView;
+	UIButton *connectPointButton;
 }
 
 @property (nonatomic,strong) UIScrollView *scrollView;
+@property (nonatomic,strong) MKMapView *mapView;
 
 @end
 
@@ -302,7 +303,7 @@
     [model queryExerciseRecordsWithDate:preDate];
     [titleView setDate:preDate];
 	
-	if (mapView) {
+	if (self.mapView) {
 		[model queryLocationWithDate:titleView.date];
 	}
     
@@ -320,7 +321,7 @@
     [model queryExerciseRecordsWithDate:nextDate];
     [titleView setDate:nextDate];
 	
-	if (mapView) {
+	if (self.mapView) {
 		[model queryLocationWithDate:titleView.date];
 	}
 }
@@ -332,11 +333,39 @@
     curveButton.selected = YES;
     trackButton.selected = NO;
     
-    if (mapView.superview) {
-        [mapView removeFromSuperview];
+    if (self.mapView.superview) {
+        [self.mapView removeFromSuperview];
     }
     
     currentGraphView.hidden = NO;
+}
+
+- (void)connectPointButtonClick:(UIButton *)button {
+	if (!button.selected) {
+		button.selected = YES;
+		[button setBackgroundColor:[UIColor whiteColor]];
+		for (MKPointAnnotation *annotation in self.mapView.annotations) {
+			MKAnnotationView *annotationView = [self.mapView viewForAnnotation:annotation];
+			if (annotation == self.mapView.annotations.lastObject) {
+				annotationView.image = [UIImage imageNamed:@"ic_marker_end"];
+			} else {
+				annotationView.image = [UIImage imageNamed:@"ic_marker_direct"];
+			}
+		}
+		if (nil != polyline) {
+			[self.mapView addOverlay:polyline];
+		}
+	} else {
+		button.selected = NO;
+		[button setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.2f]];
+		for (MKPointAnnotation *annotation in self.mapView.annotations) {
+			MKAnnotationView *annotationView = [self.mapView viewForAnnotation:annotation];
+			annotationView.image = [UIImage imageNamed:@"mainMap_SmallBlue"];
+		}
+		if (nil != polyline) {
+			[self.mapView removeOverlay:polyline];
+		}
+	}
 }
 
 - (void)trackButtonClick {
@@ -346,16 +375,26 @@
     curveButton.selected = NO;
     trackButton.selected = YES;
     
-    if (!mapView) {
-        mapView = [[MKMapView alloc] initWithFrame:CGRectMake(12.0f, progressView.bottom + 10.0f, IPHONE_WIDTH - 24.0f, 166.0f)];
-        mapView.delegate = self;
-        mapView.layer.cornerRadius = 3.5f;
-        
+    if (!self.mapView) {
+        self.mapView = [[MKMapView alloc] initWithFrame:CGRectMake(12.0f, progressView.bottom + 10.0f, IPHONE_WIDTH - 24.0f, 166.0f)];
+		self.mapView.rotateEnabled = NO;
+        self.mapView.delegate = self;
+        self.mapView.layer.cornerRadius = 3.5f;
+		
+		connectPointButton = [UIButton buttonWithType:UIButtonTypeCustom];
+		connectPointButton.frame = CGRectMake(self.mapView.width - 45.0f, 15.0f, 30.0f, 30.0f);
+		[connectPointButton setBackgroundColor:[[UIColor blackColor] colorWithAlphaComponent:0.2f]];
+		[connectPointButton setImage:[UIImage imageNamed:@"aw_mapview_track_line"] forState:UIControlStateNormal];
+		[connectPointButton setImage:[UIImage imageNamed:@"aw_mapview_track_line_selected"] forState:UIControlStateSelected];
+		connectPointButton.layer.cornerRadius = 3.0f;
+		[connectPointButton addTarget:self action:@selector(connectPointButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+		[self.mapView addSubview:connectPointButton];
+
         [model queryLocationWithDate:titleView.date];
     }
     
-    if (!mapView.superview) {
-        [_scrollView addSubview:mapView];
+    if (!self.mapView.superview) {
+        [_scrollView addSubview:self.mapView];
     }
     
     currentGraphView.hidden = YES;
@@ -512,6 +551,41 @@
 
 #pragma mark - Mpa view
 
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+	if ([annotation isKindOfClass:[MKPointAnnotation class]]) {
+		static NSString *reuseIndetifier = @"annotationReuseIndetifier";
+		MKAnnotationView *annotationView = (MKAnnotationView *)[mapView dequeueReusableAnnotationViewWithIdentifier:reuseIndetifier];
+		if (annotationView == nil)
+		{
+			annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation
+														  reuseIdentifier:reuseIndetifier];
+			annotationView.canShowCallout = NO;
+		}
+		if (connectPointButton.selected) {
+			if (annotation == self.mapView.annotations.lastObject) {
+				annotationView.image = [UIImage imageNamed:@"ic_marker_end"];
+			} else {
+				NSArray *pointAnnotations = mapView.annotations;
+				NSInteger index = [pointAnnotations indexOfObject:annotation];
+				if (pointAnnotations.count > index + 1) {
+					MKPointAnnotation *nextAnnotation = [pointAnnotations objectAtIndex:index + 1];
+					float radians = [self angleFromCoordinate:[annotation coordinate] toCoordinate:nextAnnotation.coordinate];
+					UIImage *rotatedImage = [[UIImage imageNamed:@"ic_marker_direct"] rotateImagePixelsInRadians:radians];
+					annotationView.image = rotatedImage;
+				} else {
+					annotationView.image = [UIImage imageNamed:@"ic_marker_direct"];
+				}
+				
+			}
+		} else {
+			annotationView.image = [UIImage imageNamed:@"mainMap_SmallBlue"];
+		}
+		return annotationView;
+	}
+	
+	return nil;
+}
+
 - (void)mapView:(MKMapView *)mapView didAddOverlayViews:(NSArray *)overlayViews
 {
 }
@@ -556,57 +630,127 @@
     [MBProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
 }
 
+-(float)angleFromCoordinate:(CLLocationCoordinate2D)first
+			   toCoordinate:(CLLocationCoordinate2D)second {
+	
+	float deltaLongitude = second.longitude - first.longitude;
+	float deltaLatitude = second.latitude - first.latitude;
+	float angle = (M_PI * .5f) - atan(deltaLatitude / deltaLongitude);
+	
+	if (deltaLongitude > 0)      return angle;
+	else if (deltaLongitude < 0) return angle + M_PI;
+	else if (deltaLatitude < 0)  return M_PI;
+	
+	return 0.0f;
+}
+
 - (void)locationQueryFinished {
-    MKMapPoint northEastPoint = MKMapPointMake(0.f, 0.f);
-    MKMapPoint southWestPoint = MKMapPointMake(0.f, 0.f);
-    
-    MKMapPoint* pointArray = malloc(sizeof(CLLocationCoordinate2D) * model.locationArray.count);
-    for(int idx = 0; idx < model.locationArray.count; idx++)
-    {
-        CLLocation *location = [model.locationArray objectAtIndex:idx];
-        CLLocationDegrees latitude  = location.coordinate.latitude;
-        CLLocationDegrees longitude = location.coordinate.longitude;
-        
-        // create our coordinate and add it to the correct spot in the array
-        CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(latitude, longitude);
-        MKMapPoint point = MKMapPointForCoordinate(coordinate);
-        
-        // if it is the first point, just use them, since we have nothing to compare to yet.
-        if (idx == 0) {
-            northEastPoint = point;
-            southWestPoint = point;
-        } else {
-            if (point.x > northEastPoint.x)
-                northEastPoint.x = point.x;
-            if(point.y > northEastPoint.y)
-                northEastPoint.y = point.y;
-            if (point.x < southWestPoint.x)
-                southWestPoint.x = point.x;
-            if (point.y < southWestPoint.y) 
-                southWestPoint.y = point.y;
-        }
-        
-        pointArray[idx] = point;        
-    }
-    
-    if (polyline) {
-        [mapView removeOverlay:polyline];
-    }
-    
-    polyline = [MKPolyline polylineWithPoints:pointArray count:model.locationArray.count];
-    
-    if (nil != polyline) {
-        [mapView addOverlay:polyline];
-    }
-    
-    free(pointArray);
-    
-    double width = northEastPoint.x - southWestPoint.x;
-    double height = northEastPoint.y - southWestPoint.y;
-    
-    MKMapRect routeRect = MKMapRectMake(southWestPoint.x, southWestPoint.y, width, height);
-    
-    [mapView setVisibleMapRect:routeRect];
+	if (self.mapView.annotations.count > 0) {
+		[self.mapView removeAnnotations:self.mapView.annotations];
+	}
+	
+	MKMapPoint northEastPoint = MKMapPointMake(0.f, 0.f);
+	MKMapPoint southWestPoint = MKMapPointMake(0.f, 0.f);
+	
+	MKMapPoint* pointArray = malloc(sizeof(CLLocationCoordinate2D) * model.locationArray.count);
+	
+	for(int idx = 0; idx < model.locationArray.count; idx++)
+	{
+		CLLocation *location = [model.locationArray objectAtIndex:idx];
+		MKPointAnnotation *pointAnnotation = [[MKPointAnnotation alloc] init];
+		pointAnnotation.coordinate = location.coordinate;
+		[self.mapView addAnnotation:pointAnnotation];
+		
+		// create our coordinate and add it to the correct spot in the array
+		MKMapPoint point = MKMapPointForCoordinate(location.coordinate);
+		pointArray[idx] = point;
+		
+		// if it is the first point, just use them, since we have nothing to compare to yet.
+		if (idx == 0) {
+			northEastPoint = point;
+			southWestPoint = point;
+		} else {
+			if (point.x > northEastPoint.x)
+				northEastPoint.x = point.x;
+			if(point.y > northEastPoint.y)
+				northEastPoint.y = point.y;
+			if (point.x < southWestPoint.x)
+				southWestPoint.x = point.x;
+			if (point.y < southWestPoint.y)
+				southWestPoint.y = point.y;
+		}
+		
+	}
+	
+	if (polyline) {
+		[self.mapView removeOverlay:polyline];
+	}
+	polyline = [MKPolyline polylineWithPoints:pointArray count:model.locationArray.count];
+
+	if (connectPointButton.selected) {
+		if (nil != polyline) {
+			[self.mapView addOverlay:polyline];
+		}
+	}
+	
+	free(pointArray);
+	
+	double width = northEastPoint.x - southWestPoint.x;
+	double height = northEastPoint.y - southWestPoint.y;
+	
+	MKMapRect routeRect = MKMapRectMake(southWestPoint.x, southWestPoint.y, width, height);
+	
+	[self.mapView setVisibleMapRect:routeRect];
+//    MKMapPoint northEastPoint = MKMapPointMake(0.f, 0.f);
+//    MKMapPoint southWestPoint = MKMapPointMake(0.f, 0.f);
+//
+//    MKMapPoint* pointArray = malloc(sizeof(CLLocationCoordinate2D) * model.locationArray.count);
+//    for(int idx = 0; idx < model.locationArray.count; idx++)
+//    {
+//        CLLocation *location = [model.locationArray objectAtIndex:idx];
+//        CLLocationDegrees latitude  = location.coordinate.latitude;
+//        CLLocationDegrees longitude = location.coordinate.longitude;
+//        
+//        // create our coordinate and add it to the correct spot in the array
+//        CLLocationCoordinate2D coordinate = CLLocationCoordinate2DMake(latitude, longitude);
+//        MKMapPoint point = MKMapPointForCoordinate(coordinate);
+//        
+//        // if it is the first point, just use them, since we have nothing to compare to yet.
+//        if (idx == 0) {
+//            northEastPoint = point;
+//            southWestPoint = point;
+//        } else {
+//            if (point.x > northEastPoint.x)
+//                northEastPoint.x = point.x;
+//            if(point.y > northEastPoint.y)
+//                northEastPoint.y = point.y;
+//            if (point.x < southWestPoint.x)
+//                southWestPoint.x = point.x;
+//            if (point.y < southWestPoint.y) 
+//                southWestPoint.y = point.y;
+//        }
+//        
+//        pointArray[idx] = point;        
+//    }
+//    
+//    if (polyline) {
+//        [mapView removeOverlay:polyline];
+//    }
+//    
+//    polyline = [MKPolyline polylineWithPoints:pointArray count:model.locationArray.count];
+//    
+//    if (nil != polyline) {
+//        [mapView addOverlay:polyline];
+//    }
+//    
+//    free(pointArray);
+//    
+//    double width = northEastPoint.x - southWestPoint.x;
+//    double height = northEastPoint.y - southWestPoint.y;
+//    
+//    MKMapRect routeRect = MKMapRectMake(southWestPoint.x, southWestPoint.y, width, height);
+//    
+//    [mapView setVisibleMapRect:routeRect];
 }
 
 #pragma mark - KVO
