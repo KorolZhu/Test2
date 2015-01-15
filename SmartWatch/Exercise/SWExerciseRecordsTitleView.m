@@ -53,6 +53,8 @@
 }
 
 - (void)setDate:(NSDate *)date {
+	_date = date;
+	
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy年MM月dd日"];
     dateLabel.text = [dateFormatter stringFromDate:date];

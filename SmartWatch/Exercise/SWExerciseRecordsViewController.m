@@ -301,6 +301,10 @@
     NSDate *preDate = [model.currentDate dateByAddingTimeInterval:-24 * 3600];
     [model queryExerciseRecordsWithDate:preDate];
     [titleView setDate:preDate];
+	
+	if (mapView) {
+		[model queryLocationWithDate:titleView.date];
+	}
     
     if (!titleView.nextButton.enabled) {
         titleView.nextButton.enabled = YES;
@@ -315,6 +319,10 @@
     NSDate *nextDate = [model.currentDate dateByAddingTimeInterval:24 * 3600];
     [model queryExerciseRecordsWithDate:nextDate];
     [titleView setDate:nextDate];
+	
+	if (mapView) {
+		[model queryLocationWithDate:titleView.date];
+	}
 }
 
 - (void)curveButtonClick {
@@ -343,7 +351,7 @@
         mapView.delegate = self;
         mapView.layer.cornerRadius = 3.5f;
         
-        [model queryLocationWithDate:[NSDate date]];
+        [model queryLocationWithDate:titleView.date];
     }
     
     if (!mapView.superview) {

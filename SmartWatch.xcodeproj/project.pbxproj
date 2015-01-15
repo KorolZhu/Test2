@@ -1485,7 +1485,7 @@
 					"$(PROJECT_DIR)/SmartWatch/ThirdParty/WeChat",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "35131dfd-355b-4520-bf65-36c61772feb6";
+				PROVISIONING_PROFILE = "92a1fde2-88c5-4265-a0f3-0127652cbd23";
 				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Debug;
@@ -1505,7 +1505,7 @@
 					"$(PROJECT_DIR)/SmartWatch/ThirdParty/WeChat",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "35131dfd-355b-4520-bf65-36c61772feb6";
+				PROVISIONING_PROFILE = "92a1fde2-88c5-4265-a0f3-0127652cbd23";
 				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Release;
