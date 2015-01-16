@@ -17,7 +17,9 @@
 
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 
-#define DistanceFilter 300.0f
+#define DistanceFilter 100.0f
+
+NSString * const KNewLocationProducedNotification = @"KNewLocationProducedNotification";
 
 @implementation LocationTracker
 
@@ -129,13 +131,13 @@
     
     for(int i=0;i<locations.count;i++){
         CLLocation * newLocation = [locations objectAtIndex:i];
-        NSTimeInterval locationAge = -[newLocation.timestamp timeIntervalSinceNow];
-        
-        if (locationAge > 30.0)
-        {
-            continue;
-        }
-        
+//        NSTimeInterval locationAge = -[newLocation.timestamp timeIntervalSinceNow];
+//		
+//        if (locationAge > 30.0)
+//        {
+//            continue;
+//        }
+		
         //Select only valid location and also location with good accuracy
         if(newLocation!=nil&&newLocation.horizontalAccuracy>0
            &&newLocation.horizontalAccuracy<2000
@@ -180,8 +182,10 @@
 -(void)stopLocationDelayBy10Seconds{
     CLLocationManager *locationManager = [LocationTracker sharedLocationManager];
     [locationManager stopUpdatingLocation];
-    
-    NSLog(@"locationManager stop Updating after 10 seconds");
+	
+	[self updateLocationToServer];
+	
+    NSLog(@"locationManager stop Updating");
 }
 
 
@@ -230,7 +234,6 @@
             }
         }
     }
-    NSLog(@"My Best location:%@",myBestLocation);
     
     //If the array is 0, get the last location
     //Sometimes due to network issue or unknown reason, you could not get the location during that  period, the best you can do is sending the last known location to the server
@@ -238,8 +241,10 @@
     {
         NSLog(@"Unable to get location, use the last known location");
         return;
-    }
-    
+	} else {
+		NSLog(@"My Best location:%@",myBestLocation);
+	}
+		
     CLLocationDegrees latitude = [[NSUserDefaults standardUserDefaults] doubleForKey:LATITUDE];
     CLLocationDegrees longitude = [[NSUserDefaults standardUserDefaults] doubleForKey:LONGITUDE];
     
@@ -264,8 +269,10 @@
         [[NSUserDefaults standardUserDefaults] setDouble:myBestLocation.coordinate.latitude forKey:LATITUDE];
         [[NSUserDefaults standardUserDefaults] setDouble:myBestLocation.coordinate.longitude forKey:LONGITUDE];
         [[NSUserDefaults standardUserDefaults] synchronize];
+		
+		CLLocation *location = [[CLLocation alloc] initWithLatitude:myBestLocation.coordinate.latitude longitude:myBestLocation.coordinate.longitude];
+		[[NSNotificationCenter defaultCenter] postNotificationName:KNewLocationProducedNotification object:location];
     }
-    
     
     //After sending the location to the server successful, remember to clear the current array with the following code. It is to make sure that you clear up old location in the array and add the new locations from locationManager
     [self.shareModel.myLocationArray removeAllObjects];

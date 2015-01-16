@@ -10,7 +10,9 @@
 #import <CoreLocation/CoreLocation.h>
 #import "LocationShareModel.h"
 
-#define LocationTimeInterval 10.0f
+#define LocationTimeInterval 5.0f * 60.0f
+
+extern NSString * const KNewLocationProducedNotification;
 
 @interface LocationTracker : NSObject <CLLocationManagerDelegate>
 
@@ -18,7 +20,7 @@
 
 @property (strong,nonatomic) LocationShareModel * shareModel;
 
-@property (nonatomic) CLLocationCoordinate2D myBestLocation;
+//@property (nonatomic) CLLocationCoordinate2D myBestLocation;
 
 + (CLLocationManager *)sharedLocationManager;
 

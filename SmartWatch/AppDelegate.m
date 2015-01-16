@@ -94,23 +94,7 @@
     } else {
         self.locationTracker = [[LocationTracker alloc]init];
         [self.locationTracker startLocationTracking];
-        
-        //Send the best location to server every 60 seconds
-        //You may adjust the time interval depends on the need of your app.
-        self.locationUpdateTimer =
-        [NSTimer scheduledTimerWithTimeInterval:LocationTimeInterval
-                                         target:self
-                                       selector:@selector(updateLocation)
-                                       userInfo:nil
-                                        repeats:YES];
-    }
-
-}
-
--(void)updateLocation {
-    NSLog(@"updateLocation");
-    
-    [self.locationTracker updateLocationToServer];
+	}
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
