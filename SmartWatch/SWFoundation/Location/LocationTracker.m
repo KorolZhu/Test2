@@ -64,13 +64,17 @@ NSString * const KNewLocationProducedNotification = @"KNewLocationProducedNotifi
 
 - (void) restartLocationUpdates
 {
-    NSLog(@"restartLocationUpdates");
-    
     if (self.shareModel.timer) {
         [self.shareModel.timer invalidate];
         self.shareModel.timer = nil;
     }
-    
+	
+	if ([[NSUserDefaults standardUserDefaults] integerForKey:@"TrackEnable"] != 1) {
+		return;
+	}
+	
+	NSLog(@"restartLocationUpdates");
+	
     CLLocationManager *locationManager = [LocationTracker sharedLocationManager];
     locationManager.delegate = self;
     locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation;

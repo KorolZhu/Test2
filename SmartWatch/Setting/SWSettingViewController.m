@@ -72,8 +72,13 @@
     }
 }
 
+- (void)trackSwitchValueChanged:(UISwitch *)switc {
+	[[NSUserDefaults standardUserDefaults] setInteger:switc.on forKey:@"TrackEnable"];
+	[[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 6;
+    return 7;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -83,12 +88,14 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:indexPath.row == 4 ? lostCellIdentifier : cellIdentifier];
     if (!cell) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:indexPath.row == 4 ? lostCellIdentifier : cellIdentifier];
-        cell.accessoryType = indexPath.row == 4 ? UITableViewCellAccessoryNone : UITableViewCellAccessoryDisclosureIndicator;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.backgroundColor = [UIColor clearColor];
         cell.textLabel.textColor = [UIColor whiteColor];
         cell.textLabel.font = [UIFont systemFontOfSize:14.0f];
         
         if (indexPath.row == 4) {
+			cell.accessoryType = UITableViewCellAccessoryNone;
+			
             UISwitch *switc = [[UISwitch alloc] init];
             [switc addTarget:self action:@selector(preventLostSwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
             switc.right = IPHONE_WIDTH - 12.0f;
@@ -96,9 +103,19 @@
             [cell.contentView addSubview:switc];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             switc.on = ([SWSettingInfo shareInstance].preventLost == 1);
-        }
+		} else if (indexPath.row == 5) {
+			cell.accessoryType = UITableViewCellAccessoryNone;
+
+			UISwitch *switc = [[UISwitch alloc] init];
+			[switc addTarget:self action:@selector(trackSwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
+			switc.right = IPHONE_WIDTH - 12.0f;
+			switc.centerY = 22.0f;
+			[cell.contentView addSubview:switc];
+			cell.selectionStyle = UITableViewCellSelectionStyleNone;
+			switc.on = ([[NSUserDefaults standardUserDefaults] integerForKey:@"TrackEnable"] == 1);
+		}
     }
-    
+	
     if (indexPath.row == 0) {
         cell.imageView.image = [UIImage imageNamed:@"4设置_08"];
         cell.textLabel.text = @"我的设备";
@@ -116,7 +133,11 @@
         cell.imageView.image = [UIImage imageNamed:@"4设置_37"];
         cell.textLabel.text = @"防丢设置";
     }
-    else if (indexPath.row == 5) {
+	else if (indexPath.row == 5) {
+		cell.imageView.image = [UIImage imageNamed:@"4设置_37"];
+		cell.textLabel.text = @"运动轨迹";
+	}
+    else if (indexPath.row == 6) {
         cell.imageView.image = [UIImage imageNamed:@"4设置_41"];
         cell.textLabel.text = @"关于我们";
     }

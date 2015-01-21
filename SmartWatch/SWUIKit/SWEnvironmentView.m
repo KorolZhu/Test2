@@ -101,7 +101,7 @@
         [self addSubview:backView];
         
         uvLabel = [[SWEnvironmentLabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.width / 4.0f, self.height)];
-        uvLabel.title = NSLocalizedString(@"紫外线等级", nil);
+        uvLabel.title = NSLocalizedString(@"紫外线强度", nil);
         uvLabel.image = [UIImage imageNamed:@"ico_紫外线"];
         
         UIView *lineView = [[UIView alloc] init];
@@ -141,16 +141,16 @@
     
 }
 
-- (void)setUvLevel:(NSInteger)uvLevel {
-    uvLabel.value = [NSString stringWithFormat:@"%ld级", (long)uvLevel];
+- (void)setUvLevel:(NSString *)uvLevel {
+    uvLabel.value = [NSString stringWithFormat:@"%@", uvLevel];
 }
 
-- (void)setTemperature:(NSInteger)temperature {
-    temperatureLabel.value = [NSString stringWithFormat:@"%ld℃", (long)temperature];
+- (void)setTemperature:(NSString *)temperature {
+    temperatureLabel.value = [NSString stringWithFormat:@"%@", temperature];
 }
 
-- (void)setHumidity:(NSInteger)humidity {
-    humidityLabel.value = [NSString stringWithFormat:@"%ld%%", (long)humidity];
+- (void)setHumidity:(NSString *)humidity {
+    humidityLabel.value = [NSString stringWithFormat:@"%@", humidity];
 }
 
 - (void)setLeftPower:(float)leftPower {

@@ -109,7 +109,6 @@
     
     
     environmentView = [[SWEnvironmentView alloc] initWithFrame:CGRectMake(14.0f, 12.0f, IPHONE_WIDTH - 28.0f, 25.0f)];
-    environmentView.uvLevel = [SWSettingInfo shareInstance].ultravioletIndex;
     environmentView.temperature = 0;
     environmentView.humidity = 0;
     environmentView.leftPower = [SWSettingInfo shareInstance].battery;
@@ -246,6 +245,17 @@
     titleView.nextButton.enabled = NO;
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newLocationProduced:) name:KNewLocationProducedNotification object:nil];
+	
+	[[NSNotificationCenter defaultCenter] addObserver:self
+											 selector:@selector(applicationWillBecomeActive)
+												 name:UIApplicationDidBecomeActiveNotification
+											   object:nil];
+	
+	[model queryWeatherInfo];
+}
+
+- (void)applicationWillBecomeActive {
+	[model queryWeatherInfo];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -649,9 +659,6 @@
 #pragma mark - Model
 
 - (void)exerciseRecordsQueryFinished {
-    environmentView.uvLevel = [SWSettingInfo shareInstance].ultravioletIndex;
-    environmentView.leftPower = [SWSettingInfo shareInstance].battery;
-    
     [self reloadProgressData];
 
 	caloriePlot.plottingValues = model.calorieDictionary;
@@ -748,6 +755,13 @@
 	visibleRect = routeRect;
 	
 	[self.mapView setVisibleMapRect:routeRect];
+}
+
+- (void)weatherInfoUpdated {
+	environmentView.uvLevel = model.uvLevel;
+	environmentView.humidity = model.shidu;
+	environmentView.temperature = model.temp;
+	environmentView.leftPower = [SWSettingInfo shareInstance].battery;
 }
 
 #pragma mark - KVO

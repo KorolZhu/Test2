@@ -87,6 +87,10 @@
 }
 
 - (void)startLocationTracking {
+	if ([[NSUserDefaults standardUserDefaults] integerForKey:@"TrackEnable"] != 1) {
+		return;
+	}
+	
     if([[UIApplication sharedApplication] backgroundRefreshStatus] == UIBackgroundRefreshStatusDenied){
         return;
     } else if([[UIApplication sharedApplication] backgroundRefreshStatus] == UIBackgroundRefreshStatusRestricted){

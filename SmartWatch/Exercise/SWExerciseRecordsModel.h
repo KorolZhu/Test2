@@ -33,7 +33,12 @@
 
 @property (nonatomic,readonly) NSArray *locationArray;
 
+@property (nonatomic,readonly) NSString *uvLevel;
+@property (nonatomic,readonly) NSString *temp;
+@property (nonatomic,readonly) NSString *shidu;
+
 - (void)queryExerciseRecordsWithDate:(NSDate *)date;
 - (void)queryLocationWithDate:(NSDate *)date;
+- (void)queryWeatherInfo;
 
 @end

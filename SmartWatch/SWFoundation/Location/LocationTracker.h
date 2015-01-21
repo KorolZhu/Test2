@@ -10,7 +10,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "LocationShareModel.h"
 
-#define LocationTimeInterval 5.0f * 60.0f
+#define LocationTimeInterval 1.0f * 60.0f
 
 extern NSString * const KNewLocationProducedNotification;
 

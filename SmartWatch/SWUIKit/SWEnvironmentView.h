@@ -10,9 +10,9 @@
 
 @interface SWEnvironmentView : UIView
 
-@property (nonatomic)NSInteger uvLevel;
-@property (nonatomic)NSInteger temperature;
-@property (nonatomic)NSInteger humidity;
+@property (nonatomic)NSString *uvLevel;
+@property (nonatomic)NSString *temperature;
+@property (nonatomic)NSString *humidity;
 @property (nonatomic)float leftPower;
 
 @end
