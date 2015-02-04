@@ -199,6 +199,8 @@
 
 - (void)queryWeatherInfo {
 	[[GCDQueue lowPriorityGlobalQueue] queueBlock:^{
+		cityCode = @"101280601";
+		
 		if (!cityCode) {
 			//解析网址通过ip 获取城市天气代码
 			NSURL *url = [NSURL URLWithString:@"http://61.4.185.48:81/g/"];

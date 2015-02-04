@@ -426,6 +426,10 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
 
 #pragma mark - BLE delegate
 
+//- (void)bleDidUpdateRSSI:(NSNumber *)rssi {
+//	NSLog(@"%@", rssi);
+//}
+
 - (void)bleDidConnect {
     self.state = SWPeripheralStateConnected;
     [self sendSetDateTimeRequest];
@@ -437,7 +441,12 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
 //    [self getDaylightInfo];
 //    [self getStepsTarget];
 //    [self sendActivityCountRequest];
+//	[NSTimer scheduledTimerWithTimeInterval:1.0f target:self selector:@selector(readRSSI) userInfo:nil repeats:YES];
 }
+
+//- (void)readRSSI {
+//	[self.ble readRSSI];
+//}
 
 - (void)bleDidWriteValue {
     
