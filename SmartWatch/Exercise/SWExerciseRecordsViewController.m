@@ -46,6 +46,7 @@
     MKPolyline *polyline;
     MKPolylineView *polylineView;
 	UIButton *connectPointButton;
+	UIButton *fullScreenButton;
 	
 	NSArray *annotations;
 	NSArray *images;
@@ -385,6 +386,26 @@
 	}
 }
 
+- (void)fullScreenButtonClick:(UIButton *)button {
+	if (!button.selected) {
+		[UIView animateWithDuration:0.2f animations:^{
+			self.mapView.frame = self.scrollView.bounds;
+			connectPointButton.frame = CGRectMake(self.mapView.width - 45.0f, 15.0f, 30.0f, 30.0f);
+		} completion:^(BOOL finished) {
+			button.selected = YES;
+			self.scrollView.scrollsToTop = NO;
+		}];
+	} else {
+		[UIView animateWithDuration:0.2f animations:^{
+			self.mapView.frame = CGRectMake(12.0f, progressView.bottom + 10.0f, IPHONE_WIDTH - 24.0f, 166.0f);
+			connectPointButton.frame = CGRectMake(self.mapView.width - 45.0f, 15.0f, 30.0f, 30.0f);
+		} completion:^(BOOL finished) {
+			button.selected = NO;
+			self.scrollView.scrollsToTop = YES;
+		}];
+	}
+}
+
 - (void)trackButtonClick {
     if (trackButton.selected) {
         return;
@@ -406,6 +427,15 @@
 		connectPointButton.layer.cornerRadius = 3.0f;
 		[connectPointButton addTarget:self action:@selector(connectPointButtonClick:) forControlEvents:UIControlEventTouchUpInside];
 		[self.mapView addSubview:connectPointButton];
+		
+		fullScreenButton = [UIButton buttonWithType:UIButtonTypeCustom];
+		fullScreenButton.frame = CGRectMake(15.0f, 15.0f, 30.0f, 30.0f);
+		[fullScreenButton setBackgroundColor:[UIColor clearColor]] ;
+		[fullScreenButton setImage:[UIImage imageNamed:@"map_001"] forState:UIControlStateNormal];
+		[fullScreenButton setImage:[UIImage imageNamed:@"map_002"] forState:UIControlStateSelected];
+		fullScreenButton.layer.cornerRadius = 3.0f;
+		[fullScreenButton addTarget:self action:@selector(fullScreenButtonClick:) forControlEvents:UIControlEventTouchUpInside];
+		[self.mapView addSubview:fullScreenButton];
 
         [model queryLocationWithDate:titleView.date];
     }

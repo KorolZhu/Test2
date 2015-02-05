@@ -142,15 +142,15 @@
 }
 
 - (void)setUvLevel:(NSString *)uvLevel {
-    uvLabel.value = [NSString stringWithFormat:@"%@", uvLevel];
+	uvLabel.value = [NSString stringWithFormat:@"%@", uvLevel.length == 0 ? @"" : uvLevel];
 }
 
 - (void)setTemperature:(NSString *)temperature {
-    temperatureLabel.value = [NSString stringWithFormat:@"%@", temperature];
+	temperatureLabel.value = [NSString stringWithFormat:@"%@", temperature.length == 0 ? @"" : temperature];
 }
 
 - (void)setHumidity:(NSString *)humidity {
-    humidityLabel.value = [NSString stringWithFormat:@"%@", humidity];
+	humidityLabel.value = [NSString stringWithFormat:@"%@", humidity.length == 0 ? @"" : humidity];
 }
 
 - (void)setLeftPower:(float)leftPower {

@@ -31,4 +31,6 @@
 #define ALARMSTATE @"alarmstate"
 #define ALARMREPEAT @"alarmrepeat"
 
+#define LASTCITYCODE @"lastcitycode"
+
 #endif

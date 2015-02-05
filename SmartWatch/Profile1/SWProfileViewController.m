@@ -192,8 +192,13 @@
             heightPickerView = [[SWPickerView alloc] init];
             heightPickerView.hidden = YES;
             heightPickerView.delegate = self;
-            
-            heightPickerViewDataSource = @[@140, @145, @150, @155, @160, @165, @170, @175, @180, @185, @190];
+			
+			NSMutableArray *tempArr = [NSMutableArray array];
+			for (int i = 100; i < 266 ; i++) {
+				[tempArr addObject:@(i)];
+			}
+			
+			heightPickerViewDataSource = [NSArray arrayWithArray:tempArr];
             heightPickerView.titleSuffix = @"cm";
             heightPickerView.dataSource = heightPickerViewDataSource;
         }
@@ -201,7 +206,12 @@
         NSUInteger index = [heightPickerViewDataSource indexOfObject:@([SWUserInfo shareInstance].height)];
         if (index != NSNotFound) {
             [heightPickerView selectRow:index inComponent:0 animated:NO];
-        }
+		} else {
+			NSUInteger index2 = [heightPickerViewDataSource indexOfObject:@(165)];
+			if (index2 != NSNotFound) {
+				[heightPickerView selectRow:index2 inComponent:0 animated:NO];
+			}
+		}
         [heightPickerView showFromView:self.view];
     } else if (indexPath.row == 4) {
         if (!weightPickerView) {

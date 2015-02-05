@@ -33,7 +33,7 @@
         
         _datePickBar = [[UINavigationBar alloc] initForAutoLayout];
         _datePickBar.barStyle = UIBarStyleDefault ;
-        
+		[_datePickBar setTintColor:[UIColor blackColor]];
 //        UIImage *navBtnBg = [[UIImage imageNamed:@"nav_btn"] stretchableImageWithLeftCapWidth:5 topCapHeight:30];
 //        UIImage *navBtnBgPressed = [[UIImage imageNamed:@"nav_btn_pressed"] stretchableImageWithLeftCapWidth:5 topCapHeight:30];
         

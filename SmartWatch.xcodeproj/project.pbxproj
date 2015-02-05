@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		45381E211A8364690035E714 /* map_001.png in Resources */ = {isa = PBXBuildFile; fileRef = 45381E1F1A8364690035E714 /* map_001.png */; };
+		45381E221A8364690035E714 /* map_002.png in Resources */ = {isa = PBXBuildFile; fileRef = 45381E201A8364690035E714 /* map_002.png */; };
 		45393F0E1A63B2CD00BDFB43 /* SWLostSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45393F0D1A63B2CD00BDFB43 /* SWLostSettingViewController.m */; };
 		455851001A37E1D700649397 /* SWDAILYSTEPS.m in Sources */ = {isa = PBXBuildFile; fileRef = 455850FF1A37E1D700649397 /* SWDAILYSTEPS.m */; };
 		455851031A37ED5800649397 /* SWExerciseRecordsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 455851021A37ED5800649397 /* SWExerciseRecordsModel.m */; };
@@ -195,6 +197,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		45381E1F1A8364690035E714 /* map_001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_001.png; sourceTree = "<group>"; };
+		45381E201A8364690035E714 /* map_002.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_002.png; sourceTree = "<group>"; };
 		45393F0C1A63B2CD00BDFB43 /* SWLostSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWLostSettingViewController.h; sourceTree = "<group>"; };
 		45393F0D1A63B2CD00BDFB43 /* SWLostSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWLostSettingViewController.m; sourceTree = "<group>"; };
 		455850FE1A37E1D700649397 /* SWDAILYSTEPS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SWDAILYSTEPS.h; path = ../Sql/SWDAILYSTEPS.h; sourceTree = "<group>"; };
@@ -605,6 +609,8 @@
 				45E8F5BE1A67A2C700DDE39B /* aw_mapview_track_line_selected@2x.png */,
 				45E8F5BF1A67A2C700DDE39B /* aw_mapview_track_line.png */,
 				45E8F5C01A67A2C700DDE39B /* aw_mapview_track_line@2x.png */,
+				45381E1F1A8364690035E714 /* map_001.png */,
+				45381E201A8364690035E714 /* map_002.png */,
 				CE7EE0951A20EA33006F3294 /* button */,
 				CE7EE09E1A20EA33006F3294 /* icon */,
 				CE7EE0A51A20EA33006F3294 /* nav */,
@@ -1270,6 +1276,8 @@
 				CE7EE11F1A20EC3B006F3294 /* 历史记录_27@2x.png in Resources */,
 				CE7EE0E61A20EA33006F3294 /* 1背景-ios_02@2x.png in Resources */,
 				CE7EE0D21A20EA33006F3294 /* 个人中心2@2x.png in Resources */,
+				45381E211A8364690035E714 /* map_001.png in Resources */,
+				45381E221A8364690035E714 /* map_002.png in Resources */,
 				CE7EE1181A20EC3B006F3294 /* 历史记录_09@2x.png in Resources */,
 				CE7EE0DF1A20EA33006F3294 /* 小三角_向上@2x.png in Resources */,
 				CE7EE12B1A20EC3B006F3294 /* 4设置_25@2x.png in Resources */,
@@ -1542,6 +1550,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/SmartWatch/ThirdParty/WeChat",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "22778a46-d0c6-4d64-9793-dd726cf17cd1";
 				VALID_ARCHS = "armv7 armv7s";
@@ -1562,6 +1571,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/SmartWatch/ThirdParty/WeChat",
 				);
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "22778a46-d0c6-4d64-9793-dd726cf17cd1";
 				VALID_ARCHS = "armv7 armv7s";

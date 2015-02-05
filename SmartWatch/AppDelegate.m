@@ -87,6 +87,8 @@
 }
 
 - (void)startLocationTracking {
+	[[NSUserDefaults standardUserDefaults] registerDefaults:@{@"TrackEnable": @(1)}];
+	
 	if ([[NSUserDefaults standardUserDefaults] integerForKey:@"TrackEnable"] != 1) {
 		return;
 	}

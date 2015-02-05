@@ -25,6 +25,7 @@
         [self setBlurTintColor:[UIColor whiteColor]];
         _navigationBar = [[UINavigationBar alloc] initForAutoLayout];
         _navigationBar.barStyle = UIBarStyleDefault;
+		[_navigationBar setTintColor:[UIColor blackColor]];
         UIBarButtonItem *cancelBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"取消", @"Cancel Button") style:UIBarButtonItemStylePlain target:self action:@selector(cancelBtnClick)];
         UIBarButtonItem *saveBtn = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"保存", @"picker Birthday Save Button") style:UIBarButtonItemStyleDone target:self action:@selector(saveBtnClick)];
         _navItem = [[UINavigationItem alloc] init];
