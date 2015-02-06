@@ -152,13 +152,13 @@
         }
         
         _totalSteps = tempTotalSteps;
-        _stepsPercent = _totalSteps / stepsTarget;
+        _stepsPercent = _totalSteps / (float)stepsTarget;
         _stepsPercentString = [NSString stringWithFormat:@"%d%%", (int)(_stepsPercent * 100)];
         
         _totalDistance = tempTotalSteps * [[SWUserInfo shareInstance] height] * 0.45 * 0.01 * 0.001;
         
         _totalCalorie = tempTotalCalorie;
-        _caloriePercent = tempTotalCalorie / [[SWSettingInfo shareInstance] calorieTarget];
+        _caloriePercent = tempTotalCalorie / (float)[[SWSettingInfo shareInstance] calorieTarget];
         _caloriePercentString = [NSString stringWithFormat:@"%d%%", (int)(_caloriePercent * 100)];
         _daylightActivitytime = tempTotalActivityTime;
         

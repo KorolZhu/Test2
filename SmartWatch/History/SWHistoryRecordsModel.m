@@ -140,7 +140,7 @@
         currentDayDateymd = dateymd;
         [self queryReportWithDateymd:currentDayDateymd];
         _dayTotalSteps = tempTotalSteps;
-        _dayStepsPercent = tempTotalSteps / [self stepsTarget];
+        _dayStepsPercent = tempTotalSteps / (float)[self stepsTarget];
         
         _dayTotalCalorie = tempTotalCalorie;
         _dayCaloriePercent = tempTotalCalorie / [[SWSettingInfo shareInstance] calorieTarget];
