@@ -67,23 +67,23 @@ SW_DEF_SINGLETON(SWSettingInfo, shareInstance);
 }
 
 - (float)calorieTarget {
-//    NSInteger height = [[SWUserInfo shareInstance] height];
-//    if (height <= 0) {
-//        height = [[SWUserInfo shareInstance] defaultHeight];
-//    }
-//    
-//    NSInteger weight = [[SWUserInfo shareInstance] weight];
-//    if (weight <= 0) {
-//        weight = [[SWUserInfo shareInstance] defaultWeight];
-//    }
-//    
-//    NSInteger steps = [self stepsTarget];
-//    if (steps <= 0) {
-//        steps = [self defaultStepsTarget];
-//    }
+    NSInteger height = [[SWUserInfo shareInstance] height];
+    if (height <= 0) {
+        height = [[SWUserInfo shareInstance] defaultHeight];
+    }
+    
+    NSInteger weight = [[SWUserInfo shareInstance] weight];
+    if (weight <= 0) {
+        weight = [[SWUserInfo shareInstance] defaultWeight];
+    }
+    
+    NSInteger steps = [self stepsTarget];
+    if (steps <= 0) {
+        steps = [self defaultStepsTarget];
+    }
     
     
-    return 0.53 * [[SWUserInfo shareInstance] height] + 0.58 * [[SWUserInfo shareInstance] weight] + 0.04 * [self stepsTarget] - 135;
+    return 0.53 * height + 0.58 * weight + 0.04 * steps - 135;
 }
 
 - (NSInteger)defaultStepsTarget {
