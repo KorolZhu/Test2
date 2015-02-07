@@ -118,16 +118,6 @@
                     // 计算睡眠时间
                     NSInteger daylightStartHour = [[SWSettingInfo shareInstance] startHour];
                     NSInteger daylightEndHour = [[SWSettingInfo shareInstance] endHour];
-
-                    if (daylightStartHour <= 0) {
-                        daylightStartHour = 9;
-                    }
-                    
-                    if (daylightEndHour <= 0) {
-                        daylightEndHour = 21;
-                    }
-                    
-                    
                     
                     BOOL night = NO;
                     if (daylightStartHour > daylightEndHour) {

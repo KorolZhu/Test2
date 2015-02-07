@@ -46,7 +46,6 @@ SW_DEF_SINGLETON(SWSettingInfo, shareInstance);
     WBSQLBuffer *sqlBuffer = [[WBSQLBuffer alloc] init];
     sqlBuffer.INSERT(DBSETTING._tableName);
     sqlBuffer.SET(DBSETTING._TARGETSTEP,@([[SWSettingInfo shareInstance] stepsTarget]));
-    sqlBuffer.SET(DBSETTING._TARGETCALORIE,@([[SWSettingInfo shareInstance] calorieTarget]));
     sqlBuffer.SET(DBSETTING._TARGETSLEEP,@([[SWSettingInfo shareInstance] sleepTarget]));
     sqlBuffer.SET(DBSETTING._DAYTIMESTARTHOUR,@([SWSettingInfo shareInstance].startHour));
     sqlBuffer.SET(DBSETTING._DAYTIMEENDTHOUR,@([SWSettingInfo shareInstance].endHour));
