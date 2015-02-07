@@ -13,6 +13,7 @@
 @interface SWSettingModel : SWModel
 
 - (void)saveStepsTarget:(NSInteger)steps;
+- (void)saveSleepTarget:(NSInteger)sleep;
 
 - (void)saveDaylightTimeWithStartHour:(NSInteger)startHour
                               endHour:(NSInteger)endHour;

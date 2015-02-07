@@ -431,6 +431,18 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
 //}
 
 - (void)bleDidConnect {
+    NSString *uuid = self.ble.activePeripheral.identifier.UUIDString;
+    if (uuid.length > 0) {
+        [[NSUserDefaults standardUserDefaults] setObject:uuid forKey:LASTPERIPHERALUUID];
+    }
+    
+    NSString *name = self.ble.activePeripheral.name;
+    if (name.length > 0) {
+        [[NSUserDefaults standardUserDefaults] setObject:name forKey:LASTPERIPHERALNAME];
+    }
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     self.state = SWPeripheralStateConnected;
     [self sendSetDateTimeRequest];
     

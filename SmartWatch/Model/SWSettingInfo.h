@@ -17,6 +17,7 @@ SW_AS_SINGLETON(SWSettingInfo, shareInstance);
 @property (nonatomic) NSInteger ultravioletIndex;
 @property (nonatomic) NSInteger stepsTarget;
 @property (nonatomic) float calorieTarget;
+@property (nonatomic) NSInteger sleepTarget;
 @property (nonatomic) NSInteger startHour;
 @property (nonatomic) NSInteger endHour;
 @property (nonatomic) NSMutableArray *alarmArray;
@@ -25,5 +26,9 @@ SW_AS_SINGLETON(SWSettingInfo, shareInstance);
 
 - (void)loadDataWithDictionary:(NSDictionary *)dictionary;
 - (void)updateToDB;
+
+- (NSInteger)defaultStepsTarget;
+- (float)defaultCalorieTarget;
+- (NSInteger)defaultSleepTarget;
 
 @end

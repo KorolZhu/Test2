@@ -52,10 +52,44 @@
 - (NSInteger)stepsTarget {
     NSInteger stepsTarget = [[SWSettingInfo shareInstance] stepsTarget];
     if (stepsTarget <= 0) {
-        stepsTarget = 2500;
+        stepsTarget = [[SWSettingInfo shareInstance] defaultStepsTarget];
     }
     
     return stepsTarget;
+}
+
+- (float)calorieTarget {
+    float calorieTarget = (float)[[SWSettingInfo shareInstance] calorieTarget];
+    if (calorieTarget <= 0.0f) {
+        calorieTarget = [[SWSettingInfo shareInstance] defaultCalorieTarget];
+    }
+    
+    return calorieTarget;
+}
+
+- (NSInteger)sleepTarget {
+    NSInteger sleepTarget = [SWSettingInfo shareInstance].sleepTarget;
+    if (sleepTarget <= 0) {
+        sleepTarget = [[SWSettingInfo shareInstance] defaultSleepTarget];
+    }
+    
+    return sleepTarget;
+}
+
+- (NSInteger)height {
+    if ([[SWUserInfo shareInstance] height] == 0.0f) {
+        return [[SWUserInfo shareInstance] defaultHeight];
+    }
+    
+    return [[SWUserInfo shareInstance] height];
+}
+
+- (NSInteger)weight {
+    if ([[SWUserInfo shareInstance] weight] == 0.0f) {
+        return [[SWUserInfo shareInstance] defaultWeight];
+    }
+    
+    return [[SWUserInfo shareInstance] weight];
 }
 
 - (void)queryReportWithDateymd:(long long)dateymd {
@@ -85,15 +119,8 @@
                         }
                     }
                     
-                    NSInteger height = [[SWUserInfo shareInstance] height];
-                    if (height <= 0) {
-                        height = 170;
-                    }
-                    
-                    NSInteger weight = [[SWUserInfo shareInstance] weight];
-                    if (weight <= 0) {
-                        weight = 55;
-                    }
+                    NSInteger height = [self height];
+                    NSInteger weight = [self weight];
                     
                     float calorie = 0.53 * height + 0.58 * weight + 0.04 * steps - 135;
                     if (calorie > 0.0f) {
@@ -120,7 +147,7 @@
                         night = YES;
                     }
                 }
-                if (night && steps <= 50) {
+                if (night && steps > 0 && steps <= 50) {
                     tempTotalSleep += 1;
                 }
             }
@@ -143,7 +170,7 @@
         _dayStepsPercent = tempTotalSteps / (float)[self stepsTarget];
         
         _dayTotalCalorie = tempTotalCalorie;
-        _dayCaloriePercent = tempTotalCalorie / [[SWSettingInfo shareInstance] calorieTarget];
+        _dayCaloriePercent = tempTotalCalorie / [self calorieTarget];
         _dayStepsDictionary = [NSDictionary dictionaryWithDictionary:stepsTempDictionary];
         _dayCalorieDictionary = [NSDictionary dictionaryWithDictionary:calorieTempDictionary];
         
@@ -188,7 +215,7 @@
         _weekStepsPerday = tempWeekTotalSteps / 7.0f;
         _weekStepsPercent = _weekStepsPerday / (float)[self stepsTarget];
         _weekCaloriePerday = tempWeekTotalCalorie / 7.0f;
-        _weekCaloriePercent = _weekCaloriePerday / (float)[[SWSettingInfo shareInstance] calorieTarget];
+        _weekCaloriePercent = _weekCaloriePerday / (float)[self calorieTarget];
         _weekSleepPerday = tempWeekTotalSleep / 7.0f;
         
         [self respondSelectorOnMainThread:@selector(weekRecordsQueryFinished)];
@@ -230,7 +257,7 @@
         _monthStepsPerday = tempMonthTotalSteps / 30.0f;
         _monthStepsPercent = _monthStepsPerday / (float)[self stepsTarget];
         _monthCaloriePerday = tempMonthTotalCalorie / 30.0f;
-        _monthCaloriePercent = _monthCaloriePerday / (float)[[SWSettingInfo shareInstance] calorieTarget];
+        _monthCaloriePercent = _monthCaloriePerday / (float)[self calorieTarget];
         _monthSleepPerday = tempMonthTotalSleep / 30.0f;
         
         [self respondSelectorOnMainThread:@selector(monthRecordsQueryFinished)];
@@ -288,7 +315,7 @@
         _yearStepsPerday = tempYearTotalSteps / 365.0f;
         _yearStepsPercent = _yearStepsPerday / (float)[self stepsTarget];
         _yearCaloriePerday = tempYearTotalCalorie / 365.0f;
-        _yearCaloriePercent = _yearCaloriePerday / (float)[[SWSettingInfo shareInstance] calorieTarget];
+        _yearCaloriePercent = _yearCaloriePerday / (float)[self calorieTarget];
         _yearSleepPerday = tempYearTotalSleep / 30.0f;
         
         [self respondSelectorOnMainThread:@selector(annualRecordsQueryFinished)];

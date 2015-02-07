@@ -35,6 +35,12 @@
     [[SWSettingInfo shareInstance] updateToDB];
 }
 
+- (void)saveSleepTarget:(NSInteger)sleep {
+    [[SWSettingInfo shareInstance] setSleepTarget:sleep];
+    [[SWSettingInfo shareInstance] updateToDB];
+
+}
+
 - (void)saveDaylightTimeWithStartHour:(NSInteger)startHour endHour:(NSInteger)endHour {
     [[SWSettingInfo shareInstance] setStartHour:startHour];
     [[SWSettingInfo shareInstance] setEndHour:endHour];

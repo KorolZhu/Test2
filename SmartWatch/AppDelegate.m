@@ -14,6 +14,7 @@
 #import "SWShareKit.h"
 #import "WBDatabaseService.h"
 #import "LocationTracker.h"
+#import "SWUserInfo.h"
 
 @interface AppDelegate ()
 
@@ -82,6 +83,14 @@
     [self.window makeKeyAndVisible];
     
     [self startLocationTracking];
+    
+    if ([SWUserInfo shareInstance].sex == -1 ||
+        [SWUserInfo shareInstance].weight == 0 ||
+        [SWUserInfo shareInstance].height == 0) {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"请设置性别、身高、体重", nil) message:nil delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+        [alertView show];
+        _tabBarController.selectedIndex = 2;
+    }
     
     return YES;
 }

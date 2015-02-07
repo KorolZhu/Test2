@@ -111,7 +111,13 @@
     
     if (indexPath.row == 1) {
         cell.title = @"性别";
-        cell.value = [[SWUserInfo shareInstance] sex] == 0 ? @"女" : @"男";
+        if ([[SWUserInfo shareInstance] sex] == 0) {
+            cell.value = @"女";
+        } else if ([[SWUserInfo shareInstance] sex] == 1) {
+            cell.value = @"男";
+        } else {
+            cell.value = @"";
+        }
     } else if (indexPath.row == 2) {
         cell.title = @"生日";
         cell.value = [[SWUserInfo shareInstance] birthdayString];
@@ -220,7 +226,7 @@
             weightPickerView.delegate = self;
             
             NSMutableArray *arr = [NSMutableArray array];
-            for (NSInteger i = 20; i < 201; i++) {
+            for (NSInteger i = 20; i < 151; i++) {
                 [arr addObject:@(i)];
             }
             weightPickerViewDataSource = arr;

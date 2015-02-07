@@ -51,6 +51,9 @@
 	NSArray *annotations;
 	NSArray *images;
 	MKMapRect visibleRect;
+    
+    NSTimer *scanTimer;
+    MBProgressHUD *progressHUD;
 }
 
 @property (nonatomic,strong) UIScrollView *scrollView;
@@ -244,6 +247,11 @@
     
     [model queryExerciseRecordsWithDate:[NSDate date]];
     titleView.nextButton.enabled = NO;
+    
+    if (!progressHUD) {
+        progressHUD = [[MBProgressHUD alloc] initWithView:self.tabBarController.view];
+        [self.tabBarController.view addSubview:progressHUD];
+    }
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newLocationProduced:) name:KNewLocationProducedNotification object:nil];
 	
@@ -264,28 +272,33 @@
 }
 
 - (void)synchronizeStart {
-    [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+    progressHUD.detailsLabelText = NSLocalizedString(@"同步中...", nil);
+//    [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
 }
 
 - (void)synchronizeSucceed {
+    environmentView.leftPower = [SWSettingInfo shareInstance].battery;
     [model queryExerciseRecordsWithDate:[NSDate date]];
     [titleView setDate:[NSDate date]];
 }
 
 - (void)synchronizeFailed {
-    [MBProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
+    [progressHUD hide:YES];
+//    [MBProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
 }
 
 - (void)bleClick {
     if ([SWBLECenter shareInstance].state == SWPeripheralStateDisconnected) {
-        if (!accessoryPickerView) {
-            accessoryPickerView = [[SWAccessoryPickerView alloc] initWithFrame:CGRectMake(22.0f, 100.0f, IPHONE_WIDTH - 44.0f, IPHONE_HEIGHT - 200.0f)];
-            accessoryPickerView.title = NSLocalizedString(@"请选择蓝牙设备", nil);
-            accessoryPickerView.delegate = self;
+        NSString *lastuuid = [[NSUserDefaults standardUserDefaults] stringForKey:LASTPERIPHERALUUID];
+        if (lastuuid.length > 0) {
+            progressHUD.detailsLabelText = NSLocalizedString(@"扫描中...", nil);
+            [progressHUD show:YES];
+            
+            scanTimer = [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(scanTimeout) userInfo:nil repeats:YES];
+        } else {
+            [self scanTimeout];
         }
         
-        [accessoryPickerView show];
-        [accessoryPickerView setDataSource:nil];
         [[SWBLECenter shareInstance] scanBLEPeripherals];
         [[SWBLECenter shareInstance].ble addObserver:self forKeyPath:@"peripherals" options: NSKeyValueObservingOptionNew context:NULL];
     } else {
@@ -293,10 +306,28 @@
     }
 }
 
+- (void)scanTimeout {
+    [scanTimer invalidate];
+    scanTimer = nil;
+    
+    [progressHUD hide:NO];
+    
+    if (!accessoryPickerView) {
+        accessoryPickerView = [[SWAccessoryPickerView alloc] initWithFrame:CGRectMake(22.0f, 100.0f, IPHONE_WIDTH - 44.0f, IPHONE_HEIGHT - 200.0f)];
+        accessoryPickerView.title = NSLocalizedString(@"请选择蓝牙设备", nil);
+        accessoryPickerView.delegate = self;
+    }
+    
+    [accessoryPickerView show];
+    [accessoryPickerView setDataSource:[NSArray arrayWithArray:[SWBLECenter shareInstance].ble.peripherals]];
+}
+
 - (void)accessoryPickerView:(SWAccessoryPickerView *)pickerView didSelectPeripheral:(CBPeripheral *)peripheral {
     [[SWBLECenter shareInstance].ble removeObserver:self forKeyPath:@"peripherals"];
     [[SWBLECenter shareInstance] stopScanBLEPeripherals];
-    [accessoryPickerView hide];
+    if (accessoryPickerView.isVisible) {
+        [accessoryPickerView hide];
+    }
     [[SWBLECenter shareInstance] connectPeripheral:peripheral];
 }
 
@@ -554,7 +585,7 @@
         dashboardView.value1 = @((int)model.totalCalorie).stringValue;
         dashboardView.unit1 = @"千卡";
         dashboardView.descri1 = @"燃烧";
-        dashboardView.value2 = @((int)model.totalDistance).stringValue;
+        dashboardView.value2 = [NSString stringWithFormat:@"%.1f", model.totalDistance];
         dashboardView.unit2 = @"公里";
         dashboardView.descri2 = @"距离";
         dashboardView.value3 = @(model.totalSteps).stringValue;
@@ -577,7 +608,11 @@
     } else {
         progressView.topDesc = NSLocalizedString(@"今日", nil);
         progressView.bottomDesc = NSLocalizedString(@"睡眠", nil);
-        progressView.progress = (model.deepSleepHour + model.lightSleepHour) / 7.0f;
+        NSInteger sleepTarget = [SWSettingInfo shareInstance].sleepTarget;
+        if (sleepTarget <= 0) {
+            sleepTarget = [[SWSettingInfo shareInstance] defaultSleepTarget];
+        }
+        progressView.progress = (model.deepSleepHour + model.lightSleepHour) / sleepTarget;
         progressView.valueString = [NSString stringWithFormat:@"%@h", @(model.deepSleepHour + model.lightSleepHour).stringValue];
         dashboardView.value1 = @(model.deepSleepHour).stringValue;
         dashboardView.unit1 = @"小时";
@@ -698,7 +733,8 @@
 	[stepsGraphView reloadPlot];
 	[sleepGraphView reloadPlot];
     
-    [MBProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
+    [progressHUD hide:YES];
+//    [MBProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
 }
 
 - (void)locationQueryFinished {
@@ -821,6 +857,13 @@
                     leftBarButton.enabled = NO;
                     [leftBarButton setImage:[UIImage imageNamed:@"蓝牙"] forState:UIControlStateNormal];
                     [leftBarButton setTitle:nil forState:UIControlStateNormal];
+                    
+                    if (state == SWPeripheralStateConnecting) {
+                        if (progressHUD.hidden || progressHUD.alpha == 0.0f) {
+                            [progressHUD show:YES];
+                        }
+                        progressHUD.detailsLabelText = NSLocalizedString(@"连接中...", nil);
+                    }
                 });
 
             }
@@ -829,8 +872,25 @@
     } else if ([keyPath isEqualToString:@"peripherals"]) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (accessoryPickerView.isVisible) {
-                accessoryPickerView.dataSource = [NSArray arrayWithArray:[SWBLECenter shareInstance].ble.peripherals];
+                [accessoryPickerView setDataSource:[NSArray arrayWithArray:[SWBLECenter shareInstance].ble.peripherals]];
+            } else {
+                NSString *lastuuid = [[NSUserDefaults standardUserDefaults] stringForKey:LASTPERIPHERALUUID];
+                if (lastuuid.length > 0) {
+                    NSArray *array = [NSArray arrayWithArray:[SWBLECenter shareInstance].ble.peripherals];
+                    for (CBPeripheral *peripheral in array) {
+                        if ([peripheral.identifier.UUIDString isEqualToString:lastuuid]) {
+                            if ([scanTimer isValid] && ![accessoryPickerView isVisible]) {
+                                [self accessoryPickerView:nil didSelectPeripheral:peripheral];
+                                [scanTimer invalidate];
+                                scanTimer = nil;
+                            }
+                            
+                            break;
+                        }
+                    }
+                }
             }
+
         });
     }
 }

@@ -13,6 +13,6 @@
 @property (nonatomic)NSString *uvLevel;
 @property (nonatomic)NSString *temperature;
 @property (nonatomic)NSString *humidity;
-@property (nonatomic)float leftPower;
+@property (nonatomic)NSInteger leftPower;
 
 @end

@@ -33,4 +33,7 @@
 
 #define LASTCITYCODE @"lastcitycode"
 
+#define LASTPERIPHERALUUID @"lastperipheraluuid"
+#define LASTPERIPHERALNAME @"lastperipheralname"
+
 #endif

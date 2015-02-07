@@ -13,6 +13,15 @@
 
 SW_DEF_SINGLETON(SWUserInfo, shareInstance);
 
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        self.sex = -1;
+    }
+    
+    return self;
+}
+
 - (void)loadDataWithDictionary:(NSDictionary *)dictionary {
     self.headImagePath = [dictionary stringForKey:DBPROFILE._PHOTOPATH];
     self.name = [dictionary stringForKey:DBPROFILE._NAME];
@@ -30,6 +39,22 @@ SW_DEF_SINGLETON(SWUserInfo, shareInstance);
 //    [dateFormatter setDateFormat:@"yyyy/MM/dd"];
 //    NSString *dateString = [dateFormatter stringFromDate:date];
 //    _birthdayString = [
+}
+
+- (NSInteger)height {
+    return _height;
+}
+
+- (NSInteger)weight {
+    return _weight;
+}
+
+- (NSInteger)defaultHeight {
+    return 170;
+}
+
+- (NSInteger)defaultWeight {
+    return 55;
 }
 
 @end

@@ -21,6 +21,7 @@ SW_DEF_SINGLETON(SWSettingInfo, shareInstance);
 
 - (void)loadDataWithDictionary:(NSDictionary *)dictionary {
     self.stepsTarget = [dictionary intForKey:DBSETTING._TARGETSTEP];
+    self.sleepTarget = [dictionary floatForKey:DBSETTING._TARGETSLEEP];
     self.startHour = [dictionary intForKey:DBSETTING._DAYTIMESTARTHOUR];
     self.endHour = [dictionary intForKey:DBSETTING._DAYTIMEENDTHOUR];
     NSString *string = [dictionary stringForKey:DBSETTING._ALARM];
@@ -45,6 +46,8 @@ SW_DEF_SINGLETON(SWSettingInfo, shareInstance);
     WBSQLBuffer *sqlBuffer = [[WBSQLBuffer alloc] init];
     sqlBuffer.INSERT(DBSETTING._tableName);
     sqlBuffer.SET(DBSETTING._TARGETSTEP,@([[SWSettingInfo shareInstance] stepsTarget]));
+    sqlBuffer.SET(DBSETTING._TARGETCALORIE,@([[SWSettingInfo shareInstance] calorieTarget]));
+    sqlBuffer.SET(DBSETTING._TARGETSLEEP,@([[SWSettingInfo shareInstance] sleepTarget]));
     sqlBuffer.SET(DBSETTING._DAYTIMESTARTHOUR,@([SWSettingInfo shareInstance].startHour));
     sqlBuffer.SET(DBSETTING._DAYTIMEENDTHOUR,@([SWSettingInfo shareInstance].endHour));
     
@@ -65,7 +68,35 @@ SW_DEF_SINGLETON(SWSettingInfo, shareInstance);
 }
 
 - (float)calorieTarget {
-    return 0.53 * [[SWUserInfo shareInstance] height] + 0.58 * [[SWUserInfo shareInstance] weight] + 0.04 * self.stepsTarget - 135;
+//    NSInteger height = [[SWUserInfo shareInstance] height];
+//    if (height <= 0) {
+//        height = [[SWUserInfo shareInstance] defaultHeight];
+//    }
+//    
+//    NSInteger weight = [[SWUserInfo shareInstance] weight];
+//    if (weight <= 0) {
+//        weight = [[SWUserInfo shareInstance] defaultWeight];
+//    }
+//    
+//    NSInteger steps = [self stepsTarget];
+//    if (steps <= 0) {
+//        steps = [self defaultStepsTarget];
+//    }
+    
+    
+    return 0.53 * [[SWUserInfo shareInstance] height] + 0.58 * [[SWUserInfo shareInstance] weight] + 0.04 * [self stepsTarget] - 135;
+}
+
+- (NSInteger)defaultStepsTarget {
+    return 2500;
+}
+
+- (float)defaultCalorieTarget {
+    return 0.53 * [[SWUserInfo shareInstance] defaultHeight] + 0.58 * [[SWUserInfo shareInstance] defaultWeight] + 0.04 * [self defaultStepsTarget] - 135.0f;
+}
+
+- (NSInteger)defaultSleepTarget {
+    return 7;
 }
 
 @end

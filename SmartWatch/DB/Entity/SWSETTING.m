@@ -20,6 +20,14 @@ SW_DEF_SINGLETON(SWSETTING, shareInstant);
     return @"TARGETSTEP";
 }
 
+- (NSString *)_TARGETCALORIE {
+    return @"TARGETCALORIE";
+}
+
+- (NSString *)_TARGETSLEEP {
+    return @"TARGETSLEEP";
+}
+
 - (NSString *)_DAYTIMESTARTHOUR {
     return @"DAYTIMESTARTHOUR";
 }

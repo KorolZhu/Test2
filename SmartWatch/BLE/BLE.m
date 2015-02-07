@@ -222,6 +222,8 @@ static int rssi = 0;
 
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error;
 {
+    NSLog(@"Disconnected %@", peripheral);
+    
     [[self delegate] bleDidDisconnect];
     
     isConnected = false;
@@ -439,36 +441,41 @@ static int rssi = 0;
 
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
-    if (!self.peripherals) {
-        [self willChangeValueForKey:@"peripherals"];
-        self.peripherals = [[NSMutableArray alloc] initWithObjects:peripheral,nil];
-        [self didChangeValueForKey:@"peripherals"];
-    }
-    else
-    {
-        for(int i = 0; i < self.peripherals.count; i++)
-        {
-            CBPeripheral *p = [self.peripherals objectAtIndex:i];
-            
-            if ((p.identifier == NULL) || (peripheral.identifier == NULL))
-                continue;
-            
-            if ([self UUIDSAreEqual:p.identifier UUID2:peripheral.identifier])
-            {
-                [self willChangeValueForKey:@"peripherals"];
-                [self.peripherals replaceObjectAtIndex:i withObject:peripheral];
-                [self didChangeValueForKey:@"peripherals"];
-                NSLog(@"Duplicate UUID found updating...");
-                return;
-            }
+    NSLog(@"%@", peripheral);
+    if ([peripheral.name.lowercaseString isEqualToString:@"tinsee"] || [peripheral.name.lowercaseString isEqualToString:@"wristband"]) {
+        if (!self.peripherals) {
+            [self willChangeValueForKey:@"peripherals"];
+            self.peripherals = [[NSMutableArray alloc] initWithObjects:peripheral,nil];
+            [self didChangeValueForKey:@"peripherals"];
         }
-        
-        [self willChangeValueForKey:@"peripherals"];
-        [self.peripherals addObject:peripheral];
-        [self didChangeValueForKey:@"peripherals"];
-        
-        NSLog(@"New UUID, adding");
+        else
+        {
+            for(int i = 0; i < self.peripherals.count; i++)
+            {
+                CBPeripheral *p = [self.peripherals objectAtIndex:i];
+                
+                if ((p.identifier == NULL) || (peripheral.identifier == NULL))
+                    continue;
+                
+                if ([self UUIDSAreEqual:p.identifier UUID2:peripheral.identifier])
+                {
+                    [self willChangeValueForKey:@"peripherals"];
+                    [self.peripherals replaceObjectAtIndex:i withObject:peripheral];
+                    [self didChangeValueForKey:@"peripherals"];
+                    NSLog(@"Duplicate UUID found updating...");
+                    return;
+                }
+            }
+            
+            [self willChangeValueForKey:@"peripherals"];
+            [self.peripherals addObject:peripheral];
+            [self didChangeValueForKey:@"peripherals"];
+            
+            NSLog(@"New UUID, adding");
+        }
     }
+    
+    
     
     NSLog(@"didDiscoverPeripheral");
 }

@@ -26,4 +26,7 @@ SW_AS_SINGLETON(SWUserInfo, shareInstance);
 - (void)loadDataWithDictionary:(NSDictionary *)dictionary;
 - (void)setup;
 
+- (NSInteger)defaultHeight;
+- (NSInteger)defaultWeight;
+
 @end

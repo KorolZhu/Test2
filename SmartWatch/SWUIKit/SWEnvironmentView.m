@@ -153,7 +153,7 @@
 	humidityLabel.value = [NSString stringWithFormat:@"%@", humidity.length == 0 ? @"" : humidity];
 }
 
-- (void)setLeftPower:(float)leftPower {
+- (void)setLeftPower:(NSInteger)leftPower {
     leftPowerLabel.value = [NSString stringWithFormat:@"%ld%%", (long)leftPower];
 }
 

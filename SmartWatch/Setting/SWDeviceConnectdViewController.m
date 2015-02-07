@@ -90,12 +90,30 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:nil];
     cell.backgroundColor = [UIColor clearColor];
     cell.textLabel.textColor = [UIColor whiteColor];
-    NSString *name = [SWBLECenter shareInstance].activePeripheral.name;
+    cell.detailTextLabel.textColor = [UIColor whiteColor];
+    
+    NSString *uuid = [[NSUserDefaults standardUserDefaults] stringForKey:LASTPERIPHERALUUID];
+    NSString *name = [[NSUserDefaults standardUserDefaults] stringForKey:LASTPERIPHERALNAME];
+    
+    NSString *subuuid = @"";
+    if (uuid.length >= 4) {
+        subuuid = [uuid substringToIndex:4];
+    }
+    
+    if (name.length == 0) {
+        name = @"";
+    }
+    
+    if ([name.lowercaseString isEqualToString:@"wristband"]) {
+        name = @"Tinsee";
+    }
+    
     if (name.length > 0) {
-        cell.textLabel.text = name;
+        cell.textLabel.text = [NSString stringWithFormat:@"%@%@", name, subuuid];
+        cell.detailTextLabel.text = NSLocalizedString(@"解绑", nil);
     } else {
         cell.textLabel.text = nil;
     }
@@ -104,6 +122,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    NSString *name = [[NSUserDefaults standardUserDefaults] stringForKey:LASTPERIPHERALUUID];
+    if (name.length > 0) {
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:LASTPERIPHERALUUID];
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:LASTPERIPHERALNAME];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        [tableView reloadData];
+    }
 }
 
 #pragma mark - AccessoryPickerView

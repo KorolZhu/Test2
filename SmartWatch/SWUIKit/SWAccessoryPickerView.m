@@ -126,7 +126,17 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     CBPeripheral *peripheral = [_dataSource objectAtIndex:indexPath.row];
-    cell.textLabel.text = peripheral.name;
+    NSString *subString = @"";
+    if (peripheral.identifier.UUIDString.length >= 4) {
+        subString = [peripheral.identifier.UUIDString substringToIndex:4];
+    }
+    
+    NSString *name = peripheral.name;
+    if ([name.lowercaseString isEqualToString:@"wristband"]) {
+        name = @"Tinsee";
+    }
+    
+    cell.textLabel.text = [NSString stringWithFormat:@"%@%@", name, subString];
     return cell;
 }
 
