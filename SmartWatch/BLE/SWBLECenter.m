@@ -163,6 +163,7 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
 
 - (void)sendGetActivityRequestWithIndex:(UInt8)index {
     UInt8 buf[] = {BLE_CMD_ACTIVITY_GETBYSN_REQUEST, index, activitystartHour};
+    NSLog(@"%@,%@", @(index).stringValue, @(activitystartHour).stringValue);
     NSData *data = [[NSData alloc] initWithBytes:buf length:3];
     [self.ble write:data];
 }
@@ -326,13 +327,14 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
         [SWSettingInfo shareInstance].stepsTarget = step2 * 256 + step1;
     }
     [[SWSettingInfo shareInstance] updateToDB];
+    activitystartHour = 0;
     [self sendGetActivityCountRequest];
 }
 
 - (void)handleGetActivityCountResponse:(NSData *)data {
     activityCountResponse = [[SWActivityCountResponse alloc] initWithData:data];
     if (activityCountResponse.count > 0) {
-        activityCountResponse.currentIndex = activityCountResponse.count - 1;
+        activityCountResponse.currentIndex = 0;
         [self sendGetActivityRequestWithIndex:activityCountResponse.currentIndex];
     } else {
         [[NSNotificationCenter defaultCenter] postNotificationName:kSWBLESynchronizeSuccessNotification object:nil];
@@ -375,15 +377,15 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
 	if (activitystartHour <= 18) {
 		[self sendGetActivityRequestWithIndex:activityCountResponse.currentIndex];
 	} else {
-        if (activityCountResponse.currentIndex == 0) {
+        if (activityCountResponse.currentIndex == activityCountResponse.count - 1) {
             [[NSNotificationCenter defaultCenter] postNotificationName:kSWBLESynchronizeSuccessNotification object:nil];
             
             return;
         }
         
 		activitystartHour = 0;
-		activityCountResponse.currentIndex--;
-		if (activityCountResponse.currentIndex >= 0) {
+		activityCountResponse.currentIndex++;
+		if (activityCountResponse.currentIndex <= activityCountResponse.count - 1) {
 			[self sendGetActivityRequestWithIndex:activityCountResponse.currentIndex];
 		}
 	}
