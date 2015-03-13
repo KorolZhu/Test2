@@ -80,9 +80,9 @@
         __block NSInteger tempTotalSteps = 0;
         __block float tempTotalCalorie = 0.0f;
         __block NSInteger tempTotalActivityTime = 0;
-        __block float tempTotalDeepSleep;
-        __block float tempTotalLightSleep;
-        __block float tempNightActivityHour;
+        __block float tempTotalDeepSleep = 0.0f;
+        __block float tempTotalLightSleep = 0.0f;
+        __block float tempNightActivityHour = 0.0f;
         
 		if (transaction.resultSet.resultArray.count > 0) {
 			
