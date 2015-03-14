@@ -117,16 +117,16 @@
                         if (steps > 100) {
                             
                         }
-                    }
-                    
-                    NSInteger height = [self height];
-                    NSInteger weight = [self weight];
-                    
-                    float calorie = 0.53 * height + 0.58 * weight + 0.04 * steps - 135;
-                    if (calorie > 0.0f) {
-                        [calorieTempDictionary setObject:@(calorie) forKey:@(hour + 1)];
                         
-                        tempTotalCalorie += calorie;
+                        NSInteger height = [self height];
+                        NSInteger weight = [self weight];
+                        
+                        float calorie = 0.53 * height + 0.58 * weight + 0.04 * steps - 135;
+                        if (calorie > 0.0f) {
+                            [calorieTempDictionary setObject:@(calorie) forKey:@(hour + 1)];
+                            
+                            tempTotalCalorie += calorie;
+                        }
                     }
                 }
                 
