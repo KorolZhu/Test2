@@ -109,7 +109,7 @@
                 if (steps >= 65280) {
                     // 睡眠评分
                     NSInteger score = steps - 65280;
-                    if (score > 0 && score <= 50) {
+                    if (score >= 0 && score <= 50) {
                         tempTotalSleep += 1;
                     }
                 } else {
