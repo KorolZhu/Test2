@@ -92,6 +92,17 @@
 					NSInteger hour = [[keyString stringByReplacingOccurrencesOfString:DBDAILYSTEPS._STEPCOUNT withString:@""] integerValue];
 					NSInteger steps = [obj integerValue];
 					if (steps >= 65280) {
+                        NSInteger score = steps - 65280;
+                        if (score > 0) {
+                            if (score <= 10) {
+                                tempTotalDeepSleep += 1;
+                            } else if (score <= 50) {
+                                tempTotalLightSleep += 1;
+                            } else {
+                                tempNightActivityHour += 1;
+                            }
+                        }
+                        
 						[sleepTempDictionary setObject:@(steps - 65280) forKey:@(hour + 1)];
 					} else {
                         if (steps > 0) {
@@ -115,6 +126,7 @@
                         }
 					}
                     
+                    /*
                     // 计算睡眠时间
                     NSInteger daylightStartHour = [[SWSettingInfo shareInstance] startHour];
                     NSInteger daylightEndHour = [[SWSettingInfo shareInstance] endHour];
@@ -145,7 +157,7 @@
                             }
                         }
                         
-                    }
+                    }*/
                     
 				}
 			}];
