@@ -66,7 +66,7 @@ SW_DEF_SINGLETON(SWSettingInfo, shareInstance);
     }];
 }
 
-- (float)calorieTarget {
+- (NSInteger)calorieTarget {
     NSInteger height = [[SWUserInfo shareInstance] height];
     if (height <= 0) {
         height = [[SWUserInfo shareInstance] defaultHeight];
@@ -77,21 +77,25 @@ SW_DEF_SINGLETON(SWSettingInfo, shareInstance);
         weight = [[SWUserInfo shareInstance] defaultWeight];
     }
     
-    NSInteger steps = [self stepsTarget];
+    NSInteger steps = self.stepsTarget;
     if (steps <= 0) {
         steps = [self defaultStepsTarget];
     }
     
-    
-    return 0.53 * height + 0.58 * weight + 0.04 * steps - 135;
+	NSInteger calorie = (NSInteger)(0.53 * height + 0.58 * weight + 0.04 * steps - 135);
+	if (calorie <= 0) {
+		calorie = 80;
+	}
+	
+    return calorie;
 }
 
 - (NSInteger)defaultStepsTarget {
     return 2500;
 }
 
-- (float)defaultCalorieTarget {
-    return 0.53 * [[SWUserInfo shareInstance] defaultHeight] + 0.58 * [[SWUserInfo shareInstance] defaultWeight] + 0.04 * [self defaultStepsTarget] - 135.0f;
+- (NSInteger)defaultCalorieTarget {
+    return (NSInteger)(0.53 * [[SWUserInfo shareInstance] defaultHeight] + 0.58 * [[SWUserInfo shareInstance] defaultWeight] + 0.04 * [self defaultStepsTarget] - 135.0f);
 }
 
 - (NSInteger)defaultSleepTarget {

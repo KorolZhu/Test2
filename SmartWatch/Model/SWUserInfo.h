@@ -24,7 +24,6 @@ SW_AS_SINGLETON(SWUserInfo, shareInstance);
 @property (nonatomic)NSInteger physiologicalDays;
 
 - (void)loadDataWithDictionary:(NSDictionary *)dictionary;
-- (void)setup;
 
 - (NSInteger)defaultHeight;
 - (NSInteger)defaultWeight;

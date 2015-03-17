@@ -81,7 +81,11 @@
     
     if (indexPath.row == 0) {
         cell.textLabel.text = @"步数";
-        cell.detailTextLabel.text = @([[SWSettingInfo shareInstance] stepsTarget]).stringValue;
+		if ([[SWSettingInfo shareInstance] stepsTarget] > 0) {
+			cell.detailTextLabel.text = @([[SWSettingInfo shareInstance] stepsTarget]).stringValue;
+		} else {
+			cell.detailTextLabel.text = @"";
+		}
     } else if (indexPath.row == 1) {
         cell.textLabel.text = @"卡路里";
         float calorieTarget = [[SWSettingInfo shareInstance] calorieTarget];
@@ -92,7 +96,11 @@
         }
     } else if (indexPath.row == 2) {
         cell.textLabel.text = @"睡眠";
-        cell.detailTextLabel.text = @([[SWSettingInfo shareInstance] sleepTarget]).stringValue;
+		if ([[SWSettingInfo shareInstance] sleepTarget] > 0) {
+			cell.detailTextLabel.text = @([[SWSettingInfo shareInstance] sleepTarget]).stringValue;
+		} else {
+			cell.detailTextLabel.text = @"";
+		}
     }
     
     return cell;

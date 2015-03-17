@@ -126,10 +126,18 @@
         cell.value = [NSString stringWithFormat:@"%@cm", @([[SWUserInfo shareInstance] height]).stringValue];
     } else if (indexPath.row == 4) {
         cell.title = @"体重";
-        cell.value = [NSString stringWithFormat:@"%@kg", @([[SWUserInfo shareInstance] weight]).stringValue];
+		if ([[SWUserInfo shareInstance] weight] > 0) {
+			cell.value = [NSString stringWithFormat:@"%@kg", @([[SWUserInfo shareInstance] weight]).stringValue];
+		} else {
+			cell.value = @"";
+		}
     } else if (indexPath.row == 5) {
         cell.title = @"生理周期";
-        cell.value = [NSString stringWithFormat:@"%@天", @([[SWUserInfo shareInstance] physiologicalDays]).stringValue];
+		if ([[SWUserInfo shareInstance] physiologicalDays] > 0) {
+			cell.value = [NSString stringWithFormat:@"%@天", @([[SWUserInfo shareInstance] physiologicalDays]).stringValue];
+		} else {
+			cell.value = @"";
+		}
     } else if (indexPath.row == 6) {
         cell.title = @"生理日期";
         if ([[SWUserInfo shareInstance] physiologicalDateString].length > 0) {

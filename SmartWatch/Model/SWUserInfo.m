@@ -31,22 +31,6 @@ SW_DEF_SINGLETON(SWUserInfo, shareInstance);
     self.weight = [dictionary intForKey:DBPROFILE._WEIGHT];
     self.physiologicalDays = [dictionary intForKey:DBPROFILE._PHYSIOLOGICALDAYS];
     self.physiologicalDateString = [dictionary stringForKey:DBPROFILE._PHYSIOLOGICALDATESTRING];
-    [self setup];
-}
-
-- (void)setup {
-//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-//    [dateFormatter setDateFormat:@"yyyy/MM/dd"];
-//    NSString *dateString = [dateFormatter stringFromDate:date];
-//    _birthdayString = [
-}
-
-- (NSInteger)height {
-    return _height;
-}
-
-- (NSInteger)weight {
-    return _weight;
 }
 
 - (NSInteger)defaultHeight {

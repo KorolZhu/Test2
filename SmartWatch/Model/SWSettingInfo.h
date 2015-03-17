@@ -16,7 +16,7 @@ SW_AS_SINGLETON(SWSettingInfo, shareInstance);
 @property (nonatomic) NSInteger battery;
 @property (nonatomic) NSInteger ultravioletIndex;
 @property (nonatomic) NSInteger stepsTarget;
-@property (nonatomic) float calorieTarget;
+@property (nonatomic) NSInteger calorieTarget;
 @property (nonatomic) NSInteger sleepTarget;
 @property (nonatomic) NSInteger startHour;
 @property (nonatomic) NSInteger endHour;
@@ -28,7 +28,7 @@ SW_AS_SINGLETON(SWSettingInfo, shareInstance);
 - (void)updateToDB;
 
 - (NSInteger)defaultStepsTarget;
-- (float)defaultCalorieTarget;
+- (NSInteger)defaultCalorieTarget;
 - (NSInteger)defaultSleepTarget;
 
 @end
