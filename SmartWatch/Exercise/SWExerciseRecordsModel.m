@@ -126,40 +126,6 @@
                             }
                         }
 					}
-                    
-                    /*
-                    // 计算睡眠时间
-                    NSInteger daylightStartHour = [[SWSettingInfo shareInstance] startHour];
-                    NSInteger daylightEndHour = [[SWSettingInfo shareInstance] endHour];
-                    
-                    BOOL night = NO;
-                    if (daylightStartHour > daylightEndHour) {
-                        if (hour >= daylightStartHour || hour <= daylightEndHour) {
-                            night = NO;
-                        } else {
-                            night = YES;
-                        }
-                    } else {
-                        if (hour >= daylightStartHour && hour <= daylightEndHour) {
-                            night = NO;
-                        } else {
-                            night = YES;
-                        }
-                    }
-                    
-                    if (night) {
-                        if (steps > 0) {
-                            if (steps <= 10) {
-                                tempTotalDeepSleep += 1;
-                            } else if (steps <= 50) {
-                                tempTotalLightSleep += 1;
-                            } else {
-                                tempNightActivityHour += 1;
-                            }
-                        }
-                        
-                    }*/
-                    
 				}
 			}];
 		}

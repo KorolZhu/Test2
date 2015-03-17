@@ -28,6 +28,8 @@
 
 @property (nonatomic,weak) id<SWPickerView2Delegate> delegate;
 
+- (void)selectRow:(NSInteger)row inComponent:(NSInteger)component animated:(BOOL)animated;
+
 - (void)showFromView:(UIView *)view;
 - (void)hideFromView:(UIView *)view;
 

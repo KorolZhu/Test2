@@ -281,11 +281,13 @@
         environmentView.leftPower = [SWSettingInfo shareInstance].battery;
         [model queryExerciseRecordsWithDate:[NSDate date]];
         [titleView setDate:[NSDate date]];
+		titleView.nextButton.enabled = NO;
     } else {
         [[GCDQueue mainQueue] queueBlock:^{
             environmentView.leftPower = [SWSettingInfo shareInstance].battery;
             [model queryExerciseRecordsWithDate:[NSDate date]];
             [titleView setDate:[NSDate date]];
+			titleView.nextButton.enabled = NO;
         }];
     }
     

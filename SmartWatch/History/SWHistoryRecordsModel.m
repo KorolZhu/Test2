@@ -165,10 +165,10 @@
     NSDate *date = [NSDate date];
     NSString *dateString = [date stringWithFormat:@"yyyyMMdd"];
     long long dateymd = [dateString longLongValue];
-    if (currentDayDateymd == dateymd) {
-        return NO;
-    }
-    
+//    if (currentDayDateymd == dateymd) {
+//        return NO;
+//    }
+	
     [[GCDQueue globalQueue] queueBlock:^{
         currentDayDateymd = dateymd;
         [self queryReportWithDateymd:currentDayDateymd];
@@ -192,10 +192,10 @@
     NSDate *date = [NSDate date];
     NSString *dateString = [date stringWithFormat:@"yyyyMMdd"];
     long long dateymd = [dateString longLongValue];
-    if (currentWeekDateymd == dateymd) {
-        return NO;
-    }
-    
+//    if (currentWeekDateymd == dateymd) {
+//        return NO;
+//    }
+	
     [[GCDQueue globalQueue] queueBlock:^{
         currentWeekDateymd = dateymd;
         
@@ -234,10 +234,10 @@
     NSDate *date = [NSDate date];
     NSString *dateString = [date stringWithFormat:@"yyyyMMdd"];
     long long dateymd = [dateString longLongValue];
-    if (currentMonthDateymd == dateymd) {
-        return NO;
-    }
-    
+//    if (currentMonthDateymd == dateymd) {
+//        return NO;
+//    }
+	
     [[GCDQueue globalQueue] queueBlock:^{
         currentMonthDateymd = dateymd;
         
@@ -276,10 +276,10 @@
     NSDate *date = [NSDate date];
     NSString *dateString = [date stringWithFormat:@"yyyyMMdd"];
     long long dateymd = [dateString longLongValue];
-    if (currentYearDateymd == dateymd) {
-        return NO;
-    }
-    
+//    if (currentYearDateymd == dateymd) {
+//        return NO;
+//    }
+	
     [[GCDQueue globalQueue] queueBlock:^{
        
         currentYearDateymd = dateymd;

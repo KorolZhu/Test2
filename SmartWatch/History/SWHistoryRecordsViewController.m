@@ -98,8 +98,6 @@
     progressView3.backImage = [UIImage imageNamed:@"历史记录_03"];
     progressView3.topDesc = NSLocalizedString(@"每日平均", nil);
     progressView3.bottomDesc = NSLocalizedString(@"睡眠", nil);
-    progressView3.progress = 0.83;
-    progressView3.valueString = @"83%";
     [_scrollView addSubview:progressView3];
     
     
@@ -347,7 +345,9 @@
     if (dayButton.selected) {
         return;
     }
-    
+	
+	self.navigationItem.title = @"日报";
+	
     if ([model queryDailyReport]) {
         [_HUD show:YES];
     } else {
@@ -364,7 +364,9 @@
     if (weekButton.selected) {
         return;
     }
-    
+	
+	self.navigationItem.title = @"周报";
+
     if ([model queryWeeklyReport]) {
         [_HUD show:YES];
     } else {
@@ -381,7 +383,9 @@
     if (monthButton.selected) {
         return;
     }
-    
+	
+	self.navigationItem.title = @"月报";
+	
     if ([model queryMonthlyReport]) {
         [_HUD show:YES];
     } else {
@@ -398,7 +402,9 @@
     if (yearButton.selected) {
         return;
     }
-    
+	
+	self.navigationItem.title = @"年报";
+	
     if ([model queryAnnualReport]) {
         [_HUD show:YES];
     } else {
@@ -423,9 +429,9 @@
     progressView2.progress = model.dayStepsPercent;
     progressView2.valueString = @(model.dayTotalSteps).stringValue;
     
-    progressView3.valueString = [NSString stringWithFormat:@"%@h", @(model.dayTotalSleep).stringValue];
     progressView3.progress = model.dayTotalSleep / 7.0f;
-    
+	progressView3.valueString = [NSString stringWithFormat:@"%@h", @(model.dayTotalSleep).stringValue];
+
     dayCaloriePlot.plottingValues = model.dayCalorieDictionary;
     dayStepsPlot.plottingValues = model.dayStepsDictionary;
     [dayGraphView reloadPlot];
@@ -442,10 +448,10 @@
     
     progressView2.progress = model.weekStepsPercent;
     progressView2.valueString = @(model.weekStepsPerday).stringValue;
-    
+	
+	progressView3.progress = model.weekSleepPerday / 7.0f;
     progressView3.valueString = [NSString stringWithFormat:@"%.1fh", model.weekSleepPerday];
-    progressView3.progress = model.weekSleepPerday / 7.0f;
-    
+	
     weekCaloriePlot.plottingValues = model.weekCalorieDictionary;
     weekStepsPlot.plottingValues = model.weekStepsDictionary;
     [weekGraphView reloadPlot];
@@ -462,10 +468,10 @@
     
     progressView2.progress = model.monthStepsPercent;
     progressView2.valueString = @(model.monthStepsPerday).stringValue;
-    
+	
+	progressView3.progress = model.monthSleepPerday / 7.0f;
     progressView3.valueString = [NSString stringWithFormat:@"%.1fh", model.monthSleepPerday];
-    progressView3.progress = model.monthSleepPerday / 7.0f;
-    
+	
     monthCaloriePlot.plottingValues = model.monthCalorieDictionary;
     monthStepsPlot.plottingValues = model.monthStepsDictionary;
     [monthGraphView reloadPlot];
@@ -482,10 +488,10 @@
     
     progressView2.progress = model.yearStepsPercent;
     progressView2.valueString = @(model.yearStepsPerday).stringValue;
-    
+	
+	progressView3.progress = model.yearSleepPerday / 7.0f;
     progressView3.valueString = [NSString stringWithFormat:@"%.1fh", model.yearSleepPerday];
-    progressView3.progress = model.yearSleepPerday / 7.0f;
-    
+	
     yearCaloriePlot.plottingValues = model.yearCalorieDictionary;
     yearStepsPlot.plottingValues = model.yearStepsDictionary;
     [yearGraphView reloadPlot];

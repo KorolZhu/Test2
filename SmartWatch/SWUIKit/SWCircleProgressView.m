@@ -90,6 +90,7 @@
     _valueString = valueString;
     valueLabel.text = valueString;
     [self setNeedsDisplay];
+	[self setNeedsLayout];
 }
 
 - (void)setProgress:(float)progress {

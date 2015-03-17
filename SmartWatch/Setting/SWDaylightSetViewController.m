@@ -12,6 +12,10 @@
 #import "SWSettingModel.h"
 
 @interface SWDaylightSetViewController ()<UITableViewDataSource,UITableViewDelegate,SWPickerView2Delegate>
+{
+	NSMutableArray *datasource1;
+	NSMutableArray *datasource2;
+}
 
 @property (nonatomic,strong) UITableView *tableView;
 @property (nonatomic,strong) SWPickerView2 *pickerView;
@@ -96,12 +100,12 @@
         self.pickerView.delegate = self;
         self.pickerView.hidden = YES;
         
-        NSMutableArray *datasource1 = [[NSMutableArray alloc] init];
+        datasource1 = [[NSMutableArray alloc] init];
         for (int i = 0; i < 24; i++) {
             [datasource1 addObject:@(i).stringValue];
         }
         
-        NSMutableArray *datasource2 = [[NSMutableArray alloc] init];
+        datasource2 = [[NSMutableArray alloc] init];
         for (int i = 0; i < 24; i++) {
             [datasource2 addObject:@(i).stringValue];
         }
@@ -112,7 +116,17 @@
         self.pickerView.titleSuffix2 = @"时";
         
     }
-    
+	
+	NSUInteger index = [datasource1 indexOfObject:@([[SWSettingInfo shareInstance] startHour]).stringValue];
+	if (index != NSNotFound) {
+		[_pickerView selectRow:index inComponent:0 animated:NO];
+	}
+	
+	index = [datasource2 indexOfObject:@([[SWSettingInfo shareInstance] endHour]).stringValue];
+	if (index != NSNotFound) {
+		[_pickerView selectRow:index inComponent:1 animated:NO];
+	}
+	
     self.tableView.userInteractionEnabled = NO;
     [self.pickerView showFromView:self.view];
 }
