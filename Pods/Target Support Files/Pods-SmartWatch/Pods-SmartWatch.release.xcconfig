@@ -1,6 +1,6 @@
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/ASIHTTPRequest" "${PODS_ROOT}/Headers/Public/FMDB" "${PODS_ROOT}/Headers/Public/Reachability" "${PODS_ROOT}/Headers/Public/SBJson" "$(SDKROOT)/usr/include/libxml2"
-OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/ASIHTTPRequest" -isystem "${PODS_ROOT}/Headers/Public/FMDB" -isystem "${PODS_ROOT}/Headers/Public/Reachability" -isystem "${PODS_ROOT}/Headers/Public/SBJson"
-OTHER_LDFLAGS = -ObjC -l"Pods-SmartWatch-ASIHTTPRequest" -l"Pods-SmartWatch-FMDB" -l"Pods-SmartWatch-Reachability" -l"Pods-SmartWatch-SBJson" -l"sqlite3" -l"xml2.2" -l"z.1" -framework "CFNetwork" -framework "CoreGraphics" -framework "MobileCoreServices" -framework "SystemConfiguration"
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/ASIHTTPRequest" "${PODS_ROOT}/Headers/Public/FMDB" "${PODS_ROOT}/Headers/Public/Reachability" "${PODS_ROOT}/Headers/Public/SBJson" "${PODS_ROOT}/Headers/Public/XMLDictionary" "$(SDKROOT)/usr/include/libxml2"
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/ASIHTTPRequest" -isystem "${PODS_ROOT}/Headers/Public/FMDB" -isystem "${PODS_ROOT}/Headers/Public/Reachability" -isystem "${PODS_ROOT}/Headers/Public/SBJson" -isystem "${PODS_ROOT}/Headers/Public/XMLDictionary"
+OTHER_LDFLAGS = -ObjC -l"Pods-SmartWatch-ASIHTTPRequest" -l"Pods-SmartWatch-FMDB" -l"Pods-SmartWatch-Reachability" -l"Pods-SmartWatch-SBJson" -l"Pods-SmartWatch-XMLDictionary" -l"sqlite3" -l"xml2.2" -l"z.1" -framework "CFNetwork" -framework "CoreGraphics" -framework "MobileCoreServices" -framework "SystemConfiguration"
 OTHER_LIBTOOLFLAGS = $(OTHER_LDFLAGS)
 PODS_ROOT = ${SRCROOT}/Pods

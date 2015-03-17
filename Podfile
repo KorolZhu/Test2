@@ -10,6 +10,8 @@ pod 'ASIHTTPRequest', '~> 1.8.2'
 
 pod 'SBJson', '~> 3.2'
 
+pod 'XMLDictionary', '~> 1.4'
+
 end
 
 target 'SmartWatchTests' do

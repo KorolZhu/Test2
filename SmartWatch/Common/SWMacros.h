@@ -32,6 +32,7 @@
 #define ALARMREPEAT @"alarmrepeat"
 
 #define LASTCITYCODE @"lastcitycode"
+#define LASTCITYNAME @"lastcityname"
 
 #define LASTPERIPHERALUUID @"lastperipheraluuid"
 #define LASTPERIPHERALNAME @"lastperipheralname"

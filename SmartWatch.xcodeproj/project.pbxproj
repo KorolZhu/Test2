@@ -14,6 +14,7 @@
 		455851031A37ED5800649397 /* SWExerciseRecordsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 455851021A37ED5800649397 /* SWExerciseRecordsModel.m */; };
 		455851061A37EF0900649397 /* NSDate+WB.m in Sources */ = {isa = PBXBuildFile; fileRef = 455851051A37EF0900649397 /* NSDate+WB.m */; };
 		4558510B1A37F92D00649397 /* SWModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4558510A1A37F92D00649397 /* SWModel.m */; };
+		45739F001AB805E800BBAD44 /* CityID.plist in Resources */ = {isa = PBXBuildFile; fileRef = 45739EFF1AB805E800BBAD44 /* CityID.plist */; };
 		458687591A4A6AFD0079059D /* SWHistoryRecordsModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 458687581A4A6AFD0079059D /* SWHistoryRecordsModel.m */; };
 		45DD4DB51A67985C00D28071 /* ic_marker_direct.png in Resources */ = {isa = PBXBuildFile; fileRef = 45DD4DB31A67985C00D28071 /* ic_marker_direct.png */; };
 		45DD4DB61A67985C00D28071 /* ic_marker_direct@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 45DD4DB41A67985C00D28071 /* ic_marker_direct@2x.png */; };
@@ -209,6 +210,7 @@
 		455851051A37EF0900649397 /* NSDate+WB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+WB.m"; sourceTree = "<group>"; };
 		455851091A37F92D00649397 /* SWModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWModel.h; sourceTree = "<group>"; };
 		4558510A1A37F92D00649397 /* SWModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWModel.m; sourceTree = "<group>"; };
+		45739EFF1AB805E800BBAD44 /* CityID.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = CityID.plist; sourceTree = "<group>"; };
 		458687571A4A6AFD0079059D /* SWHistoryRecordsModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWHistoryRecordsModel.h; sourceTree = "<group>"; };
 		458687581A4A6AFD0079059D /* SWHistoryRecordsModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWHistoryRecordsModel.m; sourceTree = "<group>"; };
 		45DD4DB31A67985C00D28071 /* ic_marker_direct.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_marker_direct.png; sourceTree = "<group>"; };
@@ -579,6 +581,7 @@
 		CE7EE0391A20E5E2006F3294 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				45739EFF1AB805E800BBAD44 /* CityID.plist */,
 				CE7EE1371A20F56B006F3294 /* Images.xcassets */,
 				CE7EE0911A20EA33006F3294 /* 1运动记录 */,
 				CE7EE0ED1A20EC3B006F3294 /* 历史记录 */,
@@ -1215,6 +1218,7 @@
 				CE7EE1361A20EC3B006F3294 /* 4背景-ios_02@2x.png in Resources */,
 				CE7EE0C11A20EA33006F3294 /* 1运动记录_卡路里-标注(标注)@2x.png in Resources */,
 				CE62A7721A6151BD00362C8D /* Info.plist in Resources */,
+				45739F001AB805E800BBAD44 /* CityID.plist in Resources */,
 				CE7EE0D81A20EA33006F3294 /* 运动记录2@2x.png in Resources */,
 				CE7EE12E1A20EC3B006F3294 /* 4设置_37@2x.png in Resources */,
 				CE7EE1251A20EC3B006F3294 /* 4设置_05@2x.png in Resources */,

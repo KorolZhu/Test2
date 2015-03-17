@@ -17,13 +17,16 @@
 #import <CoreLocation/CoreLocation.h>
 #import "SBJSON.h"
 #import "ASIFormDataRequest.h"
+#import <XMLDictionary.h>
 
 @interface SWExerciseRecordsModel ()<CLLocationManagerDelegate>
 {
 	NSString *cityCode;
+	NSString *cityName;
 	CLLocation *currentLocation;
 	CLPlacemark *placemark;
 	BOOL isRequestWeathering;
+	__block NSArray *cityIDArray;
 }
 
 @property (strong, nonatomic) CLLocationManager *locationManager;
@@ -244,102 +247,40 @@
 
 - (void)getCityCode {
 	[[GCDQueue lowPriorityGlobalQueue] queueBlock:^{
-		NSString *provinceListPath = [NSHomeDirectory() stringByAppendingPathComponent:@"/Documents/provincelist.plist"];
-		if (![[NSFileManager defaultManager] fileExistsAtPath:provinceListPath]) {
-			//获取省份列表
-			NSString *path= @"http://www.weather.com.cn/data/city3jdata/china.html";
-			ASIHTTPRequest *request = [[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:path]];
-			[request startSynchronous];
-			if (request.responseStatusCode == 200) {
-				NSDictionary *resultInfo = [request.responseString jsonValue];
-				[resultInfo writeToFile:provinceListPath atomically:YES];
+		NSString *locality = placemark.locality;
+		if (locality.length == 0) {
+			locality = placemark.administrativeArea;
+		}
+//		if (locality.length > 0) {
+//			cityName = locality;
+//			[[NSUserDefaults standardUserDefaults] setObject:locality forKey:LASTCITYNAME];
+//			[[NSUserDefaults standardUserDefaults] synchronize];
+//		}
+		
+		if (!cityIDArray) {
+			cityIDArray = [[NSArray alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"CityID" ofType:@"plist"]];
+		}
+		
+		for (NSDictionary *cityID in cityIDArray) {
+			NSString *namecn = [cityID stringForKey:@"NAMECN"];
+			NSString *nameen = [cityID stringForKey:@"NAMEEN"];
+			
+			if ([locality containsString:namecn] ||
+				[locality containString:nameen]) {
+				NSString *areaID = [cityID stringForKey:@"AREAID"];
+				cityCode = [areaID copy];
+				[[NSUserDefaults standardUserDefaults] setObject:cityCode forKey:LASTCITYCODE];
+				[[NSUserDefaults standardUserDefaults] synchronize];
+				break;
 			}
 		}
 		
-		NSDictionary *provinceList = [NSDictionary dictionaryWithContentsOfFile:provinceListPath];
-		if (provinceList.count == 0) {
-			[self requestWeatherInfo];
-			return;
-		}
-		
-		NSString *province = placemark.administrativeArea;
-		if (province.length == 0) {
-			[self requestWeatherInfo];
-			return;
-		}
-		
-		__block NSString *provinceCode = nil;
-		[provinceList enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-			if ([province containsString:obj] || [obj containsString:province]) {
-				provinceCode = key;
-				*stop = YES;
-			}
-		}];
-		
-		if (provinceCode.length == 0) {
-			[self requestWeatherInfo];
-			return;
-		}
-		
-		if ([provinceCode isEqualToString:@"10101"] ||
-			[provinceCode isEqualToString:@"10102"] ||
-			[provinceCode isEqualToString:@"10103"] ||
-			[provinceCode isEqualToString:@"10104"]) {
-			cityCode = [NSString stringWithFormat:@"%@0100", provinceCode];
-		} else {
-			//获取城市列表
-			NSString *cityListPath = [NSHomeDirectory() stringByAppendingFormat:@"/Documents/%@.plist", province];
-			if (![[NSFileManager defaultManager] fileExistsAtPath:cityListPath]) {
-				NSString *path= [NSString stringWithFormat:@"http://www.weather.com.cn/data/city3jdata/provshi/%@.html", provinceCode] ;
-				ASIHTTPRequest *request = [[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:path]];
-				[request startSynchronous];
-				if (request.responseStatusCode == 200) {
-					NSDictionary *resultInfo = [request.responseString jsonValue];
-					[resultInfo writeToFile:cityListPath atomically:YES];
-				}
-			}
-			
-			NSDictionary *cityList = [NSDictionary dictionaryWithContentsOfFile:cityListPath];
-			if (cityList.count == 0) {
-				[self requestWeatherInfo];
-				return;
-			}
-			
-			NSString *locality = placemark.locality;
-			if (locality.length == 0) {
-				locality = placemark.administrativeArea;
-			}
-			
-			__block NSString *localityCode = nil;
-			[cityList enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
-				if ([locality containsString:obj] || [obj containsString:locality]) {
-					localityCode = key;
-					*stop = YES;
-				}
-			}];
-			
-			if (localityCode.length == 0) {
-				[self requestWeatherInfo];
-				return;
-			}
-			
-			if ([localityCode containsString:@"00"]) {
-				// 直辖市
-				cityCode = [NSString stringWithFormat:@"%@0100", provinceCode];
-			} else {
-				cityCode = [NSString stringWithFormat:@"%@%@01", provinceCode, localityCode];
-			}
-		}
-		
-		[[NSUserDefaults standardUserDefaults] setObject:cityCode forKey:LASTCITYCODE];
-		[[NSUserDefaults standardUserDefaults] synchronize];
 		[self requestWeatherInfo];
 	}];
 }
 
 - (void)requestWeatherInfo {
 	[[GCDQueue lowPriorityGlobalQueue] queueBlock:^{
-		
 		if (cityCode.length == 0) {
 			cityCode = [[NSUserDefaults standardUserDefaults] stringForKey:LASTCITYCODE];
 		}
@@ -349,59 +290,69 @@
 			return ;
 		}
 		
-		//中国天气网解析地址；
-		NSString *path= [NSString stringWithFormat:@"http://www.weather.com.cn/data/sk/%@.html", cityCode];
-		
-//		NSURLRequest *urlrequest = [NSURLRequest requestWithURL:[NSURL URLWithString:path]];
-//		NSURLResponse* response;
-//		NSError* error = nil;
-//
-//		NSData *data = [NSURLConnection sendSynchronousRequest:urlrequest returningResponse:&response error:&error];
-		
+		//http://wthrcdn.etouch.cn/WeatherApi?citykey=101280601
+		NSString *path = [NSString stringWithFormat:@"http://wthrcdn.etouch.cn/WeatherApi?citykey=%@", cityCode];
 		ASIHTTPRequest *request = [[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:path]];
 		[request startSynchronous];
 		if (request.responseStatusCode == 200) {
-			NSDictionary *resultInfo = [request.responseString jsonValue];
-			if ([resultInfo isKindOfClass:[NSDictionary class]]) {
-				NSDictionary *weatherinfo = [resultInfo objectForKey:@"weatherinfo"];
-				if (weatherinfo) {
-					NSString *temp = [weatherinfo stringForKey:@"temp"];
-					if (temp.length > 0) {
-						_temp = [NSString stringWithFormat:@"%@℃", temp];
+			NSString *responseStr = [[NSString alloc] initWithData:request.responseData encoding:NSUTF8StringEncoding];
+			NSDictionary *dic = [[XMLDictionaryParser sharedInstance] dictionaryWithString:responseStr];
+			NSString *wendu = [dic stringForKey:@"wendu"];
+			if (wendu.length > 0) {
+				_temp = [NSString stringWithFormat:@"%@℃", wendu];
+			}
+			
+			NSString *shidu = [dic stringForKey:@"shidu"];
+			if (shidu.length > 0) {
+				_shidu = [shidu copy];
+			}
+			
+			NSDictionary *zhishus = [dic dictionaryForKey:@"zhishus"];
+			NSArray *zhishuArr = [zhishus arrayForKey:@"zhishu"];
+			for (NSDictionary *tempdic in zhishuArr) {
+				NSString *name = [tempdic stringForKey:@"name"];
+				if ([name isEqualToString:@"紫外线强度"]) {
+					NSString *value = [tempdic stringForKey:@"value"];
+					_uvLevel = [value copy];
+					break;
+				}
+			}
+			
+			[self respondSelectorOnMainThread:@selector(weatherInfoUpdated)];
+			
+			isRequestWeathering = NO;
+		} else {
+			/*
+			//中国天气网解析地址；
+			NSString *path= [NSString stringWithFormat:@"http://m.weather.com.cn/data/%@.html", cityCode];
+			
+			ASIHTTPRequest *request = [[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:path]];
+			[request startSynchronous];
+			if (request.responseStatusCode == 200) {
+				NSDictionary *resultInfo = [request.responseString jsonValue];
+				if ([resultInfo isKindOfClass:[NSDictionary class]]) {
+					NSDictionary *weatherinfo = [resultInfo objectForKey:@"weatherinfo"];
+					if (weatherinfo) {
+						NSString *temp = [weatherinfo stringForKey:@"temp"];
+						if (temp.length > 0) {
+							_temp = [NSString stringWithFormat:@"%@℃", temp];
+						}
+						
+						NSString *sd = [weatherinfo stringForKey:@"SD"];
+						if (sd.length > 0) {
+							_shidu = sd;
+						}
 					}
 					
-					NSString *sd = [weatherinfo stringForKey:@"SD"];
-					if (sd.length > 0) {
-						_shidu = sd;
-					}
 				}
 				
-			}
-		}
-		
-		
-		//中国天气网解析地址；
-		NSString *path2= [NSString stringWithFormat:@"http://www.weather.com.cn/data/zs/%@.html", cityCode];
-		ASIHTTPRequest *request2 = [[ASIHTTPRequest alloc] initWithURL:[NSURL URLWithString:path2]];
-		[request2 startSynchronous];
-		if (request2.responseStatusCode == 200) {
-			NSDictionary *resultInfo2 = [request2.responseString jsonValue];
-			if ([resultInfo2 isKindOfClass:[NSDictionary class]]) {
-				NSDictionary *weatherinfo = [resultInfo2 objectForKey:@"zs"];
-				if (weatherinfo) {
-					NSString *uv = [weatherinfo stringForKey:@"uv_hint"];
-					if (uv.length > 0) {
-						_uvLevel = uv;
-					}
-				}
+				[self respondSelectorOnMainThread:@selector(weatherInfoUpdated)];
 				
+				isRequestWeathering = NO;
 			}
+			 */
 		}
 		
-		
-		[self respondSelectorOnMainThread:@selector(weatherInfoUpdated)];
-		
-		isRequestWeathering = NO;
 	}];
 }
 
