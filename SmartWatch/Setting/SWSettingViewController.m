@@ -17,6 +17,7 @@
 @interface SWSettingViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
     SWSettingModel *model;
+    UISwitch *preventLostSwitch;
 }
 
 @property (nonatomic,strong) UITableView *tableView;
@@ -31,6 +32,7 @@
         self.edgesForExtendedLayout = UIRectEdgeNone;
         self.extendedLayoutIncludesOpaqueBars = NO;
         model = [[SWSettingModel alloc] initWithResponder:self];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(synchronizeSucceed) name:kSWBLESynchronizeSuccessNotification object:nil];
     }
     
     return self;
@@ -77,6 +79,17 @@
 	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 
+- (void)synchronizeSucceed {
+    if ([NSThread isMainThread]) {
+        preventLostSwitch.on = ([SWSettingInfo shareInstance].preventLost == 1);
+    } else {
+        [[GCDQueue mainQueue] queueBlock:^{
+            preventLostSwitch.on = ([SWSettingInfo shareInstance].preventLost == 1);
+        }];
+    }
+    
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 7;
 }
@@ -96,13 +109,12 @@
         if (indexPath.row == 4) {
 			cell.accessoryType = UITableViewCellAccessoryNone;
 			
-            UISwitch *switc = [[UISwitch alloc] init];
-            [switc addTarget:self action:@selector(preventLostSwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
-            switc.right = IPHONE_WIDTH - 12.0f;
-            switc.centerY = 22.0f;
-            [cell.contentView addSubview:switc];
+            preventLostSwitch = [[UISwitch alloc] init];
+            [preventLostSwitch addTarget:self action:@selector(preventLostSwitchValueChanged:) forControlEvents:UIControlEventValueChanged];
+            preventLostSwitch.right = IPHONE_WIDTH - 12.0f;
+            preventLostSwitch.centerY = 22.0f;
+            [cell.contentView addSubview:preventLostSwitch];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            switc.on = ([SWSettingInfo shareInstance].preventLost == 1);
 		} else if (indexPath.row == 5) {
 			cell.accessoryType = UITableViewCellAccessoryNone;
 
@@ -132,6 +144,7 @@
     else if (indexPath.row == 4) {
         cell.imageView.image = [UIImage imageNamed:@"4设置_37"];
         cell.textLabel.text = @"防丢设置";
+        preventLostSwitch.on = ([SWSettingInfo shareInstance].preventLost == 1);
     }
 	else if (indexPath.row == 5) {
 		cell.imageView.image = [UIImage imageNamed:@"4设置_37"];

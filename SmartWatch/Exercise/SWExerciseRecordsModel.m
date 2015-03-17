@@ -95,6 +95,15 @@
 					NSInteger hour = [[keyString stringByReplacingOccurrencesOfString:DBDAILYSTEPS._STEPCOUNT withString:@""] integerValue];
 					NSInteger steps = [obj integerValue];
 					if (steps >= 65280) {
+                        NSInteger score = steps - 65280;
+                        if (score <= 10) {
+                            tempTotalDeepSleep += 1;
+                        } else if (score <= 50) {
+                            tempTotalLightSleep += 1;
+                        } else {
+                            tempNightActivityHour += 1;
+                        }
+                        
 						[sleepTempDictionary setObject:@(steps - 65280) forKey:@(hour + 1)];
 					} else {
                         if (steps > 0) {
@@ -105,19 +114,20 @@
                             if (steps >= 100) {
                                 tempTotalActivityTime += 1;
                             }
-                        }
-						
-                        NSInteger height = [self height];
-                        NSInteger weight = [self weight];
-                        
-						float calorie = 0.53 * height + 0.58 * weight + 0.04 * steps - 135;
-                        if (calorie > 0.0f) {
-                            [calorieTempDictionary setObject:@(calorie) forKey:@(hour + 1)];
                             
-                            tempTotalCalorie += calorie;
+                            NSInteger height = [self height];
+                            NSInteger weight = [self weight];
+                            
+                            float calorie = 0.53 * height + 0.58 * weight + 0.04 * steps - 135;
+                            if (calorie > 0.0f) {
+                                [calorieTempDictionary setObject:@(calorie) forKey:@(hour + 1)];
+                                
+                                tempTotalCalorie += calorie;
+                            }
                         }
 					}
                     
+                    /*
                     // 计算睡眠时间
                     NSInteger daylightStartHour = [[SWSettingInfo shareInstance] startHour];
                     NSInteger daylightEndHour = [[SWSettingInfo shareInstance] endHour];
@@ -148,7 +158,7 @@
                             }
                         }
                         
-                    }
+                    }*/
                     
 				}
 			}];

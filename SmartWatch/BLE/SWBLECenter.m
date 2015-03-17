@@ -143,6 +143,12 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
     [self.ble write:data];
 }
 
+- (void)sendGetPreventLostState {
+    UInt8 buf[] = {BLE_CMD_PREVENT_LOST_READ_REQUEST, 0x00};
+    NSData *data = [[NSData alloc] initWithBytes:buf length:2];
+    [self.ble write:data];
+}
+
 - (void)sendGetDayModeRequest {
     UInt8 buf[] = {BLE_CMD_GET_DAYMODE_REQUEST};
     NSData *data = [[NSData alloc] initWithBytes:buf length:1];
@@ -292,7 +298,8 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
         [SWSettingInfo shareInstance].battery = battery;
     }
     
-    [self sendGetIndexRequest];
+//    [self sendGetIndexRequest];
+    [self sendGetPreventLostState];
 }
 
 - (void)handleGetIndexResponse:(NSData *)data {
@@ -300,6 +307,16 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
         UInt8 index = 0;
         [data getBytes:&index range:NSMakeRange(1, 1)];
         [SWSettingInfo shareInstance].ultravioletIndex = index;
+    }
+    
+    [self sendGetDayModeRequest];
+}
+
+- (void)handleGetPreventLostStateResponse:(NSData *)data {
+    if (data.length >= 2) {
+        UInt8 state = 0;
+        [data getBytes:&state range:NSMakeRange(1, 1)];
+        [SWSettingInfo shareInstance].preventLost = state;
     }
     
     [self sendGetDayModeRequest];
@@ -519,6 +536,9 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
                 break;
             case BLE_CMD_PREVENT_LOST_RESPONSE:
                 [self handleSetPreventLostState:data];
+                break;
+            case BLE_CMD_PREVENT_LOST_READ_RESPONSE:
+                [self handleGetPreventLostStateResponse:data];
                 break;
             default:
                 break;

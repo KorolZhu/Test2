@@ -1556,7 +1556,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "72cfdc76-d5b9-459f-be32-7c77bfee8897";
+				PROVISIONING_PROFILE = "e5e2019e-3990-4ccf-a385-c10d066e9992";
 				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Debug;
@@ -1567,6 +1567,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_PREFIX_HEADER = SmartWatch/SmartWatch_Prefix.pch;
 				INFOPLIST_FILE = SmartWatch/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -1577,7 +1578,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "72cfdc76-d5b9-459f-be32-7c77bfee8897";
+				PROVISIONING_PROFILE = "4c8d211b-b567-44be-bc14-af65ad563426";
 				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Release;

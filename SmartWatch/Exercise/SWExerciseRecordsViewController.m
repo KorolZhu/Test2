@@ -277,9 +277,18 @@
 }
 
 - (void)synchronizeSucceed {
-    environmentView.leftPower = [SWSettingInfo shareInstance].battery;
-    [model queryExerciseRecordsWithDate:[NSDate date]];
-    [titleView setDate:[NSDate date]];
+    if ([NSThread isMainThread]) {
+        environmentView.leftPower = [SWSettingInfo shareInstance].battery;
+        [model queryExerciseRecordsWithDate:[NSDate date]];
+        [titleView setDate:[NSDate date]];
+    } else {
+        [[GCDQueue mainQueue] queueBlock:^{
+            environmentView.leftPower = [SWSettingInfo shareInstance].battery;
+            [model queryExerciseRecordsWithDate:[NSDate date]];
+            [titleView setDate:[NSDate date]];
+        }];
+    }
+    
 }
 
 - (void)synchronizeFailed {

@@ -108,6 +108,10 @@
                 NSInteger steps = [obj integerValue];
                 if (steps >= 65280) {
                     // 睡眠评分
+                    NSInteger score = steps - 65280;
+                    if (score >= 0 && score <= 50) {
+                        tempTotalSleep += 1;
+                    }
                 } else {
                     if (steps > 0) {
                         [stepsTempDictionary setObject:@(steps) forKey:@(hour + 1)];
@@ -117,19 +121,20 @@
                         if (steps > 100) {
                             
                         }
-                    }
-                    
-                    NSInteger height = [self height];
-                    NSInteger weight = [self weight];
-                    
-                    float calorie = 0.53 * height + 0.58 * weight + 0.04 * steps - 135;
-                    if (calorie > 0.0f) {
-                        [calorieTempDictionary setObject:@(calorie) forKey:@(hour + 1)];
                         
-                        tempTotalCalorie += calorie;
+                        NSInteger height = [self height];
+                        NSInteger weight = [self weight];
+                        
+                        float calorie = 0.53 * height + 0.58 * weight + 0.04 * steps - 135;
+                        if (calorie > 0.0f) {
+                            [calorieTempDictionary setObject:@(calorie) forKey:@(hour + 1)];
+                            
+                            tempTotalCalorie += calorie;
+                        }
                     }
                 }
                 
+                /*
                 // 计算睡眠时间
                 NSInteger daylightStartHour = [[SWSettingInfo shareInstance] startHour];
                 NSInteger daylightEndHour = [[SWSettingInfo shareInstance] endHour];
@@ -150,6 +155,7 @@
                 if (night && steps > 0 && steps <= 50) {
                     tempTotalSleep += 1;
                 }
+                 */
             }
         }];
     }
