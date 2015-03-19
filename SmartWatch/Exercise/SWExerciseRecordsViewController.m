@@ -455,6 +455,7 @@
 			connectPointButton.frame = CGRectMake(self.mapView.width - 45.0f, 15.0f, 30.0f, 30.0f);
 		} completion:^(BOOL finished) {
 			button.selected = YES;
+            self.scrollView.scrollEnabled = NO;
 			self.scrollView.scrollsToTop = NO;
 		}];
 	} else {
@@ -463,6 +464,7 @@
 			connectPointButton.frame = CGRectMake(self.mapView.width - 45.0f, 15.0f, 30.0f, 30.0f);
 		} completion:^(BOOL finished) {
 			button.selected = NO;
+            self.scrollView.scrollEnabled = YES;
 			self.scrollView.scrollsToTop = YES;
 		}];
 	}
