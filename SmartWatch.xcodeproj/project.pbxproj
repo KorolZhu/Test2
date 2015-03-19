@@ -61,6 +61,8 @@
 		CE61B61A1A3C74E800B18811 /* SWAlarmSetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE61B6191A3C74E800B18811 /* SWAlarmSetViewController.m */; };
 		CE62A7661A614C3200362C8D /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE62A7651A614C3200362C8D /* CoreLocation.framework */; };
 		CE62A7721A6151BD00362C8D /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE62A7711A6151BD00362C8D /* Info.plist */; };
+		CE69BCEA1ABB0DB500F71C89 /* Bugly.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CE69BCE91ABB0DB500F71C89 /* Bugly.framework */; };
+		CE69BCEC1ABB0DE400F71C89 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE69BCEB1ABB0DE400F71C89 /* libc++.dylib */; };
 		CE7EE0BF1A20EA33006F3294 /* 1运动记录_70@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7EE0921A20EA33006F3294 /* 1运动记录_70@2x.png */; };
 		CE7EE0C01A20EA33006F3294 /* 1运动记录_73@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7EE0931A20EA33006F3294 /* 1运动记录_73@2x.png */; };
 		CE7EE0C11A20EA33006F3294 /* 1运动记录_卡路里-标注(标注)@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CE7EE0941A20EA33006F3294 /* 1运动记录_卡路里-标注(标注)@2x.png */; };
@@ -167,6 +169,7 @@
 		CEBB8CA81A372F7D00EBE67F /* SWPacketHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBB8CA71A372F7D00EBE67F /* SWPacketHeader.m */; };
 		CEBB8CAB1A37316E00EBE67F /* SWActivityCountResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBB8CAA1A37316E00EBE67F /* SWActivityCountResponse.m */; };
 		CEBB8CAE1A374EE700EBE67F /* SWActivityResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBB8CAD1A374EE700EBE67F /* SWActivityResponse.m */; };
+		CED5AE661ABB276E001B0AA3 /* BuglySDKHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = CED5AE651ABB276E001B0AA3 /* BuglySDKHelper.m */; };
 		CEE0D7F71A18793500CE643C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D7F61A18793500CE643C /* main.m */; };
 		CEE0D7FA1A18793500CE643C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D7F91A18793500CE643C /* AppDelegate.m */; };
 		CEE0D8141A18793500CE643C /* SmartWatchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D8131A18793500CE643C /* SmartWatchTests.m */; };
@@ -294,6 +297,8 @@
 		CE61B6191A3C74E800B18811 /* SWAlarmSetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWAlarmSetViewController.m; sourceTree = "<group>"; };
 		CE62A7651A614C3200362C8D /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		CE62A7711A6151BD00362C8D /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CE69BCE91ABB0DB500F71C89 /* Bugly.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bugly.framework; sourceTree = "<group>"; };
+		CE69BCEB1ABB0DE400F71C89 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		CE7EE0921A20EA33006F3294 /* 1运动记录_70@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1运动记录_70@2x.png"; sourceTree = "<group>"; };
 		CE7EE0931A20EA33006F3294 /* 1运动记录_73@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1运动记录_73@2x.png"; sourceTree = "<group>"; };
 		CE7EE0941A20EA33006F3294 /* 1运动记录_卡路里-标注(标注)@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "1运动记录_卡路里-标注(标注)@2x.png"; sourceTree = "<group>"; };
@@ -425,6 +430,8 @@
 		CEBB8CAA1A37316E00EBE67F /* SWActivityCountResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWActivityCountResponse.m; sourceTree = "<group>"; };
 		CEBB8CAC1A374EE700EBE67F /* SWActivityResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWActivityResponse.h; sourceTree = "<group>"; };
 		CEBB8CAD1A374EE700EBE67F /* SWActivityResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWActivityResponse.m; sourceTree = "<group>"; };
+		CED5AE641ABB276E001B0AA3 /* BuglySDKHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BuglySDKHelper.h; sourceTree = "<group>"; };
+		CED5AE651ABB276E001B0AA3 /* BuglySDKHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BuglySDKHelper.m; sourceTree = "<group>"; };
 		CEE0D7F11A18793500CE643C /* SmartWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEE0D7F61A18793500CE643C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CEE0D7F81A18793500CE643C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -480,6 +487,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE69BCEC1ABB0DE400F71C89 /* libc++.dylib in Frameworks */,
+				CE69BCEA1ABB0DB500F71C89 /* Bugly.framework in Frameworks */,
 				CE62A7661A614C3200362C8D /* CoreLocation.framework in Frameworks */,
 				CEAA01BD1A35CEDD0047BAF2 /* MapKit.framework in Frameworks */,
 				CEE0D8321A1884FC00CE643C /* libWeChatSDK.a in Frameworks */,
@@ -576,6 +585,16 @@
 				CE4CCEED1A4EBD9400C53E56 /* MBProgressHUD.m */,
 			);
 			path = MBProgressHUD;
+			sourceTree = "<group>";
+		};
+		CE69BCE81ABB0D9D00F71C89 /* Bugly */ = {
+			isa = PBXGroup;
+			children = (
+				CED5AE641ABB276E001B0AA3 /* BuglySDKHelper.h */,
+				CED5AE651ABB276E001B0AA3 /* BuglySDKHelper.m */,
+				CE69BCE91ABB0DB500F71C89 /* Bugly.framework */,
+			);
+			path = Bugly;
 			sourceTree = "<group>";
 		};
 		CE7EE0391A20E5E2006F3294 /* Resource */ = {
@@ -848,7 +867,6 @@
 		CEE0D7E81A18793400CE643C = {
 			isa = PBXGroup;
 			children = (
-				CEAA01BC1A35CEDD0047BAF2 /* MapKit.framework */,
 				CE7EE0391A20E5E2006F3294 /* Resource */,
 				CEE0D8381A18877600CE643C /* Common */,
 				CEE0D83C1A1887F600CE643C /* Category */,
@@ -970,6 +988,7 @@
 		CEE0D82D1A1884D000CE643C /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				CE69BCE81ABB0D9D00F71C89 /* Bugly */,
 				CE4CCEEB1A4EBD9400C53E56 /* MBProgressHUD */,
 				CEE0D8501A1888CF00CE643C /* PureLayout */,
 				CEE0D8471A1888CF00CE643C /* GCDObjC */,
@@ -1088,6 +1107,8 @@
 		DB60BD39C50C94E7C9E5EFF4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				CEAA01BC1A35CEDD0047BAF2 /* MapKit.framework */,
+				CE69BCEB1ABB0DE400F71C89 /* libc++.dylib */,
 				CE62A7651A614C3200362C8D /* CoreLocation.framework */,
 				6C73B39E88090B44A198085E /* libPods-SmartWatch.a */,
 			);
@@ -1386,6 +1407,7 @@
 				CE61B5F31A3C02DB00B18811 /* SWPROFILE.m in Sources */,
 				CEE2245C1A519D20004D1965 /* SWAccessoryPickerView.m in Sources */,
 				CE7EE14F1A21D7DE006F3294 /* SWEnvironmentView.m in Sources */,
+				CED5AE661ABB276E001B0AA3 /* BuglySDKHelper.m in Sources */,
 				CEAA01E11A35E56E0047BAF2 /* WBPath.m in Sources */,
 				CEE0D7FA1A18793500CE643C /* AppDelegate.m in Sources */,
 				CE61B6051A3C463F00B18811 /* SWTargetSetViewController.m in Sources */,
@@ -1546,6 +1568,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SmartWatch/ThirdParty/Bugly",
+				);
 				GCC_PREFIX_HEADER = SmartWatch/SmartWatch_Prefix.pch;
 				INFOPLIST_FILE = SmartWatch/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -1556,7 +1582,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "e5e2019e-3990-4ccf-a385-c10d066e9992";
+				PROVISIONING_PROFILE = "9d4a8c8c-876a-46e9-a906-2e05913d0fbb";
 				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Debug;
@@ -1568,6 +1594,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/SmartWatch/ThirdParty/Bugly",
+				);
 				GCC_PREFIX_HEADER = SmartWatch/SmartWatch_Prefix.pch;
 				INFOPLIST_FILE = SmartWatch/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -1578,7 +1608,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "4c8d211b-b567-44be-bc14-af65ad563426";
+				PROVISIONING_PROFILE = "f7c91f20-171f-4657-9471-ee26be3a6a94";
 				VALID_ARCHS = "armv7 armv7s";
 			};
 			name = Release;

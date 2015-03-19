@@ -24,10 +24,19 @@ NSString *const kSWBLESynchronizeStartNotification = @"kSWBLESynchronizeStartNot
 NSString *const kSWBLESynchronizeSuccessNotification = @"kSWBLESynchronizeSuccessNotification";
 NSString *const kSWBLESynchronizeFailNotification = @"kSWBLESynchronizeFailNotification";
 
+#define TIMEOUT_5 5
+#define TIMEOUT_10 10
+#define TIMEOUT_15 15
+#define TIMEOUT_20 20
+#define TIMEOUT_25 25
+#define TIMEOUT_30 30
+
 @interface SWBLECenter ()<BLEDelegate>
 {
 	SWActivityCountResponse *activityCountResponse;
 	int activitystartHour;
+    
+    NSTimer *timeoutTimer;   // 超时定时器
 }
 
 @end
@@ -47,6 +56,30 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
     return self;
 }
 
+#pragma mark - Time out
+
+- (void)validateTimerWithTimeout:(NSTimeInterval)timeout {
+    if ([timeoutTimer isValid]) {
+        [self invalidateTimer];
+    }
+    
+    timeoutTimer = [NSTimer scheduledTimerWithTimeInterval:timeout target:self selector:@selector(timeout) userInfo:nil repeats:NO];
+}
+
+- (void)invalidateTimer {
+    [timeoutTimer invalidate];
+    timeoutTimer = nil;
+}
+
+- (void)timeout {
+    if (self.state == SWPeripheralStateConnecting ||
+        self.state == SWPeripheralStateConnected) {
+        [self disconnectDevice];
+    }
+}
+
+#pragma mark -
+
 - (void)scanBLEPeripherals {
     [self.ble findBLEPeripherals];
 }
@@ -58,6 +91,7 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
 - (void)connectPeripheral:(CBPeripheral *)peripheral {
     self.state = SWPeripheralStateConnecting;
     [self.ble connectPeripheral:peripheral];
+    [self validateTimerWithTimeout:TIMEOUT_15];
 }
 
 - (void)connectDevice {
@@ -355,6 +389,7 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
         [self sendGetActivityRequestWithIndex:activityCountResponse.currentIndex];
     } else {
         [[NSNotificationCenter defaultCenter] postNotificationName:kSWBLESynchronizeSuccessNotification object:nil];
+        [self invalidateTimer];
     }
 }
 
@@ -396,6 +431,7 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
 	} else {
         if (activityCountResponse.currentIndex == activityCountResponse.count - 1) {
             [[NSNotificationCenter defaultCenter] postNotificationName:kSWBLESynchronizeSuccessNotification object:nil];
+            [self invalidateTimer];
             
             return;
         }
@@ -450,6 +486,7 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
 //}
 
 - (void)bleDidConnect {
+    [self validateTimerWithTimeout:TIMEOUT_30];
     NSString *uuid = self.ble.activePeripheral.identifier.UUIDString;
     if (uuid.length > 0) {
         [[NSUserDefaults standardUserDefaults] setObject:uuid forKey:LASTPERIPHERALUUID];
@@ -484,10 +521,10 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
 }
 
 - (void)bleDidDisconnect {
+    [self invalidateTimer];
+    
     self.state = SWPeripheralStateDisconnected;
 	activityCountResponse = nil;
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:kSWBLESynchronizeFailNotification object:nil];
 }
 
 - (void)bleDidReceiveData:(NSData *)data {

@@ -271,19 +271,28 @@
     [super viewDidAppear:animated];
 }
 
+#pragma mark - Synchronize
+
 - (void)synchronizeStart {
-    progressHUD.detailsLabelText = NSLocalizedString(@"同步中...", nil);
-//    [MBProgressHUD showHUDAddedTo:[UIApplication sharedApplication].keyWindow animated:YES];
+    if ([NSThread isMainThread]) {
+        progressHUD.detailsLabelText = NSLocalizedString(@"同步中...", nil);
+    } else {
+        [[GCDQueue mainQueue] queueBlock:^{
+            progressHUD.detailsLabelText = NSLocalizedString(@"同步中...", nil);
+        }];
+    }
 }
 
 - (void)synchronizeSucceed {
     if ([NSThread isMainThread]) {
+        [progressHUD hide:YES];
         environmentView.leftPower = [SWSettingInfo shareInstance].battery;
         [model queryExerciseRecordsWithDate:[NSDate date]];
         [titleView setDate:[NSDate date]];
 		titleView.nextButton.enabled = NO;
     } else {
         [[GCDQueue mainQueue] queueBlock:^{
+            [progressHUD hide:YES];
             environmentView.leftPower = [SWSettingInfo shareInstance].battery;
             [model queryExerciseRecordsWithDate:[NSDate date]];
             [titleView setDate:[NSDate date]];
@@ -294,16 +303,23 @@
 }
 
 - (void)synchronizeFailed {
-    [progressHUD hide:YES];
-//    [MBProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
+    if ([NSThread isMainThread]) {
+        [progressHUD hide:YES];
+    } else {
+        [[GCDQueue mainQueue] queueBlock:^{
+            [progressHUD hide:YES];
+        }];
+    }
 }
+
+#pragma mark - Ble 
 
 - (void)bleClick {
     if ([SWBLECenter shareInstance].state == SWPeripheralStateDisconnected) {
         NSString *lastuuid = [[NSUserDefaults standardUserDefaults] stringForKey:LASTPERIPHERALUUID];
         if (lastuuid.length > 0) {
             progressHUD.detailsLabelText = NSLocalizedString(@"扫描中...", nil);
-            [progressHUD show:YES];
+            [progressHUD show:NO];
             
             scanTimer = [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(scanTimeout) userInfo:nil repeats:YES];
         } else {
@@ -345,8 +361,12 @@
 - (void)accessoryPickerViewDidCancel:(SWAccessoryPickerView *)pickerView {
     [[SWBLECenter shareInstance].ble removeObserver:self forKeyPath:@"peripherals"];
     [[SWBLECenter shareInstance] stopScanBLEPeripherals];
-    [accessoryPickerView hide];
+    if (accessoryPickerView.isVisible) {
+        [accessoryPickerView hide];
+    }
 }
+
+#pragma mark -
 
 - (void)shareClick {
     UIView *view = [[UIApplication sharedApplication] keyWindow];
@@ -741,7 +761,6 @@
 	[sleepGraphView reloadPlot];
     
     [progressHUD hide:YES];
-//    [MBProgressHUD hideAllHUDsForView:[UIApplication sharedApplication].keyWindow animated:YES];
 }
 
 - (void)locationQueryFinished {
@@ -845,6 +864,7 @@
         switch (state) {
             case SWPeripheralStateDisconnected: {
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    [progressHUD hide:NO];
                     leftBarButton.enabled = YES;
                     [leftBarButton setImage:[UIImage imageNamed:@"蓝牙"] forState:UIControlStateNormal];
                     [leftBarButton setTitle:nil forState:UIControlStateNormal];
@@ -867,7 +887,7 @@
                     
                     if (state == SWPeripheralStateConnecting) {
                         if (progressHUD.hidden || progressHUD.alpha == 0.0f) {
-                            [progressHUD show:YES];
+                            [progressHUD show:NO];
                         }
                         progressHUD.detailsLabelText = NSLocalizedString(@"连接中...", nil);
                     }

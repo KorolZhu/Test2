@@ -15,6 +15,7 @@
 #import "WBDatabaseService.h"
 #import "LocationTracker.h"
 #import "SWUserInfo.h"
+#import "BuglySDKHelper.h"
 
 @interface AppDelegate ()
 
@@ -91,6 +92,9 @@
         [alertView show];
         _tabBarController.selectedIndex = 2;
     }
+    
+    [BuglySDKHelper initSDK];
+    [BuglySDKHelper setExceptionCallback:0];
     
     return YES;
 }
