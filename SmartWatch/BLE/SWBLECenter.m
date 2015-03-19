@@ -141,6 +141,8 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
     if (self.state != SWPeripheralStateConnected) {
         return;
     }
+    
+    [self validateTimerWithTimeout:TIMEOUT_30];
     [self sendSetDateTimeRequest];
     [[NSNotificationCenter defaultCenter] postNotificationName:kSWBLESynchronizeStartNotification object:nil];
 }
@@ -350,10 +352,16 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
     if (data.length >= 2) {
         UInt8 state = 0;
         [data getBytes:&state range:NSMakeRange(1, 1)];
-        [SWSettingInfo shareInstance].preventLost = state;
+        
+        if ([SWSettingInfo shareInstance].preventLost != state) {
+            [self setPreventLostState:[SWSettingInfo shareInstance].preventLost];
+        } else {
+            [SWSettingInfo shareInstance].preventLost = state;
+            [self sendGetDayModeRequest];
+        }
+    } else {
+        [self sendGetDayModeRequest];
     }
-    
-    [self sendGetDayModeRequest];
 }
 
 - (void)handleGetDayModeResponse:(NSData *)data {
@@ -476,6 +484,11 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
     if (data.length >= 20) {
         UInt8 ret = 0;
         [data getBytes:&ret range:NSMakeRange(1, 1)];
+        
+        if ([timeoutTimer isValid]) {
+            [SWSettingInfo shareInstance].preventLost = ret;
+            [self sendGetDayModeRequest];
+        }
     }
 }
 

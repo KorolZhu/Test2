@@ -8,10 +8,13 @@
 
 #import "SWDeviceConnectdViewController.h"
 #import "SWAccessoryPickerView.h"
+#import "MBProgressHUD.h"
 
 @interface SWDeviceConnectdViewController ()<UITableViewDataSource,UITableViewDelegate,SWAccessoryPickerViewDelegate>
 {
     SWAccessoryPickerView *accessoryPickerView;
+    MBProgressHUD *progressHUD;
+    NSTimer *scanTimer;
 }
 
 @property (nonatomic,strong) UITableView *tableView;
@@ -26,14 +29,18 @@
         self.edgesForExtendedLayout = UIRectEdgeNone;
         self.extendedLayoutIncludesOpaqueBars = NO;
         self.hidesBottomBarWhenPushed = YES;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(synchronizeStart) name:kSWBLESynchronizeStartNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(synchronizeSucceed) name:kSWBLESynchronizeSuccessNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(synchronizeFailed) name:kSWBLESynchronizeFailNotification object:nil];
     }
     
     return self;
 }
 
 - (void)dealloc {
-    [[SWBLECenter shareInstance] removeObserver:self forKeyPath:@"state"];
-    [[SWBLECenter shareInstance].ble removeObserver:self forKeyPath:@"peripherals"];
+    [[SWBLECenter shareInstance] removeObserver:self forKeyPath:@"state" context:NULL];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewDidLoad {
@@ -61,28 +68,24 @@
     footView.backgroundColor = [UIColor clearColor];
     self.tableView.tableFooterView = footView;
     
+    if (!progressHUD) {
+        progressHUD = [[MBProgressHUD alloc] initWithView:self.tabBarController.view];
+        [self.tabBarController.view addSubview:progressHUD];
+    }
+    
     [[SWBLECenter shareInstance] addObserver:self forKeyPath:@"state" options:NSKeyValueObservingOptionNew context:NULL];
-    [[SWBLECenter shareInstance].ble addObserver:self forKeyPath:@"peripherals" options: NSKeyValueObservingOptionNew context:NULL];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    if ([scanTimer isValid]) {
+        [scanTimer invalidate];
+        scanTimer = nil;
+    }
 }
 
 - (void)backClick {
     [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (void)synchronizeClick {
-    if ([SWBLECenter shareInstance].state == SWPeripheralStateDisconnected) {
-        if (!accessoryPickerView) {
-            accessoryPickerView = [[SWAccessoryPickerView alloc] initWithFrame:CGRectMake(22.0f, 100.0f, IPHONE_WIDTH - 44.0f, IPHONE_HEIGHT - 200.0f)];
-            accessoryPickerView.title = NSLocalizedString(@"请选择蓝牙设备", nil);
-            accessoryPickerView.delegate = self;
-        }
-        
-        [accessoryPickerView show];
-        [accessoryPickerView setDataSource:nil];
-        [[SWBLECenter shareInstance] scanBLEPeripherals];
-    } else if ([SWBLECenter shareInstance].state == SWPeripheralStateConnected) {
-        [[SWBLECenter shareInstance] synchronize];
-    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -131,17 +134,99 @@
     }
 }
 
+#pragma mark - Ble
+
+- (void)synchronizeClick {
+    if ([SWBLECenter shareInstance].state == SWPeripheralStateDisconnected) {
+        NSString *lastuuid = [[NSUserDefaults standardUserDefaults] stringForKey:LASTPERIPHERALUUID];
+        if (lastuuid.length > 0) {
+            progressHUD.detailsLabelText = NSLocalizedString(@"扫描中...", nil);
+            [progressHUD show:NO];
+            
+            scanTimer = [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(scanTimeout) userInfo:nil repeats:YES];
+        } else {
+            [self scanTimeout];
+        }
+        
+        [[SWBLECenter shareInstance] scanBLEPeripherals];
+        [[SWBLECenter shareInstance].ble addObserver:self forKeyPath:@"peripherals" options: NSKeyValueObservingOptionNew context:NULL];
+    } else if ([SWBLECenter shareInstance].state == SWPeripheralStateConnected) {
+        [[SWBLECenter shareInstance] synchronize];
+    }
+}
+
+- (void)scanTimeout {
+    [scanTimer invalidate];
+    scanTimer = nil;
+    
+    [progressHUD hide:NO];
+    
+    if (!accessoryPickerView) {
+        accessoryPickerView = [[SWAccessoryPickerView alloc] initWithFrame:CGRectMake(22.0f, 100.0f, IPHONE_WIDTH - 44.0f, IPHONE_HEIGHT - 200.0f)];
+        accessoryPickerView.title = NSLocalizedString(@"请选择蓝牙设备", nil);
+        accessoryPickerView.delegate = self;
+    }
+    
+    [accessoryPickerView show];
+    [accessoryPickerView setDataSource:[NSArray arrayWithArray:[SWBLECenter shareInstance].ble.peripherals]];
+}
+
+#pragma mark - Synchronize
+
+- (void)synchronizeStart {
+    if ([NSThread isMainThread]) {
+        if (progressHUD.hidden || progressHUD.alpha == 0.0f) {
+            [progressHUD show:NO];
+        }
+        progressHUD.detailsLabelText = NSLocalizedString(@"同步中...", nil);
+    } else {
+        if (progressHUD.hidden || progressHUD.alpha == 0.0f) {
+            [progressHUD show:NO];
+        }
+        [[GCDQueue mainQueue] queueBlock:^{
+            progressHUD.detailsLabelText = NSLocalizedString(@"同步中...", nil);
+        }];
+    }
+}
+
+- (void)synchronizeSucceed {
+    if ([NSThread isMainThread]) {
+        [progressHUD hide:YES];
+    } else {
+        [[GCDQueue mainQueue] queueBlock:^{
+            [progressHUD hide:YES];
+        }];
+    }
+    
+}
+
+- (void)synchronizeFailed {
+    if ([NSThread isMainThread]) {
+        [progressHUD hide:YES];
+    } else {
+        [[GCDQueue mainQueue] queueBlock:^{
+            [progressHUD hide:YES];
+        }];
+    }
+}
+
 #pragma mark - AccessoryPickerView
 
 - (void)accessoryPickerView:(SWAccessoryPickerView *)pickerView didSelectPeripheral:(CBPeripheral *)peripheral {
+    [[SWBLECenter shareInstance].ble removeObserver:self forKeyPath:@"peripherals"];
     [[SWBLECenter shareInstance] stopScanBLEPeripherals];
-    [accessoryPickerView hide];
+    if (accessoryPickerView.isVisible) {
+        [accessoryPickerView hide];
+    }
     [[SWBLECenter shareInstance] connectPeripheral:peripheral];
 }
 
 - (void)accessoryPickerViewDidCancel:(SWAccessoryPickerView *)pickerView {
+    [[SWBLECenter shareInstance].ble removeObserver:self forKeyPath:@"peripherals"];
     [[SWBLECenter shareInstance] stopScanBLEPeripherals];
-    [accessoryPickerView hide];
+    if (accessoryPickerView.isVisible) {
+        [accessoryPickerView hide];
+    }
 }
 
 #pragma mark - KVO
@@ -150,18 +235,53 @@
     if ([keyPath isEqualToString:@"state"]) {
         NSInteger state = [[change objectForKey:NSKeyValueChangeNewKey] integerValue];
         switch (state) {
-            case SWPeripheralStateDisconnected:
-            case SWPeripheralStateConnected:
-                [self.tableView reloadData];
+            case SWPeripheralStateDisconnected: {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [progressHUD hide:NO];
+                });
+            }
                 break;
-            default:
+            case SWPeripheralStateConnected: {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.tableView reloadData];
+                });
+            }
+                break;
+            default: {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    if (state == SWPeripheralStateConnecting) {
+                        if (progressHUD.hidden || progressHUD.alpha == 0.0f) {
+                            [progressHUD show:NO];
+                        }
+                        progressHUD.detailsLabelText = NSLocalizedString(@"连接中...", nil);
+                    }
+                });
+                
+            }
                 break;
         }
     } else if ([keyPath isEqualToString:@"peripherals"]) {
         dispatch_async(dispatch_get_main_queue(), ^{
             if (accessoryPickerView.isVisible) {
-                accessoryPickerView.dataSource = [NSArray arrayWithArray:[SWBLECenter shareInstance].ble.peripherals];
+                [accessoryPickerView setDataSource:[NSArray arrayWithArray:[SWBLECenter shareInstance].ble.peripherals]];
+            } else {
+                NSString *lastuuid = [[NSUserDefaults standardUserDefaults] stringForKey:LASTPERIPHERALUUID];
+                if (lastuuid.length > 0) {
+                    NSArray *array = [NSArray arrayWithArray:[SWBLECenter shareInstance].ble.peripherals];
+                    for (CBPeripheral *peripheral in array) {
+                        if ([peripheral.identifier.UUIDString isEqualToString:lastuuid]) {
+                            if ([scanTimer isValid] && ![accessoryPickerView isVisible]) {
+                                [self accessoryPickerView:nil didSelectPeripheral:peripheral];
+                                [scanTimer invalidate];
+                                scanTimer = nil;
+                            }
+                            
+                            break;
+                        }
+                    }
+                }
             }
+            
         });
     }
 }
