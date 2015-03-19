@@ -619,11 +619,7 @@
     } else {
         progressView.topDesc = NSLocalizedString(@"今日", nil);
         progressView.bottomDesc = NSLocalizedString(@"睡眠", nil);
-        NSInteger sleepTarget = [SWSettingInfo shareInstance].sleepTarget;
-        if (sleepTarget <= 0) {
-            sleepTarget = [[SWSettingInfo shareInstance] defaultSleepTarget];
-        }
-        progressView.progress = (model.deepSleepHour + model.lightSleepHour) / sleepTarget;
+        progressView.progress = model.sleepPercent;
         progressView.valueString = [NSString stringWithFormat:@"%@h", @(model.deepSleepHour + model.lightSleepHour).stringValue];
         dashboardView.value1 = @(model.deepSleepHour).stringValue;
         dashboardView.unit1 = @"小时";

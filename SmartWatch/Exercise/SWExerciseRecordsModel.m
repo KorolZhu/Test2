@@ -18,6 +18,7 @@
 #import "SBJSON.h"
 #import "ASIFormDataRequest.h"
 #import <XMLDictionary.h>
+#import "SWSettingModel.h"
 
 @interface SWExerciseRecordsModel ()<CLLocationManagerDelegate>
 {
@@ -42,25 +43,49 @@
 - (instancetype)initWithResponder:(id)responder {
 	self = [super initWithResponder:responder];
 	if (self) {
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stepsTargetChangedNotification) name:kSWStepsTargetChangedNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(sleepTargetChangedNotification) name:kSWSleepTargetChangedNotification object:nil];
 	}
 	
 	return self;
 }
 
-- (NSInteger)height {
-    if ([[SWUserInfo shareInstance] height] == 0.0f) {
-        return [[SWUserInfo shareInstance] defaultHeight];
+- (void)stepsTargetChangedNotification {
+    NSInteger stepsTarget = [[SWSettingInfo shareInstance] stepsTarget];
+    if (stepsTarget <= 0) {
+        stepsTarget = [[SWSettingInfo shareInstance] defaultStepsTarget];
     }
     
-    return [[SWUserInfo shareInstance] height];
+    _stepsPercent = _totalSteps / (float)stepsTarget;
+    if (_stepsPercent <= 0.0f && _totalSteps > 0) {
+        _stepsPercent = 0.01f;
+    }
+    _stepsPercentString = [NSString stringWithFormat:@"%d%%", (int)(_stepsPercent * 100)];
+    
+    // 计算总得卡路里
+    float calorieTarget = (float)[[SWSettingInfo shareInstance] calorieTarget];
+    if (calorieTarget <= 0.0f) {
+        calorieTarget = [[SWSettingInfo shareInstance] defaultCalorieTarget];
+    }
+    
+    _caloriePercent = _totalCalorie / (float)calorieTarget;
+//    if (_caloriePercent <= 0.0f && _totalSteps > 0) {
+//        _caloriePercent = 0.01f;
+//    }
+    _caloriePercentString = [NSString stringWithFormat:@"%d%%", (int)(_caloriePercent * 100)];
+    
+    [self respondSelectorOnMainThread:@selector(exerciseRecordsQueryFinished)];
 }
 
-- (NSInteger)weight {
-    if ([[SWUserInfo shareInstance] weight] == 0.0f) {
-        return [[SWUserInfo shareInstance] defaultWeight];
+- (void)sleepTargetChangedNotification {
+    NSInteger sleepTarget = [SWSettingInfo shareInstance].sleepTarget;
+    if (sleepTarget <= 0) {
+        sleepTarget = [[SWSettingInfo shareInstance] defaultSleepTarget];
     }
+    _sleepPercent = (_deepSleepHour + _lightSleepHour) /(float)sleepTarget;
     
-    return [[SWUserInfo shareInstance] weight];
+    [self respondSelectorOnMainThread:@selector(exerciseRecordsQueryFinished)];
 }
 
 - (void)queryExerciseRecordsWithDate:(NSDate *)date {
@@ -81,11 +106,20 @@
         NSMutableDictionary *sleepTempDictionary = [NSMutableDictionary dictionary];
         
         __block NSInteger tempTotalSteps = 0;
-        __block float tempTotalCalorie = 0.0f;
         __block NSInteger tempTotalActivityTime = 0;
         __block float tempTotalDeepSleep = 0.0f;
         __block float tempTotalLightSleep = 0.0f;
         __block float tempNightActivityHour = 0.0f;
+        
+        NSInteger height = [[SWUserInfo shareInstance] height];
+        if (height <= 0) {
+            height = [[SWUserInfo shareInstance] defaultHeight];
+        }
+        
+        NSInteger weight = [[SWUserInfo shareInstance] weight];
+        if (weight <= 0) {
+            weight = [[SWUserInfo shareInstance] defaultWeight];
+        }
         
 		if (transaction.resultSet.resultArray.count > 0) {
 			
@@ -115,14 +149,9 @@
                                 tempTotalActivityTime += 1;
                             }
                             
-                            NSInteger height = [self height];
-                            NSInteger weight = [self weight];
-                            
                             float calorie = 0.53 * height + 0.58 * weight + 0.04 * steps - 135;
                             if (calorie > 0.0f) {
                                 [calorieTempDictionary setObject:@(calorie) forKey:@(hour + 1)];
-                                
-                                tempTotalCalorie += calorie;
                             }
                         }
 					}
@@ -130,30 +159,53 @@
 			}];
 		}
         
-        NSInteger stepsTarget = [[SWSettingInfo shareInstance] stepsTarget];
-        if (stepsTarget <= 0) {
-            stepsTarget = [[SWSettingInfo shareInstance] defaultStepsTarget];
-        }
-        
+        // 计算总得卡路里
         float calorieTarget = (float)[[SWSettingInfo shareInstance] calorieTarget];
         if (calorieTarget <= 0.0f) {
             calorieTarget = [[SWSettingInfo shareInstance] defaultCalorieTarget];
         }
         
-        _totalSteps = tempTotalSteps;
-        _stepsPercent = _totalSteps / (float)stepsTarget;
-        _stepsPercentString = [NSString stringWithFormat:@"%d%%", (int)(_stepsPercent * 100)];
-        
-        _totalDistance = tempTotalSteps * [self height] * 0.45 * 0.01 * 0.001;
-        
+        float tempTotalCalorie = 0.53 * height + 0.58 * weight + 0.04 * tempTotalSteps - 135;
+        if (tempTotalCalorie <= 0) {
+            tempTotalCalorie = 0.0f;
+//            if (tempTotalSteps > 0) {
+//                tempTotalCalorie = 1.0f;
+//            }
+        }
         _totalCalorie = tempTotalCalorie;
         _caloriePercent = tempTotalCalorie / (float)calorieTarget;
+//        if (_caloriePercent <= 0.01f && tempTotalSteps > 0) {
+//            _caloriePercent = 0.01f;
+//        }
         _caloriePercentString = [NSString stringWithFormat:@"%d%%", (int)(_caloriePercent * 100)];
+        
         _daylightActivitytime = tempTotalActivityTime;
+        
+        NSInteger stepsTarget = [[SWSettingInfo shareInstance] stepsTarget];
+        if (stepsTarget <= 0) {
+            stepsTarget = [[SWSettingInfo shareInstance] defaultStepsTarget];
+        }
+        
+        _totalSteps = tempTotalSteps;
+        _stepsPercent = _totalSteps / (float)stepsTarget;
+//        if (_stepsPercent <= 0.01f && tempTotalSteps > 0) {
+//            _stepsPercent = 0.01f;
+//        }
+        _stepsPercentString = [NSString stringWithFormat:@"%d%%", (int)(_stepsPercent * 100)];
+        
+        _totalDistance = tempTotalSteps * height * 0.45 * 0.01 * 0.001;
+        if (_totalDistance < 0.1f && tempTotalSteps > 0) {
+            _totalDistance = 0.1f;
+        }
         
         _deepSleepHour = tempTotalDeepSleep;
         _lightSleepHour = tempTotalLightSleep;
         _nightActivityHour = tempNightActivityHour;
+        NSInteger sleepTarget = [SWSettingInfo shareInstance].sleepTarget;
+        if (sleepTarget <= 0) {
+            sleepTarget = [[SWSettingInfo shareInstance] defaultSleepTarget];
+        }
+        _sleepPercent = (_deepSleepHour + _lightSleepHour) /(float)sleepTarget;
         
         _stepsDictionary = [NSDictionary dictionaryWithDictionary:stepsTempDictionary];
         _sleepDictionary = [NSDictionary dictionaryWithDictionary:sleepTempDictionary];

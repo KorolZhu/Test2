@@ -84,7 +84,7 @@ SW_DEF_SINGLETON(SWSettingInfo, shareInstance);
     
 	NSInteger calorie = (NSInteger)(0.53 * height + 0.58 * weight + 0.04 * steps - 135);
 	if (calorie <= 0) {
-		calorie = 80;
+		calorie = 0;
 	}
 	
     return calorie;

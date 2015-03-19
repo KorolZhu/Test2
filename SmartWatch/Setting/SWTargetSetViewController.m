@@ -126,11 +126,11 @@
             _stepPickerView.dataSource = dataSource;
             _stepPickerView.titleSuffix = @"步/天";
         }
-        NSUInteger index = [_stepPickerView.dataSource indexOfObject:@([SWSettingInfo shareInstance].stepsTarget)];
+        NSUInteger index = [_stepPickerView.dataSource indexOfObject:@([SWSettingInfo shareInstance].stepsTarget).stringValue];
         if (index != NSNotFound) {
             [_stepPickerView selectRow:index inComponent:0 animated:NO];
         } else {
-            NSUInteger index2 = [_stepPickerView.dataSource indexOfObject:@(5000)];
+            NSUInteger index2 = [_stepPickerView.dataSource indexOfObject:@(5000).stringValue];
             if (index2 != NSNotFound) {
                 [_stepPickerView selectRow:index2 inComponent:0 animated:NO];
             }
@@ -151,11 +151,11 @@
             _caloriePickerView.titleSuffix = @"千卡";
         }
         
-        NSUInteger index = [_caloriePickerView.dataSource indexOfObject:@([SWSettingInfo shareInstance].calorieTarget)];
+        NSUInteger index = [_caloriePickerView.dataSource indexOfObject:@([SWSettingInfo shareInstance].calorieTarget).stringValue];
         if (index != NSNotFound) {
             [_caloriePickerView selectRow:index inComponent:0 animated:NO];
         } else {
-            NSUInteger index2 = [_caloriePickerView.dataSource indexOfObject:@(100)];
+            NSUInteger index2 = [_caloriePickerView.dataSource indexOfObject:@(100).stringValue];
             if (index2 != NSNotFound) {
                 [_caloriePickerView selectRow:index2 inComponent:0 animated:NO];
             }
@@ -176,11 +176,11 @@
             _sleepPickerView.titleSuffix = @"小时";
         }
         
-        NSUInteger index = [_sleepPickerView.dataSource indexOfObject:@([SWSettingInfo shareInstance].sleepTarget)];
+        NSUInteger index = [_sleepPickerView.dataSource indexOfObject:@([SWSettingInfo shareInstance].sleepTarget).stringValue];
         if (index != NSNotFound) {
             [_sleepPickerView selectRow:index inComponent:0 animated:NO];
         } else {
-            NSUInteger index2 = [_sleepPickerView.dataSource indexOfObject:@(8)];
+            NSUInteger index2 = [_sleepPickerView.dataSource indexOfObject:@(8).stringValue];
             if (index2 != NSNotFound) {
                 [_sleepPickerView selectRow:index2 inComponent:0 animated:NO];
             }
@@ -192,21 +192,7 @@
 
 #pragma mark - SWPickerViewDelegate
 
-- (NSInteger)height {
-    if ([[SWUserInfo shareInstance] height] == 0.0f) {
-        return 165;
-    }
-    
-    return [[SWUserInfo shareInstance] height];
-}
 
-- (NSInteger)weight {
-    if ([[SWUserInfo shareInstance] weight] == 0.0f) {
-        return 55;
-    }
-    
-    return [[SWUserInfo shareInstance] weight];
-}
 
 - (void)pickerView:(SWPickerView *)pickerView didFinished:(NSString *)value {
     if (pickerView == _stepPickerView) {
@@ -215,7 +201,17 @@
             [self.tableView reloadData];
         }
     } else if (pickerView == _caloriePickerView) {
-        NSInteger steps = (value.integerValue - 0.53 * [self height] - 0.58 * [self weight] + 135) * 25;
+        NSInteger height = [[SWUserInfo shareInstance] height];
+        if (height <= 0) {
+            height = [[SWUserInfo shareInstance] defaultHeight];
+        }
+        
+        NSInteger weight = [[SWUserInfo shareInstance] weight];
+        if (weight <= 0) {
+            weight = [[SWUserInfo shareInstance] defaultWeight];
+        }
+        
+        NSInteger steps = (value.integerValue - 0.53 * height - 0.58 * weight + 135) * 25;
         if ([[SWBLECenter shareInstance] setStepTargets:steps]) {
             [_model saveStepsTarget:steps];
             [self.tableView reloadData];

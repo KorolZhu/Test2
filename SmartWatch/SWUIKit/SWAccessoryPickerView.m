@@ -146,8 +146,11 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    CBPeripheral *peripheral = [_dataSource objectAtIndex:indexPath.row];
-    [self.delegate accessoryPickerView:self didSelectPeripheral:peripheral];
+    if (indexPath.row < _dataSource.count) {
+        CBPeripheral *peripheral = [_dataSource objectAtIndex:indexPath.row];
+        [self.delegate accessoryPickerView:self didSelectPeripheral:peripheral];
+    }
+    
 }
 
 @end

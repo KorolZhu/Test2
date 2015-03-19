@@ -27,6 +27,7 @@
 @property (nonatomic,readonly) NSInteger deepSleepHour;
 @property (nonatomic,readonly) NSInteger lightSleepHour;
 @property (nonatomic,readonly) NSInteger nightActivityHour;
+@property (nonatomic,readonly) float sleepPercent;
 
 @property (nonatomic,readonly) NSDate *currentDate;
 @property (nonatomic,readonly) NSString *currentDateString;

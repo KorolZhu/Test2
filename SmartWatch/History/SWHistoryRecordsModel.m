@@ -76,22 +76,6 @@
     return sleepTarget;
 }
 
-- (NSInteger)height {
-    if ([[SWUserInfo shareInstance] height] == 0.0f) {
-        return [[SWUserInfo shareInstance] defaultHeight];
-    }
-    
-    return [[SWUserInfo shareInstance] height];
-}
-
-- (NSInteger)weight {
-    if ([[SWUserInfo shareInstance] weight] == 0.0f) {
-        return [[SWUserInfo shareInstance] defaultWeight];
-    }
-    
-    return [[SWUserInfo shareInstance] weight];
-}
-
 - (void)queryReportWithDateymd:(long long)dateymd {
     [self resetTempData];
     
@@ -100,6 +84,16 @@
     WBDatabaseTransaction *transaction = [[WBDatabaseTransaction alloc] initWithSQLBuffer:sqlBuffer];
     [[WBDatabaseService defaultService] readWithTransaction:transaction completionBlock:^{}];
     if (transaction.resultSet.resultArray.count > 0) {
+        NSInteger height = [[SWUserInfo shareInstance] height];
+        if (height <= 0) {
+            height = [[SWUserInfo shareInstance] defaultHeight];
+        }
+        
+        NSInteger weight = [[SWUserInfo shareInstance] weight];
+        if (weight <= 0) {
+            weight = [[SWUserInfo shareInstance] defaultWeight];
+        }
+        
         NSDictionary *resultDictionary = transaction.resultSet.resultArray.firstObject;
         [resultDictionary enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
             NSString *keyString = key;
@@ -118,46 +112,22 @@
                         
                         tempTotalSteps += steps;
                         
-                        if (steps > 100) {
-                            
-                        }
-                        
-                        NSInteger height = [self height];
-                        NSInteger weight = [self weight];
-                        
                         float calorie = 0.53 * height + 0.58 * weight + 0.04 * steps - 135;
                         if (calorie > 0.0f) {
                             [calorieTempDictionary setObject:@(calorie) forKey:@(hour + 1)];
-                            
-                            tempTotalCalorie += calorie;
                         }
                     }
                 }
-                
-                /*
-                // 计算睡眠时间
-                NSInteger daylightStartHour = [[SWSettingInfo shareInstance] startHour];
-                NSInteger daylightEndHour = [[SWSettingInfo shareInstance] endHour];
-                BOOL night = NO;
-                if (daylightStartHour > daylightEndHour) {
-                    if (hour >= daylightStartHour || hour <= daylightEndHour) {
-                        night = NO;
-                    } else {
-                        night = YES;
-                    }
-                } else {
-                    if (hour >= daylightStartHour && hour <= daylightEndHour) {
-                        night = NO;
-                    } else {
-                        night = YES;
-                    }
-                }
-                if (night && steps > 0 && steps <= 50) {
-                    tempTotalSleep += 1;
-                }
-                 */
             }
         }];
+        
+        tempTotalCalorie = 0.53 * height + 0.58 * weight + 0.04 * tempTotalSteps - 135;
+        if (tempTotalCalorie <= 0) {
+            tempTotalCalorie = 0.0f;
+//            if (tempTotalSteps > 0) {
+//                tempTotalCalorie = 0.1f;
+//            }
+        }
     }
 }
 
@@ -174,9 +144,16 @@
         [self queryReportWithDateymd:currentDayDateymd];
         _dayTotalSteps = tempTotalSteps;
         _dayStepsPercent = tempTotalSteps / (float)[self stepsTarget];
+//        if (_dayStepsPercent <= 0.01f && tempTotalSteps > 0) {
+//            _dayStepsPercent = 0.01f;
+//        }
         
         _dayTotalCalorie = tempTotalCalorie;
         _dayCaloriePercent = tempTotalCalorie / [self calorieTarget];
+//        if (_dayCaloriePercent <= 0.01f && tempTotalSteps > 0) {
+//            _dayCaloriePercent = 0.01f;
+//        }
+        
         _dayStepsDictionary = [NSDictionary dictionaryWithDictionary:stepsTempDictionary];
         _dayCalorieDictionary = [NSDictionary dictionaryWithDictionary:calorieTempDictionary];
         

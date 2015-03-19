@@ -123,7 +123,11 @@
         cell.value = [[SWUserInfo shareInstance] birthdayString];
     } else if (indexPath.row == 3) {
         cell.title = @"身高";
-        cell.value = [NSString stringWithFormat:@"%@cm", @([[SWUserInfo shareInstance] height]).stringValue];
+        if ([[SWUserInfo shareInstance] height] > 0) {
+            cell.value = [NSString stringWithFormat:@"%@cm", @([[SWUserInfo shareInstance] height]).stringValue];
+        } else {
+            cell.value = @"";
+        }
     } else if (indexPath.row == 4) {
         cell.title = @"体重";
 		if ([[SWUserInfo shareInstance] weight] > 0) {

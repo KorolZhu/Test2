@@ -8,6 +8,9 @@
 
 #import "SWModel.h"
 
+NSString *const kSWStepsTargetChangedNotification;
+NSString *const kSWSleepTargetChangedNotification;
+
 @class SWAlarmInfo;
 
 @interface SWSettingModel : SWModel

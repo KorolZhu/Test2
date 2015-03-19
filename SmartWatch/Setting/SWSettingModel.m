@@ -13,6 +13,9 @@
 #import "SWSettingInfo.h"
 #import "SWAlarmInfo.h"
 
+NSString *const kSWStepsTargetChangedNotification = @"kSWStepsTargetChangedNotification";
+NSString *const kSWSleepTargetChangedNotification = @"kSWSleepTargetChangedNotification";
+
 @implementation SWSettingModel
 
 - (instancetype)initWithResponder:(id)responder {
@@ -33,12 +36,13 @@
 - (void)saveStepsTarget:(NSInteger)steps {
     [[SWSettingInfo shareInstance] setStepsTarget:steps];
     [[SWSettingInfo shareInstance] updateToDB];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kSWStepsTargetChangedNotification object:nil];
 }
 
 - (void)saveSleepTarget:(NSInteger)sleep {
     [[SWSettingInfo shareInstance] setSleepTarget:sleep];
     [[SWSettingInfo shareInstance] updateToDB];
-
+    [[NSNotificationCenter defaultCenter] postNotificationName:kSWSleepTargetChangedNotification object:nil];
 }
 
 - (void)saveDaylightTimeWithStartHour:(NSInteger)startHour endHour:(NSInteger)endHour {

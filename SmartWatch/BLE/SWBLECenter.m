@@ -55,9 +55,9 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
     [self.ble.CM stopScan];
 }
 
-- (void)connectPeripheral:(CBPeripheral *)eripheral {
+- (void)connectPeripheral:(CBPeripheral *)peripheral {
     self.state = SWPeripheralStateConnecting;
-    [self.ble connectPeripheral:[self.ble.peripherals objectAtIndex:0]];
+    [self.ble connectPeripheral:peripheral];
 }
 
 - (void)connectDevice {
