@@ -130,9 +130,9 @@
 					NSInteger steps = [obj integerValue];
 					if (steps >= 65280) {
                         NSInteger score = steps - 65280;
-                        if (score <= 10) {
+                        if (score >= 80) {
                             tempTotalDeepSleep += 1;
-                        } else if (score <= 50) {
+                        } else if (score >= 50) {
                             tempTotalLightSleep += 1;
                         } else {
                             tempNightActivityHour += 1;
@@ -293,7 +293,7 @@
 			NSString *namecn = [cityID stringForKey:@"NAMECN"];
 			NSString *nameen = [cityID stringForKey:@"NAMEEN"];
 			
-			if ([locality containsString:namecn] ||
+			if ([locality containString:namecn] ||
 				[locality containString:nameen]) {
 				NSString *areaID = [cityID stringForKey:@"AREAID"];
 				cityCode = [areaID copy];
