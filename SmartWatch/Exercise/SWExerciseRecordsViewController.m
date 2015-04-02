@@ -120,30 +120,30 @@
     
     progressView = [[SWCircleProgressView alloc] initWithFrame:CGRectMake(14.0f, environmentView.bottom + 15.0f, 0.0f, 0.0f)];
     progressView.backImage = [UIImage imageNamed:@"1运动记录_70"];
-    progressView.topDesc = NSLocalizedString(@"今日", nil);
-    progressView.bottomDesc = NSLocalizedString(@"目标", nil);
+    progressView.topDesc = NSLocalizedString(@"Today", nil);
+    progressView.bottomDesc = NSLocalizedString(@"Target", nil);
     [_scrollView addSubview:progressView];
     
     dashboardView = [[SWDashboardView alloc] initWithFrame:CGRectMake(progressView.right + 11.0f, progressView.top + 10.0f, 107.0f, 171.0f)];
     [_scrollView addSubview:dashboardView];
     dashboardView.value1 = 0;
-    dashboardView.unit1 = @"千卡";
-    dashboardView.descri1 = @"燃烧";
+    dashboardView.unit1 = NSLocalizedString(@"Kcal", nil);
+    dashboardView.descri1 = NSLocalizedString(@"Consume", nil);
     dashboardView.value2 = 0;
-    dashboardView.unit2 = @"公里";
-    dashboardView.descri2 = @"距离";
+    dashboardView.unit2 = NSLocalizedString(@"KM", nil);
+    dashboardView.descri2 = NSLocalizedString(@"Distance",nil);
     dashboardView.value3 = 0;
-    dashboardView.unit3 = @"步";
-    dashboardView.descri3 = @"步数";
+    dashboardView.unit3 = NSLocalizedString(@"Step", nil);
+    dashboardView.descri3 = NSLocalizedString(@"Steps", nil);
     
     calorieGraphView = [[SWLineGraphView alloc] initWithFrame:CGRectMake(0.0f, progressView.bottom + 10.0f, IPHONE_WIDTH, 166.0f)];
     calorieGraphView.backgroundColor = [UIColor clearColor];
     calorieGraphView.xAxisValues = @[@{@6 : @"6"},@{@12 : @"12"},@{@18 : @"18"},@{@24 : @"24"}];
     calorieGraphView.xIntervalCount = 24;
-    calorieGraphView.xAxisDescription = @"时间";
+    calorieGraphView.xAxisDescription = NSLocalizedString(@"Time", nil);
     calorieGraphView.yAxisRange = 100;
     calorieGraphView.yIntervalCount = 2;
-    calorieGraphView.yAxisDescription = @"卡路里（千卡）";
+    calorieGraphView.yAxisDescription = [NSString stringWithFormat:@"%@(%@)", NSLocalizedString(@"Calories", nil), NSLocalizedString(@"Kcal", nil)];
 		
 	caloriePlot = [[SWPlot alloc] init];
 	caloriePlot.plotThemeAttributes = @{
@@ -179,7 +179,7 @@
     [curveButton addTarget:self action:@selector(curveButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [curveButton setBackgroundImage:[UIImage imageNamed:@"button1"] forState:UIControlStateNormal];
     [curveButton setBackgroundImage:[UIImage imageNamed:@"button2"] forState:UIControlStateSelected];
-    [curveButton setTitle:@"曲线图" forState:UIControlStateNormal];
+    [curveButton setTitle:NSLocalizedString(@"Graph", nil) forState:UIControlStateNormal];
     [curveButton.titleLabel setFont:[UIFont systemFontOfSize:9.0f]];
     [curveButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
     [curveButton setTitleColor:RGBFromHex(0x505050) forState:UIControlStateNormal];
@@ -191,7 +191,7 @@
     [trackButton addTarget:self action:@selector(trackButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [trackButton setBackgroundImage:[UIImage imageNamed:@"button1"] forState:UIControlStateNormal];
     [trackButton setBackgroundImage:[UIImage imageNamed:@"button2"] forState:UIControlStateSelected];
-    [trackButton setTitle:@"轨迹图" forState:UIControlStateNormal];
+    [trackButton setTitle:NSLocalizedString(@"Locus plot", nil) forState:UIControlStateNormal];
     [trackButton.titleLabel setFont:[UIFont systemFontOfSize:9.0f]];
     [trackButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
     [trackButton setTitleColor:RGBFromHex(0x505050) forState:UIControlStateNormal];
@@ -204,7 +204,7 @@
     [calorieButton setBackgroundImage:[UIImage imageNamed:@"left_2"] forState:UIControlStateSelected];
     [calorieButton setImage:[UIImage imageNamed:@"ico_卡路里1"] forState:UIControlStateNormal];
     [calorieButton setImage:[UIImage imageNamed:@"ico_卡路里2"] forState:UIControlStateSelected];
-    [calorieButton setTitle:@"卡路里" forState:UIControlStateNormal];
+    [calorieButton setTitle:NSLocalizedString(@"Calories", nil) forState:UIControlStateNormal];
     calorieButton.titleEdgeInsets = UIEdgeInsetsMake(2.0f, 8.0f, 0.0f, 0.0f);
     [calorieButton.titleLabel setFont:[UIFont systemFontOfSize:11.0f]];
     [calorieButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
@@ -219,7 +219,7 @@
     [stepButton setBackgroundImage:[UIImage imageNamed:@"m_2"] forState:UIControlStateSelected];
     [stepButton setImage:[UIImage imageNamed:@"ico_步数1"] forState:UIControlStateNormal];
     [stepButton setImage:[UIImage imageNamed:@"ico_步数2"] forState:UIControlStateSelected];
-    [stepButton setTitle:@"步数" forState:UIControlStateNormal];
+    [stepButton setTitle:NSLocalizedString(@"Steps", nil) forState:UIControlStateNormal];
     stepButton.titleEdgeInsets = UIEdgeInsetsMake(2.0f, 8.0f, 0.0f, 0.0f);
     [stepButton.titleLabel setFont:[UIFont systemFontOfSize:11.0f]];
     [stepButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
@@ -233,7 +233,7 @@
     [sleepButton setBackgroundImage:[UIImage imageNamed:@"right_2"] forState:UIControlStateSelected];
     [sleepButton setImage:[UIImage imageNamed:@"ico_睡眠1"] forState:UIControlStateNormal];
     [sleepButton setImage:[UIImage imageNamed:@"ico_睡眠2"] forState:UIControlStateSelected];
-    [sleepButton setTitle:@"睡眠" forState:UIControlStateNormal];
+    [sleepButton setTitle:NSLocalizedString(@"Sleep", nil) forState:UIControlStateNormal];
     sleepButton.titleEdgeInsets = UIEdgeInsetsMake(2.0f, 8.0f, 0.0f, 0.0f);
     [sleepButton.titleLabel setFont:[UIFont systemFontOfSize:11.0f]];
     [sleepButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
@@ -275,10 +275,10 @@
 
 - (void)synchronizeStart {
     if ([NSThread isMainThread]) {
-        progressHUD.detailsLabelText = NSLocalizedString(@"同步中...", nil);
+        progressHUD.detailsLabelText = NSLocalizedString(@"Synchronous...", nil);
     } else {
         [[GCDQueue mainQueue] queueBlock:^{
-            progressHUD.detailsLabelText = NSLocalizedString(@"同步中...", nil);
+            progressHUD.detailsLabelText = NSLocalizedString(@"Synchronous...", nil);
         }];
     }
 }
@@ -318,7 +318,7 @@
     if ([SWBLECenter shareInstance].state == SWPeripheralStateDisconnected) {
         NSString *lastuuid = [[NSUserDefaults standardUserDefaults] stringForKey:LASTPERIPHERALUUID];
         if (lastuuid.length > 0) {
-            progressHUD.detailsLabelText = NSLocalizedString(@"扫描中...", nil);
+            progressHUD.detailsLabelText = NSLocalizedString(@"Scanning...", nil);
             [progressHUD show:NO];
             
             scanTimer = [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(scanTimeout) userInfo:nil repeats:YES];
@@ -341,7 +341,7 @@
     
     if (!accessoryPickerView) {
         accessoryPickerView = [[SWAccessoryPickerView alloc] initWithFrame:CGRectMake(22.0f, 100.0f, IPHONE_WIDTH - 44.0f, IPHONE_HEIGHT - 200.0f)];
-        accessoryPickerView.title = NSLocalizedString(@"请选择蓝牙设备", nil);
+        accessoryPickerView.title = NSLocalizedString(@"Please Choose Watch", nil);
         accessoryPickerView.delegate = self;
     }
     
@@ -542,10 +542,10 @@
 		stepsGraphView.backgroundColor = [UIColor clearColor];
 		stepsGraphView.xAxisValues = @[@{@6 : @"6"},@{@12 : @"12"},@{@18 : @"18"},@{@24 : @"24"}];
 		stepsGraphView.xIntervalCount = 24;
-		stepsGraphView.xAxisDescription = @"时间";
+		stepsGraphView.xAxisDescription = NSLocalizedString(@"Time", nil);
 		stepsGraphView.yAxisRange = 2000.0;
 		stepsGraphView.yIntervalCount = 2;
-		stepsGraphView.yAxisDescription = @"步数";
+		stepsGraphView.yAxisDescription = NSLocalizedString(@"Steps", nil);
 		
 		stepsPlot = [[SWPlot alloc] init];
 		stepsPlot.plottingValues = model.stepsDictionary;
@@ -582,10 +582,10 @@
 		sleepGraphView.backgroundColor = [UIColor clearColor];
 		sleepGraphView.xAxisValues = @[@{@6 : @"6"},@{@12 : @"12"},@{@18 : @"18"},@{@24 : @"24"}];
 		sleepGraphView.xIntervalCount = 24;
-		sleepGraphView.xAxisDescription = @"时间";
+		sleepGraphView.xAxisDescription = NSLocalizedString(@"Time", nil);
 		sleepGraphView.yAxisRange = 100;
 		sleepGraphView.yIntervalCount = 2;
-		sleepGraphView.yAxisDescription = @"睡眠";
+		sleepGraphView.yAxisDescription = NSLocalizedString(@"Sleep", nil);
 		
 		sleepPlot = [[SWPlot alloc] init];
 		sleepPlot.plottingValues = model.sleepDictionary;
@@ -611,47 +611,47 @@
 
 - (void)reloadProgressData {
     if (calorieButton.selected) {
-        progressView.topDesc = NSLocalizedString(@"今日", nil);
-        progressView.bottomDesc = NSLocalizedString(@"目标", nil);
+        progressView.topDesc = NSLocalizedString(@"Today", nil);
+        progressView.bottomDesc = NSLocalizedString(@"Target", nil);
         progressView.progress = model.caloriePercent;
         progressView.valueString = model.caloriePercentString;
         dashboardView.value1 = @((int)model.totalCalorie).stringValue;
-        dashboardView.unit1 = @"千卡";
-        dashboardView.descri1 = @"燃烧";
+        dashboardView.unit1 = NSLocalizedString(@"Kcal", nil);
+        dashboardView.descri1 = NSLocalizedString(@"Consume", nil);
         dashboardView.value2 = [NSString stringWithFormat:@"%.1f", model.totalDistance];
-        dashboardView.unit2 = @"公里";
-        dashboardView.descri2 = @"距离";
+        dashboardView.unit2 = NSLocalizedString(@"KM", nil);
+        dashboardView.descri2 = NSLocalizedString(@"Distance", nil);
         dashboardView.value3 = @(model.totalSteps).stringValue;
-        dashboardView.unit3 = @"";
-        dashboardView.descri3 = @"步数";
+        dashboardView.unit3 = NSLocalizedString(@"Step", nil);
+        dashboardView.descri3 = NSLocalizedString(@"Steps", nil);
     } else if (stepButton.selected) {
-        progressView.topDesc = NSLocalizedString(@"今日", nil);
-        progressView.bottomDesc = NSLocalizedString(@"步", nil);
+        progressView.topDesc = NSLocalizedString(@"Today", nil);
+        progressView.bottomDesc = NSLocalizedString(@"Step", nil);
         progressView.progress = model.stepsPercent;
         progressView.valueString = @(model.totalSteps).stringValue;
         dashboardView.value1 = @(model.daylightActivitytime).stringValue;
-        dashboardView.unit1 = @"小时";
-        dashboardView.descri1 = @"活动";
+        dashboardView.unit1 = NSLocalizedString(@"Hour", nil);
+        dashboardView.descri1 = NSLocalizedString(@"Activity", nil);
         dashboardView.value2 = @(24 - model.daylightActivitytime).stringValue;
-        dashboardView.unit2 = @"小时";
-        dashboardView.descri2 = @"非活动";
+        dashboardView.unit2 = NSLocalizedString(@"Hour", nil);
+        dashboardView.descri2 = NSLocalizedString(@"Inactive", nil);
         dashboardView.unit3 = @"";
         dashboardView.value3 = model.stepsPercentString;
-        dashboardView.descri3 = @"目标百分比";
+        dashboardView.descri3 = NSLocalizedString(@"Target Percent", nil);
     } else {
-        progressView.topDesc = NSLocalizedString(@"今日", nil);
-        progressView.bottomDesc = NSLocalizedString(@"睡眠", nil);
+        progressView.topDesc = NSLocalizedString(@"Today", nil);
+        progressView.bottomDesc = NSLocalizedString(@"Sleep", nil);
         progressView.progress = model.sleepPercent;
         progressView.valueString = [NSString stringWithFormat:@"%@h", @(model.deepSleepHour + model.lightSleepHour).stringValue];
         dashboardView.value1 = @(model.deepSleepHour).stringValue;
-        dashboardView.unit1 = @"小时";
-        dashboardView.descri1 = @"深睡";
+        dashboardView.unit1 = NSLocalizedString(@"Hour",nil);
+        dashboardView.descri1 = NSLocalizedString(@"Deep Sleep",nil);
         dashboardView.value2 = @(model.lightSleepHour).stringValue;
-        dashboardView.unit2 = @"小时";
-        dashboardView.descri2 = @"浅睡";
-        dashboardView.unit3 = @"小时";
+        dashboardView.unit2 = NSLocalizedString(@"Hour",nil);
+        dashboardView.descri2 = NSLocalizedString(@"Light Sleep",nil);
+        dashboardView.unit3 = NSLocalizedString(@"Hour",nil);
         dashboardView.value3 = @(model.nightActivityHour).stringValue;
-        dashboardView.descri3 = @"活动";
+        dashboardView.descri3 = NSLocalizedString(@"Activity", nil);
     }
     
 }
@@ -877,7 +877,7 @@
                 dispatch_async(dispatch_get_main_queue(), ^{
                     leftBarButton.enabled = YES;
                     [leftBarButton setImage:nil forState:UIControlStateNormal];
-                    [leftBarButton setTitle:NSLocalizedString(@"已连接", nil) forState:UIControlStateNormal];
+                    [leftBarButton setTitle:NSLocalizedString(@"Connected", nil) forState:UIControlStateNormal];
                 });
             }
                 break;
@@ -891,7 +891,7 @@
                         if (progressHUD.hidden || progressHUD.alpha == 0.0f) {
                             [progressHUD show:NO];
                         }
-                        progressHUD.detailsLabelText = NSLocalizedString(@"连接中...", nil);
+                        progressHUD.detailsLabelText = NSLocalizedString(@"Connecting...", nil);
                     }
                 });
 

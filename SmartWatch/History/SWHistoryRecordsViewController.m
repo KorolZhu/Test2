@@ -74,7 +74,7 @@
     _scrollView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     [self.view addSubview:_scrollView];
     
-    self.navigationItem.title = @"日报";
+    self.navigationItem.title = NSLocalizedString(@"Daily report", nil);
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"2背景-ios_01"] forBarMetrics:UIBarMetricsDefault];
     
@@ -82,22 +82,22 @@
     
     progressView1 = [[SWCircleProgressView alloc] initWithFrame:CGRectMake(14.0f, 27.0f, 0.0f, 0.0f)];
     progressView1.backImage = [UIImage imageNamed:@"1运动记录_70"];
-    progressView1.topDesc = NSLocalizedString(@"每日平均", nil);
-    progressView1.bottomDesc = NSLocalizedString(@"千卡燃烧", nil);
+    progressView1.topDesc = NSLocalizedString(@"Daily Average", nil);
+    progressView1.bottomDesc = NSLocalizedString(@"Kcal Consume", nil);
     [_scrollView addSubview:progressView1];
     
     progressView2 = [[SWCircleProgressView alloc] initWithFrame:CGRectMake(progressView1.right + 10.0f, 35.0f, 0.0f, 0.0f)];
     progressView2.style = SWCircleProgressViewStyleSmall;
     progressView2.backImage = [UIImage imageNamed:@"历史记录_03"];
-    progressView2.topDesc = NSLocalizedString(@"每日平均", nil);
-    progressView2.bottomDesc = NSLocalizedString(@"歩", nil);
+    progressView2.topDesc = NSLocalizedString(@"Daily Average", nil);
+    progressView2.bottomDesc = NSLocalizedString(@"Step", nil);
     [_scrollView addSubview:progressView2];
     
     progressView3 = [[SWCircleProgressView alloc] initWithFrame:CGRectMake(progressView1.right - 10.0f, progressView2.bottom + 6.0f, 0.0f, 0.0f)];
     progressView3.style = SWCircleProgressViewStyleSmall;
     progressView3.backImage = [UIImage imageNamed:@"历史记录_03"];
-    progressView3.topDesc = NSLocalizedString(@"每日平均", nil);
-    progressView3.bottomDesc = NSLocalizedString(@"睡眠", nil);
+    progressView3.topDesc = NSLocalizedString(@"Daily Average", nil);
+    progressView3.bottomDesc = NSLocalizedString(@"Sleep", nil);
     [_scrollView addSubview:progressView3];
     
     
@@ -109,7 +109,7 @@
     dayGraphView.xAxisDescription = @"时间";
     dayGraphView.yAxisRange = 2000;
     dayGraphView.yIntervalCount = 2;
-    dayGraphView.yAxisDescription = @"卡路里/步数 走势";
+    dayGraphView.yAxisDescription = [NSString stringWithFormat:@"%@/%@", NSLocalizedString(@"Calories", nil), NSLocalizedString(@"Steps", nil)];
     
     dayCaloriePlot = [[SWPlot alloc] init];
     dayCaloriePlot.plotThemeAttributes = @{
@@ -143,10 +143,10 @@
     weekGraphView.backgroundColor = [UIColor clearColor];
     weekGraphView.xAxisValues = xAxisValues;
     weekGraphView.xIntervalCount = 7;
-    weekGraphView.xAxisDescription = @"时间";
+    weekGraphView.xAxisDescription = NSLocalizedString(@"Time", nil);
     weekGraphView.yAxisRange = 6000;
     weekGraphView.yIntervalCount = 2;
-    weekGraphView.yAxisDescription = @"卡路里/步数 走势";
+    weekGraphView.yAxisDescription = [NSString stringWithFormat:@"%@/%@", NSLocalizedString(@"Calories", nil), NSLocalizedString(@"Steps", nil)];
     
     weekCaloriePlot = [[SWPlot alloc] init];
     weekCaloriePlot.plotThemeAttributes = @{
@@ -180,10 +180,10 @@
     monthGraphView.backgroundColor = [UIColor clearColor];
     monthGraphView.xAxisValues = monthXAxisValues;
     monthGraphView.xIntervalCount = 30;
-    monthGraphView.xAxisDescription = @"时间";
+    monthGraphView.xAxisDescription = NSLocalizedString(@"Time", nil);
     monthGraphView.yAxisRange = 6000;
     monthGraphView.yIntervalCount = 2;
-    monthGraphView.yAxisDescription = @"卡路里/步数 走势";
+    monthGraphView.yAxisDescription = [NSString stringWithFormat:@"%@/%@", NSLocalizedString(@"Calories", nil), NSLocalizedString(@"Steps", nil)];
     
     monthCaloriePlot = [[SWPlot alloc] init];
     monthCaloriePlot.plotThemeAttributes = @{
@@ -224,7 +224,7 @@
     yearGraphView.xAxisDescription = @"月份";
     yearGraphView.yAxisRange = 15000;
     yearGraphView.yIntervalCount = 2;
-    yearGraphView.yAxisDescription = @"卡路里/步数 走势";
+    yearGraphView.yAxisDescription = [NSString stringWithFormat:@"%@/%@", NSLocalizedString(@"Calories", nil), NSLocalizedString(@"Steps", nil)];
     
     yearCaloriePlot = [[SWPlot alloc] init];
     yearCaloriePlot.plotThemeAttributes = @{
@@ -251,7 +251,7 @@
     [dayButton addTarget:self action:@selector(dayButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [dayButton setBackgroundImage:[UIImage imageNamed:@"历史记录_18"] forState:UIControlStateNormal];
     [dayButton setBackgroundImage:[UIImage imageNamed:@"历史记录_25"] forState:UIControlStateSelected];
-    [dayButton setTitle:@"日" forState:UIControlStateNormal];
+    [dayButton setTitle:NSLocalizedString(@"Day", nil) forState:UIControlStateNormal];
     [dayButton.titleLabel setFont:[UIFont systemFontOfSize:11.0f]];
     [dayButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
     [dayButton setTitleColor:RGBFromHex(0x505050) forState:UIControlStateNormal];
@@ -265,7 +265,7 @@
     [weekButton addTarget:self action:@selector(weekButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [weekButton setBackgroundImage:[UIImage imageNamed:@"历史记录_20"] forState:UIControlStateNormal];
     [weekButton setBackgroundImage:[UIImage imageNamed:@"历史记录_26"] forState:UIControlStateSelected];
-    [weekButton setTitle:@"周" forState:UIControlStateNormal];
+    [weekButton setTitle:NSLocalizedString(@"Week", nil) forState:UIControlStateNormal];
     [weekButton.titleLabel setFont:[UIFont systemFontOfSize:11.0f]];
     [weekButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
     [weekButton setTitleColor:RGBFromHex(0x505050) forState:UIControlStateNormal];
@@ -276,7 +276,7 @@
     [monthButton addTarget:self action:@selector(monthButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [monthButton setBackgroundImage:[UIImage imageNamed:@"历史记录_20"] forState:UIControlStateNormal];
     [monthButton setBackgroundImage:[UIImage imageNamed:@"历史记录_26"] forState:UIControlStateSelected];
-    [monthButton setTitle:@"月" forState:UIControlStateNormal];
+    [monthButton setTitle:NSLocalizedString(@"Month", nil) forState:UIControlStateNormal];
     [monthButton.titleLabel setFont:[UIFont systemFontOfSize:11.0f]];
     [monthButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
     [monthButton setTitleColor:RGBFromHex(0x505050) forState:UIControlStateNormal];
@@ -287,7 +287,7 @@
     [yearButton addTarget:self action:@selector(yearButtonClick) forControlEvents:UIControlEventTouchUpInside];
     [yearButton setBackgroundImage:[UIImage imageNamed:@"历史记录_21"] forState:UIControlStateNormal];
     [yearButton setBackgroundImage:[UIImage imageNamed:@"历史记录_27"] forState:UIControlStateSelected];
-    [yearButton setTitle:@"年" forState:UIControlStateNormal];
+    [yearButton setTitle:NSLocalizedString(NSLocalizedString(@"Year", nil), nil) forState:UIControlStateNormal];
     [yearButton.titleLabel setFont:[UIFont systemFontOfSize:11.0f]];
     [yearButton setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
     [yearButton setTitleColor:RGBFromHex(0x505050) forState:UIControlStateNormal];
@@ -315,7 +315,7 @@
     caloriLabel.backgroundColor = [UIColor clearColor];
     caloriLabel.font = [UIFont systemFontOfSize:7.0f];
     caloriLabel.textColor = RGBFromHex(0x00F0FF);
-    caloriLabel.text = @"卡路里";
+    caloriLabel.text = NSLocalizedString(@"Calories", nil);
     [graphHeadView addSubview:caloriLabel];
     [caloriLabel sizeToFit];
     
@@ -324,7 +324,7 @@
     stepLabel.backgroundColor = [UIColor clearColor];
     stepLabel.font = [UIFont systemFontOfSize:7.0f];
     stepLabel.textColor = RGBFromHex(0xFFDE00);
-    stepLabel.text = @"步数";
+    stepLabel.text = NSLocalizedString(@"Steps", nil);
     [graphHeadView addSubview:stepLabel];
     [stepLabel sizeToFit];
     
@@ -346,7 +346,7 @@
         return;
     }
 	
-	self.navigationItem.title = @"日报";
+	self.navigationItem.title = NSLocalizedString(@"Daily report", nil);
 	
     if ([model queryDailyReport]) {
         [_HUD show:YES];
@@ -365,7 +365,7 @@
         return;
     }
 	
-	self.navigationItem.title = @"周报";
+	self.navigationItem.title = NSLocalizedString(@"Weekly report", nil);
 
     if ([model queryWeeklyReport]) {
         [_HUD show:YES];
@@ -384,7 +384,7 @@
         return;
     }
 	
-	self.navigationItem.title = @"月报";
+	self.navigationItem.title = NSLocalizedString(@"Monthly report", nil);
 	
     if ([model queryMonthlyReport]) {
         [_HUD show:YES];
@@ -403,7 +403,7 @@
         return;
     }
 	
-	self.navigationItem.title = @"年报";
+	self.navigationItem.title = NSLocalizedString(@"Annual report", nil);
 	
     if ([model queryAnnualReport]) {
         [_HUD show:YES];

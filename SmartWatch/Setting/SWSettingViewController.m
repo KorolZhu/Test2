@@ -43,7 +43,7 @@
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"4背景-ios_02"]];
     
-    self.navigationItem.title = @"设置";
+    self.navigationItem.title = NSLocalizedString(@"Settings", nil);
     
     _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     _tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
@@ -130,29 +130,29 @@
 	
     if (indexPath.row == 0) {
         cell.imageView.image = [UIImage imageNamed:@"4设置_08"];
-        cell.textLabel.text = @"我的设备";
+        cell.textLabel.text = NSLocalizedString(@"Watch ID", nil);
     } else if (indexPath.row == 1) {
         cell.imageView.image = [UIImage imageNamed:@"4设置_25"];
-        cell.textLabel.text = @"智能闹钟";
+        cell.textLabel.text = NSLocalizedString(@"Alarm Clock", nil);
     } else if (indexPath.row == 2) {
         cell.imageView.image = [UIImage imageNamed:@"4设置_30"];
-        cell.textLabel.text = @"白天时间设置";
+        cell.textLabel.text = NSLocalizedString(@"DayTime Set", nil);
     } else if (indexPath.row == 3) {
         cell.imageView.image = [UIImage imageNamed:@"4设置_32"];
-        cell.textLabel.text = @"目标设置";
+        cell.textLabel.text = NSLocalizedString(@"Target Set", nil);
     }
     else if (indexPath.row == 4) {
         cell.imageView.image = [UIImage imageNamed:@"4设置_37"];
-        cell.textLabel.text = @"防丢设置";
+        cell.textLabel.text = NSLocalizedString(@"Anti Loss Set", nil);
         preventLostSwitch.on = ([SWSettingInfo shareInstance].preventLost == 1);
     }
 	else if (indexPath.row == 5) {
 		cell.imageView.image = [UIImage imageNamed:@"4设置_37"];
-		cell.textLabel.text = @"运动轨迹";
+		cell.textLabel.text = NSLocalizedString(@"Track Record", nil);
 	}
     else if (indexPath.row == 6) {
         cell.imageView.image = [UIImage imageNamed:@"4设置_41"];
-        cell.textLabel.text = @"关于我们";
+        cell.textLabel.text = NSLocalizedString(@"About us", nil);
     }
     
     return cell;

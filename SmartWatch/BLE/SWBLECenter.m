@@ -129,7 +129,7 @@ SW_DEF_SINGLETON(SWBLECenter, shareInstance);
 
 - (BOOL)isDeviceConnected {
     if (self.state != SWPeripheralStateConnected) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"请连接蓝牙设备", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:NSLocalizedString(@"Please Connect Watch", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
         [alertView show];
         return NO;
     }

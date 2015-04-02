@@ -41,9 +41,9 @@ static NSString *alarmEditCellIdentifier = @"alarmEditCellIdentifier";
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"4背景-ios_01"] forBarMetrics:UIBarMetricsDefault];
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"4背景-ios_02"]];
-    self.navigationItem.title = @"编辑闹钟";
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(cancelClick)];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"确定" style:UIBarButtonItemStylePlain target:self action:@selector(saveClick)];
+    self.navigationItem.title = NSLocalizedString(@"Edit", nil);
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Cancel", nil) style:UIBarButtonItemStylePlain target:self action:@selector(cancelClick)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"OK", nil) style:UIBarButtonItemStylePlain target:self action:@selector(saveClick)];
     
     datePicker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0.0f, 0.0f, IPHONE_WIDTH, 216.0f)];
     datePicker.backgroundColor = [UIColor whiteColor];
@@ -62,7 +62,7 @@ static NSString *alarmEditCellIdentifier = @"alarmEditCellIdentifier";
     footView.backgroundColor = [UIColor clearColor];
     self.tableView.tableFooterView = footView;
     
-    textArray = @[@"星期一",@"星期二",@"星期三",@"星期四",@"星期五",@"星期六",@"星期日"];
+    textArray = @[NSLocalizedString(@"Monday", nil),NSLocalizedString(@"Tuesday", nil),NSLocalizedString(@"Wednesday", nil),NSLocalizedString(@"Thursday", nil),NSLocalizedString(@"Friday", nil),NSLocalizedString(@"Saturday", nil),NSLocalizedString(@"Sunday", nil)];
     selectedArray = [NSMutableArray array];
 }
 

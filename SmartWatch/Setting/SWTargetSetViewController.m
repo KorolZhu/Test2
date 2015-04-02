@@ -42,7 +42,7 @@
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"4背景-ios_02"]];
     
-    self.navigationItem.title = @"设置目标";
+    self.navigationItem.title = NSLocalizedString(@"Target Set", nil);
     
     _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     _tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
@@ -80,14 +80,14 @@
     }
     
     if (indexPath.row == 0) {
-        cell.textLabel.text = @"步数";
+        cell.textLabel.text = NSLocalizedString(@"Steps", nil);
 		if ([[SWSettingInfo shareInstance] stepsTarget] > 0) {
 			cell.detailTextLabel.text = @([[SWSettingInfo shareInstance] stepsTarget]).stringValue;
 		} else {
 			cell.detailTextLabel.text = @"";
 		}
     } else if (indexPath.row == 1) {
-        cell.textLabel.text = @"卡路里";
+        cell.textLabel.text = NSLocalizedString(@"Calories", nil);
         float calorieTarget = [[SWSettingInfo shareInstance] calorieTarget];
         if (calorieTarget > 0) {
             cell.detailTextLabel.text = @([[SWSettingInfo shareInstance] calorieTarget]).stringValue;
@@ -95,7 +95,7 @@
             cell.detailTextLabel.text = @"0";
         }
     } else if (indexPath.row == 2) {
-        cell.textLabel.text = @"睡眠";
+        cell.textLabel.text = NSLocalizedString(@"Sleep", nil);
 		if ([[SWSettingInfo shareInstance] sleepTarget] > 0) {
 			cell.detailTextLabel.text = @([[SWSettingInfo shareInstance] sleepTarget]).stringValue;
 		} else {
@@ -124,7 +124,7 @@
                 [dataSource addObject:@(i).stringValue];
             }
             _stepPickerView.dataSource = dataSource;
-            _stepPickerView.titleSuffix = @"步/天";
+            _stepPickerView.titleSuffix = [NSString stringWithFormat:@"%@/%@", NSLocalizedString(@"Step", nil), NSLocalizedString(@"Day", nil)];
         }
         NSUInteger index = [_stepPickerView.dataSource indexOfObject:@([SWSettingInfo shareInstance].stepsTarget).stringValue];
         if (index != NSNotFound) {
@@ -148,7 +148,7 @@
                 [dataSource addObject:@(i).stringValue];
             }
             _caloriePickerView.dataSource = dataSource;
-            _caloriePickerView.titleSuffix = @"千卡";
+            _caloriePickerView.titleSuffix = NSLocalizedString(@"Kcal", nil);
         }
         
         NSUInteger index = [_caloriePickerView.dataSource indexOfObject:@([SWSettingInfo shareInstance].calorieTarget).stringValue];
@@ -173,7 +173,7 @@
                 [dataSource addObject:@(i).stringValue];
             }
             _sleepPickerView.dataSource = dataSource;
-            _sleepPickerView.titleSuffix = @"小时";
+            _sleepPickerView.titleSuffix = NSLocalizedString(@"Hour", nil);
         }
         
         NSUInteger index = [_sleepPickerView.dataSource indexOfObject:@([SWSettingInfo shareInstance].sleepTarget).stringValue];

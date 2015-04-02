@@ -32,7 +32,7 @@
         _headImageView.userInteractionEnabled = YES;
         
         _nameTextField = [[UITextField alloc] initWithFrame:CGRectMake((IPHONE_WIDTH - 150.0f) / 2.0f, _headImageView.bottom + 6.0f, 150.0f, 25.0f)];
-        _nameTextField.placeholder = NSLocalizedString(@"请输入姓名", nil);
+        _nameTextField.placeholder = NSLocalizedString(@"Please Input Name", nil);
         _nameTextField.delegate = self;
         _nameTextField.borderStyle = UITextBorderStyleNone;
         _nameTextField.textAlignment = NSTextAlignmentCenter;

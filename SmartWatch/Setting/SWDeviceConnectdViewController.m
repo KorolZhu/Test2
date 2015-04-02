@@ -48,12 +48,12 @@
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"4背景-ios_01"] forBarMetrics:UIBarMetricsDefault];
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"4背景-ios_02"]];
-    self.navigationItem.title = @"我的设备";
+    self.navigationItem.title = @"Watch ID";
     
     UIBarButtonItem *backButton = [UIBarButtonItem backItemWithTarget:self action:@selector(backClick)];
     self.navigationItem.leftBarButtonItem = backButton;
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"同步", nil) style:UIBarButtonItemStylePlain target:self action:@selector(synchronizeClick)];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Synchronous", nil) style:UIBarButtonItemStylePlain target:self action:@selector(synchronizeClick)];
     
     _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     _tableView.allowsSelectionDuringEditing = YES;
@@ -116,7 +116,7 @@
     
     if (name.length > 0) {
         cell.textLabel.text = [NSString stringWithFormat:@"%@%@", name, subuuid];
-        cell.detailTextLabel.text = NSLocalizedString(@"解绑", nil);
+        cell.detailTextLabel.text = NSLocalizedString(@"UNLOCK", nil);
     } else {
         cell.textLabel.text = nil;
     }
@@ -140,7 +140,7 @@
     if ([SWBLECenter shareInstance].state == SWPeripheralStateDisconnected) {
         NSString *lastuuid = [[NSUserDefaults standardUserDefaults] stringForKey:LASTPERIPHERALUUID];
         if (lastuuid.length > 0) {
-            progressHUD.detailsLabelText = NSLocalizedString(@"扫描中...", nil);
+            progressHUD.detailsLabelText = NSLocalizedString(@"Scanning", nil);
             [progressHUD show:NO];
             
             scanTimer = [NSTimer scheduledTimerWithTimeInterval:5.0f target:self selector:@selector(scanTimeout) userInfo:nil repeats:YES];
@@ -163,7 +163,7 @@
     
     if (!accessoryPickerView) {
         accessoryPickerView = [[SWAccessoryPickerView alloc] initWithFrame:CGRectMake(22.0f, 100.0f, IPHONE_WIDTH - 44.0f, IPHONE_HEIGHT - 200.0f)];
-        accessoryPickerView.title = NSLocalizedString(@"请选择蓝牙设备", nil);
+        accessoryPickerView.title = NSLocalizedString(@"Please Choose Watch", nil);
         accessoryPickerView.delegate = self;
     }
     
@@ -178,13 +178,13 @@
         if (progressHUD.hidden || progressHUD.alpha == 0.0f) {
             [progressHUD show:NO];
         }
-        progressHUD.detailsLabelText = NSLocalizedString(@"同步中...", nil);
+        progressHUD.detailsLabelText = NSLocalizedString(@"Synchronous...", nil);
     } else {
         if (progressHUD.hidden || progressHUD.alpha == 0.0f) {
             [progressHUD show:NO];
         }
         [[GCDQueue mainQueue] queueBlock:^{
-            progressHUD.detailsLabelText = NSLocalizedString(@"同步中...", nil);
+            progressHUD.detailsLabelText = NSLocalizedString(@"Synchronous...", nil);
         }];
     }
 }
@@ -253,7 +253,7 @@
                         if (progressHUD.hidden || progressHUD.alpha == 0.0f) {
                             [progressHUD show:NO];
                         }
-                        progressHUD.detailsLabelText = NSLocalizedString(@"连接中...", nil);
+                        progressHUD.detailsLabelText = NSLocalizedString(@"Connecting...", nil);
                     }
                 });
                 

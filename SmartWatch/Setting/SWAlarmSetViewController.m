@@ -46,21 +46,21 @@ static NSString *alarmCellIdentifier = @"alarmCellIdentifier";
 - (void)viewDidLoad {
     UIBarButtonItem *backButton = [UIBarButtonItem backItemWithTarget:self action:@selector(backClick)];
     self.navigationItem.leftBarButtonItem = backButton;
-    rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(editClick)];
+    rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Edit", nil) style:UIBarButtonItemStylePlain target:self action:@selector(editClick)];
     self.navigationItem.rightBarButtonItem = rightBarButtonItem;
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"4背景-ios_01"] forBarMetrics:UIBarMetricsDefault];
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"4背景-ios_02"]];
     
-    self.navigationItem.title = @"智能闹钟";
+    self.navigationItem.title = NSLocalizedString(@"Alarm Clock", nil);
     
     addLabel = [[UILabel alloc] init];
     addLabel.textAlignment = NSTextAlignmentCenter;
     addLabel.backgroundColor = [UIColor clearColor];
     addLabel.font = [UIFont systemFontOfSize:12.0f];
     addLabel.textColor = [UIColor whiteColor];
-    addLabel.text = @"添加闹钟";
+    addLabel.text = NSLocalizedString(@"Add Alarm", nil);
     [self.view addSubview:addLabel];
     [addLabel autoPinEdgeToSuperviewEdge:ALEdgeBottom withInset:12.0f];
     [addLabel autoAlignAxisToSuperviewAxis:ALAxisVertical];
@@ -121,9 +121,9 @@ static NSString *alarmCellIdentifier = @"alarmCellIdentifier";
     [self.tableView setEditing:!self.tableView.editing animated:YES];
 
     if (self.tableView.isEditing) {
-        rightBarButtonItem.title = @"取消";
+        rightBarButtonItem.title = NSLocalizedString(@"Cancel", nil);
     } else {
-        rightBarButtonItem.title = @"编辑";
+        rightBarButtonItem.title = NSLocalizedString(@"Edit", nil);
     }
 }
 

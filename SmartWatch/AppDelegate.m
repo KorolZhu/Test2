@@ -48,26 +48,26 @@
     self.window.backgroundColor = [UIColor whiteColor];
     
     _exerciseRecordsViewController = [[SWExerciseRecordsViewController alloc] init];
-    [_exerciseRecordsViewController.tabBarItem setTitle:NSLocalizedString(@"运动记录", nil)];
+    [_exerciseRecordsViewController.tabBarItem setTitle:NSLocalizedString(@"Sports Records", nil)];
     [_exerciseRecordsViewController.tabBarItem setImage:[UIImage imageNamed:@"运动记录1"]];
     [_exerciseRecordsViewController.tabBarItem setSelectedImage:[[UIImage imageNamed:@"运动记录2"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     [_exerciseRecordsViewController.tabBarItem setTitleTextAttributes:@{ NSForegroundColorAttributeName : RGB(40,116,172) } forState:UIControlStateSelected];
     
     _historyRecordsViewController = [[SWHistoryRecordsViewController alloc] init];
-    [_historyRecordsViewController.tabBarItem setTitle:NSLocalizedString(@"历史记录", nil)];
+    [_historyRecordsViewController.tabBarItem setTitle:NSLocalizedString(@"History Records", nil)];
     [_historyRecordsViewController.tabBarItem setImage:[UIImage imageNamed:@"历史记录1"]];
     [_historyRecordsViewController.tabBarItem setSelectedImage:[[UIImage imageNamed:@"历史记录2"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     [_historyRecordsViewController.tabBarItem setTitleTextAttributes:@{ NSForegroundColorAttributeName : RGB(49,170,21) } forState:UIControlStateSelected];
     
     _profileViewController = [[SWProfileViewController alloc] init];
-    [_profileViewController.tabBarItem setTitle:NSLocalizedString(@"个人资料", nil)];
+    [_profileViewController.tabBarItem setTitle:NSLocalizedString(@"Profile", nil)];
     [_profileViewController.tabBarItem setImage:[UIImage imageNamed:@"个人中心1"]];
     [_profileViewController.tabBarItem setSelectedImage:[[UIImage imageNamed:@"个人中心2"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     [_profileViewController.tabBarItem setTitleTextAttributes:@{ NSForegroundColorAttributeName : RGB(42,136,121) } forState:UIControlStateSelected];
 
 
     _settingViewController = [[SWSettingViewController alloc] init];
-    [_settingViewController.tabBarItem setTitle:NSLocalizedString(@"设置", nil)];
+    [_settingViewController.tabBarItem setTitle:NSLocalizedString(@"Settings", nil)];
     [_settingViewController.tabBarItem setImage:[UIImage imageNamed:@"设置1"]];
     [_settingViewController.tabBarItem setSelectedImage:[[UIImage imageNamed:@"设置2"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     [_settingViewController.tabBarItem setTitleTextAttributes:@{ NSForegroundColorAttributeName : RGB(38,69,213) } forState:UIControlStateSelected];
@@ -88,7 +88,7 @@
     if ([SWUserInfo shareInstance].sex == -1 ||
         [SWUserInfo shareInstance].weight == 0 ||
         [SWUserInfo shareInstance].height == 0) {
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"请设置性别、身高、体重", nil) message:nil delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Please Set gender, height, weight", nil) message:nil delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles: nil];
         [alertView show];
         _tabBarController.selectedIndex = 2;
     }

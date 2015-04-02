@@ -40,7 +40,7 @@
         [self addSubview:_tableView];
         
         _cancelButton = [UIButton buttonWithType:UIButtonTypeCustom];
-        [_cancelButton setTitle:NSLocalizedString(@"取消", nil) forState:UIControlStateNormal];
+        [_cancelButton setTitle:NSLocalizedString(@"Cancel", nil) forState:UIControlStateNormal];
         [_cancelButton setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
         _cancelButton.frame = CGRectMake(0.0f, _tableView.bottom, self.width, 44.0f);
         [_cancelButton addTarget:self action:@selector(cancelButtonClick) forControlEvents:UIControlEventTouchUpInside];

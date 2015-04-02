@@ -6,4 +6,4 @@
 
 */
 
-"NSLocationAlwaysUsageDescription" = "需要允许定位才能查询天气信息和获得运动轨迹";
+"NSLocationAlwaysUsageDescription" = "Please allow positioning to check the weather and access to the trajectory";

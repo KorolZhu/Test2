@@ -101,7 +101,7 @@
         [self addSubview:backView];
         
         uvLabel = [[SWEnvironmentLabel alloc] initWithFrame:CGRectMake(0.0f, 0.0f, self.width / 4.0f, self.height)];
-        uvLabel.title = NSLocalizedString(@"紫外线强度", nil);
+        uvLabel.title = NSLocalizedString(@"Uitraviolet", nil);
         uvLabel.image = [UIImage imageNamed:@"ico_紫外线"];
         
         UIView *lineView = [[UIView alloc] init];
@@ -110,7 +110,7 @@
         lineView.frame = CGRectMake(self.width / 4.0f, 0.0f, 1.0f, self.height);
         
         temperatureLabel = [[SWEnvironmentLabel alloc] initWithFrame:CGRectMake(uvLabel.right, 0.0f, self.width / 4.0f, self.height)];
-        temperatureLabel.title = NSLocalizedString(@"温度", nil);
+        temperatureLabel.title = NSLocalizedString(@"Temperature", nil);
         temperatureLabel.image = [UIImage imageNamed:@"ico_温度"];
         
         UIView *lineView2 = [[UIView alloc] init];
@@ -119,7 +119,7 @@
         lineView2.frame = CGRectMake(2 * self.width / 4.0f, 0.0f, 1.0f, self.height);
         
         humidityLabel = [[SWEnvironmentLabel alloc] initWithFrame:CGRectMake(temperatureLabel.right, 0.0f, self.width / 4.0f, self.height)];
-        humidityLabel.title = NSLocalizedString(@"湿度", nil);
+        humidityLabel.title = NSLocalizedString(@"Humidity", nil);
         humidityLabel.image = [UIImage imageNamed:@"ico_湿度"];
         
         UIView *lineView3 = [[UIView alloc] init];
@@ -128,7 +128,7 @@
         lineView3.frame = CGRectMake(3 * self.width / 4.0f, 0.0f, 1.0f, self.height);
         
         leftPowerLabel = [[SWEnvironmentLabel alloc] initWithFrame:CGRectMake(humidityLabel.right, 0.0f, self.width / 4.0f, self.height)];
-        leftPowerLabel.title = NSLocalizedString(@"剩余电量", nil);
+        leftPowerLabel.title = NSLocalizedString(@"Battery", nil);
         leftPowerLabel.image = [UIImage imageNamed:@"ico_电量"];
 
         [self addSubview:uvLabel];

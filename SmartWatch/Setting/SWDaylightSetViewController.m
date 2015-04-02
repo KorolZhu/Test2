@@ -43,7 +43,7 @@
     
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"4背景-ios_02"]];
     
-    self.navigationItem.title = @"白天时间";
+    self.navigationItem.title = NSLocalizedString(@"DayTime",nil);
     
     _tableView = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     _tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
@@ -81,7 +81,7 @@
     }
     
     if (indexPath.row == 0) {
-        cell.textLabel.text = @"时间";
+        cell.textLabel.text = NSLocalizedString(@"Time", nil);
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%d:00 ~ %d:00", [[SWSettingInfo shareInstance] startHour], [[SWSettingInfo shareInstance] endHour]];
     }
     
@@ -111,9 +111,9 @@
         }
         
         self.pickerView.dataSource1 = datasource1;
-        self.pickerView.titleSuffix1 = @"时";
+        self.pickerView.titleSuffix1 = NSLocalizedString(@"Hour", nil);
         self.pickerView.dataSource2 = datasource2;
-        self.pickerView.titleSuffix2 = @"时";
+        self.pickerView.titleSuffix2 = NSLocalizedString(@"Hour", nil);
         
     }
 	

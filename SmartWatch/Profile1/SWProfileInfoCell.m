@@ -25,7 +25,7 @@
         titleLabel.font = [UIFont systemFontOfSize:14.0f];
         titleLabel.textColor = [UIColor whiteColor];
         [self.contentView addSubview:titleLabel];
-        titleLabel.frame = CGRectMake(17.0f, 0.0f, 100.0f, 45.0f);
+        titleLabel.frame = CGRectMake(17.0f, 0.0f, 135.0f, 45.0f);
         
         UIImageView *accessoryView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"4设置_43"]];
         [self.contentView addSubview:accessoryView];

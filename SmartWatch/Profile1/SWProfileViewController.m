@@ -58,7 +58,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.title = @"个人资料";
+    self.navigationItem.title = NSLocalizedString(@"Profile", nil);
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"3背景-ios_01"] forBarMetrics:UIBarMetricsDefault];
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"3背景-ios_02"]];
     
@@ -110,40 +110,40 @@
     }
     
     if (indexPath.row == 1) {
-        cell.title = @"性别";
+        cell.title = NSLocalizedString(@"Sex", nil);
         if ([[SWUserInfo shareInstance] sex] == 0) {
-            cell.value = @"女";
+            cell.value = NSLocalizedString(@"Female", nil);
         } else if ([[SWUserInfo shareInstance] sex] == 1) {
-            cell.value = @"男";
+            cell.value = NSLocalizedString(@"Male", nil);
         } else {
             cell.value = @"";
         }
     } else if (indexPath.row == 2) {
-        cell.title = @"生日";
+        cell.title = NSLocalizedString(@"Birthday", nil);
         cell.value = [[SWUserInfo shareInstance] birthdayString];
     } else if (indexPath.row == 3) {
-        cell.title = @"身高";
+        cell.title = NSLocalizedString(@"Height", nil);
         if ([[SWUserInfo shareInstance] height] > 0) {
             cell.value = [NSString stringWithFormat:@"%@cm", @([[SWUserInfo shareInstance] height]).stringValue];
         } else {
             cell.value = @"";
         }
     } else if (indexPath.row == 4) {
-        cell.title = @"体重";
+        cell.title = NSLocalizedString(@"Weight", nil);
 		if ([[SWUserInfo shareInstance] weight] > 0) {
 			cell.value = [NSString stringWithFormat:@"%@kg", @([[SWUserInfo shareInstance] weight]).stringValue];
 		} else {
 			cell.value = @"";
 		}
     } else if (indexPath.row == 5) {
-        cell.title = @"生理周期";
+        cell.title = NSLocalizedString(@"Menstrual cycle", nil);
 		if ([[SWUserInfo shareInstance] physiologicalDays] > 0) {
-			cell.value = [NSString stringWithFormat:@"%@天", @([[SWUserInfo shareInstance] physiologicalDays]).stringValue];
+			cell.value = [NSString stringWithFormat:@"%@%@", @([[SWUserInfo shareInstance] physiologicalDays]).stringValue, NSLocalizedString(@"Day", nil)];
 		} else {
 			cell.value = @"";
 		}
     } else if (indexPath.row == 6) {
-        cell.title = @"生理日期";
+        cell.title = NSLocalizedString(@"Menstrual date", nil);
         if ([[SWUserInfo shareInstance] physiologicalDateString].length > 0) {
             cell.value = [NSString stringWithFormat:@"%@", [[SWUserInfo shareInstance] physiologicalDateString]];
         } else {
@@ -187,7 +187,7 @@
             sexPickerView.hidden = YES;
             sexPickerView.delegate = self;
             
-            sexPickerViewDataSource = @[@"男", @"女"];
+            sexPickerViewDataSource = @[NSLocalizedString(@"Male", nil), NSLocalizedString(@"Female", nil)];
             sexPickerView.dataSource = sexPickerViewDataSource;
         }
         [sexPickerView selectRow:[SWUserInfo shareInstance].sex == 0 ? 1 : 0 inComponent:0 animated:NO];
@@ -261,7 +261,7 @@
                 [arr addObject:@(i)];
             }
             physiologicalDaysPickerViewDataSource = arr;
-            physiologicalDaysPickerView.titleSuffix = @"天";
+            physiologicalDaysPickerView.titleSuffix = NSLocalizedString(@"Day", nil);
             physiologicalDaysPickerView.dataSource = physiologicalDaysPickerViewDataSource;
         }
         NSUInteger index = [physiologicalDaysPickerViewDataSource indexOfObject:@([SWUserInfo shareInstance].physiologicalDays)];
@@ -305,8 +305,8 @@
     
     if ([newStr length]>20)
     {
-        NSString *msg =  NSLocalizedString(@"名字字符数不能超过20", nil);
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:msg delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        NSString *msg =  NSLocalizedString(@"Name can not exceed 20 characters", nil);
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil message:msg delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
         [alertView show];
         return NO;
     }
@@ -332,10 +332,10 @@
     
     UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
                                                              delegate:self
-                                                    cancelButtonTitle:NSLocalizedString(@"取消",@"Cancel button text")
+                                                    cancelButtonTitle:NSLocalizedString(@"Cancel",@"Cancel button text")
                                                destructiveButtonTitle:nil
-                                                    otherButtonTitles:NSLocalizedString(@"从相册选择",@"Button text"),
-                                  NSLocalizedString(@"拍照",@"Camera button text"),nil];
+                                                    otherButtonTitles:NSLocalizedString(@"Choose from album",@"Button text"),
+                                  NSLocalizedString(@"Take Pictures",@"Camera button text"),nil];
     [actionSheet setActionSheetStyle:UIActionSheetStyleBlackTranslucent];
     [actionSheet showInView:self.tableView];
 }

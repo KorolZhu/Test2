@@ -56,7 +56,12 @@
 	_date = date;
 	
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy年MM月dd日"];
+    NSString *currentLanguageCode = [[NSLocale preferredLanguages] objectAtIndex:0];
+    if ([currentLanguageCode rangeOfString:@"zh"].location != NSNotFound) {
+        [dateFormatter setDateFormat:@"yyyy年MM月dd日"];
+    } else {
+        [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    }
     dateLabel.text = [dateFormatter stringFromDate:date];
     
     [self setNeedsLayout];
