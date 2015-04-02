@@ -57,31 +57,31 @@
     
     NSMutableString *repeatString = [NSMutableString string];
     if ((alarmInfo.repeat & 1) > 0) {
-        [repeatString appendString:@"星期一 "];
+        [repeatString appendString:NSLocalizedString(@"Monday", nil)];
     }
     
     if ((alarmInfo.repeat & 2) > 0) {
-        [repeatString appendString:@"星期二 "];
+        [repeatString appendString:NSLocalizedString(@"Tuesday", nil)];
     }
     
     if ((alarmInfo.repeat & 4) > 0) {
-        [repeatString appendString:@"星期三 "];
+        [repeatString appendString:NSLocalizedString(@"Wednesday", nil)];
     }
     
     if ((alarmInfo.repeat & 8) > 0) {
-        [repeatString appendString:@"星期四 "];
+        [repeatString appendString:NSLocalizedString(@"Thursday", nil)];
     }
     
     if ((alarmInfo.repeat & 16) > 0) {
-        [repeatString appendString:@"星期五 "];
+        [repeatString appendString:NSLocalizedString(@"Friday", nil)];
     }
     
     if ((alarmInfo.repeat & 32) > 0) {
-        [repeatString appendString:@"星期六 "];
+        [repeatString appendString:NSLocalizedString(@"Saturday", nil)];
     }
     
     if ((alarmInfo.repeat & 64) > 0) {
-        [repeatString appendString:@"星期日 "];
+        [repeatString appendString:NSLocalizedString(@"Sunday", nil)];
     }
     
     if (repeatString.length > 0) {

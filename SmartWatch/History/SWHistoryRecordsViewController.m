@@ -221,7 +221,7 @@
     yearGraphView.backgroundColor = [UIColor clearColor];
     yearGraphView.xAxisValues = yearXAxisValues;
     yearGraphView.xIntervalCount = 12;
-    yearGraphView.xAxisDescription = @"月份";
+    yearGraphView.xAxisDescription = NSLocalizedString(@"Months", nil);
     yearGraphView.yAxisRange = 15000;
     yearGraphView.yIntervalCount = 2;
     yearGraphView.yAxisDescription = [NSString stringWithFormat:@"%@/%@", NSLocalizedString(@"Calories", nil), NSLocalizedString(@"Steps", nil)];

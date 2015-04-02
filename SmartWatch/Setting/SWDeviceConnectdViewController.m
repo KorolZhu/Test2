@@ -48,7 +48,7 @@
     
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"4背景-ios_01"] forBarMetrics:UIBarMetricsDefault];
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"4背景-ios_02"]];
-    self.navigationItem.title = @"Watch ID";
+    self.navigationItem.title = NSLocalizedString(@"Watch ID", nil);
     
     UIBarButtonItem *backButton = [UIBarButtonItem backItemWithTarget:self action:@selector(backClick)];
     self.navigationItem.leftBarButtonItem = backButton;
