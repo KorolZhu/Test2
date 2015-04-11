@@ -47,7 +47,6 @@
     [self.view addSubview:_scrollView];
     
     UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"setting-about@2x"]];
-    imageView.backgroundColor = [UIColor lightGrayColor];
     imageView.frame = CGRectMake((IPHONE_WIDTH - 200.0f) / 2.0f, 15.0f, 200.0f, 200.0f);
     [_scrollView addSubview:imageView];
     
