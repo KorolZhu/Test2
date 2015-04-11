@@ -13,6 +13,7 @@
 #import "SWSettingModel.h"
 #import "SWAlarmSetViewController.h"
 #import "SWDeviceConnectdViewController.h"
+#import "SWAboutViewController.h"
 
 @interface SWSettingViewController ()<UITableViewDataSource,UITableViewDelegate>
 {
@@ -188,6 +189,9 @@
     }
     else if (indexPath.row == 5) {
         
+    } else if (indexPath.row == 6) {
+        SWAboutViewController *lostSetViewController = [[SWAboutViewController alloc] init];
+        [self.navigationController pushViewController:lostSetViewController animated:YES];
     }
 }
 

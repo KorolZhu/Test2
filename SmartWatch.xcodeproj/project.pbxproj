@@ -188,6 +188,8 @@
 		CEE0D85E1A1888CF00CE643C /* NSArray+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D8541A1888CF00CE643C /* NSArray+PureLayout.m */; };
 		CEE0D85F1A1888CF00CE643C /* NSLayoutConstraint+PureLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE0D8561A1888CF00CE643C /* NSLayoutConstraint+PureLayout.m */; };
 		CEE2245C1A519D20004D1965 /* SWAccessoryPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE2245B1A519D20004D1965 /* SWAccessoryPickerView.m */; };
+		CEFCFE011AD8C49C004366D9 /* SWAboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEFCFDFF1AD8C49C004366D9 /* SWAboutViewController.m */; };
+		CEFCFE071AD8C842004366D9 /* setting-about@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CEFCFE061AD8C842004366D9 /* setting-about@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -480,6 +482,9 @@
 		CEE0D8671A1891BB00CE643C /* SWShareConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWShareConstant.h; sourceTree = "<group>"; };
 		CEE2245A1A519D20004D1965 /* SWAccessoryPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWAccessoryPickerView.h; sourceTree = "<group>"; };
 		CEE2245B1A519D20004D1965 /* SWAccessoryPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWAccessoryPickerView.m; sourceTree = "<group>"; };
+		CEFCFDFF1AD8C49C004366D9 /* SWAboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWAboutViewController.m; sourceTree = "<group>"; };
+		CEFCFE001AD8C49C004366D9 /* SWAboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWAboutViewController.h; sourceTree = "<group>"; };
+		CEFCFE061AD8C842004366D9 /* setting-about@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting-about@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -739,6 +744,7 @@
 		CE7EE0FB1A20EC3B006F3294 /* 设置 */ = {
 			isa = PBXGroup;
 			children = (
+				CEFCFE061AD8C842004366D9 /* setting-about@2x.png */,
 				CE7EE0FC1A20EC3B006F3294 /* 4设置-智能闹钟标注(标注)@2x.png */,
 				CE7EE0FD1A20EC3B006F3294 /* 4设置-白天时间设置标注(标注)@2x.png */,
 				CE7EE0FE1A20EC3B006F3294 /* 4设置_03@2x.png */,
@@ -963,6 +969,8 @@
 		CEE0D8201A187C9D00CE643C /* Setting */ = {
 			isa = PBXGroup;
 			children = (
+				CEFCFE001AD8C49C004366D9 /* SWAboutViewController.h */,
+				CEFCFDFF1AD8C49C004366D9 /* SWAboutViewController.m */,
 				CEE0D82A1A187DC800CE643C /* SWSettingViewController.h */,
 				CEE0D82B1A187DC800CE643C /* SWSettingViewController.m */,
 				CE33DDCE1A49A8FD0069E8AE /* SWDeviceConnectdViewController.h */,
@@ -1299,6 +1307,7 @@
 				CE7EE0CD1A20EA33006F3294 /* ico_步数2@2x.png in Resources */,
 				CE7EE11D1A20EC3B006F3294 /* 历史记录_25@2x.png in Resources */,
 				CE7EE11F1A20EC3B006F3294 /* 历史记录_27@2x.png in Resources */,
+				CEFCFE071AD8C842004366D9 /* setting-about@2x.png in Resources */,
 				CE7EE0E61A20EA33006F3294 /* 1背景-ios_02@2x.png in Resources */,
 				CE7EE0D21A20EA33006F3294 /* 个人中心2@2x.png in Resources */,
 				45381E211A8364690035E714 /* map_001.png in Resources */,
@@ -1391,6 +1400,7 @@
 				CE4CCEEE1A4EBD9400C53E56 /* MBProgressHUD.m in Sources */,
 				CE61B6021A3C2D5600B18811 /* SWPickerView.m in Sources */,
 				45E8F5C71A67C24400DDE39B /* UIImage-Extension.m in Sources */,
+				CEFCFE011AD8C49C004366D9 /* SWAboutViewController.m in Sources */,
 				CEAA01DE1A35E4FE0047BAF2 /* NSString+SW.m in Sources */,
 				CE44E28E1A2F79DF0081F09E /* SWHeadImageCell.m in Sources */,
 				4558510B1A37F92D00649397 /* SWModel.m in Sources */,
@@ -1582,7 +1592,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9d4a8c8c-876a-46e9-a906-2e05913d0fbb";
+				PROVISIONING_PROFILE = "71f5f1ac-1e2a-443a-8bd6-0e0c7fa75a15";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
@@ -1608,7 +1618,7 @@
 				);
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f7c91f20-171f-4657-9471-ee26be3a6a94";
+				PROVISIONING_PROFILE = "1833d14d-1501-4555-bd73-2e5271f1c4d5";
 				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;
